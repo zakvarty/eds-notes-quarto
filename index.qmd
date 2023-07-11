@@ -1,9 +1,125 @@
-# Preface {.unnumbered}
+# About this Course {.unnumbered}
 
-This is a Quarto book.
-
-To learn more about Quarto books visit <https://quarto.org/docs/books>.
 
 ```{r}
-1 + 1
+#| echo: false
+#| eval: false
+#| results: 'asis'
+source("_common.R")
+status("complete")
+```
+
+<!--## Course Description {.unnumbered}-->
+
+Model building and evaluation are are necessary but not sufficient skills for the effective practice of data science. In this module you will develop the technical and personal skills that are required to work successfully as a data scientist within an organisation. 
+
+<!-- 
+::: small_right
+<img src="images/EDS-logo.jpg" alt="Logo"/>
+:::
+-->
+
+During this module you will critically explore how to:
+
+- effectively scope and manage a data science project; 
+- work openly and reproducibly;
+- efficiently acquire, manipulate, and present data;
+- interpret and explain your work for a variety of stakeholders;
+- ensure that your work can be put into production; 
+- assess the ethical implications of your work as a data scientist.
+
+
+This interdisciplinary course will draw from fields including statistics, computing, management science and data ethics. Each topic will be investigated through a selection of lecture videos, conference presentations and academic papers, hands-on lab exercises, and readings on industry best-practices from recognised professional bodies. 
+
+
+## Schedule {-}
+
+These notes are intended for students on the course **MATH70076: Data Science** in the academic year 2023/24.
+
+As the course is scheduled to take place over five weeks, the suggested schedule is:
+
+-   1st week: effective data science workflows;
+-   2nd week: aquiring and sharing data;
+-   3rd week: exploratory data analysis and visualisation;
+-   4th week: preparing for production;
+-   5th week: ethics and context of data science.
+
+A pdf version of these notes may be downloaded [here](./data_science_notes.pdf). Please be aware that these are very rough and will be updated less frequently than the course webpage.
+
+
+## Learning outcomes {-}
+
+On successful completion of this module students should be able to:
+
+1. Independently scope and manage a data science project; 
+2. Source data from the internet through web scraping and APIs;
+3. Clean, explore and visualise data, justifying and documenting the decisions made;
+4. Evaluate the need for (and implement) approaches that are explainable, reproducible and scalable;
+5. Appraise the ethical implications of a data science projects, particularly the risks of compromising privacy or fairness and the potential to cause harm.
+
+## Allocation of Study Hours {-}
+
+**Lectures:** 10 Hours (2 hours per week)
+
+**Group Teaching:** 5 Hours  (1 hour per week)
+
+**Lab / Practical:** 5 hours  (1 hour per week)
+
+**Independent Study:** 105 hours (15 hours per week + 30 hours coursework)
+
+## Assessment Structure {-}
+
+The course will be assessed entirely by coursework, reflecting the practical and pragmatic nature of the course material.
+
+**Coursework 1 (30%):** To be completed during the fourth week of the course.
+
+**Coursework 2 (70%):** To be released in the last week of the course and submitted following the examination period in Summer term. 
+
+## Acknowledgements {-}
+
+These notes were created by Dr Zak Varty. They were inspired by a previous lecture series by Dr Purvasha Chakravarti at Imperial College London and draw from many resource that were made available by the R community.
+
+
+```{r setup}
+#| include: false
+#| message: false
+
+#library(tidyverse)
+#library(lax)
+#library(ismev)
+#library(evir)
+#library(lubridate)
+#library(xts)
+#library(qrmdata)
+#library(tseries)
+#source("../labs/extremes-functions.R")
+
+knitr::opts_chunk$set(
+  fig.path = "images/",
+  echo = FALSE,
+  out.width = "85%",
+  fig.align = "center",
+  message = FALSE,
+  fig.width = 8.5,
+  fig.asp = 0.7)
+
+ggplot2::theme_set(ggplot2::theme_bw(12))
+
+colorise <- function(x, color = "red") {
+  if (knitr::is_latex_output()) {
+    sprintf("\\textcolor{%s}{%s}", color, x)
+  } else if (knitr::is_html_output()) {
+    sprintf("<span style='color: %s;'>%s</span>", color, 
+      x)
+  } else x
+}
+```
+
+```{r}
+#| include: false
+
+# automatically create a bib database for R packages
+knitr::write_bib(c(
+  .packages(), 'bookdown', 'knitr', 'rmarkdown'
+), 'packages.bib')
 ```

@@ -2,9 +2,9 @@
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "eds-notes-quarto",
+    "title": "Effective Data Science",
     "section": "",
-    "text": "Preface\nThis is a Quarto book.\nTo learn more about Quarto books visit https://quarto.org/docs/books.\n\n1 + 1\n\n[1] 2"
+    "text": "About this Course\nModel building and evaluation are are necessary but not sufficient skills for the effective practice of data science. In this module you will develop the technical and personal skills that are required to work successfully as a data scientist within an organisation.\nDuring this module you will critically explore how to:\nThis interdisciplinary course will draw from fields including statistics, computing, management science and data ethics. Each topic will be investigated through a selection of lecture videos, conference presentations and academic papers, hands-on lab exercises, and readings on industry best-practices from recognised professional bodies."
   },
   {
     "objectID": "intro.html",
@@ -26,5 +26,47 @@
     "title": "References",
     "section": "",
     "text": "Knuth, Donald E. 1984. “Literate Programming.” Comput.\nJ. 27 (2): 97–111. https://doi.org/10.1093/comjnl/27.2.97."
+  },
+  {
+    "objectID": "index.html#course-description",
+    "href": "index.html#course-description",
+    "title": "Effective Data Science",
+    "section": "Course Description",
+    "text": "Course Description\nModel building and evaluation are are necessary but not sufficient skills for the effective practice of data science. In this module you will develop the technical and personal skills that are required to work successfully as a data scientist within an organisation.\n\nDuring this module you will critically explore how to:\n\neffectively scope and manage a data science project;\nwork openly and reproducibly;\nefficiently acquire, manipulate, and present data;\ninterpret and explain your work for a variety of stakeholders;\nensure that your work can be put into production;\nassess the ethical implications of your work as a data scientist.\n\nThis interdisciplinary course will draw from fields including statistics, computing, management science and data ethics. Each topic will be investigated through a selection of lecture videos, conference presentations and academic papers, hands-on lab exercises, and readings on industry best-practices from recognised professional bodies."
+  },
+  {
+    "objectID": "index.html#schedule",
+    "href": "index.html#schedule",
+    "title": "Effective Data Science",
+    "section": "Schedule",
+    "text": "Schedule\nThese notes are intended for students on the course MATH70076: Data Science in the academic year 2023/24.\nAs the course is scheduled to take place over five weeks, the suggested schedule is:\n\n1st week: effective data science workflows;\n2nd week: aquiring and sharing data;\n3rd week: exploratory data analysis and visualisation;\n4th week: preparing for production;\n5th week: ethics and context of data science.\n\nA pdf version of these notes may be downloaded here. Please be aware that these are very rough and will be updated less frequently than the course webpage."
+  },
+  {
+    "objectID": "index.html#learning-outcomes",
+    "href": "index.html#learning-outcomes",
+    "title": "Effective Data Science",
+    "section": "Learning outcomes",
+    "text": "Learning outcomes\nOn successful completion of this module students should be able to:\n\nIndependently scope and manage a data science project;\nSource data from the internet through web scraping and APIs;\nClean, explore and visualise data, justifying and documenting the decisions made;\nEvaluate the need for (and implement) approaches that are explainable, reproducible and scalable;\nAppraise the ethical implications of a data science projects, particularly the risks of compromising privacy or fairness and the potential to cause harm."
+  },
+  {
+    "objectID": "index.html#allocation-of-study-hours",
+    "href": "index.html#allocation-of-study-hours",
+    "title": "Effective Data Science",
+    "section": "Allocation of Study Hours",
+    "text": "Allocation of Study Hours\nLectures: 10 Hours (2 hours per week)\nGroup Teaching: 5 Hours (1 hour per week)\nLab / Practical: 5 hours (1 hour per week)\nIndependent Study: 105 hours (15 hours per week + 30 hours coursework)"
+  },
+  {
+    "objectID": "index.html#assessment-structure",
+    "href": "index.html#assessment-structure",
+    "title": "Effective Data Science",
+    "section": "Assessment Structure",
+    "text": "Assessment Structure\nThe course will be assessed entirely by coursework, reflecting the practical and pragmatic nature of the course material.\nCoursework 1 (30%): To be completed during the fourth week of the course.\nCoursework 2 (70%): To be released in the last week of the course and submitted following the examination period in Summer term."
+  },
+  {
+    "objectID": "index.html#acknowledgements",
+    "href": "index.html#acknowledgements",
+    "title": "Effective Data Science",
+    "section": "Acknowledgements",
+    "text": "Acknowledgements\nThese notes were created by Dr Zak Varty. They were inspired by a previous lecture series by Dr Purvasha Chakravarti at Imperial College London and draw from many resource that were made available by the R community."
   }
 ]

@@ -7,8 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Zak Varty">
+<meta name="dcterms.date" content="2023-07-11">
 
-<title>eds-notes-quarto</title>
+<title>Effective Data Science</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,40 +21,6 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
-}
-/* CSS for syntax highlighting */
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -107,7 +74,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Preface</a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">About this Course</a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -122,7 +89,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="./">eds-notes-quarto</a> 
+      <a href="./">Effective Data Science</a> 
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -135,7 +102,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Preface</span></a>
+ <span class="menu-text">About this Course</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -166,7 +133,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#preface" id="toc-preface" class="nav-link active" data-scroll-target="#preface">Preface</a></li>
+  <li><a href="#about-this-course" id="toc-about-this-course" class="nav-link active" data-scroll-target="#about-this-course">About this Course</a>
+  <ul class="collapse">
+  <li><a href="#schedule" id="toc-schedule" class="nav-link" data-scroll-target="#schedule">Schedule</a></li>
+  <li><a href="#learning-outcomes" id="toc-learning-outcomes" class="nav-link" data-scroll-target="#learning-outcomes">Learning outcomes</a></li>
+  <li><a href="#allocation-of-study-hours" id="toc-allocation-of-study-hours" class="nav-link" data-scroll-target="#allocation-of-study-hours">Allocation of Study Hours</a></li>
+  <li><a href="#assessment-structure" id="toc-assessment-structure" class="nav-link" data-scroll-target="#assessment-structure">Assessment Structure</a></li>
+  <li><a href="#acknowledgements" id="toc-acknowledgements" class="nav-link" data-scroll-target="#acknowledgements">Acknowledgements</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -175,7 +149,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">eds-notes-quarto</h1>
+<h1 class="title">Effective Data Science</h1>
 </div>
 
 
@@ -192,7 +166,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">Invalid Date</p>
+      <p class="date">July 11, 2023</p>
     </div>
   </div>
   
@@ -202,18 +176,69 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header>
 
-<section id="preface" class="level1 unnumbered">
-<h1 class="unnumbered">Preface</h1>
-<p>This is a Quarto book.</p>
-<p>To learn more about Quarto books visit <a href="https://quarto.org/docs/books" class="uri">https://quarto.org/docs/books</a>.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">+</span> <span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 2</code></pre>
-</div>
-</div>
+
+<section id="about-this-course" class="level1 unnumbered">
+<h1 class="unnumbered">About this Course</h1><p><img src="cover.png" title="Effective Data Science" class="quarto-cover-image img-fluid"></p>
+<!--## Course Description {.unnumbered}-->
+<p>Model building and evaluation are are necessary but not sufficient skills for the effective practice of data science. In this module you will develop the technical and personal skills that are required to work successfully as a data scientist within an organisation.</p>
+<!-- 
+::: small_right
+<img src="images/EDS-logo.jpg" alt="Logo"/>
+:::
+-->
+<p>During this module you will critically explore how to:</p>
+<ul>
+<li>effectively scope and manage a data science project;</li>
+<li>work openly and reproducibly;</li>
+<li>efficiently acquire, manipulate, and present data;</li>
+<li>interpret and explain your work for a variety of stakeholders;</li>
+<li>ensure that your work can be put into production;</li>
+<li>assess the ethical implications of your work as a data scientist.</li>
+</ul>
+<p>This interdisciplinary course will draw from fields including statistics, computing, management science and data ethics. Each topic will be investigated through a selection of lecture videos, conference presentations and academic papers, hands-on lab exercises, and readings on industry best-practices from recognised professional bodies.</p>
+<section id="schedule" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="schedule">Schedule</h2>
+<p>These notes are intended for students on the course <strong>MATH70076: Data Science</strong> in the academic year 2023/24.</p>
+<p>As the course is scheduled to take place over five weeks, the suggested schedule is:</p>
+<ul>
+<li>1st week: effective data science workflows;</li>
+<li>2nd week: aquiring and sharing data;</li>
+<li>3rd week: exploratory data analysis and visualisation;</li>
+<li>4th week: preparing for production;</li>
+<li>5th week: ethics and context of data science.</li>
+</ul>
+<p>A pdf version of these notes may be downloaded <a href="./data_science_notes.pdf">here</a>. Please be aware that these are very rough and will be updated less frequently than the course webpage.</p>
+</section>
+<section id="learning-outcomes" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="learning-outcomes">Learning outcomes</h2>
+<p>On successful completion of this module students should be able to:</p>
+<ol type="1">
+<li>Independently scope and manage a data science project;</li>
+<li>Source data from the internet through web scraping and APIs;</li>
+<li>Clean, explore and visualise data, justifying and documenting the decisions made;</li>
+<li>Evaluate the need for (and implement) approaches that are explainable, reproducible and scalable;</li>
+<li>Appraise the ethical implications of a data science projects, particularly the risks of compromising privacy or fairness and the potential to cause harm.</li>
+</ol>
+</section>
+<section id="allocation-of-study-hours" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="allocation-of-study-hours">Allocation of Study Hours</h2>
+<p><strong>Lectures:</strong> 10 Hours (2 hours per week)</p>
+<p><strong>Group Teaching:</strong> 5 Hours (1 hour per week)</p>
+<p><strong>Lab / Practical:</strong> 5 hours (1 hour per week)</p>
+<p><strong>Independent Study:</strong> 105 hours (15 hours per week + 30 hours coursework)</p>
+</section>
+<section id="assessment-structure" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="assessment-structure">Assessment Structure</h2>
+<p>The course will be assessed entirely by coursework, reflecting the practical and pragmatic nature of the course material.</p>
+<p><strong>Coursework 1 (30%):</strong> To be completed during the fourth week of the course.</p>
+<p><strong>Coursework 2 (70%):</strong> To be released in the last week of the course and submitted following the examination period in Summer term.</p>
+</section>
+<section id="acknowledgements" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="acknowledgements">Acknowledgements</h2>
+<p>These notes were created by Dr Zak Varty. They were inspired by a previous lecture series by Dr Purvasha Chakravarti at Imperial College London and draw from many resource that were made available by the R community.</p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->

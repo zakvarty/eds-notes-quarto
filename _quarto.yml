@@ -2,9 +2,9 @@ project:
   type: book
 
 book:
-  title: "eds-notes-quarto"
+  title: "Effective Data Science"
   author: "Zak Varty"
-  date: "AY 2023-24"
+  date: today
   chapters:
     - index.qmd
     - intro.qmd
@@ -16,8 +16,10 @@ bibliography: references.bib
 format:
   html:
     theme: cosmo
+    cover-image: "cover.png"
   pdf:
     documentclass: scrreprt
+    cover-image: "cover.png"
 
 
 
