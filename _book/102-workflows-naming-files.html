@@ -379,9 +379,13 @@ project-writeup.tex</code></pre>
 <section id="open-source-vs-proprietary-file-types" class="level3" data-number="2.3.1">
 <h3 data-number="2.3.1" class="anchored" data-anchor-id="open-source-vs-proprietary-file-types"><span class="header-section-number">2.3.1</span> Open Source vs Proprietary File Types</h3>
 <p>The first feature we’ll consider is whether the file type is open source, and can be used by anyone without charge, or if specialist software must be paid for in order to interact with those files.</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<p><img src="images/102-workflows-naming-files/file-types-image.png" class="img-fluid" style="width:80.0%"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/102-workflows-naming-files/file-types-image.png" class="img-fluid figure-img" style="width:80.0%"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>In the figure above, each column represents a different class of file, moving left to right we have example file types for tabular data, list-like data and text documents. File types closer to the top are open source while those lower down rely on proprietary software, which may or may not require payment.</p>
@@ -397,10 +401,8 @@ project-writeup.tex</code></pre>
 <p>In tabular data, each row of the data represents one record and each column represents a data value.</p>
 <p>A csv encodes this by having each record on a separate line and using commas to separate values with that record. You can see this by opening a csv file in a text editor such as notepad.</p>
 <p>The raw data stores line breaks using <code>\n</code> and indicates new rows by <code>\r</code>. These backslashed indicae that these are <em>escape characters</em> with special meanings, and should not be literally interpreted as the letters n and r.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">read_file</span>(<span class="at">file =</span> <span class="st">"images/102-workflows-naming-files/example.csv"</span>)</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] "Name,Number\r\nA,1\r\nB,2\r\nC,3"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-layout-align="center">
+<pre><code>#&gt; [1] "Name,Number\r\nA,1\r\nB,2\r\nC,3"</code></pre>
 </div>
 <p>When viewed in a text editor, the example file would look something like this.</p>
 <pre><code>Name,Number 
@@ -412,10 +414,8 @@ C,3</code></pre>
 <h4 data-number="2.3.2.2" class="anchored" data-anchor-id="inside-a-tsv-file"><span class="header-section-number">2.3.2.2</span> Inside a TSV file</h4>
 <p>TSV or tab separated value files are also used to store tabular data.</p>
 <p>Like in a csv each record is given on a new line but in a tsv tabs rather than commas are used to separate values with each record. This can also be seen by opening a tsv file in a text editor such as notepad.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">read_file</span>(<span class="at">file =</span> <span class="st">"images/102-workflows-naming-files/example.tsv"</span>)</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] "Name\tNumber\r\nA\t1\r\nB\t2\r\nC\t3"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-layout-align="center">
+<pre><code>#&gt; [1] "Name\tNumber\r\nA\t1\r\nB\t2\r\nC\t3"</code></pre>
 </div>
 <pre class="tsv"><code>Name    Number 
 A   1

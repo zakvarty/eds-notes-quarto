@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -198,6 +232,8 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"_common.R"</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">status</span>(<span class="st">"polishing"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -217,7 +253,7 @@ Note
 <section id="what-are-we-trying-to-do" class="level2" data-number="1.1">
 <h2 data-number="1.1" class="anchored" data-anchor-id="what-are-we-trying-to-do"><span class="header-section-number">1.1</span> What are we trying to do?</h2>
 <p>First, let’s consider why we want to provide our data science projects with some sense of structure and organization.</p>
-<p>As a data scientist you’ll never work alone. Within a single project you’ll interact with a whole range of other people. This might be a project manager, one or more business stakeholders or a variety of subject matter experts.These experts might be trained as sociologists, chemists, or civil servants depending on the exact type of data science work that you’re doing.</p>
+<p>As a data scientist you’ll never work alone. Within a single project you’ll interact with a whole range of other people. This might be a project manager, one or more business stakeholders or a variety of subject matter experts. These experts might be trained as sociologists, chemists, or civil servants depending on the exact type of data science work that you’re doing.</p>
 <p>To then get your project put into use and working at scale you’ll have to collaborate with data engineers. You’ll also likely work closely with other data scientists. For smaller projects this might be to act as reviewers for one another’s work. For larger projects working collaboratively will allow you to tackle larger challenges. These are the sorts of project that wouldn’t be feasible alone, because of the inherent limitations on the time and skill of any one individual person.</p>
 <p>Even if you work in a small organization, where you’re the only data scientist, then adopting a way of working that’s focused on collaborating will pay dividends over time. This is because when you inevitably return to the project that you’re working on in several weeks or months or years into the future you’ll have forgotten almost everything of what you did the first time around. You’ll also have forgotten why you made the decisions that you did and what other potential options there were that you didn’t take.</p>
 <p>This is exactly like working with a current colleague who has shoddy or poor working practices. Nobody wants to be that colleague to somebody else, let alone to their future self. Even when working alone, treating your future self as a current collaborator (and one that you want to get along well with) makes you a kind colleague and a pleasure to work with.</p>
@@ -238,9 +274,13 @@ Note
 <p>Every individual project you work on as a data scientist should be in a single, self-contained directory or folder.</p>
 </blockquote>
 <p>This is worth repeating. Every single project that you work on should be self-contained and live in a single directory. An analogy here might be having a separate ring-binder folder for each of your modules on a degree program.</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<p><img src="images/101-workflows-organising-your-work/directory-structure-drawings/directory-structure-drawing-1.png" class="img-fluid" style="width:80.0%"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/101-workflows-organising-your-work/directory-structure-drawings/directory-structure-drawing-1.png" class="img-fluid figure-img" style="width:80.0%"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>This one golden rule is deceptively simple.</p>
@@ -261,9 +301,13 @@ Note
 <section id="portability" class="level3" data-number="1.4.1">
 <h3 data-number="1.4.1" class="anchored" data-anchor-id="portability"><span class="header-section-number">1.4.1</span> Portability</h3>
 <p>A project is said to be portable if it can be easily moved without breaking.</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<p><img src="images/101-workflows-organising-your-work/directory-structure-drawings/directory-structure-drawing-2.png" class="img-fluid" style="width:80.0%"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/101-workflows-organising-your-work/directory-structure-drawings/directory-structure-drawing-2.png" class="img-fluid figure-img" style="width:80.0%"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>This might be a small move, like relocating the directory to a different location on your own computer. It might also mean a moderate move, say to another machine if yours dies just before a big deadline. Alternatively, it might be a large shift - to be uses by another person who is using a different operating system.</p>
@@ -305,28 +349,40 @@ Note
 <p>Every project is going to be slightly different and some might require slight alterations to what I suggest here. Indeed, even if you start as I suggest then you might have to adapt your project structure as it develops and grows. I think it’s helpful to consider yourself as a tailor when making these changes. I’m providing you with a one size fits all design, that’s great for lots of projects but perfect for none of them. It’s your job to alter and refine this design for each individual case.</p>
 <p>One final caveat before we get started: companies and businesses will many times have a house style how to write and organize your code or projects. If that’s the case, then follow the style guide that your business or company uses. The most important thing here is to be consistent at both an individual level and across the entire data science team. It’s this consistency that reaps the benefits.</p>
 <p>Okay, so imagine now that you’ve been assigned a shiny new project and have created a single directory in which to house that project. Here we’ve, quite imaginatively, called that directory <code>exciting-new-project</code>. What do we populate this folder with?</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<p><img src="images/101-workflows-organising-your-work/directory-structure-drawings/directory-structure-drawing-3.png" class="img-fluid" style="width:80.0%"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/101-workflows-organising-your-work/directory-structure-drawings/directory-structure-drawing-3.png" class="img-fluid figure-img" style="width:80.0%"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>In the rest of this video, I’ll define the house-style for organizing the root directory of your data science projects in this module.</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<p><img src="images/101-workflows-organising-your-work/directory-structure-drawings/directory-structure-drawing-4.png" class="img-fluid" style="width:80.0%"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/101-workflows-organising-your-work/directory-structure-drawings/directory-structure-drawing-4.png" class="img-fluid figure-img" style="width:80.0%"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Within the project directory there will be some subdirectories, which you can tell a folders in this file structure because they have a forward slash following their names. There will also be some files directly in the root directory. One of these is called <code>readme.md</code> and the another called either <code>makefile</code> or <code>make.r</code>. We’re going to explore each of these files and directories in turn.</p>
 <section id="readme.md" class="level3" data-number="1.5.1">
 <h3 data-number="1.5.1" class="anchored" data-anchor-id="readme.md"><span class="header-section-number">1.5.1</span> README.md</h3>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<p><img src="images/101-workflows-organising-your-work/directory-structure-drawings/directory-structure-drawing-5.png" class="img-fluid" style="width:80.0%"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/101-workflows-organising-your-work/directory-structure-drawings/directory-structure-drawing-5.png" class="img-fluid figure-img" style="width:80.0%"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Let’s begin with the readme file. This gives a brief introduction to your project and gives information on what the project aims to do. The readme file should describe how to get started using the project and how to contribute to its development.</p>
 <p>The readme is written either in a plain text format so <code>readme.txt</code> or in markdown format <code>readme.md</code>. The benefit of using markdown is that it allows some light formatting such as sections headers and lists using plain text characters. Here you can see me doing that by using hashes to mark out first and second level headers and using bullet points for a unnumbered list. Whichever format you use, the readme file for your project is always stored in the root directory and is typically named in all uppercase letters.</p>
-<p>The readme file should be the first thing that someone who’s new to your project reads. By placing the readme in the root directory and capitalising the file name you are increase the visibility of this file and increae the chances of this actually happening.</p>
+<p>The readme file should be the first thing that someone who’s new to your project reads. By placing the readme in the root directory and capitalising the file name you are increase the visibility of this file and increase the chances of this actually happening.</p>
 <p>An additional benefit to keeping the readme in the root directory of your project is that code hosting services like GitHub, GitLab or BitBucket will display the contents of that readme file next to the contents of your project. Those services will also nicely format any markdown that you use for you in your readme file.</p>
 <p>When writing the readme, it can be useful to imaginge that you are writing this for a new, junior team member. The readme file should let them get started with the project and make some simple contributions after reading only that file. It might also link out to more detailed project documentation that will help the new team member toward a more advanced understanding or complex contribution.</p>
 </section>
@@ -339,37 +395,53 @@ Note
 <p>It’s also a good practice to include some simple examples of how to use the code within your project an the expected results, so that new users can confirm that everything is working on their local instance. Keep the examples as simple and minimal as you can so that new users</p>
 <p>For longer or more complicated examples that aren’t necessary in this short introductory document you can add links to those in the readme and explain them in detail elsewhere.</p>
 <p>There should ideally be a short description of how people can report issues with the project and also how people can get started in resolving those issues or extend the project in some way.</p>
-<p>That leads me on to one point that I’ve forgotten to list here. There there should be a section listing the authors of the work and the license in which under which it’s distributed. This is to give credit to all the people who’ve contributed to your project and the license file then says how other people may use your work. The license declates how other may use your project and whether they have to give direct attribution to your work in any modifications that they use.</p>
+<p>That leads me on to one point that I’ve forgotten to list here. There there should be a section listing the authors of the work and the license in which under which it’s distributed. This is to give credit to all the people who’ve contributed to your project and the license file then says how other people may use your work. The license declares how other may use your project and whether they have to give direct attribution to your work in any modifications that they use.</p>
 </section>
 <section id="data" class="level3" data-number="1.5.3">
 <h3 data-number="1.5.3" class="anchored" data-anchor-id="data"><span class="header-section-number">1.5.3</span> data</h3>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<p><img src="images/101-workflows-organising-your-work/directory-structure-drawings/directory-structure-drawing-7.png" class="img-fluid" style="width:80.0%"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/101-workflows-organising-your-work/directory-structure-drawings/directory-structure-drawing-7.png" class="img-fluid figure-img" style="width:80.0%"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Moving back to our project structure, next we have the data directory.</p>
 <p>The data directory will have two subdirectories one called <code>raw</code> and one called <code>derived</code>. All data that is not generate as part of your project is stored in the <code>raw</code> subdirectory. To ensure that a project is reproducible, data in the Raw folder should never be edited or modified.</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<p><img src="images/101-workflows-organising-your-work/directory-structure-drawings/directory-structure-drawing-8.png" class="img-fluid" style="width:80.0%"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/101-workflows-organising-your-work/directory-structure-drawings/directory-structure-drawing-8.png" class="img-fluid figure-img" style="width:80.0%"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>In this example we’ve got two different data types: an Excel spreadsheet the XLS file and a JSON file. These files are exacty as we received them from our project stakeholder.</p>
 <p>The text file <code>metadata.txt</code> is a plain text file explaining the contents and interpretation of each of the raw data sets. This metadata should include descriptions of all the measured variables, the units that are recorded in, the date the file was created or acquired, and the source from which it was obtained.</p>
 <p>The raw data likely isn’t going to be in a form that’s amenable to analyzing straight away. To get the data into a more pleasant form to work, it will require some data manipulation and cleaning. Any manipulation or cleaning that is applied should be well documented and the resulting cleaned files saved within the <code>derived</code> data directory.</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<p><img src="images/101-workflows-organising-your-work/directory-structure-drawings/directory-structure-drawing-12.png" class="img-fluid" style="width:80.0%"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/101-workflows-organising-your-work/directory-structure-drawings/directory-structure-drawing-12.png" class="img-fluid figure-img" style="width:80.0%"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>In our exciting new project, we can see the clean versions of the previous data sets which are ready for modelling. There’s also a third file in this folder. This is data that we’ve acquired for ourselves through web scraping, using a script within the project.</p>
 </section>
 <section id="src" class="level3" data-number="1.5.4">
 <h3 data-number="1.5.4" class="anchored" data-anchor-id="src"><span class="header-section-number">1.5.4</span> src</h3>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<p><img src="images/101-workflows-organising-your-work/directory-structure-drawings/directory-structure-drawing-16.png" class="img-fluid" style="width:80.0%"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/101-workflows-organising-your-work/directory-structure-drawings/directory-structure-drawing-16.png" class="img-fluid figure-img" style="width:80.0%"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>The <code>src</code> or source directory contains all the source code for your project. This will typically be the functions that you’ve written to make the analysis or modelling code more accessible.</p>
@@ -378,9 +450,13 @@ Note
 </section>
 <section id="tests" class="level3" data-number="1.5.5">
 <h3 data-number="1.5.5" class="anchored" data-anchor-id="tests"><span class="header-section-number">1.5.5</span> tests</h3>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<p><img src="images/101-workflows-organising-your-work/directory-structure-drawings/directory-structure-drawing-12.png" class="img-fluid" style="width:80.0%"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/101-workflows-organising-your-work/directory-structure-drawings/directory-structure-drawing-12.png" class="img-fluid figure-img" style="width:80.0%"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Moving on then to the tests directory. The structure of this directory mirrors that of the source directory. Each function file has its own counterpart file of tests.</p>
@@ -388,9 +464,13 @@ Note
 </section>
 <section id="analyses" class="level3" data-number="1.5.6">
 <h3 data-number="1.5.6" class="anchored" data-anchor-id="analyses"><span class="header-section-number">1.5.6</span> analyses</h3>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<p><img src="images/101-workflows-organising-your-work/directory-structure-drawings/directory-structure-drawing-23.png" class="img-fluid" style="width:80.0%"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/101-workflows-organising-your-work/directory-structure-drawings/directory-structure-drawing-23.png" class="img-fluid figure-img" style="width:80.0%"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>The analyses directory contains what you probably think of as the bulk of your data science work. It’s going to have one subdirectory for each major analysis that’s performed within your project and within each of these there might be a series of steps that we collect into separate scripts.</p>
@@ -399,9 +479,13 @@ Note
 </section>
 <section id="outputs" class="level3" data-number="1.5.7">
 <h3 data-number="1.5.7" class="anchored" data-anchor-id="outputs"><span class="header-section-number">1.5.7</span> outputs</h3>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<p><img src="images/101-workflows-organising-your-work/directory-structure-drawings/directory-structure-drawing-26.png" class="img-fluid" style="width:80.0%"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/101-workflows-organising-your-work/directory-structure-drawings/directory-structure-drawing-26.png" class="img-fluid figure-img" style="width:80.0%"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>The outputs directory has again one subdirectory for each meta-analysis within the project. These are then further organized by the output type whether that be some data, a figure, or a table.</p>
@@ -409,9 +493,13 @@ Note
 </section>
 <section id="reports" class="level3" data-number="1.5.8">
 <h3 data-number="1.5.8" class="anchored" data-anchor-id="reports"><span class="header-section-number">1.5.8</span> reports</h3>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<p><img src="images/101-workflows-organising-your-work/directory-structure-drawings/directory-structure-drawing-29.png" class="img-fluid" style="width:80.0%"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/101-workflows-organising-your-work/directory-structure-drawings/directory-structure-drawing-29.png" class="img-fluid figure-img" style="width:80.0%"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>The reports directory is then where everything comes together. This is where the written documents that form the final deliverables of your project are created. If these final documents are written in LaTeX or markdown, both the source and the compiled documents can be found within this directory.</p>
@@ -422,9 +510,13 @@ Note
 </section>
 <section id="make-file" class="level3" data-number="1.5.9">
 <h3 data-number="1.5.9" class="anchored" data-anchor-id="make-file"><span class="header-section-number">1.5.9</span> make file</h3>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<p><img src="images/101-workflows-organising-your-work/directory-structure-drawings/directory-structure-drawing-32.png" class="img-fluid" style="width:80.0%"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/101-workflows-organising-your-work/directory-structure-drawings/directory-structure-drawing-32.png" class="img-fluid figure-img" style="width:80.0%"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>The final element of our template project structure is a make file. We aren’t going to cover how to read or write make files in this course. Instead, I’ll give you a brief description of what they are and what it is supposed to do.</p>
@@ -437,9 +529,13 @@ Note
 <h2 data-number="1.6" class="anchored" data-anchor-id="wrapping-up"><span class="header-section-number">1.6</span> Wrapping up</h2>
 <p>Wrapping up then, that’s everything for this chapter.</p>
 <p>I’ve introduced a project structure that will serve you well as a baseline for the vast majority of projects in data science.</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<p><img src="images/101-workflows-organising-your-work/directory-structure-drawings/directory-structure-drawing-33.png" class="img-fluid" style="width:80.0%"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/101-workflows-organising-your-work/directory-structure-drawings/directory-structure-drawing-33.png" class="img-fluid figure-img" style="width:80.0%"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>In your own work, remember that the key here is standardisation. Working consistently across projects, a company or a group is more important than sticking rigidly to the particular structure that I have defined here.</p>

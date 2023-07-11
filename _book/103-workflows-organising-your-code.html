@@ -278,47 +278,30 @@ Note
 <section id="the-pipe-operator" class="level3" data-number="3.2.1">
 <h3 data-number="3.2.1" class="anchored" data-anchor-id="the-pipe-operator"><span class="header-section-number">3.2.1</span> The Pipe Operator</h3>
 <p>One issue with functional programming is that lots of nested functions means that there are also lots of nested brackets. These start to get tricky to keep track of when you have upwards of 3 functions being composed. This reading difficulty is only exacerbated if your functions have additional arguments on top of the original inputs.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">log</span>(<span class="fu">exp</span>(<span class="fu">cos</span>(<span class="fu">sin</span>(pi))))</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-layout-align="center">
+<pre><code>#&gt; [1] 1</code></pre>
 </div>
 <p>The pipe operator <code>%&gt;%</code> from the <code>{magrittr}</code> package helps with this issue. It works exactly like function composition: it takes the whatever is on the left (whether that is an object or the output of a function) and passes it to the following function call as the first argument of that function.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(magrittr)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>pi <span class="sc">%&gt;%</span> </span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sin</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cos</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">exp</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">log</span>()</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-layout-align="center">
+<pre><code>#&gt; [1] 1</code></pre>
 </div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>iris <span class="sc">%&gt;%</span> </span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="at">n =</span> <span class="dv">3</span>)</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   Sepal.Length Sepal.Width Petal.Length Petal.Width Species</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1          5.1         3.5          1.4         0.2  setosa</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2          4.9         3.0          1.4         0.2  setosa</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3          4.7         3.2          1.3         0.2  setosa</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-layout-align="center">
+<pre><code>#&gt;   Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+#&gt; 1          5.1         3.5          1.4         0.2  setosa
+#&gt; 2          4.9         3.0          1.4         0.2  setosa
+#&gt; 3          4.7         3.2          1.3         0.2  setosa</code></pre>
 </div>
 <p>The pipe operator is often referred to as “syntactic sugar”. This is because it doesn’t add anything to your code in itself but rather it makes your code <em>so</em> much more palatable.</p>
 <p>In R versions 4.1 and greater, there’s a built-in version of this pipe operator, which is written using the vertical bar symbol followed by a greater than sign. To type the vertical bar, you can usually find it found above backslash on the keyboard.</p>
 <p>(Just to cause confusion, the vertical bar symbol is also called the pipe symbol in general programming contexts. )</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(magrittr)</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>pi <span class="sc">|&gt;</span> </span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sin</span>() <span class="sc">|&gt;</span> </span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cos</span>() <span class="sc">|&gt;</span> </span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">exp</span>() <span class="sc">|&gt;</span> </span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">log</span>()</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-layout-align="center">
+<pre><code>#&gt; [1] 1</code></pre>
 </div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>iris <span class="sc">|&gt;</span> </span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="at">n =</span> <span class="dv">3</span>)</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   Sepal.Length Sepal.Width Petal.Length Petal.Width Species</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1          5.1         3.5          1.4         0.2  setosa</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2          4.9         3.0          1.4         0.2  setosa</span></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3          4.7         3.2          1.3         0.2  setosa</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-layout-align="center">
+<pre><code>#&gt;   Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+#&gt; 1          5.1         3.5          1.4         0.2  setosa
+#&gt; 2          4.9         3.0          1.4         0.2  setosa
+#&gt; 3          4.7         3.2          1.3         0.2  setosa</code></pre>
 </div>
 <p>The base R pipe usually behaves in the same way as the pipe from magrittr, but there are a few cases where they differ. For reasons of back-compatibility and consistency we’ll stick to the magrittr pipe in this course.</p>
 </section>
@@ -373,7 +356,7 @@ Note
 </section>
 <section id="portable-file-paths-with-here" class="level2" data-number="3.5">
 <h2 data-number="3.5" class="anchored" data-anchor-id="portable-file-paths-with-here"><span class="header-section-number">3.5</span> Portable File paths with <code>{here}</code></h2>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Bad - breaks if project moved</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"zaks-mbp/Desktop/exciting-new-project/src/helper_functions/rolling_mean.R"</span>)</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -396,7 +379,7 @@ Note
 <h2 data-number="3.6" class="anchored" data-anchor-id="code-body"><span class="header-section-number">3.6</span> Code Body</h2>
 <p>Moving on now, we will go from the head to the body of the code. Having well named and organised code will facilitate both reading and understanding. Comments and sectioning do the rest of this work.</p>
 <p>This section is designed as an introduction to the <a href="https://style.tidyverse.org/">tidyverse style guide</a> and not as a replacement to it. ### Comments</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># This is an example script showing good use of comments and sectioning </span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(here)</span>
@@ -428,7 +411,7 @@ Note
 <li><p>Use underscores (<code>_</code>) to separate words within a name. (<code>snake_case</code>)</p></li>
 <li><p>Use nouns, preferring singular over plural names.</p></li>
 </ul>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Good</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>day_one</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>day_1</span>
@@ -451,7 +434,7 @@ Note
 <li><p>Suggest imperative mood, as in a recipe.</p></li>
 <li><p>Break long functions over multiple lines. 4 vs 2 spaces.</p></li>
 </ul>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Good</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">add_row</span>()</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="fu">permute</span>()</span>
@@ -503,7 +486,7 @@ Note
 <li><p>Write your code to be easily understood by humans.</p></li>
 <li><p>Use informative names, typing is cheap.</p></li>
 </ul>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Bad</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> dmt){</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(i)</span>
@@ -570,7 +553,7 @@ Note
 <section id="an-roxygen2-example" class="level3" data-number="3.8.4">
 <h3 data-number="3.8.4" class="anchored" data-anchor-id="an-roxygen2-example"><span class="header-section-number">3.8.4</span> An <code>{roxygen2}</code> example</h3>
 <p>Below, we’ve got an example of an Roxygen skeleton to document a function that calculates the geometric mean of a vector. Here, the hash followed by an apostrophe is a special type of comment. It indicates that this is function documentation rather than just a regular comment.</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co">#' Title</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="co">#'</span></span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="co">#' @param x </span></span>
@@ -585,7 +568,7 @@ Note
 <span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>We’ll fill in all of the fields in this skeleton apart from export, which we’ll remove. If we put this function in a R package, then the export field makes it available to users of that package. Since this is just a standalone function we won’t need the export field, though keeping it wouldn’t actually cause us any problems either.</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co">#' Calculate the geometric mean of a numeric vector</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="co">#'</span></span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co">#' @param x numeric vector</span></span>
@@ -633,25 +616,17 @@ Note
 <h3 data-number="3.8.7" class="anchored" data-anchor-id="a-formal-testing-workflow"><span class="header-section-number">3.8.7</span> A Formal Testing Workflow</h3>
 <p>We can formalise this testing workflow by writing our tests in their own R script and saving them for future reference. Remember from the first lecture that these should be saved in the <code>tests/</code> directory, the structure of which should mirror that of the <code>src/</code> directory for your project. All of the tests for one function should live in a single file, which is named after that function.</p>
 <p>One way of writing these tests is to use lots of if statements. The <code>{testthat}</code> can do some of that syntactic heavy lifting for us. It has lots of helpful functions to test that the output of your function is what you expect.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>geometric_mean <span class="ot">&lt;-</span> <span class="cf">function</span>(x , <span class="at">remove_NA =</span> <span class="cn">FALSE</span>){<span class="fu">prod</span>(x)<span class="sc">^</span>(<span class="dv">1</span><span class="sc">/</span><span class="fu">length</span>(x))}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>testthat<span class="sc">::</span><span class="fu">expect_equal</span>(</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">object =</span> <span class="fu">geometric_mean</span>(<span class="at">x =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="cn">NA</span>), <span class="at">remove_NA =</span> <span class="cn">FALSE</span>),</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">expected =</span> <span class="cn">NA</span>)</span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Error: geometric_mean(x = c(1, NA), remove_NA = FALSE) not equal to NA.</span></span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Types not compatible: double is not logical</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>testthat<span class="sc">::</span><span class="fu">expect_equal</span>(</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">object =</span> <span class="fu">geometric_mean</span>(<span class="at">x =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="cn">NA</span>), <span class="at">remove_NA =</span> <span class="cn">FALSE</span>),</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">expected =</span> <span class="cn">NA</span>)</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Error: geometric_mean(x = c(1, NA), remove_NA = FALSE) not equal to NA.</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Types not compatible: double is not logical</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>In this example, we have an error because our function returns a logical <code>NA</code> rather than a double <code>NA</code>. Yes, R really does have different types of <code>NA</code> for different types of missing data, it usually just handles these nicely in the background for you.</p>
 <p>This subtle difference is probably not something that you would have spotted on your own, until it caused you trouble much further down the line. This rigorous approach is one of the benefits of of using the <code>{testthat}</code> functions.</p>
 <p>To fix this test we change out expected output to <code>NA_real_</code>.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>testthat<span class="sc">::</span><span class="fu">expect_equal</span>(</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">object =</span> <span class="fu">geometric_mean</span>(<span class="at">x =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="cn">NA</span>), <span class="at">remove_NA =</span> <span class="cn">FALSE</span>),</span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">expected =</span> <span class="cn">NA_real_</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
 <p>We’ll revisit the <code>{testthat}</code> package in the live session this week, when we will learn how to use it to test functions within our own packages.</p>
 </section>
 </section>
