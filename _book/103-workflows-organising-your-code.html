@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.353">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Effective Data Science - 3&nbsp; Code</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./110-workflows-checklist.html" rel="next">
+<link href="./102-workflows-naming-files.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./103-workflows-organising-your-code.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Code</span></a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Effective Data Science</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">About this Course</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <span class="sidebar-item-text sidebar-link text-start">
+ <span class="menu-text">Effective Workflows</span></span>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./101-workflows-organising-your-work.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Organising your work</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./102-workflows-naming-files.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Naming Files</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./103-workflows-organising-your-code.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Code</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./110-workflows-checklist.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Workflows Checklist</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <span class="sidebar-item-text sidebar-link text-start">
+ <span class="menu-text">Introduction</span></span>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">3.1</span> Introduction</a></li>
+  <li><a href="#functional-programming" id="toc-functional-programming" class="nav-link" data-scroll-target="#functional-programming"><span class="header-section-number">3.2</span> Functional Programming</a>
+  <ul class="collapse">
+  <li><a href="#the-pipe-operator" id="toc-the-pipe-operator" class="nav-link" data-scroll-target="#the-pipe-operator"><span class="header-section-number">3.2.1</span> The Pipe Operator</a></li>
+  <li><a href="#when-not-to-pipe" id="toc-when-not-to-pipe" class="nav-link" data-scroll-target="#when-not-to-pipe"><span class="header-section-number">3.2.2</span> When not to pipe</a></li>
+  </ul></li>
+  <li><a href="#object-oriented-programming" id="toc-object-oriented-programming" class="nav-link" data-scroll-target="#object-oriented-programming"><span class="header-section-number">3.3</span> Object Oriented Programming</a>
+  <ul class="collapse">
+  <li><a href="#oop-philosophy" id="toc-oop-philosophy" class="nav-link" data-scroll-target="#oop-philosophy"><span class="header-section-number">3.3.1</span> OOP Philosophy</a></li>
+  <li><a href="#oop-example" id="toc-oop-example" class="nav-link" data-scroll-target="#oop-example"><span class="header-section-number">3.3.2</span> OOP Example</a></li>
+  </ul></li>
+  <li><a href="#structuring-r-script-headers" id="toc-structuring-r-script-headers" class="nav-link" data-scroll-target="#structuring-r-script-headers"><span class="header-section-number">3.4</span> Structuring R Script Headers</a></li>
+  <li><a href="#portable-file-paths-with-here" id="toc-portable-file-paths-with-here" class="nav-link" data-scroll-target="#portable-file-paths-with-here"><span class="header-section-number">3.5</span> Portable File paths with <code>{here}</code></a></li>
+  <li><a href="#code-body" id="toc-code-body" class="nav-link" data-scroll-target="#code-body"><span class="header-section-number">3.6</span> Code Body</a>
+  <ul class="collapse">
+  <li><a href="#objects-are-nouns" id="toc-objects-are-nouns" class="nav-link" data-scroll-target="#objects-are-nouns"><span class="header-section-number">3.6.1</span> Objects are Nouns</a></li>
+  <li><a href="#functions-are-verbs" id="toc-functions-are-verbs" class="nav-link" data-scroll-target="#functions-are-verbs"><span class="header-section-number">3.6.2</span> Functions are Verbs</a></li>
+  <li><a href="#casing-consistantly" id="toc-casing-consistantly" class="nav-link" data-scroll-target="#casing-consistantly"><span class="header-section-number">3.6.3</span> Casing Consistantly</a></li>
+  <li><a href="#style-guide-summary" id="toc-style-guide-summary" class="nav-link" data-scroll-target="#style-guide-summary"><span class="header-section-number">3.6.4</span> Style Guide Summary</a></li>
+  </ul></li>
+  <li><a href="#further-tips-for-friendly-coding" id="toc-further-tips-for-friendly-coding" class="nav-link" data-scroll-target="#further-tips-for-friendly-coding"><span class="header-section-number">3.7</span> Further Tips for Friendly Coding</a></li>
+  <li><a href="#reduce-reuse-recycle" id="toc-reduce-reuse-recycle" class="nav-link" data-scroll-target="#reduce-reuse-recycle"><span class="header-section-number">3.8</span> Reduce, Reuse, Recycle</a>
+  <ul class="collapse">
+  <li><a href="#dry-coding" id="toc-dry-coding" class="nav-link" data-scroll-target="#dry-coding"><span class="header-section-number">3.8.1</span> DRY Coding</a></li>
+  <li><a href="#rememer-how-to-use-your-own-code" id="toc-rememer-how-to-use-your-own-code" class="nav-link" data-scroll-target="#rememer-how-to-use-your-own-code"><span class="header-section-number">3.8.2</span> Rememer how to use your own code</a></li>
+  <li><a href="#roxygen2-for-documentation" id="toc-roxygen2-for-documentation" class="nav-link" data-scroll-target="#roxygen2-for-documentation"><span class="header-section-number">3.8.3</span> <code>{roxygen2}</code> for documentation</a></li>
+  <li><a href="#an-roxygen2-example" id="toc-an-roxygen2-example" class="nav-link" data-scroll-target="#an-roxygen2-example"><span class="header-section-number">3.8.4</span> An <code>{roxygen2}</code> example</a></li>
+  <li><a href="#checking-your-code" id="toc-checking-your-code" class="nav-link" data-scroll-target="#checking-your-code"><span class="header-section-number">3.8.5</span> Checking Your Code</a></li>
+  <li><a href="#an-informal-testing-workflow" id="toc-an-informal-testing-workflow" class="nav-link" data-scroll-target="#an-informal-testing-workflow"><span class="header-section-number">3.8.6</span> An Informal Testing Workflow</a></li>
+  <li><a href="#a-formal-testing-workflow" id="toc-a-formal-testing-workflow" class="nav-link" data-scroll-target="#a-formal-testing-workflow"><span class="header-section-number">3.8.7</span> A Formal Testing Workflow</a></li>
+  </ul></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="header-section-number">3.9</span> Summary</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span id="workflows-code" class="quarto-section-identifier"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Code</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Effective Data Science is still a work-in-progress. This chapter should be readable but is currently undergoing final polishing.</p>
+<p>If you would like to contribute to the development of EDS, you may do so at <a href="https://github.com/zakvarty/data_science_notes" class="uri">https://github.com/zakvarty/data_science_notes</a>.</p>
+</div>
+</div>
+<section id="introduction" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="introduction"><span class="header-section-number">3.1</span> Introduction</h2>
+<p>We have already described how we might organise an effective data science project at the directory and file level. In this chapter we will delve one step deeper and consider how we can structure our work within those files. In particular, we’ll focus on code files here.</p>
+<p>We’ll start by comparing the two main approaches to structuring our code, namely functional programming and object oriented programming.</p>
+<p>We’ll then see how we should order code within our scripts and conventions on how to name the functions and objects that we work with in our code.</p>
+<p>Rounding up this chapter, I’ll summarise the main points from the R style guide that we will be following in this course and highlight some useful packages for writing effective code.</p>
+</section>
+<section id="functional-programming" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="functional-programming"><span class="header-section-number">3.2</span> Functional Programming</h2>
+<p>A functional programming style has two major properties:</p>
+<ul>
+<li><p>Object immutability,</p></li>
+<li><p>Complex programs written using function composition.</p></li>
+</ul>
+<p>Firstly, the original data or objects aren’t modified or altered by the code. We have met this idea before when making new, cleaner versions of our raw data but leave that original messy data intact. Object immutability is the exact same idea but in a code context rather than data context.</p>
+<p>Secondly, In functional programming, complex problems are solved by decomposing them into a series of smaller problems. A separate, self-contained function is then written to solve each sub-problem. Each individual function is, in itself, simple and easy to understand. This makes these small functions easy to test and easy to reuse in many places. Code complexity is then built up by composing these functions in various ways.</p>
+<p>It can be difficult to get into this way of thinking, but people with mathematical training often find it quite natural. This is because mathematicians have many years of experience in working with function compositions in the abstract, mathematical sense.</p>
+<p><span class="math display">\[y = g(x) = f_3 \circ f_2 \circ f_1(x).\]</span></p>
+<section id="the-pipe-operator" class="level3" data-number="3.2.1">
+<h3 data-number="3.2.1" class="anchored" data-anchor-id="the-pipe-operator"><span class="header-section-number">3.2.1</span> The Pipe Operator</h3>
+<p>One issue with functional programming is that lots of nested functions means that there are also lots of nested brackets. These start to get tricky to keep track of when you have upwards of 3 functions being composed. This reading difficulty is only exacerbated if your functions have additional arguments on top of the original inputs.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">log</span>(<span class="fu">exp</span>(<span class="fu">cos</span>(<span class="fu">sin</span>(pi))))</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The pipe operator <code>%&gt;%</code> from the <code>{magrittr}</code> package helps with this issue. It works exactly like function composition: it takes the whatever is on the left (whether that is an object or the output of a function) and passes it to the following function call as the first argument of that function.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(magrittr)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>pi <span class="sc">%&gt;%</span> </span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sin</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cos</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">exp</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">log</span>()</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>iris <span class="sc">%&gt;%</span> </span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="at">n =</span> <span class="dv">3</span>)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   Sepal.Length Sepal.Width Petal.Length Petal.Width Species</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1          5.1         3.5          1.4         0.2  setosa</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2          4.9         3.0          1.4         0.2  setosa</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3          4.7         3.2          1.3         0.2  setosa</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The pipe operator is often referred to as “syntactic sugar”. This is because it doesn’t add anything to your code in itself but rather it makes your code <em>so</em> much more palatable.</p>
+<p>In R versions 4.1 and greater, there’s a built-in version of this pipe operator, which is written using the vertical bar symbol followed by a greater than sign. To type the vertical bar, you can usually find it found above backslash on the keyboard.</p>
+<p>(Just to cause confusion, the vertical bar symbol is also called the pipe symbol in general programming contexts. )</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(magrittr)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>pi <span class="sc">|&gt;</span> </span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sin</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cos</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">exp</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">log</span>()</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>iris <span class="sc">|&gt;</span> </span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="at">n =</span> <span class="dv">3</span>)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   Sepal.Length Sepal.Width Petal.Length Petal.Width Species</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1          5.1         3.5          1.4         0.2  setosa</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2          4.9         3.0          1.4         0.2  setosa</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3          4.7         3.2          1.3         0.2  setosa</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The base R pipe usually behaves in the same way as the pipe from magrittr, but there are a few cases where they differ. For reasons of back-compatibility and consistency we’ll stick to the magrittr pipe in this course.</p>
+</section>
+<section id="when-not-to-pipe" class="level3" data-number="3.2.2">
+<h3 data-number="3.2.2" class="anchored" data-anchor-id="when-not-to-pipe"><span class="header-section-number">3.2.2</span> When not to pipe</h3>
+<div class="medium_right">
+<p><img src="images/103-organising-your-code/ceci-nest-pas-un-pipe.png" alt="Magrittr package logo: a humorous adaptation of Magritte's 'Ceci n'est pas une pipe'"></p>
+</div>
+<p>Pipes are designed to put focus on the the actions you are performing rather than the object that you are preforming those operations on. This means that there are two cases where you should almost certainly not use a pipe.</p>
+<p>The first of these is when you need to manipulate more than one object at a time. Using secondary objects as reference points (but leaving them unchanged) is of course perfectly fine, but pipes should be used when applying a sequence of steps to create a new, modified version of one primary object.</p>
+<p>Secondly, just because you <em>can</em> chain together many actions into a single pipeline, that doesn’t mean that you necessarily should. Very long sequences of piped operations are easier to read than nested functions, however they still burden the reader with the same cognitive load on their short term memory. Be kind and create meaningful, intermediate objects with informative names. This’ll help the reader to more easily understand the logic within your code.</p>
+</section>
+</section>
+<section id="object-oriented-programming" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="object-oriented-programming"><span class="header-section-number">3.3</span> Object Oriented Programming</h2>
+<p>The main alternative to functional programming is object oriented programming.</p>
+<ul>
+<li>Solve problems by using lots of simple objects</li>
+<li>R has 3 OOP systems: S3, S4 and R6.</li>
+<li>Objects belong to a class, have methods and fields.</li>
+<li>Example: agent based simulation of beehive.</li>
+</ul>
+<section id="oop-philosophy" class="level3" data-number="3.3.1">
+<h3 data-number="3.3.1" class="anchored" data-anchor-id="oop-philosophy"><span class="header-section-number">3.3.1</span> OOP Philosophy</h3>
+<p>In functional programming, we solve complicated problems by using lots of simple functions. In object oriented programming we solve complicated problems using lots of simple objects. Which of these programming approaches is best will depend on the particular type of problem that you are trying to solve.</p>
+<p>Functional programming is excellent for most types of data science work. Object oriented comes into its own when your problem has many small components interacting with one another. This makes it great for things like designing agent-based simulations, which I’ll come back to in a moment.</p>
+<p>In R there are three different systems for doing object oriented programming (called S3, S4, and R6), so things can get a bit complicated. We won’t go into detail about them here, but I’ll give you an overview of the main ideas.</p>
+<p>This approach to programming might be useful for you in the future, for example if you want to extend base R functions to work with new types of input, and to have user-friendly displays. In that case (Advanced R)[https://adv-r.hadley.nz/] by Hadley Wickham is an excellent reference text.</p>
+<p>In OOP, each object belongs to a class and has a set of methods associated with it. The class defines what an object <em>is</em> and methods describe what that object can <em>do</em>. On top of that, each object has class-specific attributes or data fields. These fields are shared by all objects in a class but the values that they take give information about that specific object.</p>
+</section>
+<section id="oop-example" class="level3" data-number="3.3.2">
+<h3 data-number="3.3.2" class="anchored" data-anchor-id="oop-example"><span class="header-section-number">3.3.2</span> OOP Example</h3>
+<div class="medium_right">
+<p><img src="images/103-organising-your-code/beehive_3.jpg" alt="Italian Trulli"></p>
+</div>
+<p>This is is all sounding very abstract. Let’s consider writing some object oriented code to simulate a beehive. Each object will be a bee, and each bee is an instance of one of three bee classes: it might be a queen, a worker or a drone for example. Different bee classes have different methods associated with them, which describe what the bee can do, for example all bees would have 6 methods that let them move up, down, left, right, forward and backward within the hive. An additional “reproduce” method might only be defined for queen bees and a pollinate method might only be defined for workers. Each instance of a bee has its own fields, which give data about that specific bee. All bees have x, y and z coordinate fields giving their location within the hive. The queen class might have an additional field for their number of offspring and the workers might have an additional field for how much pollen they are carrying.</p>
+<p>As the simulation progresses, methods are applied to each object altering their fields and potentially creating or destroying objects. This is very different from the preservation mindset of functional programming, but hopefully you can see that it is a very natural approach to many types of problem.</p>
+</section>
+</section>
+<section id="structuring-r-script-headers" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="structuring-r-script-headers"><span class="header-section-number">3.4</span> Structuring R Script Headers</h2>
+<blockquote class="blockquote">
+<p>TL;DR - Start script with a comment of 1-2 sentences explaining what it &gt; does. - <code>setwd()</code> and <code>rm(ls())</code> are the devil’s work. - “Session” &gt; “Restart R” or Keyboard shortcut: crtl/cmd + shift &gt; + 0 - Polite to gather all <code>library()</code> and <code>source()</code> calls. - Rude to mess with other people’s set up using &gt; <code>install.packages()</code>. - Portable scripts use paths relative to the root directory of the project.</p>
+</blockquote>
+<p>First things first, let’s discuss what should be at the top of your R scripts.</p>
+<p>It is almost always a good idea to start your file with a few commented out sentences describing the purpose of the script and, if you work in a large team, perhaps who contact with any questions about this script. (There is more on comments coming up soon, don’t worry!)</p>
+<p>It is also good practise to move all <code>library()</code> and <code>source()</code> calls to the top of your script. These indicate the packages and helper function that are dependencies of your script; it’s useful to know what you need to have installed before trying to run any code.</p>
+<p>That segues nicely to the next point, which is never to hard code package installations. It is extremely bad practise and very rude to do so because then your script might alter another person’s R installation. If you don’t know already, this is precisely the difference between an <code>install.packages()</code> and <code>library()</code> call: <code>install.packages()</code> will download the code for that package to the users computer, while <code>library()</code> takes that downloaded code and makes it available in the current R session. To avoid messing with anyone’s R installation, you should always type <code>install.package()</code> commands directly in the console and then place the corresponding <code>library()</code> calls within your scripts.</p>
+<p>Next, it is likely that you, or someone close to you, will commit the felony of starting every script by setting the working directory and clearing R’s global environment. This is <em>very</em> bad practice, it’s indicative of a workflow that’s not project based and it’s problematic for at least two reasons. Firstly, the path you set will likely not work on anyone else’s computer. Secondly, clearing the environment like this may <em>look</em> like it gets you back to fresh, new R session but all of your previously loaded packages will still be loaded and lurking in the background.</p>
+<p>Instead, to achieve your original aim of starting a new R session, go to the menu and select the “Session” drop down then select “Restart R”. Alternatively, you can use keyboard shortcuts to do the same. This is “crtl + shift + 0” on Windows and “cmd + shift + 0” on a mac. The fact that a keyboard shortcut exists for this should quite strongly hint that, in a reproducible and project oriented workflow, you should be restarting R quite often in an average working day. This is the scripting equivalent of “clear all output and rerun all” in a notebook.</p>
+<p>Finally, let’s circle back to the point I made earlier about setting the working directory. The reason that this will not work is because you are likely giving file paths that are specific to your computer, your operating system and your file organisation system. The chances of someone else having all of these the same are practically zero.</p>
+</section>
+<section id="portable-file-paths-with-here" class="level2" data-number="3.5">
+<h2 data-number="3.5" class="anchored" data-anchor-id="portable-file-paths-with-here"><span class="header-section-number">3.5</span> Portable File paths with <code>{here}</code></h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Bad - breaks if project moved</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"zaks-mbp/Desktop/exciting-new-project/src/helper_functions/rolling_mean.R"</span>)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Better - breaks if Windows</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"../../src/helper_functions/rolling_mean.R"</span>)</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Best - but use here:here() to check root directory correctly identified</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"src"</span>,<span class="st">"helper_functions"</span>,<span class="st">"rolling_mean.R"</span>))</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="co"># For more info on the here package:</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="fu">vignette</span>(<span class="st">"here"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>To fix the problem of person- and computer-specific file paths you can have two options.</p>
+<p>The first is to use <em>relative</em> file paths. In this you assume that each R script is being run in its current location and my moving up and down through the levels of your project directory you point to the file that you need.</p>
+<p>This is good in that it solves the problem of paths breaking because you move the project to a different location on your own laptop. However, it does not fully solve the portability problem because you might move your file to a different location <em>within</em> the same project. It also does not solve the problem that windows uses MacOS and linux use forward slashes in file paths with widows uses backslashes.</p>
+<p>To resolve these final two issues I recommend using the <code>here()</code> function from the {here} package. This package looks for a <code>.Rproj</code> or <code>.git</code> file to identify the root directory of your project and creates file paths relative to the root of your project, that are suitable for the operating system the code is being run on.</p>
+<p>It really is quite marvellous. For more information on how to use the here package, explore its chapter in <a href="https://rstats.wtf/project-oriented-workflow.html" title="rstats.wtf/project-oriented-workflow">R - What They Forgot</a>, <a href="https://r4ds.had.co.nz/workflow-projects.html">R for Data Science</a> or this <a href="https://www.tidyverse.org/blog/2017/12/workflow-vs-script/" title="Tidyverse blog: workflow-vs-script">project oriented workflow blog post</a>.</p>
+</section>
+<section id="code-body" class="level2" data-number="3.6">
+<h2 data-number="3.6" class="anchored" data-anchor-id="code-body"><span class="header-section-number">3.6</span> Code Body</h2>
+<p>Moving on now, we will go from the head to the body of the code. Having well named and organised code will facilitate both reading and understanding. Comments and sectioning do the rest of this work.</p>
+<p>This section is designed as an introduction to the <a href="https://style.tidyverse.org/">tidyverse style guide</a> and not as a replacement to it. ### Comments</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># This is an example script showing good use of comments and sectioning </span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(here)</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="fu">here</span>(<span class="st">"src"</span>,<span class="st">"helper_functions"</span>,<span class="st">"rolling_mean.R"</span>))</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="co">#===============================================================================  &lt;- 80 characters max for readability</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Major Section on Comments ----</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="co">#===============================================================================</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="co">#-------------------------------------------------------------------------------</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="do">##  Minor Section on inline comments ---- </span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="co">#-------------------------------------------------------------------------------</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span> <span class="co"># this is an inline comment</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a><span class="co">#-------------------------------------------------------------------------------</span></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a><span class="do">##  Minor Section on full line comments ---- </span></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a><span class="co">#-------------------------------------------------------------------------------</span></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a><span class="fu">rolling_mean</span>(x)</span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a><span class="co"># This is an full line comment</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Comments may be either short in-line comments at the end of a line or full lines dedicated to comments. To create either type of comment in R, simply type hash followed by one space. The rest of that line will not be evaluated and will function as a comment. If multi-line comments are needed simply start multiple lines with a hash and a space.</p>
+<p>The purpose of these comments is to explain the <em>why</em> of what you are doing, not the what. If you are explaining <em>what</em> you are doing in most of your comments then you perhaps need to consider writing more informative function names, something we will return to in the general advice section.</p>
+<p>Comments can also be used to add structure to your code, buy using commented lines of hyphens and equal signs to chunk your files into minor and major sections.</p>
+<p>Markdown-like section titles can be added to these section and subsection headers. Many IDEs, such as RStudio, will interpret these as a table of contents for you, so that you can more easily navigate your code.</p>
+<section id="objects-are-nouns" class="level3" data-number="3.6.1">
+<h3 data-number="3.6.1" class="anchored" data-anchor-id="objects-are-nouns"><span class="header-section-number">3.6.1</span> Objects are Nouns</h3>
+<ul>
+<li><p>Object names should use only lowercase letters, numbers, and <code>_</code>.</p></li>
+<li><p>Use underscores (<code>_</code>) to separate words within a name. (<code>snake_case</code>)</p></li>
+<li><p>Use nouns, preferring singular over plural names.</p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Good</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>day_one</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>day_1</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Bad</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>first_day_of_the_month</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>DayOne</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>dayone</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>djm1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>When creating and naming objects a strong guideline in that objects should be named using short but meaningful nouns. Names should not include any special characters and should use underscores to separate words within the object name.</p>
+<p>This is similar to our file naming guide, but note that hyphens can’t be used in object names because this conflicts with the subtraction operator.</p>
+<p>When naming objects, as far as possible use singular nouns. The main reason for this is that the plurisation rules in English are complex and will eventually trip up either you or a user of your code.</p>
+</section>
+<section id="functions-are-verbs" class="level3" data-number="3.6.2">
+<h3 data-number="3.6.2" class="anchored" data-anchor-id="functions-are-verbs"><span class="header-section-number">3.6.2</span> Functions are Verbs</h3>
+<ul>
+<li><p>Function names should use only lowercase letters, numbers, and <code>_</code>.</p></li>
+<li><p>Use underscores (<code>_</code>) to separate words within a name. (<code>snake_case</code>)</p></li>
+<li><p>Suggest imperative mood, as in a recipe.</p></li>
+<li><p>Break long functions over multiple lines. 4 vs 2 spaces.</p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Good</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">add_row</span>()</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="fu">permute</span>()</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Bad</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="fu">row_adder</span>()</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="fu">permutation</span>()</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>long_function_name <span class="ot">&lt;-</span> <span class="cf">function</span>(</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">a =</span> <span class="st">"a long argument"</span>,</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">b =</span> <span class="st">"another argument"</span>,</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">c =</span> <span class="st">"another long argument"</span>) {</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>  <span class="co"># As usual code is indented by two spaces.</span></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The guidelines for naming functions are broadly similar, with the advice that functions should be verbs rather than nouns.</p>
+<p>Functions should be named in the imperative mood, like in a recipe. This is again for consistency; having function names in a range of moods and tenses leads to coding nightmares.</p>
+<p>As with object names you should aim to give your functions and their arguments short, evocative names. For functions with many arguments or a long name, you might not be able to fit the function definition on a single line. In this case you can should place each argument on its own double indented line and the function body on a single indented line.</p>
+</section>
+<section id="casing-consistantly" class="level3" data-number="3.6.3">
+<h3 data-number="3.6.3" class="anchored" data-anchor-id="casing-consistantly"><span class="header-section-number">3.6.3</span> Casing Consistantly</h3>
+<p>As we have mentioned already, we have many options for separating words within names:</p>
+<ul>
+<li><code>CamelCase</code></li>
+<li><code>pascalCase</code></li>
+<li><code>snakecase</code></li>
+<li><code>underscore_separated</code> ❤️</li>
+<li><code>hyphen-separated</code></li>
+<li><code>point.separated</code> 💀</li>
+</ul>
+<p>For people used to working in Python it is tempting to use point separation in function names, in the spirit of methods from object oriented programming. Indeed, some base R functions even use this convention.</p>
+<p>However, the reason that we advise against it is because it is already used for methods in some of R’s inbuilt OOP functionality. We will use underscore separation in our work.</p>
+</section>
+<section id="style-guide-summary" class="level3" data-number="3.6.4">
+<h3 data-number="3.6.4" class="anchored" data-anchor-id="style-guide-summary"><span class="header-section-number">3.6.4</span> Style Guide Summary</h3>
+<ol type="1">
+<li>Use comments to structure your code</li>
+<li>Objects = Nouns</li>
+<li>Functions = Verbs</li>
+<li>Use snake case and consistant grammar</li>
+</ol>
+</section>
+</section>
+<section id="further-tips-for-friendly-coding" class="level2" data-number="3.7">
+<h2 data-number="3.7" class="anchored" data-anchor-id="further-tips-for-friendly-coding"><span class="header-section-number">3.7</span> Further Tips for Friendly Coding</h2>
+<p>In addition to naming conventions the style guide gives lots of other guidance on writing code in a way that is kind to future readers of that code.</p>
+<p>I’m not going to go repeat all of that guidance here, but the motivation for all of these can be boiled down into the following points.</p>
+<ul>
+<li><p>Write your code to be easily understood by humans.</p></li>
+<li><p>Use informative names, typing is cheap.</p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Bad</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> dmt){</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(i)</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Good</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(temperature <span class="cf">in</span> daily_max_temperature){</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(temperature)</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li>Divide your work into logical stages, human memory is expensive.</li>
+</ul>
+<p>When writing your code, keep that future reader in mind. This means using names that are informative and reasonably short, it also means adding white space, comments and formatting to aid comprehension. Adding this sort of structure to your code also helps to reduce the cognitive burden that you are placing on the human reading your code.</p>
+<p>Informative names are more important than short names. This is particularly true when using flow controls, which are things like for loops and while loops. Which of these for loops would you like to encounter when approaching a deadline or urgently fixing a bug? Almost surely the second one, where context is immediately clear.</p>
+<p>A computer doesn’t care if you call a variable by only a single letter, by a random key smash (like <code>aksnbioawb</code>) or by an informative name. A computer also doesn’t care if you include no white space your code - the script will still run. However, doing these things are friendly practices that can help yourself when debugging and your co-workers when collaborating.</p>
+</section>
+<section id="reduce-reuse-recycle" class="level2" data-number="3.8">
+<h2 data-number="3.8" class="anchored" data-anchor-id="reduce-reuse-recycle"><span class="header-section-number">3.8</span> Reduce, Reuse, Recycle</h2>
+<p>In this final section, we’ll look at how you can make your workflow more efficient by reducing the amount of code you write, as well as reusing and recycling code that you’ve already written.</p>
+<section id="dry-coding" class="level3" data-number="3.8.1">
+<h3 data-number="3.8.1" class="anchored" data-anchor-id="dry-coding"><span class="header-section-number">3.8.1</span> DRY Coding</h3>
+<p>This idea of making your workflow more efficient by reducing, reusing and recycling your code is summarised by the DRY acronym: don’t repeat yourself.</p>
+<p>This can be boiled down to three main points:</p>
+<blockquote class="blockquote">
+<ul>
+<li>if you do something twice in a single script, then write a function to do that thing,</li>
+<li>if you want to use your function elsewhere <em>within</em> your project, then save it in a separate script</li>
+<li>If you want to use your function <em>across</em> projects, then add it to a package.</li>
+</ul>
+</blockquote>
+<p>Of course, like with scoping projects in the first place, this requires some level of clairvoyance: you have to be able to look into the future and see whether you’ll use a function in another script or project. This is difficult, bordering on impossible. So in practice, this is done retrospectively - you find a second script or project that needs a function then pull it out its own separate file or include it in a package.</p>
+<p>As a rule of thumb, if you are having to consider whether or not to make the function more widely available then you should do it. It takes much less effort to do this work now, while it’s fresh in your mind, than to have to refamiliarise yourself with the code in several years time.</p>
+<p>Let’s now look at how to implement those sub-bullet points: “when you write a function, document it” and “when you write a function, test it”.</p>
+</section>
+<section id="rememer-how-to-use-your-own-code" class="level3" data-number="3.8.2">
+<h3 data-number="3.8.2" class="anchored" data-anchor-id="rememer-how-to-use-your-own-code"><span class="header-section-number">3.8.2</span> Rememer how to use your own code</h3>
+<p>When you come to use a function written by somebody else, you likely have to refer to their documentation to teach or to remind yourself of things like what the expected inputs are and how exactly the method is implemented.</p>
+<p>When writing your own functions you should create documentation that fills the same need. Even if the function is just for personal use, over time you’ll forget exactly how it works.</p>
+<blockquote class="blockquote">
+<p><em>When you write a function, document it.</em></p>
+</blockquote>
+<p>But what should that documentation contain?</p>
+<ul>
+<li>Inputs</li>
+<li>Outputs</li>
+<li>Example use cases</li>
+<li>Author (if not obvious or working in a team)</li>
+</ul>
+<p>Your documentation should describe the inputs and outputs of your function, some simple example uses. If you are working in a large team, the documentation should also indicate who wrote the function and who’s responsible for maintaining it over time.</p>
+</section>
+<section id="roxygen2-for-documentation" class="level3" data-number="3.8.3">
+<h3 data-number="3.8.3" class="anchored" data-anchor-id="roxygen2-for-documentation"><span class="header-section-number">3.8.3</span> <code>{roxygen2}</code> for documentation</h3>
+<p>In the same way that we used the <code>{here}</code> package to simplify our file path problems, we’ll use the <code>{roxygen2}</code> package to simplify our testing workflow.</p>
+<p>The {roxygen2} package gives us an easily insert-able temple for documenting our functions. This means we don’t have to waste our time and energy typing out and remembering boilerplate code. It also puts our documentation in a format that allows us to get hints and auto-completion for our own functions, just like the functions we use from packages that are written by other people.</p>
+<p>To use Roxygen, you only need to install it once - it doesn’t need to be loaded with a library call at the top of your script. After you’ve done this, and with your cursor inside a function definition, you can then insert skeleton code to document that function in one of two ways: you can either use the Rstudio menu or the keyboard short cut for your operating system.</p>
+<ol type="1">
+<li><code>install.packages("roxygen2")</code></li>
+<li>With cursor inside function: Code &gt; Insert Roxygen Skeleton</li>
+<li>Keyboard shortcut: <em>cmd + option + shift + r</em> or <em>crtl + option + shift + r</em></li>
+<li>Fill out relevant fields</li>
+</ol>
+</section>
+<section id="an-roxygen2-example" class="level3" data-number="3.8.4">
+<h3 data-number="3.8.4" class="anchored" data-anchor-id="an-roxygen2-example"><span class="header-section-number">3.8.4</span> An <code>{roxygen2}</code> example</h3>
+<p>Below, we’ve got an example of an Roxygen skeleton to document a function that calculates the geometric mean of a vector. Here, the hash followed by an apostrophe is a special type of comment. It indicates that this is function documentation rather than just a regular comment.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co">#' Title</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="co">#'</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="co">#' @param x </span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co">#' @param remove_NA </span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="co">#'</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="co">#' @return</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="co">#' @export</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="co">#'</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="co">#' @examples</span></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>geometric_mean <span class="ot">&lt;-</span> <span class="cf">function</span>(x, <span class="at">remove_NA =</span> <span class="cn">FALSE</span>){</span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Function body goes here</span></span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We’ll fill in all of the fields in this skeleton apart from export, which we’ll remove. If we put this function in a R package, then the export field makes it available to users of that package. Since this is just a standalone function we won’t need the export field, though keeping it wouldn’t actually cause us any problems either.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co">#' Calculate the geometric mean of a numeric vector</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="co">#'</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co">#' @param x numeric vector</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="co">#' @param remove_NA logical scalar, indicating whether NA values should be stripped before computation proceeds. </span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="co">#'</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="co">#' @return the geometric mean of the values in `x`, a numeric scalar value. </span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="co">#'</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="co">#' @examples</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="co">#' geometric_mean(x = 1:10)</span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="co">#' geometric_mean(x = c(1:10, NA), remove_NA = TRUE)</span></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a><span class="co">#' </span></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>geometric_mean <span class="ot">&lt;-</span> <span class="cf">function</span>(x, <span class="at">remove_NA =</span> <span class="cn">FALSE</span>){</span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Function body goes here</span></span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Once we have filled in the skeleton documentation it might look something like this. We have described what the function does, what the expected inputs are and what the user can expect as an output. We’ve also given an few simple examples of how the function can be used.</p>
+<p>For more on Roxygen, see the <a href="https://roxygen2.r-lib.org/">package documentation</a> or the chapter of R packages on <a href="https://r-pkgs.org/man.html">function documentation</a>.</p>
+</section>
+<section id="checking-your-code" class="level3" data-number="3.8.5">
+<h3 data-number="3.8.5" class="anchored" data-anchor-id="checking-your-code"><span class="header-section-number">3.8.5</span> Checking Your Code</h3>
+<blockquote class="blockquote">
+<p><em>If you write a function, test it.</em></p>
+</blockquote>
+<p>Testing code has two main purposes:</p>
+<ul>
+<li>To warn or prevent user misuse (e.g.&nbsp;strange inputs),</li>
+<li>To catch edge cases.</li>
+</ul>
+<p>On top of explaining how our functions <em>should</em> work, we really ought to check that they <em>do</em> work. This is the job of unit testing.</p>
+<p>Whenever you write a function you should test that it works as you intended it to. Additionally, you should test that your function is robust to being misused by the user. Depending on the context, this might be accidental or malicious misuse. Finally, you should check that the function behaves properly for strange, but still valid, inputs. These are known as edge cases.</p>
+<p>Testing can be a bit of a brutal process, you’ve just created a beautiful function and now you’re job is to do your best to break it!</p>
+</section>
+<section id="an-informal-testing-workflow" class="level3" data-number="3.8.6">
+<h3 data-number="3.8.6" class="anchored" data-anchor-id="an-informal-testing-workflow"><span class="header-section-number">3.8.6</span> An Informal Testing Workflow</h3>
+<ol type="1">
+<li>Write a function</li>
+<li>Experiment with the function in the console, try to break it</li>
+<li>Fix the break and repeat.</li>
+</ol>
+<p><strong>Problems:</strong> Time consuming and not reproducible.</p>
+<p>An informal approach to testing your code might be to first write a function and then play around with it in the console to check that it behaves well when you give it obvious inputs, edge cases and deliberately wrong inputs. Each time you manage to break the function, you edit it to fix the problem and then start the process all over again.</p>
+<p>This <em>is</em> testing the code, but only informally. There’s no record of how you have tried to break your code already. The problem with this approach is that when you return to this code to add a new feature, you’ll probably have forgotten at least one of the informal tests you ran the first time around. This goes against our efforts towards reproducibility and automation. It also makes it very easy to break code that used to work just fine.</p>
+</section>
+<section id="a-formal-testing-workflow" class="level3" data-number="3.8.7">
+<h3 data-number="3.8.7" class="anchored" data-anchor-id="a-formal-testing-workflow"><span class="header-section-number">3.8.7</span> A Formal Testing Workflow</h3>
+<p>We can formalise this testing workflow by writing our tests in their own R script and saving them for future reference. Remember from the first lecture that these should be saved in the <code>tests/</code> directory, the structure of which should mirror that of the <code>src/</code> directory for your project. All of the tests for one function should live in a single file, which is named after that function.</p>
+<p>One way of writing these tests is to use lots of if statements. The <code>{testthat}</code> can do some of that syntactic heavy lifting for us. It has lots of helpful functions to test that the output of your function is what you expect.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>geometric_mean <span class="ot">&lt;-</span> <span class="cf">function</span>(x , <span class="at">remove_NA =</span> <span class="cn">FALSE</span>){<span class="fu">prod</span>(x)<span class="sc">^</span>(<span class="dv">1</span><span class="sc">/</span><span class="fu">length</span>(x))}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>testthat<span class="sc">::</span><span class="fu">expect_equal</span>(</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">object =</span> <span class="fu">geometric_mean</span>(<span class="at">x =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="cn">NA</span>), <span class="at">remove_NA =</span> <span class="cn">FALSE</span>),</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">expected =</span> <span class="cn">NA</span>)</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Error: geometric_mean(x = c(1, NA), remove_NA = FALSE) not equal to NA.</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Types not compatible: double is not logical</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>In this example, we have an error because our function returns a logical <code>NA</code> rather than a double <code>NA</code>. Yes, R really does have different types of <code>NA</code> for different types of missing data, it usually just handles these nicely in the background for you.</p>
+<p>This subtle difference is probably not something that you would have spotted on your own, until it caused you trouble much further down the line. This rigorous approach is one of the benefits of of using the <code>{testthat}</code> functions.</p>
+<p>To fix this test we change out expected output to <code>NA_real_</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>testthat<span class="sc">::</span><span class="fu">expect_equal</span>(</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">object =</span> <span class="fu">geometric_mean</span>(<span class="at">x =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="cn">NA</span>), <span class="at">remove_NA =</span> <span class="cn">FALSE</span>),</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">expected =</span> <span class="cn">NA_real_</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We’ll revisit the <code>{testthat}</code> package in the live session this week, when we will learn how to use it to test functions within our own packages.</p>
+</section>
+</section>
+<section id="summary" class="level2" data-number="3.9">
+<h2 data-number="3.9" class="anchored" data-anchor-id="summary"><span class="header-section-number">3.9</span> Summary</h2>
+<ul>
+<li>Functional and Object Oriented Programming</li>
+<li>Structuring your scripts</li>
+<li>Styling your code</li>
+<li>Reduce, reuse, recycle</li>
+<li>Documenting and testing</li>
+</ul>
+<p>Let’s wrap up by summarising what we have learned in this chapter.</p>
+<p>We started out with a discussion on the differences between functional and object oriented programming. While R is capable of both, data science work tends to have more of a functional flavour to it.</p>
+<p>We’ve then described how to structure your scripts and style your code to make it as human-friendly and easy to debug as possible.</p>
+<p>Finally, we discussed how to write DRY code that is well documented and tested.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./102-workflows-naming-files.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Naming Files</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./110-workflows-checklist.html" class="pagination-link">
+        <span class="nav-page-text">Workflows Checklist</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>

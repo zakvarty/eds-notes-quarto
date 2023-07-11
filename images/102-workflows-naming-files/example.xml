@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+  <row>
+    <Name>A</Name>
+    <Number>1</Number>
+  </row>
+  <row>
+    <Name>B</Name>
+    <Number>2</Number>
+  </row>
+  <row>
+    <Name>C</Name>
+    <Number>3</Number>
+  </row>
+</root>
