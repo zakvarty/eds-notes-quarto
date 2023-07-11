@@ -1,0 +1,23 @@
+project:
+  type: book
+
+book:
+  title: "eds-notes-quarto"
+  author: "Zak Varty"
+  date: "AY 2023-24"
+  chapters:
+    - index.qmd
+    - intro.qmd
+    - summary.qmd
+    - references.qmd
+
+bibliography: references.bib
+
+format:
+  html:
+    theme: cosmo
+  pdf:
+    documentclass: scrreprt
+
+
+
