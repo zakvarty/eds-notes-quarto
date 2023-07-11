@@ -12,6 +12,9 @@ knitr::opts_chunk$set(
   comment = "#>",
   collapse = TRUE,
   # cache = TRUE,
+  echo = FALSE,
+  out.width = "80%",
+  fig.align = "center",
   fig.width = 7,
   fig.height = 5,
   fig.show = "hold"
