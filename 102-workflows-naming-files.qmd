@@ -1,6 +1,8 @@
 # Naming Files {#workflows-naming}
 
-```{r, results='asis', echo=FALSE}
+```{r naming-files-setup}
+#| results: 'asis'
+#| echo: false
 source("_common.R")
 status("polishing")
 ```
@@ -30,7 +32,6 @@ Before we dive into naming files, we should first consider what we want from the
 3. Order Friendly
 
 Thee first desirable property is for file names to be easily readable by computers, the second is for the file names to be easily readable by humans and finally the file names should take advantage of the default ordering imposed on our files. 
-
 
 This set of current file names is sorely lacking across all of these properties: 
 
@@ -82,7 +83,7 @@ One example of where this might be useful is when downloading assessments for ma
 
 This is _monotonously_ dull and might work for ~50 students but not for ~5000. Working programmatically with files is the way to get this job done efficiently. This requires the file names to play nicely with the way that computers interpret file names, which they regard as a string of characters. 
 
-It is often helpful to have some metadata included in the file name, for example the student's id number and the assessment title. We will use an underscore to separate elements of metadata within the file name and a hyphen to separate sub-elements of meta-data, for example words within the assessment title. 
+It is often helpful to have some meta-data included in the file name, for example the student's id number and the assessment title. We will use an underscore to separate elements of meta-data within the file name and a hyphen to separate sub-elements of meta-data, for example words within the assessment title. 
 
 Regular expressions and globbing are two ideas from string manipulation that you may not have met, but which will inform our naming conventions. Regular expressions allow you to search for strings (in our case file names) that match a particular pattern. Regular expressions can do really complicated searches but become gnarly when you have to worry about special characters like spaces, punctuation, accents and cases, so these should be avoided in file names. 
 
@@ -111,7 +112,7 @@ model-evaluation.R
 wrangle.R
 ```
 
-Prepreding numbers to these file names can make the intended ordering immediately obvious. 
+Adding numbers to the start of these file names can make the intended ordering immediately obvious. 
 
 ```
 00_download.R
@@ -133,11 +134,12 @@ A second example of orderable file names is when the file has a date associated 
 ...
 2022-effective-data-science-module-guide.docx
 ```
+
 When using dates, in file names or elsewhere, you should conform to the ISO standard date format.  
 
 > ISO 8601 sets an international standard format for dates: `YYYY-MM-DD`. 
 
-This format uses four numbers for the year, followed by two numbers for the month and two numbers of the day of the month. This structure mirrors a nested file structure moving from least to most specific. It also avoids confusion over the ordering of the date elements. Without using the ISO standard a date like 04-05-22 might be interpreted as the fourth of May 2022, the fifth of April 2022, or the 22nd of May 2004. 
+This format uses four numbers for the year, followed by two numbers for the month and two numbers of the day of the month. This structure mirrors a nested file structure moving from least to most specific. It also avoids confusion over the ordering of the date elements. Without using the ISO standard a date like `04-05-22` might be interpreted as the fourth of May 2022, the fifth of April 2022, or the twenty-second of May 2004. 
 
 
 ### Human Readable 
@@ -155,9 +157,9 @@ There are lots of formatting options with fun names like `camelCase`, `PascalCas
    easily-read-by-real-people (skewer-case)
 ```
 
- here's weak evidence that suggests snake and skewer cases are most the readable.  We'll use a mixture of these, using snake case _between_ metadata items and skewer case _within_ them. This has a slight cost to legibility, in a trade-off against making computing on these file names easier. 
+There is weak evidence to suggest that snake case and skewer case are most the readable. We'll use a mixture of these two, using snake case _between_ metadata items and skewer case _within_ them. This has a slight cost to legibility, in a trade-off against making computing on these file names easier. 
  
-The final aspect that you have control over is the length of the name. Having short, evocative and useful file names is not easy and is a skill in itself. For some hints and tips you might want to look into tips for writing URL slugs. These are last part of a web address that  are intended to improve accessibility by being immediately and intuitively meaningful to any user. 
+The final aspect that you have control over is the length of the name. Having short, evocative and useful file names is not easy and is a skill in itself. For some hints and tips you might want to look into tips for writing URL slugs. These are last part of a web address that are intended to improve accessibility by being immediately and intuitively meaningful to any user. 
 
 
 ### Naming Files - Summary 
@@ -190,7 +192,7 @@ You likely already use file extensions to distinguish between code scripts, writ
 
 The first feature we'll consider is whether the file type is open source, and can be used by anyone without charge, or if specialist software must be paid for in order to interact with those files. 
 
-```{r protability-image, echo = FALSE, out.width="80%"}
+```{r protability-image}
 image_path <- "images/102-workflows-naming-files/file-types-image.png"
 knitr::include_graphics(path = image_path)
 ```
@@ -247,9 +249,7 @@ B   2
 C   3
 ```
 
-
 One thing to note is that tabs are a separate character and are not just multiple spaces. In plain text these can be impossible to tell apart, so most text editors have an option to display tabs differently from repeated spaces, though this is usually not enabled by default. 
-
 
 #### Inside an Excel file 
 
@@ -268,7 +268,6 @@ ef48 fc87 c8f7 d5dd 9010 424b 7741 48bb
 1054 1a83 0347 7fbd 7efc cadb dd3c 8dea
 .... .... .... .... .... .... .... ....
 ```
-
 
 Each entry here is a four digit hexadecimal number and there are a lot more of them than we have entries in our small table. 
 
@@ -323,7 +322,7 @@ The difference from a JSON file is mainly in how those records are formatted wit
 
 ### A Note on Notebooks 
 
--   There are two and a half notebook formats that you are likely to use to: <br>`.rmd` (alternatively `.qmd`) and `.ipynb`.
+-   There are two and a half notebook formats that you are likely to use: <br>`.rmd`, `.ipynb` or alternatively `.qmd`.
 
 -   R markdown documents `.rmd` are plain text files, so are very human friendly.
 
@@ -331,18 +330,17 @@ The difference from a JSON file is mainly in how those records are formatted wit
 
 -   Quarto documents offer the best of both worlds and more extensive language support. Not yet as established as a format.
 
-
 In addition to the files you read and write, the files that you code in will largely determine your workflow. 
 
-There are three main options for the way that you code: first is typing it directly at the command line, second is using a text editor or IDE to write scripts and third is writing a notebook that mixes code. text and output together in a single document. 
+There are three main options for the way that you code: first is typing it directly at the command line, second is using a text editor or IDE to write scripts and third is writing a notebook that mixes code, text and output together in a single document. 
 
-We'll compare these methods of working on the next slide, but first let's do a quick review of what notebooks are available to you and why you might want to use them. 
+We'll compare these methods of working soon, but first let's do a quick review of what notebooks are available to you and why you might want to use them. 
 
-As a data scientist, there are two and a half notebook formats that you're likely to have met before. The first two are Rmarkdown files for those working predominantly in R and interactive python or jupyter notebooks for those working predominantly in python. The final half format are quarto markdown documents, which are relatively new and extend the functionality of Rmarkdown files. 
+As a data scientist, there are two and a half notebook formats that you're likely to have met before. The first two are Rmarkdown files for those working predominantly in R and interactive Python or jupyter notebooks for those working predominantly in Python. The final half format are quarto markdown documents, which are relatively new and extend the functionality of Rmarkdown files to provide multi-language support. 
 
-The main benefit of R markdown documents is that they're plain text files, so they're very human friendly. ***JuPy***te***R*** notebooks have the benefit of supporting code written in Julia, Python or R, but are not so human friendly - under the hood these documents are JSON files that should not be edited directly because a misplaced bracket will break them.
+The main benefit of R markdown documents is that they're plain text files, so they're very human friendly and work very well with version control software like git. ***JuPy***te***R*** notebooks have the benefit of supporting code written in Julia, Python or R, but are not so human friendly - under the hood these documents are JSON files that should not be edited directly (because a misplaced bracket will break them!).
 
-Quarto documents offer the best of both worlds, with plain text formatting and even more extensive language support than jupyter notebooks. Quarto is a recent extension of Rmarkdown, which is rapidly becoming popular in the data science community. 
+Quarto documents offer the best of both worlds, with plain text formatting and even more extensive language support than jupyter notebooks. Quarto is a recent extension of Rmarkdown, which is rapidly becoming popular in the data science community. Quarto also allows you to create a wider range of documents, including websites, these course notes and the associated slides.
 
 Each format has its benefits and drawbacks depending on the context in which they are used and all have some shared benefits and limitations by nature of them all being notebook documents.
 
@@ -357,19 +355,17 @@ Each format has its benefits and drawbacks depending on the context in which the
 | ordering / automation |    \~    |   ✓    |      \~      |
 
 
-The main benefit of notebook documents is that they are self-documenting, in that they can mix the documentation, code and report all into a single document.  Notebooks also they provide a level of interactivity when coding that is not possible when working directly at the command line or using a text editor to write scripts. This second factor is easily overcome by using an integrated development environment when scripting. 
+The main benefit of notebook documents is that they are self-documenting, in that they can mix the documentation, code and report all into a single document.  Notebooks also provide a level of interactivity when coding that is not possible when working directly at the command line or using a text editor to write scripts. This limitation is easily overcome by using an integrated development environment when scripting, rather than a plain text editor. 
 
-Writing code in .r files is not self-documenting but this separation of code, documentation and outputs has many other benefits. Firstly, the resulting scripts provide a reproducible and automatable workflow, unlike one-off lines of code being run at the command line. Secondly, using an IDE to write these provides you with syntax highlighting and code linting features to help you write readable and accurate code. Finally, the separation of code from documentation and output allows your work to be more easily or even directly put into production.
+Writing code in `.r` files is not self-documenting but this separation of code, documentation and outputs has many other benefits. Firstly, the resulting scripts provide a reproducible and automatable workflow, unlike one-off lines of code being run at the command line. Secondly, using an IDE to write these provides you with syntax highlighting and code linting features to help you write readable and accurate code. Finally, the separation of code from documentation and output allows your work to be more easily or even directly put into production.
 
 In this course we will advocate for a scripting-first approach to data science, though notebooks and command line work definitely have their place. 
 
-Notebooks are great as teaching and rapid development tools but have strong limitations with being put into production. Conversely, coding directly at the command line can leave no trace of your workflow and lead to an analysis that cannot be replicated in the future. 
+Notebooks are great as teaching and rapid development tools but have strong limitations with being put into production. Conversely, coding directly at the command line is perfect for simple one-time tasks but it leaves no trace of your workflow and leads to an analysis that cannot be easily replicated in the future. 
 
 ### Summary 
 
 Finally, let's wrap things up by summarising what we have learned about naming files. 
-
-
 
 Before the dot we want to pick file names that machine readable, human friendly and play nicely with the default orderings provided to us. 
 
@@ -387,5 +383,5 @@ After the dot, we want to pick file types that are widely accessible, easily rea
 > -   Easy to read and reproduce,
 > -   Appropriate for the task at hand.
 
-Above all we want to name our files and pick our file types to best match with the team we are working in and the task that we is at hand. 
+Above all we want to name our files and pick our file types to best match with the team we are working in and the task that is at hand. 
 
