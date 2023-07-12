@@ -303,7 +303,7 @@ ogata_1984_spacetime-clustering.pdf</code></pre>
 <p>When we are operating on a large number of files it is useful to be able to work with them programmatically.</p>
 <p>One example of where this might be useful is when downloading assessments for marking. This might require me to unzip a large number of zip files, copying the pdf report from each unzipped folder into a single directory and all of the R scripts from each unzipped folder into another directory. The marked scripts and code then need to be paired back up in folders named by student, and re-zipped ready to be returned.</p>
 <p>This is <em>monotonously</em> dull and might work for ~50 students but not for ~5000. Working programmatically with files is the way to get this job done efficiently. This requires the file names to play nicely with the way that computers interpret file names, which they regard as a string of characters.</p>
-<p>It is often helpful to have some metadata included in the file name, for example the student’s id number and the assessment title. We will use an underscore to separate elements of metadata within the file name and a hyphen to separate sub-elements of meta-data, for example words within the assessment title.</p>
+<p>It is often helpful to have some meta-data included in the file name, for example the student’s id number and the assessment title. We will use an underscore to separate elements of meta-data within the file name and a hyphen to separate sub-elements of meta-data, for example words within the assessment title.</p>
 <p>Regular expressions and globbing are two ideas from string manipulation that you may not have met, but which will inform our naming conventions. Regular expressions allow you to search for strings (in our case file names) that match a particular pattern. Regular expressions can do really complicated searches but become gnarly when you have to worry about special characters like spaces, punctuation, accents and cases, so these should be avoided in file names.</p>
 <p>A special type of regular expression is called globbing where a star is used to replace any number of subsequent characters in a file name, so that here we can delete all png images that begin with Rplot using a single line of code. Globbing becomes particular powerful when you use a consistent structure to create your file names.</p>
 <p>As in the assessment marking example, having machine readable file names is particularly useful when managing files, such as ordering, finding, moving or deleting them. Another example of this is when your analysis requires you to load a large number of individual data files.</p>
@@ -322,7 +322,7 @@ runtime-comparison.R
 ...
 model-evaluation.R
 wrangle.R</code></pre>
-<p>Prepreding numbers to these file names can make the intended ordering immediately obvious.</p>
+<p>Adding numbers to the start of these file names can make the intended ordering immediately obvious.</p>
 <pre><code>00_download.R
 01_wrangle.R
 02_model.R
@@ -341,7 +341,7 @@ wrangle.R</code></pre>
 <blockquote class="blockquote">
 <p>ISO 8601 sets an international standard format for dates: <code>YYYY-MM-DD</code>.</p>
 </blockquote>
-<p>This format uses four numbers for the year, followed by two numbers for the month and two numbers of the day of the month. This structure mirrors a nested file structure moving from least to most specific. It also avoids confusion over the ordering of the date elements. Without using the ISO standard a date like 04-05-22 might be interpreted as the fourth of May 2022, the fifth of April 2022, or the 22nd of May 2004.</p>
+<p>This format uses four numbers for the year, followed by two numbers for the month and two numbers of the day of the month. This structure mirrors a nested file structure moving from least to most specific. It also avoids confusion over the ordering of the date elements. Without using the ISO standard a date like <code>04-05-22</code> might be interpreted as the fourth of May 2022, the fifth of April 2022, or the twenty-second of May 2004.</p>
 </section>
 </section>
 <section id="human-readable" class="level3" data-number="2.2.4">
@@ -353,7 +353,7 @@ wrangle.R</code></pre>
    EasilyReadByRealPeople (PascalCase)
    easily_read_by_real_people (snake_case)
    easily-read-by-real-people (skewer-case)</code></pre>
-<p>here’s weak evidence that suggests snake and skewer cases are most the readable. We’ll use a mixture of these, using snake case <em>between</em> metadata items and skewer case <em>within</em> them. This has a slight cost to legibility, in a trade-off against making computing on these file names easier.</p>
+<p>There is weak evidence to suggest that snake case and skewer case are most the readable. We’ll use a mixture of these two, using snake case <em>between</em> metadata items and skewer case <em>within</em> them. This has a slight cost to legibility, in a trade-off against making computing on these file names easier.</p>
 <p>The final aspect that you have control over is the length of the name. Having short, evocative and useful file names is not easy and is a skill in itself. For some hints and tips you might want to look into tips for writing URL slugs. These are last part of a web address that are intended to improve accessibility by being immediately and intuitively meaningful to any user.</p>
 </section>
 <section id="naming-files---summary" class="level3" data-number="2.2.5">
@@ -481,17 +481,17 @@ ef48 fc87 c8f7 d5dd 9010 424b 7741 48bb
 <section id="a-note-on-notebooks" class="level3" data-number="2.3.3">
 <h3 data-number="2.3.3" class="anchored" data-anchor-id="a-note-on-notebooks"><span class="header-section-number">2.3.3</span> A Note on Notebooks</h3>
 <ul>
-<li><p>There are two and a half notebook formats that you are likely to use to: <br><code>.rmd</code> (alternatively <code>.qmd</code>) and <code>.ipynb</code>.</p></li>
+<li><p>There are two and a half notebook formats that you are likely to use: <br><code>.rmd</code>, <code>.ipynb</code> or alternatively <code>.qmd</code>.</p></li>
 <li><p>R markdown documents <code>.rmd</code> are plain text files, so are very human friendly.</p></li>
 <li><p><strong><em>JuPy</em></strong>te<strong><em>R</em></strong> notebooks have multi-language support but are not so human friendly (JSON in disguise).</p></li>
 <li><p>Quarto documents offer the best of both worlds and more extensive language support. Not yet as established as a format.</p></li>
 </ul>
 <p>In addition to the files you read and write, the files that you code in will largely determine your workflow.</p>
-<p>There are three main options for the way that you code: first is typing it directly at the command line, second is using a text editor or IDE to write scripts and third is writing a notebook that mixes code. text and output together in a single document.</p>
-<p>We’ll compare these methods of working on the next slide, but first let’s do a quick review of what notebooks are available to you and why you might want to use them.</p>
-<p>As a data scientist, there are two and a half notebook formats that you’re likely to have met before. The first two are Rmarkdown files for those working predominantly in R and interactive python or jupyter notebooks for those working predominantly in python. The final half format are quarto markdown documents, which are relatively new and extend the functionality of Rmarkdown files.</p>
-<p>The main benefit of R markdown documents is that they’re plain text files, so they’re very human friendly. <strong><em>JuPy</em></strong>te<strong><em>R</em></strong> notebooks have the benefit of supporting code written in Julia, Python or R, but are not so human friendly - under the hood these documents are JSON files that should not be edited directly because a misplaced bracket will break them.</p>
-<p>Quarto documents offer the best of both worlds, with plain text formatting and even more extensive language support than jupyter notebooks. Quarto is a recent extension of Rmarkdown, which is rapidly becoming popular in the data science community.</p>
+<p>There are three main options for the way that you code: first is typing it directly at the command line, second is using a text editor or IDE to write scripts and third is writing a notebook that mixes code, text and output together in a single document.</p>
+<p>We’ll compare these methods of working soon, but first let’s do a quick review of what notebooks are available to you and why you might want to use them.</p>
+<p>As a data scientist, there are two and a half notebook formats that you’re likely to have met before. The first two are Rmarkdown files for those working predominantly in R and interactive Python or jupyter notebooks for those working predominantly in Python. The final half format are quarto markdown documents, which are relatively new and extend the functionality of Rmarkdown files to provide multi-language support.</p>
+<p>The main benefit of R markdown documents is that they’re plain text files, so they’re very human friendly and work very well with version control software like git. <strong><em>JuPy</em></strong>te<strong><em>R</em></strong> notebooks have the benefit of supporting code written in Julia, Python or R, but are not so human friendly - under the hood these documents are JSON files that should not be edited directly (because a misplaced bracket will break them!).</p>
+<p>Quarto documents offer the best of both worlds, with plain text formatting and even more extensive language support than jupyter notebooks. Quarto is a recent extension of Rmarkdown, which is rapidly becoming popular in the data science community. Quarto also allows you to create a wider range of documents, including websites, these course notes and the associated slides.</p>
 <p>Each format has its benefits and drawbacks depending on the context in which they are used and all have some shared benefits and limitations by nature of them all being notebook documents.</p>
 </section>
 <section id="file-extensions-and-where-you-code" class="level3" data-number="2.3.4">
@@ -538,10 +538,10 @@ ef48 fc87 c8f7 d5dd 9010 424b 7741 48bb
 </tr>
 </tbody>
 </table>
-<p>The main benefit of notebook documents is that they are self-documenting, in that they can mix the documentation, code and report all into a single document. Notebooks also they provide a level of interactivity when coding that is not possible when working directly at the command line or using a text editor to write scripts. This second factor is easily overcome by using an integrated development environment when scripting.</p>
-<p>Writing code in .r files is not self-documenting but this separation of code, documentation and outputs has many other benefits. Firstly, the resulting scripts provide a reproducible and automatable workflow, unlike one-off lines of code being run at the command line. Secondly, using an IDE to write these provides you with syntax highlighting and code linting features to help you write readable and accurate code. Finally, the separation of code from documentation and output allows your work to be more easily or even directly put into production.</p>
+<p>The main benefit of notebook documents is that they are self-documenting, in that they can mix the documentation, code and report all into a single document. Notebooks also provide a level of interactivity when coding that is not possible when working directly at the command line or using a text editor to write scripts. This limitation is easily overcome by using an integrated development environment when scripting, rather than a plain text editor.</p>
+<p>Writing code in <code>.r</code> files is not self-documenting but this separation of code, documentation and outputs has many other benefits. Firstly, the resulting scripts provide a reproducible and automatable workflow, unlike one-off lines of code being run at the command line. Secondly, using an IDE to write these provides you with syntax highlighting and code linting features to help you write readable and accurate code. Finally, the separation of code from documentation and output allows your work to be more easily or even directly put into production.</p>
 <p>In this course we will advocate for a scripting-first approach to data science, though notebooks and command line work definitely have their place.</p>
-<p>Notebooks are great as teaching and rapid development tools but have strong limitations with being put into production. Conversely, coding directly at the command line can leave no trace of your workflow and lead to an analysis that cannot be replicated in the future.</p>
+<p>Notebooks are great as teaching and rapid development tools but have strong limitations with being put into production. Conversely, coding directly at the command line is perfect for simple one-time tasks but it leaves no trace of your workflow and leads to an analysis that cannot be easily replicated in the future.</p>
 </section>
 <section id="summary" class="level3" data-number="2.3.5">
 <h3 data-number="2.3.5" class="anchored" data-anchor-id="summary"><span class="header-section-number">2.3.5</span> Summary</h3>
@@ -564,7 +564,7 @@ ef48 fc87 c8f7 d5dd 9010 424b 7741 48bb
 <li>Appropriate for the task at hand.</li>
 </ul>
 </blockquote>
-<p>Above all we want to name our files and pick our file types to best match with the team we are working in and the task that we is at hand.</p>
+<p>Above all we want to name our files and pick our file types to best match with the team we are working in and the task that is at hand.</p>
 
 
 </section>

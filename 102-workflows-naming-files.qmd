@@ -192,7 +192,7 @@ You likely already use file extensions to distinguish between code scripts, writ
 
 The first feature we'll consider is whether the file type is open source, and can be used by anyone without charge, or if specialist software must be paid for in order to interact with those files. 
 
-```{r protability-image}
+```{r portability-image}
 image_path <- "images/102-workflows-naming-files/file-types-image.png"
 knitr::include_graphics(path = image_path)
 ```
@@ -217,7 +217,7 @@ A csv encodes this by having each record on a separate line and using commas to 
 
 The raw data stores line breaks using `\n` and indicates new rows by `\r`. These backslashed indicae that these are _escape characters_ with special meanings, and should not be literally interpreted as the letters n and r. 
 
-```{r}
+```{r reading-csv-example}
 library(readr)
 read_file(file = "images/102-workflows-naming-files/example.csv")
 ```
@@ -237,7 +237,7 @@ TSV or tab separated value files are also used to store tabular data.
 
 Like in a csv each record is given on a new line but in a tsv tabs rather than commas are used to separate values with each record. This can also be seen by opening a tsv file in a text editor such as notepad.
 
-```{r}
+```{r reading-tsv-example}
 library(readr)
 read_file(file = "images/102-workflows-naming-files/example.tsv")
 ```
