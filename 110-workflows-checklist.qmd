@@ -1,6 +1,8 @@
 # Workflows Checklist {#workflows-checklist .unnumbered}
 
-```{r, results='asis', echo=FALSE}
+```{r workflows-checklist-setup}
+#| results: 'asis'
+#| echo: false
 source("_common.R")
 status("complete")
 ```
