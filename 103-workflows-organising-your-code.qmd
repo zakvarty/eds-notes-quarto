@@ -1,6 +1,8 @@
 # Code {#workflows-code}
 
-```{r, results='asis', echo=FALSE}
+```{r workflows-code-setup}
+#| results: 'asis'
+#| echo: false
 source("_common.R")
 status("polishing")
 ```
@@ -9,11 +11,9 @@ status("polishing")
 
 We have already described how we might organise an effective data science project at the directory and file level. In this chapter we will delve one step deeper and consider how we can structure our work within those files. In particular, we'll focus on code files here.
 
-We'll start by comparing the two main approaches to structuring our code, namely functional programming and object oriented programming.
+We'll start by comparing the two main approaches to structuring our code, namely functional programming and object oriented programming. We'll then see how we should order code within our scripts and conventions on how to name the functions and objects that we work with in our code.
 
-We'll then see how we should order code within our scripts and conventions on how to name the functions and objects that we work with in our code.
-
-Rounding up this chapter, I'll summarise the main points from the R style guide that we will be following in this course and highlight some useful packages for writing effective code.
+Rounding up this chapter, we'll summarise the main points from the R style guide that we will be following in this course and highlight some useful packages for writing effective code.
 
 ## Functional Programming 
 
@@ -23,10 +23,9 @@ A functional programming style has two major properties:
 
 -   Complex programs written using function composition.
 
+This first point here states that the original data or objects should never be modified or altered by the code we write. We have met this idea before when making new, cleaner versions of our raw data but taking care to leave the original messy data intact. Object immutability is the exact same idea but in a code context rather than data context.
 
-Firstly, the original data or objects aren't modified or altered by the code. We have met this idea before when making new, cleaner versions of our raw data but leave that original messy data intact. Object immutability is the exact same idea but in a code context rather than data context.
-
-Secondly, In functional programming, complex problems are solved by decomposing them into a series of smaller problems. A separate, self-contained function is then written to solve each sub-problem. Each individual function is, in itself, simple and easy to understand. This makes these small functions easy to test and easy to reuse in many places. Code complexity is then built up by composing these functions in various ways.
+Secondly, in functional programming, complex problems are solved by decomposing them into a series of smaller problems. A separate, self-contained function is then written to solve each sub-problem. Each individual function is, in itself, simple and easy to understand. This makes these small functions easy to test and easy to reuse in many places. Code complexity is then built up by composing these functions in various ways.
 
 It can be difficult to get into this way of thinking, but people with mathematical training often find it quite natural. This is because mathematicians have many years of experience in working with function compositions in the abstract, mathematical sense.
 
@@ -36,13 +35,15 @@ $$y = g(x) = f_3 \circ f_2 \circ f_1(x).$$
 
 One issue with functional programming is that lots of nested functions means that there are also lots of nested brackets. These start to get tricky to keep track of when you have upwards of 3 functions being composed. This reading difficulty is only exacerbated if your functions have additional arguments on top of the original inputs. 
 
-```{r}
+```{r example-function-composition}
+#| echo: true
 log(exp(cos(sin(pi))))
 ```
 
-The pipe operator `%>%` from the `{magrittr}` package helps with this issue. It works exactly like function composition: it takes the whatever is on the left (whether that is an object or the output of a function) and passes it to the following function call as the first argument of that function.
+The pipe operator `%>%` from the `{magrittr}` package helps with this issue. It works exactly like function composition: it takes the whatever is on the left (whether that is an existing object or the output of a function) and passes it to the following function call as the first argument of that function.
 
-```{r}
+```{r example-magrittr-pipe}
+#| echo: true
 library(magrittr)
 pi %>% 
   sin() %>% 
@@ -52,19 +53,19 @@ pi %>%
 ```
 
 
-```{r}
+```{r example-iris-magrittr-pipe}
+#| echo: true
 iris %>% 
   head(n = 3)
 ```
 
-The pipe operator is often referred to as "syntactic sugar". This is because it doesn't add anything to your code in itself but rather it makes your code _so_ much more palatable.
+The pipe operator is often referred to as "syntactic sugar". This is because it doesn't add anything to your code in itself, but rather it makes your code _so_ much more palatable to read.
 
-In R versions 4.1 and greater, there's a built-in version of this pipe operator, which is written using the vertical bar symbol followed by a greater than sign. To type the vertical bar, you can usually find it found above backslash on the keyboard.
-
-(Just to cause confusion, the vertical bar symbol is also called the pipe symbol in general programming contexts. )
+In R versions 4.1 and greater, there's a built-in version of this pipe operator,`|>`. This is written using the vertical bar symbol followed by a greater than sign. To type the vertical bar, you can usually find it found above backslash on the keyboard. (Just to cause confusion, the vertical bar symbol is also called the pipe symbol and performs a similar operation in general programming contexts.)
 
 
-```{r}
+```{r example-base-pipe}
+#| echo: true
 library(magrittr)
 pi |> 
   sin() |> 
@@ -74,13 +75,14 @@ pi |>
 ```
 
 
-```{r}
+```{r example-iris-base-pipe}
+#| echo: true
 iris |> 
   head(n = 3)
 ```
 
 
-The base R pipe usually behaves in the same way as the pipe from magrittr, but there are a few cases where they differ. For reasons of back-compatibility and consistency we'll stick to the magrittr pipe in this course.
+The base R pipe usually behaves in the same way as the pipe from magrittr, but there are a few cases where they differ. For reasons of back-compatibility and consistency we'll stick to the {magrittr} pipe in this course.
 
 ### When not to pipe 
 
@@ -92,7 +94,7 @@ Pipes are designed to put focus on the the actions you are performing rather tha
 
 The first of these is when you need to manipulate more than one object at a time. Using secondary objects as reference points (but leaving them unchanged) is of course perfectly fine, but pipes should be used when applying a sequence of steps to create a new, modified version of one primary object. 
 
-Secondly, just because you _can_ chain together many actions into a single pipeline, that doesn't mean that you necessarily should. Very long sequences of piped operations are easier to read than nested functions, however they still burden the reader with the same cognitive load on their short term memory. Be kind and create meaningful, intermediate objects with informative names. This'll help the reader to more easily understand the logic within your code.
+Secondly, just because you _can_ chain together many actions into a single pipeline, that doesn't mean that you necessarily should. Very long sequences of piped operations are easier to read than nested functions, however they still burden the reader with the same cognitive load on their short term memory. Be kind and create meaningful, intermediate objects with informative names. This will help the reader to more easily understand the logic within your code.
 
 ## Object Oriented Programming 
 
@@ -130,9 +132,10 @@ As the simulation progresses, methods are applied to each object altering their 
 ## Structuring R Script Headers
 
 > TL;DR
+>
 > - Start script with a comment of 1-2 sentences explaining what it > does.
 > - `setwd()` and `rm(ls())` are the devil's work.
->     - "Session" > "Restart R" or Keyboard shortcut: crtl/cmd + shift > + 0
+> - "Session" > "Restart R" or Keyboard shortcut: crtl/cmd + shift > + 0
 > - Polite to gather all `library()` and `source()`  calls.
 > - Rude to mess with other people's set up using > `install.packages()`.
 > - Portable scripts use paths relative to the root directory of the project.
@@ -153,7 +156,7 @@ Finally, let's circle back to the point I made earlier about setting the working
 
 ## Portable File paths with `{here}`
 
-```{r}
+```{r example-portable-paths}
 #| eval: false 
 #| echo: true
 # Bad - breaks if project moved
@@ -186,7 +189,9 @@ Moving on now, we will go from the head to the body of the code. Having well nam
 This section is designed as an introduction to the [tidyverse style guide](https://style.tidyverse.org/) and not as a replacement to it. 
 ### Comments 
 
-```{r, echo=TRUE, eval=FALSE}
+```{r example-comments}
+#| echo: true
+#| eval: false
 # This is an example script showing good use of comments and sectioning 
 
 library(here)
@@ -224,7 +229,7 @@ Markdown-like section titles can be added to these section and subsection header
 
 - Use nouns, preferring singular over plural names.
 
-```{r}
+```{r example-object-names}
 #| echo: true
 #| eval: false
 # Good
@@ -246,7 +251,7 @@ When naming objects, as far as possible use singular nouns. The main reason for 
 
 ### Functions are Verbs 
 
-- Function names should use only lowercase letters, numbers, and `_`. 
+- Function names should use only lower-case letters, numbers, and `_`. 
 
 - Use underscores (`_`) to separate words within a name. (`snake_case`)
 
@@ -255,8 +260,9 @@ When naming objects, as far as possible use singular nouns. The main reason for 
 - Break long functions over multiple lines. 4 vs 2 spaces.
 
 
-
-```{r, echo=TRUE, eval=FALSE}
+```{r example-function-names}
+#| echo: true
+#| eval: false
 # Good
 add_row()
 permute()
@@ -314,14 +320,16 @@ I'm not going to go repeat all of that guidance here, but the motivation for all
 
 - Use informative names, typing is cheap. 
 
-```{r, echo=TRUE, eval=FALSE}
+```{r example-iterator-naming}
+#| echo: true
+#| eval: false
 # Bad
-for(i in dmt){
+for (i in dmt) {
   print(i)
 }
 
 # Good
-for(temperature in daily_max_temperature){
+for (temperature in daily_max_temperature) {
   print(temperature)
 }
 ```
@@ -345,13 +353,13 @@ This idea of making your workflow more efficient by reducing, reusing and recycl
 
 This can be boiled down to three main points:
 
-> - if you do something twice in a single script, then write a function to do that thing, 
-> - if you want to use your function elsewhere _within_ your project, then save it in a separate script
+> - if you do something twice in a single script, then write a function to do that thing; 
+> - if you want to use your function elsewhere _within_ your project, then save it in a separate script;
 > - If you want to use your function _across_ projects, then add it to a package. 
 
 Of course, like with scoping projects in the first place, this requires some level of clairvoyance: you have to be able to look into the future and see whether you'll use a function in another script or project. This is difficult, bordering on impossible. So in practice, this is done retrospectively - you find a second script or project that needs a function then pull it out its own separate file or include it in a package. 
 
-As a rule of thumb, if you are having to consider whether or not to make the function more widely available then you should do it. It takes much less effort to do this work now, while it's fresh in your mind, than to have to refamiliarise yourself with the code in several years time.
+As a rule of thumb, if you are having to consider whether or not to make the function more widely available then you should do it. It takes much less effort to do this work now, while it's fresh in your mind, than to have to re-familiarise yourself with the code in several years time.
 
 Let's now look at how to implement those sub-bullet points: 
 "when you write a function, document it" and "when you write a function, test it".
@@ -390,7 +398,9 @@ To use Roxygen, you only need to install it once - it doesn't need to be loaded 
 
 Below, we've got an example of an Roxygen skeleton to document a function that calculates the geometric mean of a vector. Here, the hash followed by an apostrophe is a special type of comment. It indicates that this is function documentation rather than just a regular comment.
 
-```{r, echo=TRUE, eval=FALSE}
+```{r example-roxygen-template}
+#| echo: true
+#| eval: false
 #' Title
 #'
 #' @param x 
@@ -408,7 +418,9 @@ geometric_mean <- function(x, remove_NA = FALSE){
 
 We'll fill in all of the fields in this skeleton apart from export, which we'll remove. If we put this function in a R package, then the export field makes it available to users of that package. Since this is just a standalone function we won't need the export field, though keeping it wouldn't actually cause us any problems either. 
 
-```{r, echo=TRUE, eval=FALSE}
+```{r example-roxygen-completed}
+#| echo: true
+#| eval: false
 #' Calculate the geometric mean of a numeric vector
 #'
 #' @param x numeric vector
@@ -462,11 +474,13 @@ We can formalise this testing workflow by  writing our tests in their own R scri
 
 One way of writing these tests is to use lots of if statements. The `{testthat}` can do some of that syntactic heavy lifting for us. It has lots of helpful functions to test that the output of your function is what you expect.  
 
-```{r}
+```{r geometric-mean}
 geometric_mean <- function(x , remove_NA = FALSE){prod(x)^(1/length(x))}
 ```
 
-```{r, echo=TRUE, eval=FALSE}
+```{r geometric-mean-tests}
+#| echo: true
+#| eval: false
 testthat::expect_equal(
   object = geometric_mean(x = c(1, NA), remove_NA = FALSE),
   expected = NA)
@@ -481,7 +495,7 @@ This subtle difference is probably not something that you would have spotted on 
 
 To fix this test we change out expected output to `NA_real_`. 
 
-```{r}
+```{r geometric-mean-tests-passing}
 testthat::expect_equal(
   object = geometric_mean(x = c(1,NA), remove_NA = FALSE),
   expected = NA_real_)
