@@ -21,6 +21,7 @@ bibliography: references.bib
 format:
   html:
     theme: cosmo
+    css: "style.css"
     cover-image: "images/eds-logo.jpg"
   pdf:
     documentclass: scrreprt
