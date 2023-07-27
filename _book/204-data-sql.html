@@ -6,10 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Zak Varty">
-<meta name="dcterms.date" content="2023-07-27">
 
-<title>Effective Data Science</title>
+<title>Effective Data Science - 6&nbsp; Databases and SQL</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -32,7 +30,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./100-workflows-introduction.html" rel="next">
+<link href="./210-data-checklist.html" rel="next">
+<link href="./202-data-webscraping.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -75,7 +74,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">About this Course</a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./204-data-sql.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Databases and SQL</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -102,7 +101,7 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">About this Course</span></a>
   </div>
 </li>
@@ -152,7 +151,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./204-data-sql.html" class="sidebar-item-text sidebar-link">
+  <a href="./204-data-sql.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Databases and SQL</span></span></a>
   </div>
 </li>
@@ -174,46 +173,21 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Table of contents</h2>
-   
-  <ul>
-  <li><a href="#about-this-course" id="toc-about-this-course" class="nav-link active" data-scroll-target="#about-this-course">About this Course</a>
-  <ul class="collapse">
-  <li><a href="#schedule" id="toc-schedule" class="nav-link" data-scroll-target="#schedule">Schedule</a></li>
-  <li><a href="#learning-outcomes" id="toc-learning-outcomes" class="nav-link" data-scroll-target="#learning-outcomes">Learning outcomes</a></li>
-  <li><a href="#allocation-of-study-hours" id="toc-allocation-of-study-hours" class="nav-link" data-scroll-target="#allocation-of-study-hours">Allocation of Study Hours</a></li>
-  <li><a href="#assessment-structure" id="toc-assessment-structure" class="nav-link" data-scroll-target="#assessment-structure">Assessment Structure</a></li>
-  <li><a href="#acknowledgements" id="toc-acknowledgements" class="nav-link" data-scroll-target="#acknowledgements">Acknowledgements</a></li>
-  </ul></li>
-  </ul>
-</nav>
+        
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Effective Data Science</h1>
+<h1 class="title"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Databases and SQL</span></h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>Zak Varty </p>
-          </div>
-  </div>
     
-    <div>
-    <div class="quarto-title-meta-heading">Published</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">July 27, 2023</p>
-    </div>
-  </div>
   
     
   </div>
@@ -221,72 +195,38 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
+<!-- Aim to include for for 2023/24 course delivery -->
+<!-- # SQL {#data-sql}
 
-<section id="about-this-course" class="level1 unnumbered">
-<h1 class="unnumbered">About this Course</h1><p><img src="images/eds-logo.jpg" title="Effective Data Science" class="quarto-cover-image img-fluid"></p>
-<!--## Course Description {.unnumbered}-->
-<p>Model building and evaluation are are necessary but not sufficient skills for the effective practice of data science. In this module you will develop the technical and personal skills that are required to work successfully as a data scientist within an organisation.</p>
-<!-- 
-::: small_right
-<img src="images/EDS-logo.jpg" alt="Logo"/>
+
+
+::: {.callout-important} 
+Effective Data Science is still a work-in-progress. This chapter is currently a dumping ground for ideas, and we don't recommend reading it. 
+
+If you would like to contribute to the development of EDS, you may do so at <https://github.com/zakvarty/data_science_notes>.
 :::
--->
-<p>During this module you will critically explore how to:</p>
-<ul>
-<li>effectively scope and manage a data science project;</li>
-<li>work openly and reproducibly;</li>
-<li>efficiently acquire, manipulate, and present data;</li>
-<li>interpret and explain your work for a variety of stakeholders;</li>
-<li>ensure that your work can be put into production;</li>
-<li>assess the ethical implications of your work as a data scientist.</li>
-</ul>
-<p>This interdisciplinary course will draw from fields including statistics, computing, management science and data ethics. Each topic will be investigated through a selection of lecture videos, conference presentations and academic papers, hands-on lab exercises, along with readings on industry best-practices from recognised professional bodies.</p>
-<section id="schedule" class="level2 unnumbered">
-<h2 class="unnumbered anchored" data-anchor-id="schedule">Schedule</h2>
-<p>These notes are intended for students on the course <strong>MATH70076: Data Science</strong> in the academic year 2023/24.</p>
-<p>As the course is scheduled to take place over five weeks, the suggested schedule is:</p>
-<ul>
-<li>1st week: effective data science workflows;</li>
-<li>2nd week: acquiring and sharing data;</li>
-<li>3rd week: exploratory data analysis and visualisation;</li>
-<li>4th week: preparing for production;</li>
-<li>5th week: ethics and context of data science.</li>
-</ul>
-<p>A pdf version of these notes may be downloaded <a href="./Effective-Data-Science.pdf">here</a>. Please be aware that these are very rough and will be updated less frequently than the course webpage.</p>
-</section>
-<section id="learning-outcomes" class="level2 unnumbered">
-<h2 class="unnumbered anchored" data-anchor-id="learning-outcomes">Learning outcomes</h2>
-<p>On successful completion of this module students should be able to:</p>
-<ol type="1">
-<li>Independently scope and manage a data science project;</li>
-<li>Source data from the internet through web scraping and APIs;</li>
-<li>Clean, explore and visualise data, justifying and documenting the decisions made;</li>
-<li>Evaluate the need for (and implement) approaches that are explainable, reproducible and scalable;</li>
-<li>Appraise the ethical implications of a data science projects, particularly the risks of compromising privacy or fairness and the potential to cause harm.</li>
-</ol>
-</section>
-<section id="allocation-of-study-hours" class="level2 unnumbered">
-<h2 class="unnumbered anchored" data-anchor-id="allocation-of-study-hours">Allocation of Study Hours</h2>
-<p><strong>Lectures:</strong> 10 Hours (2 hours per week)</p>
-<p><strong>Group Teaching:</strong> 5 Hours (1 hour per week)</p>
-<p><strong>Lab / Practical:</strong> 10 hours (2 hours per week)</p>
-<p><strong>Independent Study:</strong> 100 hours (15 hours per week + 30 hours coursework)</p>
-<p><strong>Drop-In Sessions:</strong> Each week there will be a 1-hour optional drop-in session to address any questions about the course or material. This is where you can get support from the course lecturer or GTA on the topics covered each week, individually or in small groups.</p>
-<p><strong>Office Hours:</strong> Additionally, there will be an office hour each week. This is a weekly opportunity for 1-1 discussion with the course lecturer to address any individual questions, concerns or problems that you might have. These meetings can be in person or on Teams and can be academic (relating to course content or progress) or pastoral (relating to student well-being) in nature. To book a 1-1 meeting please use the link on the course blackboard page.</p>
-</section>
-<section id="assessment-structure" class="level2 unnumbered">
-<h2 class="unnumbered anchored" data-anchor-id="assessment-structure">Assessment Structure</h2>
-<p>The course will be assessed entirely by coursework, reflecting the practical and pragmatic nature of the course material.</p>
-<p><strong>Coursework 1 (30%):</strong> To be completed during the fourth week of the course.</p>
-<p><strong>Coursework 2 (70%):</strong> To be released in the last week of the course and submitted following the examination period in Summer term.</p>
-</section>
-<section id="acknowledgements" class="level2 unnumbered">
-<h2 class="unnumbered anchored" data-anchor-id="acknowledgements">Acknowledgements</h2>
-<p>These notes were created by Dr Zak Varty. They were inspired by a previous lecture series by Dr Purvasha Chakravarti at Imperial College London and draw from many resource that were made available by the R community.</p>
 
 
-</section>
-</section>
+(Content to be added for AY 2023-24)
+
+
+- Structure of a webpage. Web Scraping as a source of data
+- APIs as a source of data, data files beyond csv.
+- Data bases and SQL 
+
+- Data will not always be in a nicely formatted csv 
+
+- Beginner: reading from clipboard and googlesheets 
+- Intermediate: reading messy csvs and making your workflow robust to new versions
+- Advanced: 
+  - Webscraping and APIs as data sources, data files beyond CSV
+  - data files beyond csv, benefits and drawbacks: JSON, xml, parquet, .Rdata, .pkl 
+  - Data bases as data sources: Basic SQL verbs
+  - Learning SQL theory on a small scale: dplyr verbs 
+  
+  -->
+
+
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -524,10 +464,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
+      <a href="./202-data-webscraping.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Web Scraping</span></span>
+      </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./100-workflows-introduction.html" class="pagination-link">
-        <span class="nav-page-text">Effective Workflows</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./210-data-checklist.html" class="pagination-link">
+        <span class="nav-page-text">Checklist</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

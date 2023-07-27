@@ -13,7 +13,12 @@ book:
     - 103-workflows-organising-your-code.qmd
     #- 104-workflows-project-management.qmd
     - 110-workflows-checklist.qmd
-    - part: intro.qmd
+    - part: 200-data-introduction.qmd
+    - 201-data-tabular.qmd
+    - 202-data-webscraping.qmd
+    #- 203-data-apis.qmd
+    - 204-data-sql.qmd
+    - 210-data-checklist.qmd
     - references.qmd
 
 bibliography: references.bib

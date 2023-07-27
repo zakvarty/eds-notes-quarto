@@ -1,0 +1,368 @@
+# Tabular Data {#data-tabular}
+
+```{r, setup, results='asis', echo=FALSE}
+source("_common.R")
+status("restructuring")
+knitr::opts_knit$set(root.dir = './images/201-tabular-data/')
+```
+
+## Loading Tabular Data
+
+
+```{r, eval=FALSE, echo=FALSE}
+set.seed(1234)
+random_data <- data.frame(
+  id = letters[1:26],
+  gaussian = rnorm(26),
+  gamma = rgamma(26, 1, 1),
+  uniform = runif(26)
+)
+
+readr::write_csv(random_data, file = "random-data.csv")
+readr::write_tsv(random_data, file = "random-data.tsv")
+readr::write_delim(random_data, file = "random-data.txt")
+```
+
+
+::: medium_right
+<img src="images/201-tabular-data/xls-is-not-the-only-extension.png" alt="Text reading 'xls is not the only extension'"/>
+:::
+
+Recall that simpler, open source formats improve accessibility and reproducibility. We will begin by reading in three open data formats for tabular data. 
+
+
+-   `random-data.csv`
+
+-   `random-data.tsv`
+
+-   `random-data.txt`
+
+
+Each of these data sets contains 26 observations of 4 variables:
+
+- `id`, a Roman letter identifier;
+- `gaussian`, standard normal random variates;
+- `gamma`, gamma(1,1) random variates;
+- `uniform`, uniform(0,1) random variates. 
+
+### Base R 
+
+```{r echo=TRUE, eval=TRUE}
+random_df <- read.csv(file = 'random-data.csv')
+print(random_df)
+```
+
+Output is a `data.frame` object. (List of vectors with some nice methods)
+
+### `{readr}`
+
+```{r echo=TRUE, eval=TRUE}
+random_tbl <- readr::read_csv(file = 'random-data.csv')
+print(random_tbl)
+```
+
+Output is a `tibble` object. (List of vectors with some nicer methods)
+
+
+#### Benefits of `readr::read_csv()`
+
+
+1. Increased speed (approx. 10x) and progress bar.
+
+2. Strings are not coerced to factors. No more `stringsAsFactors = FALSE`
+
+3. No row names and nice column names.
+
+4. Reproducibility bonus: does not depend on operating system.
+
+
+
+### WTF: Tibbles
+
+#### Printing
+
+- Default to first 10 rows and as many columns as will comfortably fit on your screen.
+
+- Can adjust this behaviour in the print call:
+
+```{r echo=TRUE, eval=TRUE}
+# print first three rows and all columns
+print(random_tbl, n = 3, width = Inf)
+```
+
+
+**Bonus:** Colour formatting in IDE and each column tells you it's type.
+
+#### Subsetting 
+
+Subsetting tibbles will always return another tibble.
+
+```{r, echo=TRUE, eval=FALSE}
+# Row Subsetting
+random_tbl[1, ] # returns tibble
+random_df[1, ]  # returns data.frame
+
+# Column Subsetting
+random_tbl[ , 1]      # returns tibble
+random_df[ , 1]       # returns vector
+
+# Combined Subsetting
+random_tbl[1, 1]      # returns 1x1 tibble
+random_df[1, 1]       # returns single value
+```
+
+<br>
+
+This helps to avoids edge cases associated with working on data frames.
+
+### Other `{readr}` functions 
+
+See `{readr}` [documentation](https://readr.tidyverse.org/), there are lots of useful additional arguments that can help you when reading messy data.
+
+Functions for reading and writing other types of tabular data work analogously. 
+
+#### Reading Tabular Data
+
+```{r, echo=TRUE, eval=FALSE}
+library(readr)
+read_tsv("random-data.tsv")
+read_delim("random-data.txt", delim = " ")
+```
+
+#### Writing Tabular Data
+
+```{r, echo=TRUE, eval=FALSE}
+write_csv(random_tbl, "random-data-2.csv")
+write_tsv(random_tbl, "random-data-2.tsv")
+write_delim(random_tbl, "random-data-2.tsv", delim = " ")
+```
+
+### Need for Speed 
+
+Some times you have to load _lots of large data sets_, in which case a 10x speed-up might not be sufficient.
+
+
+If each data set still fits inside RAM, then check out  `data.table::fread()` which is optimised for speed. (Alternatives exist for optimal memory usage and data too large for working memory, but not covered here.)
+
+__Note:__ While it can be much faster, the resulting data.table object lacks the consistancy properties of a tibble so be sure to check for edge cases, where the returned value is not what you might expect.
+
+## Tidy Data 
+
+### Wide vs. Tall Data 
+
+#### Wide Data
+
+  - First column has unique entries
+
+  - Easier for humans to read and compute on
+
+  - Harder for machines to compute on
+  
+#### Tall Data
+
+  - First column has repeating entries
+
+  - Harder for humans to read and compute on
+
+  - Easier for machines to compute on
+
+#### Examples 
+
+__Example 1 (Wide)__
+
+| **Person ** | **Age ** | **Weight ** | **Height ** |
+|-------------|----------|-------------|-------------|
+| Bob         | 32       | 168         | 180         |
+| Alice       | 24       | 150         | 175         |
+| Steve       | 64       | 144         | 165         |
+
+__Example 1 (Tall)__
+
+| **Person ** | **Variable ** | **Value ** |
+|:-----------:|:-------------:|:----------:|
+| Bob         | Age           | 32         |
+| Bob         | Weight        | 168        |
+| Bob         | Height        | 180        |
+| Alice       | Age           | 24         |
+| Alice       | Weight        | 150        |
+| Alice       | Height        | 175        |
+| Steve       | Age           | 64         |
+| Steve       | Weight        | 144        |
+| Steve       | Height        | 165        |
+
+[Source: Wikipedia - Wide and narrow data]
+
+__Example 2 (Wide)__ 
+
+| Team | Points | Assists | Rebounds |
+|------|--------|---------|----------|
+| A    | 88     | 12      | 22       |
+| B    | 91     | 17      | 28       |
+| C    | 99     | 24      | 30       |
+| D    | 94     | 28      | 31       | 
+
+__Example 2 (Tall)__
+
+| Team | Variable | Value |
+|------|----------|-------|
+| A    | Points   | 88    |
+| A    | Assists  | 12    |
+| A    | Rebounds | 22    |
+| B    | Points   | 91    |
+| B    | Assists  | 17    |
+| B    | Rebounds | 28    |
+| C    | Points   | 99    |
+| C    | Assists  | 24    |
+| C    | Rebounds | 30    |
+| D    | Points   | 94    |
+| D    | Assists  | 28    |
+| D    | Rebounds | 31    |
+
+[Source: Statology - Long vs wide data]
+
+
+#### Pivoting Wider and Longer
+
+- Error control at input and analysis is format-dependent. 
+
+- Switching between long and wide formats useful to control errors. 
+
+- Easy with the `{tidyr}` package functions 
+
+```{r, echo=TRUE, eval=FALSE}
+tidyr::pivot_longer()
+tidyr::pivot_wider()
+```
+
+### Tidy What? 
+
+![[Image: R4DS - Chapter 12]](images/201-tabular-data/tidy-1.png) 
+
+_Tidy Data_ is an opinionated way to store tabular data. 
+
+Image Source: Chapter 12 of R for Data Science. 
+
+- Each column corresponds to a exactly one measured variable
+- Each row corresponds to exactly one observational unit 
+- Each cell contains exactly one value. 
+
+__Benefits of tidy data__
+
+- *Consistent data format:* Reduces cognitive load and allows specialised tools (functions) to efficiently work with tabular data. 
+
+- *Vectorisation*: Keeping variables as columns allows for very efficient data manipulation. (this goes back to data frames and tibbles being lists of vectors)
+
+### Example - Tidy Longer 
+
+Consider trying to plot these data as time series. The `year` variable is trapped in the column names! 
+
+```{r eval=TRUE, echo=FALSE}
+countries <- tibble::tibble(
+  country = c("Afghanistan", "Brazil", "China"),
+  `1999` = c(745, 37737, 212258),
+  `2000` = c(2666, 80488, 213766)
+)
+``` 
+
+```{r}
+countries
+```
+
+To tidy this data, we need to `pivot_longer()`. We will turn the column names into a new `year` variable and retaining cell contents as a new variable called `cases`. 
+
+```{r, echo=TRUE, eval=TRUE}
+library(magrittr)
+countries %>% 
+  tidyr::pivot_longer(cols = c(`1999`,`2000`), names_to = "year", values_to = "cases")
+```
+
+Much better!
+
+
+### Example - Tidy Wider 
+
+There are other times where we might have to widen our data to tidy it. 
+
+This example is not tidy. Why not? 
+
+| Team | Variable | Value |
+|------|----------|-------|
+| A    | Points   | 88    |
+| A    | Assists  | 12    |
+| A    | Rebounds | 22    |
+| B    | Points   | 91    |
+| B    | Assists  | 17    |
+| B    | Rebounds | 28    |
+| C    | Points   | 99    |
+| C    | Assists  | 24    |
+| C    | Rebounds | 30    |
+| D    | Points   | 94    |
+| D    | Assists  | 28    |
+| D    | Rebounds | 31    |
+
+The observational unit here  is a team. However, each variable should be a stored in a separate column, with cells containing their values.
+
+To tidy this data we first generate it as a tibble. We use the `tribble()` function, which allows us to create a tibble row-wise rather than column-wise.
+
+```{r}
+tournament <- tibble::tribble(
+~Team  , ~Variable , ~Value,
+"A"    , "Points"  , 88    ,
+"A"    , "Assists" , 12    ,
+"A"    , "Rebounds", 22    ,
+"B"    , "Points"  , 91    ,
+"B"    , "Assists" , 17    ,
+"B"    , "Rebounds", 28    ,
+"C"    , "Points"  , 99    ,
+"C"    , "Assists" , 24    ,
+"C"    , "Rebounds", 30    ,
+"D"    , "Points"  , 94    ,
+"D"    , "Assists" , 28    ,
+"D"    , "Rebounds", 31    )
+```
+
+We can then tidy it by creating new columns for each value of the current `Variable` column and taking the values for these from the current `Value` column. 
+
+```{r, echo=TRUE, eval=TRUE}
+tournament %>% 
+  tidyr::pivot_wider(
+    id_cols = "Team", 
+    names_from = "Variable",
+    values_from = "Value")
+```
+
+### Other helpful functions 
+
+The `pivot_*()` family of functions resolve issues with rows (too many observations per row or rows per observation).
+
+<br>
+
+There are similar helper functions to solve column issues: 
+
+ - Multiple variables per column: `tidyr::separate()`,
+
+ - Multiple columns per variable: `tidyr::unite()`. 
+ 
+
+### Missing Data 
+
+In tidy data, every cell contains a value. Including cells with missing values. 
+
+- Missing values are coded as `NA` (generic) or a type-specific `NA`, such as `NA_character_`.
+
+- The `{readr}` family of `read_*()` function have good defaults and helpful `na` argument.  
+
+- Explicitly code `NA` values when collecting data, avoid ambiguity: " ", -999 or worst of all 0.
+
+- More on missing values in EDA videos...  
+
+## Wrapping Up 
+
+
+1. Reading in tabular data by a range of methods 
+
+2. Introduced the `tibble` and tidy data (+ tidy not always best)
+
+3. Tools for tidying messy tabular data 
+
+

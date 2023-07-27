@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Effective Data Science - Introduction</title>
+<title>Effective Data Science - Checklist</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,60 +20,7 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
-/* CSS for citations */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-}
-.hanging-indent div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}</style>
+</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -84,7 +31,7 @@ div.csl-indent {
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
 <link href="./references.html" rel="next">
-<link href="./110-workflows-checklist.html" rel="prev">
+<link href="./204-data-sql.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -127,7 +74,7 @@ div.csl-indent {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./intro.html">Introduction</a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./210-data-checklist.html">Checklist</a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -188,8 +135,32 @@ div.csl-indent {
 </li>
         <li class="sidebar-item sidebar-item-section">
       <span class="sidebar-item-text sidebar-link text-start">
- <span class="menu-text">Introduction</span></span>
+ <span class="menu-text">(PART) Acquiring and Sharing Data</span></span>
   </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./201-data-tabular.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Tabular Data</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./202-data-webscraping.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Web Scraping</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./204-data-sql.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Databases and SQL</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./210-data-checklist.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Checklist</span></a>
+  </div>
+</li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./references.html" class="sidebar-item-text sidebar-link">
@@ -202,14 +173,23 @@ div.csl-indent {
 <div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#videos-chapters" id="toc-videos-chapters" class="nav-link active" data-scroll-target="#videos-chapters">Videos / Chapters</a></li>
+  <li><a href="#reading" id="toc-reading" class="nav-link" data-scroll-target="#reading">Reading</a></li>
+  <li><a href="#tasks" id="toc-tasks" class="nav-link" data-scroll-target="#tasks">Tasks</a></li>
+  <li><a href="#live-session" id="toc-live-session" class="nav-link" data-scroll-target="#live-session">Live Session</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Introduction</h1>
+<h1 class="title"><span id="data-checklist" class="quarto-section-identifier">Checklist</span></h1>
 </div>
 
 
@@ -224,21 +204,111 @@ div.csl-indent {
 
 </header>
 
-<p>This is a book created from markdown and executable code.</p>
-<p>See <span class="citation" data-cites="knuth84">Knuth (<a href="references.html#ref-knuth84" role="doc-biblioref">1984</a>)</span> for additional discussion of literate programming.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">+</span> <span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 2</code></pre>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
 </div>
 </div>
+<div class="callout-body-container callout-body">
+<p>Effective Data Science is still a work-in-progress. This chapter is largely complete and just needs final proof reading.</p>
+<p>If you would like to contribute to the development of EDS, you may do so at <a href="https://github.com/zakvarty/data_science_notes" class="uri">https://github.com/zakvarty/data_science_notes</a>.</p>
+</div>
+</div>
+<section id="videos-chapters" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="videos-chapters">Videos / Chapters</h2>
+<ul class="task-list">
+<li><p><input type="checkbox"><a href="https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=d80e9045-22e7-4a0e-a0fc-af8100d3e727">Tabular Data</a> (27 min) <a href="https://github.com/zakvarty/effective-data-science-slides-2022/raw/main/02-01-tabular-data-and-csvs/02-01-tabular-data.pdf">[slides]</a></p></li>
+<li><p><input type="checkbox"><a href="https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=239ba39e-8a06-4e7b-a6c1-af7200f91d2b">Web Scraping</a> (22 min) <a href="https://github.com/zakvarty/effective-data-science-slides-2022/raw/main/02-02-webscraping/02-02-web-scraping.pdf">[slides]</a></p></li>
+<li><p><input type="checkbox"><a href="https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=e1ed8e4f-cbaa-40c2-8c44-af7200ee2e9f">APIs</a> (25 min) <a href="https://github.com/zakvarty/effective-data-science-slides-2022/raw/main/02-03-apis/02-03-apis.pdf">[slides]</a></p></li>
+</ul>
+</section>
+<section id="reading" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="reading">Reading</h2>
+<p>Use the <a href="#data-reading">Acquiring and Sharing Data section</a> of the reading list to support and guide your exploration of this week’s topics. Note that these texts are divided into core reading, reference materials and materials of interest.</p>
+</section>
+<section id="tasks" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="tasks">Tasks</h2>
+<p><em>Core:</em></p>
+<ul>
+<li><p>Revisit the Projects that you explored on Github last week. This time look for any data or documentation files.</p>
+<ul>
+<li>Are there any file types that are new to you?</li>
+<li>If so, are there packages or helper function that would let you read this data into R?</li>
+<li>Why might you not find many data files on Github?</li>
+</ul></li>
+<li><p>Play <a href="https://flukeout.github.io/">CSS Diner</a> to familiarise yourself with some CSS selectors.</p></li>
+<li><p>Identify 3 APIs that give access to data on topics that interest you. Write a post on the discussion forum describing the APIs and use one of them to load some data into R.</p></li>
+<li><p>Scraping Book Reviews:</p>
+<ul>
+<li>Visit the Amazon page for R for Data Science. Write code to scrape the percentage of customers giving each “star” rating (5⭐, …, 1⭐).</li>
+<li>Turn your code into a function that will return a tibble of the form:</li>
+</ul></li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<colgroup>
+<col style="width: 11%">
+<col style="width: 8%">
+<col style="width: 13%">
+<col style="width: 13%">
+<col style="width: 13%">
+<col style="width: 13%">
+<col style="width: 13%">
+<col style="width: 14%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">product</th>
+<th style="text-align: right;">n_reviews</th>
+<th style="text-align: right;">percent_5_star</th>
+<th style="text-align: right;">percent_4_star</th>
+<th style="text-align: right;">percent_3_star</th>
+<th style="text-align: right;">percent_2_star</th>
+<th style="text-align: right;">percent_1_star</th>
+<th style="text-align: left;">url</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">example_name</td>
+<td style="text-align: right;">1000</td>
+<td style="text-align: right;">20</td>
+<td style="text-align: right;">20</td>
+<td style="text-align: right;">20</td>
+<td style="text-align: right;">20</td>
+<td style="text-align: right;">20</td>
+<td style="text-align: left;">www.example.com</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<ul>
+<li><p>Generalise your function to work for other Amazon products, where the function takes as input a vector of product names and an associated vector of URLs.</p></li>
+<li><p>Use your function to compare the reviews of the following three books: <a href="https://www.amazon.com/Data-Science-Transform-Visualize-Model/dp/1491910399/ref=sr_1_1?keywords=r+for+data+science&amp;qid=1674145765&amp;s=books&amp;sprefix=R+for+data+%2Cstripbooks-intl-ship%2C157&amp;sr=1-1">R for Data Science</a>, <a href="https://www.amazon.com/Packages-Organize-Test-Document-Share/dp/1491910593/ref=sr_1_1?crid=XWR8O7WPKZS9&amp;keywords=R+packages&amp;qid=1674145743&amp;s=books&amp;sprefix=r+package%2Cstripbooks-intl-ship%2C158&amp;sr=1-1">R packages</a> and <a href="https://www.amazon.com/ggplot2-Elegant-Graphics-Data-Analysis/dp/331924275X/ref=sr_1_1?crid=24WRUZ93PL2E6&amp;keywords=ggplot2&amp;qid=1674145703&amp;s=books&amp;sprefix=ggplot2%2Cstripbooks-intl-ship%2C190&amp;sr=1-1">ggplot2</a>.</p></li>
+</ul>
+<p><em>Bonus:</em></p>
+<ul>
+<li>Add this function to the R package you made last week, remembering to add tests and documentation.</li>
+</ul>
+</section>
+<section id="live-session" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="live-session">Live Session</h2>
+<p>In the live session we will begin with a discussion of this week’s tasks. We will then work through some examples of how to read data from non-standard sources.</p>
+<p>Please come to the live session prepared to discuss the following points:</p>
+<ul>
+<li><p>Roger Peng states that files can be imported and exported using <code>readRDS()</code> and <code>saveRDS()</code> for fast and space efficient data storage. What is the downside to doing so?</p></li>
+<li><p>What data types have you come across (that we have not discussed already) and in what context are they used?</p></li>
+<li><p>What do you have to give greater consideration to when scraping data than when using an API?</p></li>
+</ul>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
-<div id="ref-knuth84" class="csl-entry" role="listitem">
-Knuth, Donald E. 1984. <span>“Literate Programming.”</span> <em>Comput. J.</em> 27 (2): 97–111. <a href="https://doi.org/10.1093/comjnl/27.2.97">https://doi.org/10.1093/comjnl/27.2.97</a>.
-</div>
-</div>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -476,8 +546,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./110-workflows-checklist.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Workflows Checklist</span>
+      <a href="./204-data-sql.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Databases and SQL</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
