@@ -1,6 +1,8 @@
 # Tabular Data {#data-tabular}
 
-```{r, setup, results='asis', echo=FALSE}
+```{r, setup-data-tabular}
+#| results: asis
+#| echo: false
 source("_common.R")
 status("restructuring")
 knitr::opts_knit$set(root.dir = './images/201-tabular-data/')
@@ -8,9 +10,11 @@ knitr::opts_knit$set(root.dir = './images/201-tabular-data/')
 
 ## Loading Tabular Data
 
-
-```{r, eval=FALSE, echo=FALSE}
+```{r loading-tabular-data-one-time-setup}
+#| eval: false
+#| echo: false
 set.seed(1234)
+
 random_data <- data.frame(
   id = letters[1:26],
   gaussian = rnorm(26),
@@ -47,7 +51,9 @@ Each of these data sets contains 26 observations of 4 variables:
 
 ### Base R 
 
-```{r echo=TRUE, eval=TRUE}
+```{r base-r-load-csv-to-df}
+#| eval: true
+#| echo: true
 random_df <- read.csv(file = 'random-data.csv')
 print(random_df)
 ```
@@ -56,7 +62,9 @@ Output is a `data.frame` object. (List of vectors with some nice methods)
 
 ### `{readr}`
 
-```{r echo=TRUE, eval=TRUE}
+```{r base-r-load-csv-to-tibble}
+#| eval: true
+#| echo: true
 random_tbl <- readr::read_csv(file = 'random-data.csv')
 print(random_tbl)
 ```
@@ -85,7 +93,9 @@ Output is a `tibble` object. (List of vectors with some nicer methods)
 
 - Can adjust this behaviour in the print call:
 
-```{r echo=TRUE, eval=TRUE}
+```{r tibble-printing}
+#| eval: true
+#| echo: true
 # print first three rows and all columns
 print(random_tbl, n = 3, width = Inf)
 ```
@@ -97,7 +107,9 @@ print(random_tbl, n = 3, width = Inf)
 
 Subsetting tibbles will always return another tibble.
 
-```{r, echo=TRUE, eval=FALSE}
+```{r tabular-subsetting}
+#| eval: false
+#| echo: true
 # Row Subsetting
 random_tbl[1, ] # returns tibble
 random_df[1, ]  # returns data.frame
@@ -123,7 +135,9 @@ Functions for reading and writing other types of tabular data work analogously.
 
 #### Reading Tabular Data
 
-```{r, echo=TRUE, eval=FALSE}
+```{r reading-tsv}
+#| eval: false
+#| echo: true
 library(readr)
 read_tsv("random-data.tsv")
 read_delim("random-data.txt", delim = " ")
@@ -131,7 +145,9 @@ read_delim("random-data.txt", delim = " ")
 
 #### Writing Tabular Data
 
-```{r, echo=TRUE, eval=FALSE}
+```{r writing-tabular-data}
+#| eval: false
+#| echo: true
 write_csv(random_tbl, "random-data-2.csv")
 write_tsv(random_tbl, "random-data-2.tsv")
 write_delim(random_tbl, "random-data-2.tsv", delim = " ")
@@ -229,7 +245,9 @@ __Example 2 (Tall)__
 
 - Easy with the `{tidyr}` package functions 
 
-```{r, echo=TRUE, eval=FALSE}
+```{r pivot-tabular-data}
+#| eval: false
+#| echo: true
 tidyr::pivot_longer()
 tidyr::pivot_wider()
 ```
@@ -256,7 +274,9 @@ __Benefits of tidy data__
 
 Consider trying to plot these data as time series. The `year` variable is trapped in the column names! 
 
-```{r eval=TRUE, echo=FALSE}
+```{r create-countries-tibble}
+#| eval: true
+#| echo: false
 countries <- tibble::tibble(
   country = c("Afghanistan", "Brazil", "China"),
   `1999` = c(745, 37737, 212258),
@@ -264,14 +284,17 @@ countries <- tibble::tibble(
 )
 ``` 
 
-```{r}
+```{r print-countries-tibble}
 countries
 ```
 
 To tidy this data, we need to `pivot_longer()`. We will turn the column names into a new `year` variable and retaining cell contents as a new variable called `cases`. 
 
-```{r, echo=TRUE, eval=TRUE}
+```{r tidy-countries-tibble}
+#| eval: true
+#| echo: true
 library(magrittr)
+
 countries %>% 
   tidyr::pivot_longer(cols = c(`1999`,`2000`), names_to = "year", values_to = "cases")
 ```
@@ -304,7 +327,7 @@ The observational unit here  is a team. However, each variable should be a store
 
 To tidy this data we first generate it as a tibble. We use the `tribble()` function, which allows us to create a tibble row-wise rather than column-wise.
 
-```{r}
+```{r tournament-tribble}
 tournament <- tibble::tribble(
 ~Team  , ~Variable , ~Value,
 "A"    , "Points"  , 88    ,
@@ -323,7 +346,9 @@ tournament <- tibble::tribble(
 
 We can then tidy it by creating new columns for each value of the current `Variable` column and taking the values for these from the current `Value` column. 
 
-```{r, echo=TRUE, eval=TRUE}
+```{r tidy-tournament-tibble}
+#| eval: true
+#| echo: true
 tournament %>% 
   tidyr::pivot_wider(
     id_cols = "Team", 
