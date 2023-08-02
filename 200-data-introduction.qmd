@@ -2,7 +2,9 @@
 
 # Introduction {#data-introduction .unnumbered}
 
-```{r, results='asis', echo=FALSE}
+```{r setup-data-introduction}
+#| results: 'asis'
+#| echo: false
 source("_common.R")
 status("complete")
 ```
