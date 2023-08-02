@@ -1,6 +1,8 @@
 # Web Scraping {#data-webscraping}
 
-```{r, results='asis', echo=FALSE}
+```{r data-webscraping-setup}
+#| results: asis
+#| echo: false
 source("_common.R")
 status("complete")
 ```
@@ -115,7 +117,7 @@ CSS Selectors can work on the level of an element type, a class, or a tag and th
 
 When you want to select a single element `id` attributes are particularly useful because that _must_ be unique within a html document. Unfortunately, this is only helpful if the developer added an `id` attribute to the element(s) you want to scrape! 
 
-If you want to learn more CSS selectors I recommend starting with the fun [CSS dinner tutorial](https://flukeout.github.io/) to build a base of knowledge and then using the [W3schools resources](https://www.w3schools.com/css/default.asp) as a reference to explore more webpages in the wild. 
+If you want to learn more CSS selectors I recommend starting with the fun [CSS diner tutorial](https://flukeout.github.io/) to build a base of knowledge and then using the [W3schools resources](https://www.w3schools.com/css/default.asp) as a reference to explore more webpages in the wild. 
 
 ## Which Attributes and Selectors Do You Need?
 
@@ -133,18 +135,22 @@ Inspecting the source of some familiar websites can be a useful way to get your 
 
 With `{rvest}`, reading a html page can be as simple as loading in tabular data. 
 
-```{r}
+```{r rvest-read-html}
+#| echo: true
 html <- rvest::read_html("https://www.zakvarty.com/professional/teaching.html")
 ```
+
 The `class` of the resulting object is an `xml_document`. This type of object is from the low-level package `{xml2}`, which allows you to read xml files into R.
 
-```{r}
+```{r rvest-html-class}
+#| echo: true
 class(html)
 ```
 
 We can see that this object is split into several components: first is some metadata on the type of document we have scraped, followed by the head and then the body of that html document. 
 
-```{r}
+```{r rvest-html-class-structure}
+#| echo: true
 html
 ```
 
@@ -154,7 +160,9 @@ We have several possible approaches to extracting information from this document
 
 In `{rvest}` you can extract a single element with `html_element()`, or all matching elements with `html_elements()`. Both functions take a document object and one or more CSS selectors as inputs. 
 
-```{r, collapse=TRUE}
+```{r extracting-headings-and-paragraphs}
+#| echo: true
+#| collapse: true
 library(rvest)
 
 html %>% html_elements("h1")
@@ -164,7 +172,8 @@ html %>% html_elements("p")
 
 You can also combine and nest these selectors. For example you might want to extract all links that are within paragraphs *and* all second level headers.
 
-```{r}
+```{r combining-selectors}
+#| echo: true
 html %>% html_elements("p a,h2")
 ```
 
@@ -178,7 +187,8 @@ You’ll usually get the data from either the contents of the HTML element or el
 ### Extracting text 
 The functions `rvest::html_text()` and `rvest::html_text2()` can be used to extract the plain text contents of an HTML element. 
 
-```{r}
+```{r extracting-scraped-text}
+#| echo: true
 html %>% 
   html_elements("#teaching li") %>% 
   html_text2()
@@ -192,16 +202,20 @@ Attributes are also used to record information that you might like to collect. F
 
 As an example of this, consider trying to extract the twitter link from the icon in the page footer. This is quite tricky to locate in the html source, so I used the [Selector Gadget](https://rvest.tidyverse.org/articles/selectorgadget.html) to help find the correct combination of elements.
 
-```{r}
+```{r extracting-by-attributes}
+#| echo: true
 html %>% html_element(".compact:nth-child(1) .nav-link")
 ```
+
 To extract the `href` attribute from the scraped element, we use the `rvest::html_attr()` function.
 
 ```{r}
+#| echo: true
 html %>% 
   html_elements(".compact:nth-child(1) .nav-link") %>% 
   html_attr("href")
 ```
+
 **Note:** `rvest::html_attr()` will always return a character string (or list of character strings). If you are extracting an attribute that describes a quantity, such as the width of an image, you'll need to convert this from a string to your required data type. For example, of the width is measures in pixels you might use `as.integer()`.  
 
 ### Extracting tables
@@ -217,7 +231,8 @@ There are four main elements to know about that make up an HTML table:
 
 Here’s our simple example data, formatted as an HTML table:
 
-```{r}
+```{r example-html-table}
+#| echo: true
 html_2 <- minimal_html("
   <table>
     <tr>
@@ -242,7 +257,8 @@ html_2 <- minimal_html("
 
 Since tables are a common way to store data, `{rvest}` includes a useful function `html_table()` that converts directly from an HTML table into a tibble.
 
-```{r}
+```{r scraping-example-html-table}
+#| echo: true
 html_2 %>% 
   html_element("table") %>% 
   html_table()
@@ -250,7 +266,8 @@ html_2 %>%
 
 Applying this to our real scraped data we can easily extract the table of taught courses.
 
-```{r}
+```{r parsing-example-html-table}
+#| echo: true
 html %>% 
   html_element("table") %>% 
   html_table()
@@ -270,7 +287,8 @@ Taking this approach guarantees that you’ll get the same number of values for 
 
 As an example, consider this extract of text about the [starwars dataset](https://dplyr.tidyverse.org/reference/starwars.html#ref-examples).
 
-```{r}
+```{r starwars-example-table}
+#| echo: true
 starwars_html <- minimal_html("
   <ul>
     <li><b>C-3PO</b> is a <i>droid</i> that weighs <span class='weight'>167 kg</span></li>
@@ -285,7 +303,9 @@ This is an unordered list where each list item corresponds to one observational 
 
 If we try to extract each element directly, our vectors of variable values are of different lengths. We don't know where the missing values should be, so we can't line them back up to make a tibble. 
 
-```{r, collapse=TRUE}
+```{r starwars-cautionary-example}
+#| echo: true
+#| collapse: true
 starwars_html %>% html_elements("b") %>% html_text2()
 starwars_html %>% html_elements("i") %>% html_text2()
 starwars_html %>% html_elements(".weight") %>% html_text2()
@@ -293,7 +313,8 @@ starwars_html %>% html_elements(".weight") %>% html_text2()
 
 What we should do instead is start by extracting all of the list item elements using `html_elements()`. Once we have done this, we can then use `html_element()` to extract each variable for all characters. This will pad with NAs, so that we can collate them into a tibble. 
 
-```{r}
+```{r starwars-correct-approach}
+#| echo: true
 #| collapse: true
 starwars_characters <- starwars_html %>% html_elements("li")
 
@@ -302,7 +323,8 @@ starwars_characters %>% html_element("i") %>% html_text2()
 starwars_characters %>% html_element(".weight") %>% html_text2()
 ```
 
-```{r}
+```{r starwars-correct-approach-tibble}
+#| echo: true
 tibble::tibble(
   name = starwars_characters %>% html_element("b") %>% html_text2(),
   species = starwars_characters %>% html_element("i") %>% html_text2(),

@@ -348,7 +348,7 @@ Note
 <li><p>The <code>#title</code> selector will select the element with the id attribute <code>“title”</code>.</p></li>
 </ul>
 <p>When you want to select a single element <code>id</code> attributes are particularly useful because that <em>must</em> be unique within a html document. Unfortunately, this is only helpful if the developer added an <code>id</code> attribute to the element(s) you want to scrape!</p>
-<p>If you want to learn more CSS selectors I recommend starting with the fun <a href="https://flukeout.github.io/">CSS dinner tutorial</a> to build a base of knowledge and then using the <a href="https://www.w3schools.com/css/default.asp">W3schools resources</a> as a reference to explore more webpages in the wild.</p>
+<p>If you want to learn more CSS selectors I recommend starting with the fun <a href="https://flukeout.github.io/">CSS diner tutorial</a> to build a base of knowledge and then using the <a href="https://www.w3schools.com/css/default.asp">W3schools resources</a> as a reference to explore more webpages in the wild.</p>
 </section>
 <section id="which-attributes-and-selectors-do-you-need" class="level2" data-number="5.6">
 <h2 data-number="5.6" class="anchored" data-anchor-id="which-attributes-and-selectors-do-you-need"><span class="header-section-number">5.6</span> Which Attributes and Selectors Do You Need?</h2>
@@ -364,16 +364,21 @@ Note
 <section id="reading-html-with-rvest" class="level2" data-number="5.7">
 <h2 data-number="5.7" class="anchored" data-anchor-id="reading-html-with-rvest"><span class="header-section-number">5.7</span> Reading HTML with <code>{rvest}</code></h2>
 <p>With <code>{rvest}</code>, reading a html page can be as simple as loading in tabular data.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>html <span class="ot">&lt;-</span> rvest<span class="sc">::</span><span class="fu">read_html</span>(<span class="st">"https://www.zakvarty.com/professional/teaching.html"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <p>The <code>class</code> of the resulting object is an <code>xml_document</code>. This type of object is from the low-level package <code>{xml2}</code>, which allows you to read xml files into R.</p>
 <div class="cell" data-layout-align="center">
-<pre><code>#&gt; [1] "xml_document" "xml_node"</code></pre>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(html)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] "xml_document" "xml_node"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>We can see that this object is split into several components: first is some metadata on the type of document we have scraped, followed by the head and then the body of that html document.</p>
 <div class="cell" data-layout-align="center">
-<pre><code>#&gt; {html_document}
-#&gt; &lt;html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"&gt;
-#&gt; [1] &lt;head&gt;\n&lt;meta http-equiv="Content-Type" content="text/html; charset=UT ...
-#&gt; [2] &lt;body class="nav-fixed"&gt;\n\n&lt;div id="quarto-search-results"&gt;&lt;/div&gt;\n   ...</code></pre>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>html</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; {html_document}</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &lt;html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"&gt;</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &lt;head&gt;\n&lt;meta http-equiv="Content-Type" content="text/html; charset=UT ...</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [2] &lt;body class="nav-fixed"&gt;\n\n&lt;div id="quarto-search-results"&gt;&lt;/div&gt;\n   ...</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>We have several possible approaches to extracting information from this document.</p>
 </section>
@@ -381,26 +386,32 @@ Note
 <h2 data-number="5.8" class="anchored" data-anchor-id="extracting-html-elements"><span class="header-section-number">5.8</span> Extracting HTML elements</h2>
 <p>In <code>{rvest}</code> you can extract a single element with <code>html_element()</code>, or all matching elements with <code>html_elements()</code>. Both functions take a document object and one or more CSS selectors as inputs.</p>
 <div class="cell" data-layout-align="center">
-<pre><code>#&gt; {xml_nodeset (1)}
-#&gt; [1] &lt;h1&gt;Teaching&lt;/h1&gt;
-#&gt; {xml_nodeset (2)}
-#&gt; [1] &lt;h2 id="toc-title"&gt;On this page&lt;/h2&gt;
-#&gt; [2] &lt;h2 class="anchored" data-anchor-id="course-history"&gt;Course History&lt;/h2&gt;
-#&gt; {xml_nodeset (7)}
-#&gt; [1] &lt;p&gt;I am fortunate to have had the opportunity to teach in a variety of ...
-#&gt; [2] &lt;p&gt;Developing and teaching a number of modules in statistics, data sci ...
-#&gt; [3] &lt;p&gt;Supervising undergraduate, postgraduate and doctoral research proje ...
-#&gt; [4] &lt;p&gt;Adapting and leading short courses on scientific writing and commun ...
-#&gt; [5] &lt;p&gt;Running workshops and computer labs for undergraduate and postgradu ...
-#&gt; [6] &lt;p&gt;Speaking at univerisity open days and providing one-to-one tuition  ...
-#&gt; [7] &lt;p&gt;I am an associate fellow of the Higher Education Academy, which you ...</code></pre>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rvest)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>html <span class="sc">%&gt;%</span> <span class="fu">html_elements</span>(<span class="st">"h1"</span>)</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; {xml_nodeset (1)}</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &lt;h1&gt;Teaching&lt;/h1&gt;</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>html <span class="sc">%&gt;%</span> <span class="fu">html_elements</span>(<span class="st">"h2"</span>)</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; {xml_nodeset (2)}</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &lt;h2 id="toc-title"&gt;On this page&lt;/h2&gt;</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [2] &lt;h2 class="anchored" data-anchor-id="course-history"&gt;Course History&lt;/h2&gt;</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>html <span class="sc">%&gt;%</span> <span class="fu">html_elements</span>(<span class="st">"p"</span>)</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; {xml_nodeset (7)}</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &lt;p&gt;I am fortunate to have had the opportunity to teach in a variety of ...</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [2] &lt;p&gt;Developing and teaching a number of modules in statistics, data sci ...</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [3] &lt;p&gt;Supervising undergraduate, postgraduate and doctoral research proje ...</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [4] &lt;p&gt;Adapting and leading short courses on scientific writing and commun ...</span></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [5] &lt;p&gt;Running workshops and computer labs for undergraduate and postgradu ...</span></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [6] &lt;p&gt;Speaking at univerisity open days and providing one-to-one tuition  ...</span></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [7] &lt;p&gt;I am an associate fellow of the Higher Education Academy, which you ...</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>You can also combine and nest these selectors. For example you might want to extract all links that are within paragraphs <em>and</em> all second level headers.</p>
 <div class="cell" data-layout-align="center">
-<pre><code>#&gt; {xml_nodeset (3)}
-#&gt; [1] &lt;h2 id="toc-title"&gt;On this page&lt;/h2&gt;
-#&gt; [2] &lt;a href="https://www.advance-he.ac.uk/fellowship/associate-fellowship" ...
-#&gt; [3] &lt;h2 class="anchored" data-anchor-id="course-history"&gt;Course History&lt;/h2&gt;</code></pre>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>html <span class="sc">%&gt;%</span> <span class="fu">html_elements</span>(<span class="st">"p a,h2"</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; {xml_nodeset (3)}</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &lt;h2 id="toc-title"&gt;On this page&lt;/h2&gt;</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [2] &lt;a href="https://www.advance-he.ac.uk/fellowship/associate-fellowship" ...</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [3] &lt;h2 class="anchored" data-anchor-id="course-history"&gt;Course History&lt;/h2&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="extracting-data-from-html-elements" class="level2" data-number="5.9">
@@ -411,11 +422,14 @@ Note
 <h3 data-number="5.9.1" class="anchored" data-anchor-id="extracting-text"><span class="header-section-number">5.9.1</span> Extracting text</h3>
 <p>The functions <code>rvest::html_text()</code> and <code>rvest::html_text2()</code> can be used to extract the plain text contents of an HTML element.</p>
 <div class="cell" data-layout-align="center">
-<pre><code>#&gt; [1] "Developing and teaching a number of modules in statistics, data science and data ethics. These were predominantly at the postgradute-level and include courses designed for in-person and remote learning."
-#&gt; [2] "Supervising undergraduate, postgraduate and doctoral research projects."                                                                                                                                   
-#&gt; [3] "Adapting and leading short courses on scientific writing and communication."                                                                                                                               
-#&gt; [4] "Running workshops and computer labs for undergraduate and postgraduate modules."                                                                                                                           
-#&gt; [5] "Speaking at univerisity open days and providing one-to-one tuition to high school students."</code></pre>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>html <span class="sc">%&gt;%</span> </span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_elements</span>(<span class="st">"#teaching li"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_text2</span>()</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] "Developing and teaching a number of modules in statistics, data science and data ethics. These were predominantly at the postgradute-level and include courses designed for in-person and remote learning."</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [2] "Supervising undergraduate, postgraduate and doctoral research projects."                                                                                                                                   </span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [3] "Adapting and leading short courses on scientific writing and communication."                                                                                                                               </span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [4] "Running workshops and computer labs for undergraduate and postgraduate modules."                                                                                                                           </span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [5] "Speaking at univerisity open days and providing one-to-one tuition to high school students."</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The difference between <code>html_text()</code> and <code>html_text2()</code> is in how they handle whitespace. In HTML whitespace and line breaks have very little influence over how the code is interpreted by the computer (this is similar to R but very different from Python). <code>html_text()</code> will extract the text as it is in the raw html, while <code>html_text2()</code> will do its best to extract the text in a way that gives you something similar to what you’d see in the browser.</p>
 </section>
@@ -424,13 +438,17 @@ Note
 <p>Attributes are also used to record information that you might like to collect. For example, the destination of links are stored in the <code>href</code> attribute and the source of images is stored in the <code>src</code> attribute.</p>
 <p>As an example of this, consider trying to extract the twitter link from the icon in the page footer. This is quite tricky to locate in the html source, so I used the <a href="https://rvest.tidyverse.org/articles/selectorgadget.html">Selector Gadget</a> to help find the correct combination of elements.</p>
 <div class="cell" data-layout-align="center">
-<pre><code>#&gt; {html_node}
-#&gt; &lt;a class="nav-link" href="https://www.twitter.com/zakvarty"&gt;
-#&gt; [1] &lt;i class="bi bi-twitter" role="img"&gt;\n&lt;/i&gt;</code></pre>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>html <span class="sc">%&gt;%</span> <span class="fu">html_element</span>(<span class="st">".compact:nth-child(1) .nav-link"</span>)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; {html_node}</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &lt;a class="nav-link" href="https://www.twitter.com/zakvarty"&gt;</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &lt;i class="bi bi-twitter" role="img"&gt;\n&lt;/i&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>To extract the <code>href</code> attribute from the scraped element, we use the <code>rvest::html_attr()</code> function.</p>
 <div class="cell" data-layout-align="center">
-<pre><code>#&gt; [1] "https://www.twitter.com/zakvarty"</code></pre>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>html <span class="sc">%&gt;%</span> </span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_elements</span>(<span class="st">".compact:nth-child(1) .nav-link"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_attr</span>(<span class="st">"href"</span>)</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] "https://www.twitter.com/zakvarty"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><strong>Note:</strong> <code>rvest::html_attr()</code> will always return a character string (or list of character strings). If you are extracting an attribute that describes a quantity, such as the width of an image, you’ll need to convert this from a string to your required data type. For example, of the width is measures in pixels you might use <code>as.integer()</code>.</p>
 </section>
@@ -445,27 +463,55 @@ Note
 <li><code>&lt;td&gt;</code> (table data).</li>
 </ul>
 <p>Here’s our simple example data, formatted as an HTML table:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>html_2 <span class="ot">&lt;-</span> <span class="fu">minimal_html</span>(<span class="st">"</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="st">  &lt;table&gt;</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="st">    &lt;tr&gt;</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="st">      &lt;th&gt;Name&lt;/th&gt;</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="st">      &lt;th&gt;Number&lt;/th&gt;</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="st">    &lt;/tr&gt;</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="st">    &lt;tr&gt;</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="st">      &lt;td&gt;A&lt;/td&gt;</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="st">      &lt;td&gt;1&lt;/td&gt;</span></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a><span class="st">    &lt;/tr&gt;</span></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a><span class="st">    &lt;tr&gt;</span></span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a><span class="st">      &lt;td&gt;B&lt;/td&gt;</span></span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a><span class="st">      &lt;td&gt;2&lt;/td&gt;</span></span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a><span class="st">    &lt;/tr&gt;</span></span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a><span class="st">    &lt;tr&gt;</span></span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a><span class="st">      &lt;td&gt;C&lt;/td&gt;</span></span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a><span class="st">      &lt;td&gt;3&lt;/td&gt;</span></span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a><span class="st">    &lt;/tr&gt;</span></span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a><span class="st">  &lt;/table&gt;</span></span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a><span class="st">  "</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <p>Since tables are a common way to store data, <code>{rvest}</code> includes a useful function <code>html_table()</code> that converts directly from an HTML table into a tibble.</p>
 <div class="cell" data-layout-align="center">
-<pre><code>#&gt; # A tibble: 3 × 2
-#&gt;   Name  Number
-#&gt;   &lt;chr&gt;  &lt;int&gt;
-#&gt; 1 A          1
-#&gt; 2 B          2
-#&gt; 3 C          3</code></pre>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>html_2 <span class="sc">%&gt;%</span> </span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_element</span>(<span class="st">"table"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_table</span>()</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 3 × 2</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   Name  Number</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;  &lt;int&gt;</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 A          1</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 B          2</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 C          3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Applying this to our real scraped data we can easily extract the table of taught courses.</p>
 <div class="cell" data-layout-align="center">
-<pre><code>#&gt; # A tibble: 31 × 3
-#&gt;   Year      Course                                     Role    
-#&gt;   &lt;chr&gt;     &lt;chr&gt;                                      &lt;chr&gt;   
-#&gt; 1 "2022-23" Data Science                               Lecturer
-#&gt; 2 ""        Ethics in Data Science I, II and III       Lecturer
-#&gt; 3 ""        Data Ethics for Digital Chemistry          Lecturer
-#&gt; 4 ""        Y1 research projects: point process models Lecturer
-#&gt; 5 "2021-22" Supervised Learning                        Lecturer
-#&gt; 6 ""        Ethics in Data Science I                   Lecturer
-#&gt; # ℹ 25 more rows</code></pre>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>html <span class="sc">%&gt;%</span> </span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_element</span>(<span class="st">"table"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_table</span>()</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 31 × 3</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   Year      Course                                     Role    </span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;     &lt;chr&gt;                                      &lt;chr&gt;   </span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 "2022-23" Data Science                               Lecturer</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 ""        Ethics in Data Science I, II and III       Lecturer</span></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 ""        Data Ethics for Digital Chemistry          Lecturer</span></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4 ""        Y1 research projects: point process models Lecturer</span></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5 "2021-22" Supervised Learning                        Lecturer</span></span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6 ""        Ethics in Data Science I                   Lecturer</span></span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # ℹ 25 more rows</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 </section>
@@ -479,27 +525,50 @@ Note
 </ol>
 <p>Taking this approach guarantees that you’ll get the same number of values for each variable, because <code>html_element()</code> always returns the same number of outputs as inputs. This is vital when you have missing data - when not every observation unit has a value for every variable of interest.</p>
 <p>As an example, consider this extract of text about the <a href="https://dplyr.tidyverse.org/reference/starwars.html#ref-examples">starwars dataset</a>.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>starwars_html <span class="ot">&lt;-</span> <span class="fu">minimal_html</span>(<span class="st">"</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="st">  &lt;ul&gt;</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="st">    &lt;li&gt;&lt;b&gt;C-3PO&lt;/b&gt; is a &lt;i&gt;droid&lt;/i&gt; that weighs &lt;span class='weight'&gt;167 kg&lt;/span&gt;&lt;/li&gt;</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="st">    &lt;li&gt;&lt;b&gt;R2-D2&lt;/b&gt; is a &lt;i&gt;droid&lt;/i&gt; that weighs &lt;span class='weight'&gt;96 kg&lt;/span&gt;&lt;/li&gt;</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="st">    &lt;li&gt;&lt;b&gt;Yoda&lt;/b&gt; weighs &lt;span class='weight'&gt;66 kg&lt;/span&gt;&lt;/li&gt;</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="st">    &lt;li&gt;&lt;b&gt;R4-P17&lt;/b&gt; is a &lt;i&gt;droid&lt;/i&gt;&lt;/li&gt;</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="st">  &lt;/ul&gt;</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="st">  "</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <p>This is an unordered list where each list item corresponds to one observational unit (one character from the starwars universe). The name of the character is given in bold, the character species is specified in italics and the weight of the character is denoted by the <code>.weight</code> class. However, some characters have only a subset of these variables defined: for example Yoda has no species entry.</p>
 <p>If we try to extract each element directly, our vectors of variable values are of different lengths. We don’t know where the missing values should be, so we can’t line them back up to make a tibble.</p>
 <div class="cell" data-layout-align="center">
-<pre><code>#&gt; [1] "C-3PO"  "R2-D2"  "Yoda"   "R4-P17"
-#&gt; [1] "droid" "droid" "droid"
-#&gt; [1] "167 kg" "96 kg"  "66 kg"</code></pre>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>starwars_html <span class="sc">%&gt;%</span> <span class="fu">html_elements</span>(<span class="st">"b"</span>) <span class="sc">%&gt;%</span> <span class="fu">html_text2</span>()</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] "C-3PO"  "R2-D2"  "Yoda"   "R4-P17"</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>starwars_html <span class="sc">%&gt;%</span> <span class="fu">html_elements</span>(<span class="st">"i"</span>) <span class="sc">%&gt;%</span> <span class="fu">html_text2</span>()</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] "droid" "droid" "droid"</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>starwars_html <span class="sc">%&gt;%</span> <span class="fu">html_elements</span>(<span class="st">".weight"</span>) <span class="sc">%&gt;%</span> <span class="fu">html_text2</span>()</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] "167 kg" "96 kg"  "66 kg"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>What we should do instead is start by extracting all of the list item elements using <code>html_elements()</code>. Once we have done this, we can then use <code>html_element()</code> to extract each variable for all characters. This will pad with NAs, so that we can collate them into a tibble.</p>
 <div class="cell" data-layout-align="center">
-<pre><code>#&gt; [1] "C-3PO"  "R2-D2"  "Yoda"   "R4-P17"
-#&gt; [1] "droid" "droid" NA      "droid"
-#&gt; [1] "167 kg" "96 kg"  "66 kg"  NA</code></pre>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>starwars_characters <span class="ot">&lt;-</span> starwars_html <span class="sc">%&gt;%</span> <span class="fu">html_elements</span>(<span class="st">"li"</span>)</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>starwars_characters <span class="sc">%&gt;%</span> <span class="fu">html_element</span>(<span class="st">"b"</span>) <span class="sc">%&gt;%</span> <span class="fu">html_text2</span>()</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] "C-3PO"  "R2-D2"  "Yoda"   "R4-P17"</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>starwars_characters <span class="sc">%&gt;%</span> <span class="fu">html_element</span>(<span class="st">"i"</span>) <span class="sc">%&gt;%</span> <span class="fu">html_text2</span>()</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] "droid" "droid" NA      "droid"</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>starwars_characters <span class="sc">%&gt;%</span> <span class="fu">html_element</span>(<span class="st">".weight"</span>) <span class="sc">%&gt;%</span> <span class="fu">html_text2</span>()</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] "167 kg" "96 kg"  "66 kg"  NA</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell" data-layout-align="center">
-<pre><code>#&gt; # A tibble: 4 × 3
-#&gt;   name   species weight
-#&gt;   &lt;chr&gt;  &lt;chr&gt;   &lt;chr&gt; 
-#&gt; 1 C-3PO  droid   167 kg
-#&gt; 2 R2-D2  droid   96 kg 
-#&gt; 3 Yoda   &lt;NA&gt;    66 kg 
-#&gt; 4 R4-P17 droid   &lt;NA&gt;</code></pre>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>tibble<span class="sc">::</span><span class="fu">tibble</span>(</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">name =</span> starwars_characters <span class="sc">%&gt;%</span> <span class="fu">html_element</span>(<span class="st">"b"</span>) <span class="sc">%&gt;%</span> <span class="fu">html_text2</span>(),</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">species =</span> starwars_characters <span class="sc">%&gt;%</span> <span class="fu">html_element</span>(<span class="st">"i"</span>) <span class="sc">%&gt;%</span> <span class="fu">html_text2</span>(),</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">weight =</span> starwars_characters <span class="sc">%&gt;%</span> <span class="fu">html_element</span>(<span class="st">".weight"</span>) <span class="sc">%&gt;%</span> <span class="fu">html_text2</span>()</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 4 × 3</span></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   name   species weight</span></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;  &lt;chr&gt;   &lt;chr&gt; </span></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 C-3PO  droid   167 kg</span></span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 R2-D2  droid   96 kg </span></span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 Yoda   &lt;NA&gt;    66 kg </span></span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4 R4-P17 droid   &lt;NA&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 
