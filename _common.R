@@ -41,7 +41,7 @@ status <- function(type) {
   class <- switch(
     EXPR = type,
     polishing = "callout-note",
-    restructureing = "callout-important",
+    restructuring = "callout-important",
     drafting = "callout-important",
     complete = "callout-note"
   )
