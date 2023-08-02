@@ -1,4 +1,4 @@
-# (PART) Acquiring and Sharing Data {-}
+# Acquiring and Sharing Data {-}
 
 # Introduction {#data-introduction .unnumbered}
 
