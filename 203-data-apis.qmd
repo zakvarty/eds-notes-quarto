@@ -1,6 +1,8 @@
 # APIs {#data-apis}
 
-```{r, results='asis', echo=FALSE}
+```{r apis-setup}
+#| results: asis
+#| echo: false
 CACHE_API_CHAPTER = TRUE
 source("_common.R")
 status("complete")
@@ -168,18 +170,30 @@ Before we can get any data from the GeoNames API, we first need to do a little b
 
 1. Install and load `{geonames}` from CRAN
 
-```{r, cache=CACHE_API_CHAPTER}
+```{r load-geonames}
+#| echo: true
 #install.packages("geonames")
 library(geonames)
 ```
 
 2. Create a [user account](https://www.geonames.org/login) for the GeoNames API
 
-<img style = "border-radius: 0%;" src="images/203-data-apis/sign-up.png" alt="Screenshot of the GeoNames login page. Example text has been added in the fields to create a new user account.">
+```{r}
+#| out-width: 80%
+#| fig-align: center
+#| fig-alt: "Screenshot of the GeoNames login page. Example text has been added in the fields to create a new user account."
+knitr::include_graphics(path = "images/203-data-apis/sign-up.png")
+```
+
 
 3. Activate the account (see activation email)
 
-<img style = "border-radius: 0%;" src="images/203-data-apis/confirmation-email.png" alt="Screenshot of the GeoNames confirmation email, which gives a link to click in order to confirm the new account."> 
+```{r}
+#| out-width: 80%
+#| fig-align: center
+#| fig-alt: "Screenshot of the GeoNames confirmation email, which gives a link to click in order to confirm the new account."
+knitr::include_graphics(path = "images/203-data-apis/confirmation-email.png")
+```
 
 
 4. Enable the free web services for your GeoNames account by logging in at this [link](http://www.geonames.org/enablefreewebservice).
@@ -187,11 +201,13 @@ library(geonames)
 
 5. Tell R your credentials for GeoNames. 
 
-::: {.rmdwarning}
-We could use the following code to tell R our credentials, but we absolutely should not.
+::: {.callout-warning}
+We could use the following code to tell R our credentials, **but we absolutely should not**.
 
-```{r, eval=FALSE, cache=CACHE_API_CHAPTER}
-options(geonamesUsername="example_username")
+```{r bad-way-to-store-credentials}
+#| echo: true
+#| eval: false
+options(geonamesUsername = "example_username")
 ```
 
 This would save our username as an environment variable, but it _also_ puts our API credentials directly into the script. If we share the script with others (internally, externally or publicly) we would be sharing our credentials too. Not good!
@@ -199,11 +215,13 @@ This would save our username as an environment variable, but it _also_ puts our 
 
 ### Keep it Secret, Keep it Safe
 
-The solution to this problem is to add our credentials as environment variables in our `.Rprofile` rather than in this script. The `.Rprofile` is an R script that is run at the start of every session. IT can be created and edited directly, but can also be created and edited from within R. 
+The solution to this problem is to add our credentials as environment variables in our `.Rprofile` rather than in this script. The `.Rprofile` is an R script that is run at the start of every session. It can be created and edited directly, but can also be created and edited from within R. 
 
 To make/open your `.Rprofile` use the `edit_r_profile()` function from the `{usethis}` package. 
 
-```{r, eval=FALSE, cache=CACHE_API_CHAPTER}
+```{r edit-r-profile}
+#| echo: true
+#| eval: false
 library(usethis)
 usethis::edit_r_profile()
 ```
@@ -214,12 +232,21 @@ The final step is to __check this this file ends with a blank line__, save it an
 
 This set up procedure is indicative of most API wrappers, but of course the details will vary between each API. This is why good documentation is important! 
 
+:::{callout-note}
+If you are using `{renv}` to track the versions of R and the packages you are using take care. For `{renv}` to be effective you have to place your project level `.Rprofile` under version control - this means you might accidentally share your API credentials. 
+
+A workaround for this problem is to create an R file that you `source()` from within the project level `.Rprofile` but is included in `.gitignore`, so that your credentials remain secret.
+:::
+
 ### Using `{geonames}` 
 
 GeoNames has a whole host of [different geo-datasets](http://www.geonames.org/export/ws-overview.html) that you can explore. 
 As a first example, let's get all of the geo-tagged wikipedia articles that are within 1km of Imperial College London. 
 
-```{r, cache=CACHE_API_CHAPTER}
+```{r geonames-api-imperial-neighbours}
+#| echo: true
+#| eval: true
+#| cache: true
 imperial_coords <- list(lat = 51.49876, lon = -0.1749)
 search_radius_km <- 1
 
@@ -234,13 +261,15 @@ imperial_neighbours <- geonames::GNfindNearbyWikipedia(
 
 Looking at the structure of `imperial_neighbours` we can see that it is a data frame with one row per geo-tagged wikipedia article. 
 
-```{r, cache=CACHE_API_CHAPTER}
+```{r geonames-api-structure}
+#| echo: true
 str(imperial_neighbours)
 ```
 
 To confirm we have the correct location we can inspect the title of the first five neighbours.
 
-```{r, cache=CACHE_API_CHAPTER}
+```{r geonames-nearest-neighbours}
+#| echo: true
 imperial_neighbours$title[1:5]
 ```
 
@@ -254,15 +283,19 @@ We will look at an example using [OMDb](http://www.omdbapi.com/), which is an op
 
 To use the OMDB API you will once again need to [request a free API key](http://www.omdbapi.com/apikey.aspx), follow a verification link and add your API key to your `.Rprofile`.
 
-```{r, eval=FALSE}
+```{r add-omdb-api-key}
+#| echo: true
+#| eval: false
 # Add this to .Rprofile, pasting in your own API key
 options(OMDB_API_Key = "PASTE YOUR KEY HERE")
 ``` 
 
 You can then restart R and safely access your API key from within your R session. 
 
-```{r, cache=CACHE_API_CHAPTER}
-# Load your API key into the current R session,
+```{r load-omdb-api-key}
+#| echo: true
+#| eval: true
+# Load your API key into the current R session
 ombd_api_key <- getOption("OMDB_API_Key")
 ```
 
@@ -274,7 +307,7 @@ http://www.omdbapi.com/?t=<TITLE>&y=<YEAR>&plot=<LENGTH>&r=<FORMAT>&apikey=<API_
 
 With a little bit of effort, we can write a function that composes this type of request URL for us. We will using the `{glue}` package to help us join strings together. 
 
-```{r, cache=CACHE_API_CHAPTER}
+```{r omdb-url-function}
 
 #' Compose search requests for the OMBD API
 #'
@@ -296,7 +329,9 @@ omdb_url <- function(title, year, plot, format, api_key) {
 
 Running the example we get: 
 
-```{r, cache=CACHE_API_CHAPTER}
+```{r make-omdb-mean-girls-url}
+#| echo: true
+#| output: false
 mean_girls_request <- omdb_url(
   title = "mean+girls",
   year =  "2004",
@@ -307,7 +342,7 @@ mean_girls_request <- omdb_url(
 
 We can then use the `{httr}` package to construct our request and store the response we get.
 
-```{r, cache=CACHE_API_CHAPTER}
+```{r request-mean-girls-data}
 response <- httr::GET(url = mean_girls_request)
 httr::status_code(response)
 ```
@@ -316,7 +351,7 @@ Thankfully it was a success! If you get a 401 error code here, check that you ha
 
 The full structure of the response is quite complicated, but we can easily extract the requested data using `content()` 
 
-```{r, cache=CACHE_API_CHAPTER}
+```{r extract-mean-girls-response-content}
 httr::content(response)
 ```
 
