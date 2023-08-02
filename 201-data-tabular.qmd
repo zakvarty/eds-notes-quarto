@@ -1,6 +1,6 @@
 # Tabular Data {#data-tabular}
 
-```{r, setup-data-tabular}
+```{r setup-data-tabular}
 #| results: asis
 #| echo: false
 source("_common.R")
