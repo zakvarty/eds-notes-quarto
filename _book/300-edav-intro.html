@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Effective Data Science - 7&nbsp; Databases and SQL</title>
+<title>Effective Data Science - (PART) Data Exploration and Visualisation</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,8 +30,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./210-data-checklist.html" rel="next">
-<link href="./203-data-apis.html" rel="prev">
+<link href="./301-edav-wrangling.html" rel="next">
+<link href="./210-data-checklist.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -74,7 +74,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./204-data-sql.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Databases and SQL</span></a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./300-edav-intro.html">(PART) Data Exploration and Visualisation</a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -157,13 +157,23 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./204-data-sql.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Databases and SQL</span></span></a>
+  <a href="./210-data-checklist.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Checklist</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <span class="sidebar-item-text sidebar-link text-start">
+ <span class="menu-text">(PART) Data Exploration and Visualisation</span></span>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./301-edav-wrangling.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Data Wrangling</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./210-data-checklist.html" class="sidebar-item-text sidebar-link">
+  <a href="./310-edav-checklist.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Checklist</span></a>
   </div>
 </li>
@@ -179,14 +189,20 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#edav-introduction" id="toc-edav-introduction" class="nav-link active" data-scroll-target="#edav-introduction">Introduction</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Databases and SQL</span></h1>
+<h1 class="title">(PART) Data Exploration and Visualisation</h1>
 </div>
 
 
@@ -201,38 +217,28 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<!-- Aim to include for for 2023/24 course delivery -->
-<!-- # SQL {#data-sql}
+<section id="edav-introduction" class="level1 unnumbered">
+<h1 class="unnumbered">Introduction</h1>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Effective Data Science is still a work-in-progress. This chapter is currently a dumping ground for ideas, and we don’t recommend reading it.</p>
+<p>If you would like to contribute to the development of EDS, you may do so at <a href="https://github.com/zakvarty/data_science_notes" class="uri">https://github.com/zakvarty/data_science_notes</a>.</p>
+</div>
+</div>
+<p>Now that we have read our raw data into R we can start getting our data science project moving and being to see some initial returns on the time and effort that we have invested so far.</p>
+<p>In this section we will explore how to wrangle, explore and visualise the data that forms the basis of our projects. These skills are often overlooked by folks coming into data science as being “soft skills” compared to modelling. However, I would argue that this is not the case because each of these tasks requires its own specialist knowledge and tools.</p>
+<p>Additionally, these task make up the majority of data scientist’s work and are often where we can add the most value to an organisation. At this stage in a project we turn useless, messy data into a form that can be used; we derive initial insights from this data while making minimal assumptions; and we communicate all of this in an accurate and engaging way, to drive decision making both within and outwith the organisation.</p>
 
 
-
-::: {.callout-important} 
-Effective Data Science is still a work-in-progress. This chapter is currently a dumping ground for ideas, and we don't recommend reading it. 
-
-If you would like to contribute to the development of EDS, you may do so at <https://github.com/zakvarty/data_science_notes>.
-:::
-
-
-(Content to be added for AY 2023-24)
-
-
-- Structure of a webpage. Web Scraping as a source of data
-- APIs as a source of data, data files beyond csv.
-- Data bases and SQL 
-
-- Data will not always be in a nicely formatted csv 
-
-- Beginner: reading from clipboard and googlesheets 
-- Intermediate: reading messy csvs and making your workflow robust to new versions
-- Advanced: 
-  - Webscraping and APIs as data sources, data files beyond CSV
-  - data files beyond csv, benefits and drawbacks: JSON, xml, parquet, .Rdata, .pkl 
-  - Data bases as data sources: Basic SQL verbs
-  - Learning SQL theory on a small scale: dplyr verbs 
-  
-  -->
-
-
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -470,13 +476,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./203-data-apis.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">APIs</span></span>
+      <a href="./210-data-checklist.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Checklist</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./210-data-checklist.html" class="pagination-link">
-        <span class="nav-page-text">Checklist</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./301-edav-wrangling.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Data Wrangling</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

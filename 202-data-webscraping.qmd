@@ -332,3 +332,9 @@ tibble::tibble(
 )
 ```
 
+
+## Session Information
+
+```{r}
+pander::pander(sessionInfo())
+```

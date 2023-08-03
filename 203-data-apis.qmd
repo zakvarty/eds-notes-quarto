@@ -178,7 +178,7 @@ library(geonames)
 
 2. Create a [user account](https://www.geonames.org/login) for the GeoNames API
 
-```{r}
+```{r geonames-register-screenshot}
 #| out-width: 80%
 #| fig-align: center
 #| fig-alt: "Screenshot of the GeoNames login page. Example text has been added in the fields to create a new user account."
@@ -188,7 +188,7 @@ knitr::include_graphics(path = "images/203-data-apis/sign-up.png")
 
 3. Activate the account (see activation email)
 
-```{r}
+```{r geonames-confirmation-screenshot}
 #| out-width: 80%
 #| fig-align: center
 #| fig-alt: "Screenshot of the GeoNames confirmation email, which gives a link to click in order to confirm the new account."
@@ -367,3 +367,8 @@ When obtaining data from the internet it's vital that you keep your credentials 
 - Writing your own code to access an API can be more painful than necessary. 
 - Don't repeat other people, if a suitable wrapper exists then use it. 
 
+## Session Information
+
+```{r}
+pander::pander(sessionInfo())
+```

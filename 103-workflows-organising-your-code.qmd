@@ -519,3 +519,9 @@ We've then described how to structure your scripts and style your code to make i
 
 Finally, we discussed how to write DRY code that is well documented and tested.
 
+
+## Session Information
+
+```{r}
+pander::pander(sessionInfo())
+```

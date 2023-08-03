@@ -1,6 +1,8 @@
 # Checklist {#data-checklist .unnumbered}
 
-```{r, results='asis', echo=FALSE}
+```{r data-checklist-setup}
+#| results: asis
+#| echo: false
 source("_common.R")
 status("complete")
 ```
@@ -33,7 +35,8 @@ _Core:_
   - Visit the Amazon page for R for Data Science. Write code to scrape the percentage of customers giving each "star" rating (5`r emo::ji("star")`, ..., 1`r emo::ji("star")`).
   - Turn your code into a function that will return a tibble of the form: 
   
-```{r, echo=FALSE}
+```{r amazon-webscraping-example-output}
+#| echo: false
 example_output <- tibble::tibble(
   product = "example_name",
   n_reviews = 1000,

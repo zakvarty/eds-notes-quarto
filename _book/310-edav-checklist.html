@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Effective Data Science - References</title>
+<title>Effective Data Science - Checklist</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,26 +20,7 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for citations */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-}
-.hanging-indent div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}</style>
+</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -49,7 +30,8 @@ div.csl-indent {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./310-edav-checklist.html" rel="prev">
+<link href="./references.html" rel="next">
+<link href="./301-edav-wrangling.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -79,6 +61,8 @@ div.csl-indent {
   }
 }</script>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <link rel="stylesheet" href="style.css">
 </head>
@@ -92,7 +76,7 @@ div.csl-indent {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./references.html">References</a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./310-edav-checklist.html">Checklist</a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -191,13 +175,13 @@ div.csl-indent {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./310-edav-checklist.html" class="sidebar-item-text sidebar-link">
+  <a href="./310-edav-checklist.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Checklist</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./references.html" class="sidebar-item-text sidebar-link active">
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">References</span></a>
   </div>
 </li>
@@ -207,14 +191,23 @@ div.csl-indent {
 <div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#videos-chapters" id="toc-videos-chapters" class="nav-link active" data-scroll-target="#videos-chapters">Videos / Chapters</a></li>
+  <li><a href="#reading" id="toc-reading" class="nav-link" data-scroll-target="#reading">Reading</a></li>
+  <li><a href="#activities" id="toc-activities" class="nav-link" data-scroll-target="#activities">Activities</a></li>
+  <li><a href="#live-session" id="toc-live-session" class="nav-link" data-scroll-target="#live-session">Live Session</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">References</h1>
+<h1 class="title"><span id="edav-checklist" class="quarto-section-identifier">Checklist</span></h1>
 </div>
 
 
@@ -229,11 +222,64 @@ div.csl-indent {
 
 </header>
 
-<div id="refs" role="list" style="display: none">
-
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
 </div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Effective Data Science is still a work-in-progress. This chapter is largely complete and just needs final proof reading.</p>
+<p>If you would like to contribute to the development of EDS, you may do so at <a href="https://github.com/zakvarty/data_science_notes" class="uri">https://github.com/zakvarty/data_science_notes</a>.</p>
+</div>
+</div>
+<section id="videos-chapters" class="level2">
+<h2 class="anchored" data-anchor-id="videos-chapters">Videos / Chapters</h2>
+<ul class="task-list">
+<li><p><input type="checkbox"><a href="https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=b25a6d35-1e91-4090-b4f8-af9600b39086">Data Wrangling</a> (20 min) <a href="https://github.com/zakvarty/effective-data-science-slides-2022/raw/main/03-01-data-wrangling/03-01-data-wrangling.pdf">[slides]</a></p></li>
+<li><p><input type="checkbox"><a href="https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=a986f50c-90fe-4379-b4a1-af9600ba22fd">Data Exploration</a> (25 min) <a href="https://github.com/zakvarty/effective-data-science-slides-2022/raw/main/03-02-eda/03-02-data-exploration.pdf">[slides]</a></p></li>
+<li><p><input type="checkbox"><a href="https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=2ebbfa94-0b5d-45e9-b708-af8100d9664a">Data Visualisation</a> (27 min) <a href="https://github.com/zakvarty/effective-data-science-slides-2022/raw/main/03-03-data-visualisation/03-03-data-visualisation.pdf">[slides]</a></p></li>
+</ul>
+</section>
+<section id="reading" class="level2">
+<h2 class="anchored" data-anchor-id="reading">Reading</h2>
+<p>Use the <a href="#edav-reading">Data Exploration and Visualisation</a> section of the reading list to support and guide your exploration of this week’s topics. Note that these texts are divided into core reading, reference materials and materials of interest.</p>
+</section>
+<section id="activities" class="level2">
+<h2 class="anchored" data-anchor-id="activities">Activities</h2>
+<p><em>Core:</em></p>
+<ul class="task-list">
+<li><p><input type="checkbox"><a href="https://normconf.com/">NormConf</a> is a conference dedicated to the unglamorous but essential aspects of working in the data sciences. The in December 2022 conference talks are available as a <a href="https://www.youtube.com/@normconf/videos">Youtube Playlist</a>. Find a talk that interests you and watch it, then post a short summary to EdStem, which includes what you learned from the talk and one thing that you still do not understand.</p></li>
+<li><p><input type="checkbox">Work through this ggplot2 tutorial for <a href="https://www.cedricscherer.com/2019/08/05/a-ggplot2-tutorial-for-beautiful-plotting-in-r/#text">beautiful plotting in R</a> by Cédric Scherer, recreating the examples for yourself.</p></li>
+<li><p><input type="checkbox">Using your <code>rolling_mean()</code> function as inspiration, write a <code>rolling_sd()</code> function that calculates the rolling standard deviation of a numeric vector.</p>
+<ul class="task-list">
+<li><p><input type="checkbox">Extend your <code>rolling_sd()</code> function to optionally return approximate point-wise confidence bands for your rolling standard deviations. These should be <span class="math inline">\(\pm2\)</span> standard errors by default and may be computed using analytical or re-sampling methods.</p></li>
+<li><p><input type="checkbox">Create a visualisation using your extended <code>rolling_sd()</code> function to assess whether the variability in the daily change in Dow Jones Index is changing over time. <a href="data/dowjones.csv">[data]</a></p></li>
+</ul></li>
+</ul>
+<p><em>Bonus:</em></p>
+<ul class="task-list">
+<li><p><input type="checkbox">Add your <code>rolling_sd()</code> function to your R package, adding documentation and tests.</p></li>
+<li><p><input type="checkbox">During an exploratory analysis, we often need to assess the validity of an assumed distribution based on a sample of data. Write your own versions of <code>qqnorm()</code> and <code>qqplot()</code>, which add point-wise tolerance intervals to assess whether deviation from the line <span class="math inline">\(y=x\)</span> are larger than expected.</p></li>
+<li><p><input type="checkbox">Add your own versions of <code>qqnorm()</code> and <code>qqplot()</code> to your R package, along with documentation and tests.</p></li>
+</ul>
+</section>
+<section id="live-session" class="level2">
+<h2 class="anchored" data-anchor-id="live-session">Live Session</h2>
+<p>In the live session we will begin with a discussion of this week’s tasks. We will then break into small groups for two data visualisation exercises.</p>
+<p>(<strong>Note:</strong> For one of these exercises, it would be helpful to bring a small selection of coloured pens or pencils, of you have access to some. If not, please don’t worry - inventive use of black, blue and shading are perfectly acceptable alternatives!)</p>
+<p>Please come to the live session prepared to discuss the following points:</p>
+<ul>
+<li><p>Which NormConf video did you watch and what did you learn from it?</p></li>
+<li><p>Other than <code>{ggplot2}</code>, what else have you used to create data visualisations? What are their relative strengths and weaknesses?</p></li>
+<li><p>How did you implement your <code>rolling_sd()</code> function and what conclusions did you draw when applying it to the Dow Jones data?</p></li>
+</ul>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -471,11 +517,14 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./310-edav-checklist.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Checklist</span>
+      <a href="./301-edav-wrangling.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Data Wrangling</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="./references.html" class="pagination-link">
+        <span class="nav-page-text">References</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav>
 </div> <!-- /content -->

@@ -385,3 +385,9 @@ After the dot, we want to pick file types that are widely accessible, easily rea
 
 Above all we want to name our files and pick our file types to best match with the team we are working in and the task that is at hand. 
 
+
+## Session Information
+
+```{r}
+pander::pander(sessionInfo())
+```

@@ -391,3 +391,9 @@ In tidy data, every cell contains a value. Including cells with missing values.
 3. Tools for tidying messy tabular data 
 
 
+## Session Information
+
+```{r}
+pander::pander(sessionInfo())
+```
+

@@ -325,3 +325,9 @@ In your own work, remember that the key here is standardisation. Working consist
 There are two notable exceptions where you probably don't want to use this project structure. That's when you're building an app or you're building a package. These require specific organisation of the files within your project directory. We'll
 explore the project structure used for package development during the live session this week. 
 
+
+## Session Information
+
+```{r}
+pander::pander(sessionInfo())
+```
