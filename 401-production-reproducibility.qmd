@@ -137,7 +137,7 @@ In data science we rely a lot on the use of stochastic methods. These are often 
 ::: medium_left
 ```{r monte-carlo-approximation-of-pi}
 #| echo: false
-#| fig-cap:"Monte Carlo approximation of $\\pi$"
+#| fig-cap: "Monte Carlo approximation of $\\pi$"
 #| fig-alt: "Points randomly located on [-1,1] x [-1,1], with the unit circle overlaid."
 library(ggplot2)
 
@@ -200,7 +200,7 @@ Sometimes we have stochastic elements to our work that we can't use brute force 
 
 Fortunately, in computing it's not common to have truly random numbers. Instead, what we usually have is a complex but deterministic function that generates a sequence of numbers that are statistically indistinguishable from a series of independent random variates. 
 
-The next term in this sequence of pseudo-random numbers is generated generated based on value the current one. This means that, by setting the starting point, we can always get the same sequence of pesudo-random variates each time we run the code. In R we set this starting point using `set.seed()`
+The next term in this sequence of pseudo-random numbers is generated generated based on value the current one. This means that, by setting the starting point, we can always get the same sequence of pseudo-random variates each time we run the code. In R we set this starting point using `set.seed()`
 
 This is especially useful for simulations that involve random variables, as it allows us to recreate the same results exactly. This not only makes it possible for others to recreate our results but it can also make it much easier to test and debug our own code. 
 

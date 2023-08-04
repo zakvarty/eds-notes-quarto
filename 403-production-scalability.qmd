@@ -1,6 +1,8 @@
 # Scalability {#production-scalability}
 
-```{r, results='asis', echo=FALSE}
+```{r scalability-setup}
+#| results: asis
+#| echo: false
 source("_common.R")
 status("drafting")
 ```
@@ -55,7 +57,10 @@ Sub-optimal optimisation can be worse than doing nothing
 
 > ... programmers have spent far too much time worrying about efficiency in _the wrong places_ and at _the wrong times_; premature optimisation is the root of all evil (or at least most of it) in programming. - Donald Knuth
 
-```{r, echo=FALSE, echo=FALSE, alt="Plot of computation time agains coding time with feasible solutions shown as crosses and the Pareto frontier added as an orange curve."}
+```{r pareto-frontier}
+#| eval: true
+#| echo: false
+#| fig-alt: "Plot of computation time agains coding time with feasible solutions shown as crosses and the Pareto frontier added as an orange curve."
 knitr::include_graphics(path = "images/403-production-scalability/pareto-frontier.png" )
 ```
 
@@ -80,7 +85,9 @@ The simplest way to profile your code is to time how long it takes to run. There
 
 Firstly, you could record the time before your code starts executing, the time it completes and look at the difference of those.
 
-```{r, echo=TRUE}
+```{r sys-time-example}
+#| eval: true
+#| echo: true
 t_start <- Sys.time()
 Sys.sleep(0.5) # YOUR CODE
 t_end <- Sys.time()
@@ -90,7 +97,9 @@ t_end - t_start
 
 The system.time function provides a shorthand for this if your code runs sequentially and extends the functionality to work for parallel code too.
 
-```{r}
+```{r system-time-example}
+#| eval: true
+#| echo: true
 system.time(
   Sys.sleep(0.5)
 )
@@ -99,7 +108,9 @@ system.time(
 
 The `{tictoc}` package has similar features, but also allows you to add intermediate timers to more understand which parts of your code are taking the most time to run.
 
-```{r, echo=TRUE}
+```{r tictoc-example}
+#| eval: true
+#| echo: true
 library(tictoc)
 
 tic() 
@@ -110,7 +121,9 @@ toc()
 
 With `{tictoc}` we can get fancy 
 
-```{r, echo=TRUE, collapse=TRUE}
+```{r, tictoc-mutiple-timers}
+#| eval: true
+#| echo: true
 tic("total")
 tic("first, easy part")
 Sys.sleep(0.5)
@@ -135,7 +148,9 @@ To diagnose scaling issues you have to understand what your code is doing.
 
 - Do this a lot and you can measure (estimate) the proportion of working memory (RAM) uses over time and the time spent evaluating each function. 
 
-```{r}
+```{r load-profis-and-bench}
+#| eval: true
+#| echo: true
 library(profvis)
 library(bench)
 ```
@@ -146,7 +161,9 @@ library(bench)
 Suppose we have the following code in a file called `prof-vis-example.R`. 
 
 
-```{r, echo=TRUE}
+```{r f-g-h-profiling}
+#| eval: true
+#| echo: true
 
 h <- function() {
   profvis::pause(1)
@@ -167,7 +184,11 @@ f <- function() {
 
 Then the call stack for `f()` would look something like this. 
 
-```{r, echo=FALSE, echo=FALSE, alt="schematic diagram of a call stack. x-axis shows time and nested function calls are shown as stacked blocks of varying widths, with the deepest function call at the top. At time tau = 2.5, the pause function is being evaluated within function h, which is being evaluated within function g, which in turn is being evaluated within function f."}
+```{r f-g-h-callstack}
+#| eval: true
+#| echo: false
+#| fig-cap: "Callstack for f()"
+#| fig-alt: "Schematic diagram of a call stack. x-axis shows time and nested function calls are shown as stacked blocks of varying widths, with the deepest function call at the top. At time tau = 2.5, the pause function is being evaluated within function h, which is being evaluated within function g, which in turn is being evaluated within function f."
 knitr::include_graphics("images/403-production-scalability/call-stack.png")
 ```
 
@@ -175,12 +196,20 @@ knitr::include_graphics("images/403-production-scalability/call-stack.png")
 
 We can examine the true call stack using the `profvis()` function from the `{profvis}` package. By saving the code in a separate file and sourcing it into our session, this function will also give us line-by-line information about the time and memory demands of our code.
 
-```{r, echo=TRUE, eval=FALSE}
+```{r prof-vis-example}
+#| eval: false
+#| echo: true
 source("prof-vis-example.R")
 profvis::profvis(f())
 ```
 
-```{r, echo=FALSE, echo=FALSE, alt="RStudio window showing interacting profile of function f. A veritcal bar chart shows how much time is spent evaluating functions f,g,h, and pause.", out.width="100%"}
+```{r prof-vis-example-output}
+#| eval: true
+#| echo: false
+#| fig-alt: "RStudio window showing interacting profile of function f. A veritcal bar chart shows how much time is spent evaluating functions f,g,h, and pause."
+#| out-width: "100%" 
+
+# can't run profvis inside book compiliation, so have to add cahed results.
 knitr::include_graphics("images/403-production-scalability/profiling-example-speed.png")
 ```
 
@@ -200,31 +229,41 @@ We will get slightly different results each time you run the function
 
 If you write a function you can see the source of that function by calling it's name
 
-```{r}
+```{r pad-with-NAs}
+#| eval: true
+#| echo: true
 pad_with_NAs <- function(x, n_left, n_right){
   c(rep(NA, n_left), x, rep(NA, n_right))
 }
 ```
 
-```{r, echo=TRUE}
+```{r look-inside-pad-with-NAs}
+#| echo: true
+#| eval: true
 pad_with_NAs
 ```
 
 This is equally true for functions within packages. 
 
-```{r}
-eds::rnorm_rounded
+```{r look-inside-package-functions}
+#| echo: true
+#| eval: true
+eds::pad_with_NAs
 ```
 
-Some functions use _compiled code_ that is written in another language. This is the case for dplyr's between function, which calls some compiled C++ code in the final line. 
+Some functions use _compiled code_ that is written in another language. This is the case for dplyr's `arrange()`, which calls some compiled C++ code. 
 
-```{r}
-dplyr::between
+```{r compiled-code-in-a-package-function}
+#| echo: true
+#| eval: true
+dplyr::arrange
 ```
 
 It is also true for many functions from base R, for which there is (for obvious reason) no R source code.
 
-```{r, echo=TRUE}
+```{r compiled-code-in-a-base-function}
+#| echo: true
+#| eval: true
 mean
 ```
 
@@ -239,7 +278,9 @@ These compiled functions have no R source code, and the profiling methods we hav
 `profvis()` can similarly measure the memory usage of your code. 
 
 
-```{r, echo=TRUE}
+```{r example-for-loop}
+#| echo: true
+#| eval: true
 x <- integer()
 for (i in 1:1e4) {
   x <- c(x, i)
@@ -247,7 +288,11 @@ for (i in 1:1e4) {
 ``` 
 
 
-```{r, echo=FALSE, echo=FALSE, alt="RStudio interactive code profiler. Code to iteratively extend a vector uses and clears a lot of working memory. The garbage collector function GC causes most of the runtime.", out.width="100%"}
+```{r profiling-time-in-a-for-loop}
+#| eval: true
+#| echo: false
+#| fig-alt: "RStudio interactive code profiler. Code to iteratively extend a vector uses and clears a lot of working memory. The garbage collector function GC causes most of the runtime."
+#| out-width: "100%"
 knitr::include_graphics("images/403-production-scalability/profiling-example-memory.png")
 ```
 
@@ -267,7 +312,9 @@ __TL;DR:__ pick your object types carefully, vectorise your code and as a last r
 
 Two bits of code do the same task, but the second is much faster, because it involves fewer function calls. 
 
-```{r, echo=TRUE}
+```{r vectorisable-for-loop}
+#| eval: true
+#| echo: true
 x <- 1:10
 y <- 11:20 
 z <- rep(NA, length(x))
@@ -278,7 +325,9 @@ for (i in seq_along(x)) {
 ```
 
 
-```{r echo=TRUE}
+```{r vectorised-for-loop}
+#| eval: true
+#| echo: true
 x <- 1:10
 y <- 11:20 
 z <- x * y
@@ -288,7 +337,9 @@ z <- x * y
 
 Where possible write and use functions to take advantage of vectorised inputs. E.g.
 
-```{r, echo = TRUE, eval=FALSE}
+```{r vecorised-function-inputs}
+#| eval: false
+#| echo: true
 rnorm(n = 100, mean = 1:10, sd = rep(1, 10))
 ```
 
@@ -298,7 +349,9 @@ Be careful of recycling!
 ### Linear Algebra
 
 
-```{r, echo=TRUE}
+```{r linear-algebra-example}
+#| eval: true
+#| echo: true
 X <- diag(x = c(2, 0.5))
 y <- matrix(data = c(1, 1), ncol = 1)
 
@@ -318,20 +371,26 @@ Functional programming equivalent of a for loop. [`apply()`, `mapply()`, `lapply
 Apply a function to each element of a list-like object. 
 
 
-```{r, echo = TRUE}
+```{r make-a-matrix}
+#| eval: true
+#| echo: true
 A <- matrix(data = 1:12, nrow = 3, ncol = 4)
 A
 ```
 
 
-```{r, echo = TRUE}
+```{r apply-example}
+#| eval: true
+#| echo: true
 # MARGIN = 1 => rows,  MARGIN = 2 => columns
 apply(X = A, MARGIN = 1, FUN = sum)
 ```
 
-This generalises functions from `{matrixStats}`
+This generalises functions from `{matrixStats}`, where for some special operations we can do all to the necessary calculation in C++.
 
-```{r, echo = TRUE}
+```{r rowsums-example}
+#| eval: true
+#| echo: true
 rowSums(A)
 ```
 
@@ -339,21 +398,27 @@ rowSums(A)
 
 Iterate over a single object with `map()`. 
 
-```{r, echo = TRUE}
+```{r purrr-map-example}
+#| eval: true
+#| echo: true
 mu <- c(-10, 0, 10)
 purrr::map(.x = mu, .f = rnorm, n = 5)
 ```
 
 Iterate over multiple objects `map2()` and `pmap()`.
 
-```{r, echo = TRUE}
+```{r purrr-map2-example}
+#| eval: true
+#| echo: true
 mu <- c(-10, 0, 10)
 sigma <- c(0, 0.1, 0)
 purrr::map2(.x = mu, .y = sigma, .f = rnorm, n = 5)
 ```
 
 
-```{r, echo = TRUE}
+```{r purrr-pmap-example}
+#| eval: true
+#| echo: true
 mu <- c(-10, 0, 10)
 sigma <- c(0, 0.1, 0)
 
@@ -377,7 +442,9 @@ For more details and variants see Advanced R [chapters 9-11](https://adv-r.hadle
 - `{furrr}` makes this very easy, just add `future_` to purrr verbs. 
 
 
-```{r, echo=TRUE}
+```{r furrr-map-example}
+#| eval: true
+#| echo: true
 mu <- c(-10, 0, 10)
 furrr::future_map(
   .x = mu, 
@@ -393,7 +460,7 @@ One thing to be aware of is that we need to be very careful handling random numb
 
 ## Sometimes R doesn't cut it 
 
-::: .medium_right
+::: .small_right
 ![](images/403-production-scalability/Rccp.png){alt="Logo of the Rcpp package. A speed dial turned up to 11 out of 10 in a blue hexagon."}
 :::
 
@@ -417,6 +484,7 @@ Rewriting R code in C++ and other low-level programming languages is beyond our 
 5. Scale in another language
 
 ### Help! {.unnumbered}
+
 - Articles and blog links
 - The R inferno [(Circles 2-4)](https://www.burns-stat.com/pages/Tutor/R_inferno.pdf) 
 - Advanced R [(Chapters 23-25)](https://adv-r.hadley.nz/techniques.html), 
