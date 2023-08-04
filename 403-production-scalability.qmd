@@ -1,0 +1,424 @@
+# Scalability {#production-scalability}
+
+```{r, results='asis', echo=FALSE}
+source("_common.R")
+status("drafting")
+```
+
+<!-- 
+Structure talk around Alex's parallelisation slides 
+
+- Code profiling 
+- vectorise 
+- parallelise 
+- Use a better language: C++, Python
+
+* Documentation for 
+- apply
+- purr::map
+- furr::pmap
+
+* Advanced R (Second Edition) by Hadley Wickham. Chapters 23 and 24, measuring and improving performance 
+
+*  Advanced R (Second Edition) by Hadley Wickham. Chapter 25, measuring and improving performance 
+
+--> 
+
+## Scalability and Production 
+
+When put into production code gets used more and on more data. We will likely have to consider scalability of our methods in terms of
+
+ - Computation time 
+ 
+ - Memory requirements
+
+When doing so we have to balance a trade-off between development costs and usage costs.
+
+### Example: Bayesian Inference
+
+- MCMC originally takes ~24 hours
+
+- Identifying and amending bottlenecks in code reduced this to ~24 minutes. 
+
+_Is this actually better?_ That will depend on a number of factors, including:
+
+
+- human hours invested
+- frequency of use
+-  safe / stable / general / readable 
+- trade for scalability
+
+
+### Knowing when to worry 
+
+Sub-optimal optimisation can be worse than doing nothing 
+
+> ... programmers have spent far too much time worrying about efficiency in _the wrong places_ and at _the wrong times_; premature optimisation is the root of all evil (or at least most of it) in programming. - Donald Knuth
+
+```{r, echo=FALSE, echo=FALSE, alt="Plot of computation time agains coding time with feasible solutions shown as crosses and the Pareto frontier added as an orange curve."}
+knitr::include_graphics(path = "images/403-production-scalability/pareto-frontier.png" )
+```
+
+
+
+
+### Our Focus
+
+Writing code that scales well in terms of computaiton time or memory used is a huge topic. In this section we restrict our aims to: 
+
+
+- Basic profiling to find bottlenecks. 
+- Strategies for writing scalable (R) code.
+- Signpost advanced methods & further reading.
+
+
+## Basics of Code Profiling
+
+### R as a stopwatch
+
+The simplest way to profile your code is to time how long it takes to run. There are three common ways to do this. 
+
+Firstly, you could record the time before your code starts executing, the time it completes and look at the difference of those.
+
+```{r, echo=TRUE}
+t_start <- Sys.time()
+Sys.sleep(0.5) # YOUR CODE
+t_end <- Sys.time()
+
+t_end - t_start
+``` 
+
+The system.time function provides a shorthand for this if your code runs sequentially and extends the functionality to work for parallel code too.
+
+```{r}
+system.time(
+  Sys.sleep(0.5)
+)
+```
+
+
+The `{tictoc}` package has similar features, but also allows you to add intermediate timers to more understand which parts of your code are taking the most time to run.
+
+```{r, echo=TRUE}
+library(tictoc)
+
+tic() 
+Sys.sleep(0.5) # YOUR CODE 
+toc()
+``` 
+
+
+With `{tictoc}` we can get fancy 
+
+```{r, echo=TRUE, collapse=TRUE}
+tic("total")
+tic("first, easy part")
+Sys.sleep(0.5)
+toc(log = TRUE)
+tic("second, hard part")
+Sys.sleep(3)
+toc(log = TRUE)
+toc()
+```
+
+
+If your code is already very fast (but will be run _very_ many times, so further efficiency gains are required) then the methods may fail because they do not sample the state of the code at a high enough frequency. In those cases you might want to explore the `{mircobenchmark}` package.
+
+
+## Profiling Your Code
+
+To diagnose scaling issues you have to understand what your code is doing.
+
+- Stop the code at time $\tau$ and examine the _call-stack_. 
+
+  - The current function being evaluated, the function that called that, the function that called that, ..., top level function. 
+
+- Do this a lot and you can measure (estimate) the proportion of working memory (RAM) uses over time and the time spent evaluating each function. 
+
+```{r}
+library(profvis)
+library(bench)
+```
+
+
+### Profiling: Toy Example
+
+Suppose we have the following code in a file called `prof-vis-example.R`. 
+
+
+```{r, echo=TRUE}
+
+h <- function() {
+  profvis::pause(1)
+}
+
+g <- function() {
+  profvis::pause(1)
+  h()
+}
+
+f <- function() {
+  profvis::pause(1)
+  g()
+  profvis::pause(1)
+  h()
+}
+```
+
+Then the call stack for `f()` would look something like this. 
+
+```{r, echo=FALSE, echo=FALSE, alt="schematic diagram of a call stack. x-axis shows time and nested function calls are shown as stacked blocks of varying widths, with the deepest function call at the top. At time tau = 2.5, the pause function is being evaluated within function h, which is being evaluated within function g, which in turn is being evaluated within function f."}
+knitr::include_graphics("images/403-production-scalability/call-stack.png")
+```
+
+
+
+We can examine the true call stack using the `profvis()` function from the `{profvis}` package. By saving the code in a separate file and sourcing it into our session, this function will also give us line-by-line information about the time and memory demands of our code.
+
+```{r, echo=TRUE, eval=FALSE}
+source("prof-vis-example.R")
+profvis::profvis(f())
+```
+
+```{r, echo=FALSE, echo=FALSE, alt="RStudio window showing interacting profile of function f. A veritcal bar chart shows how much time is spent evaluating functions f,g,h, and pause.", out.width="100%"}
+knitr::include_graphics("images/403-production-scalability/profiling-example-speed.png")
+```
+
+
+In both the upper histogram and the lower flame plot we can see that the majority of time is being spent in `pause()` and `h()`. What we have to be careful of here is that the upper plot shows the total amount of time in each function call, so `h()` appears to take longer than `g()`, but this is because it is called more often in the code snippet we are profiling.
+
+## Notes on Time Profiling
+
+We will get slightly different results each time you run the function 
+
+  - Changes to internal state of computer
+  - Usually not a big deal, mainly effects fastest parts of code
+  - Be careful with stochastic simulations
+  - Use `set.seed()` to make a fair comparison over many runs.
+
+### Source code and compiled functions
+
+If you write a function you can see the source of that function by calling it's name
+
+```{r}
+pad_with_NAs <- function(x, n_left, n_right){
+  c(rep(NA, n_left), x, rep(NA, n_right))
+}
+```
+
+```{r, echo=TRUE}
+pad_with_NAs
+```
+
+This is equally true for functions within packages. 
+
+```{r}
+eds::rnorm_rounded
+```
+
+Some functions use _compiled code_ that is written in another language. This is the case for dplyr's between function, which calls some compiled C++ code in the final line. 
+
+```{r}
+dplyr::between
+```
+
+It is also true for many functions from base R, for which there is (for obvious reason) no R source code.
+
+```{r, echo=TRUE}
+mean
+```
+
+<br>
+
+These compiled functions have no R source code, and the profiling methods we have used here don't extend into compiled code. See [{jointprof}]( https://github.com/r-prof/jointprof) if you really need this profiling functionality.   
+
+
+
+## Memory Profiling 
+
+`profvis()` can similarly measure the memory usage of your code. 
+
+
+```{r, echo=TRUE}
+x <- integer()
+for (i in 1:1e4) {
+  x <- c(x, i)
+}
+``` 
+
+
+```{r, echo=FALSE, echo=FALSE, alt="RStudio interactive code profiler. Code to iteratively extend a vector uses and clears a lot of working memory. The garbage collector function GC causes most of the runtime.", out.width="100%"}
+knitr::include_graphics("images/403-production-scalability/profiling-example-memory.png")
+```
+
+
+- Copy-on-modify behaviour makes growing objects slow.  
+- Pre-allocate storage where possible. 
+- Strategies and structures, see [R inferno](https://www.burns-stat.com/pages/Tutor/R_inferno.pdf) and [Effecient R](https://csgillespie.github.io/efficientR/performance.html). 
+
+
+## Tips to work at scale 
+
+__TL;DR:__ pick your object types carefully, vectorise your code and as a last resort implement your code in a faster language.
+
+
+
+### Vectorise 
+
+Two bits of code do the same task, but the second is much faster, because it involves fewer function calls. 
+
+```{r, echo=TRUE}
+x <- 1:10
+y <- 11:20 
+z <- rep(NA, length(x))
+
+for (i in seq_along(x)) {
+  z[i] <- x[i] * y[i]
+}
+```
+
+
+```{r echo=TRUE}
+x <- 1:10
+y <- 11:20 
+z <- x * y
+```
+
+
+
+Where possible write and use functions to take advantage of vectorised inputs. E.g.
+
+```{r, echo = TRUE, eval=FALSE}
+rnorm(n = 100, mean = 1:10, sd = rep(1, 10))
+```
+
+Be careful of recycling! 
+
+
+### Linear Algebra
+
+
+```{r, echo=TRUE}
+X <- diag(x = c(2, 0.5))
+y <- matrix(data = c(1, 1), ncol = 1)
+
+X %*% y
+```
+
+
+More on vectorising: [Noam Ross Blog Post](http://www.noamross.net/archives/2014-04-16-vectorization-in-r-why/)
+
+
+## For loops in disguise 
+
+### The apply family 
+
+Functional programming equivalent of a for loop. [`apply()`, `mapply()`, `lapply()`, ...]
+
+Apply a function to each element of a list-like object. 
+
+
+```{r, echo = TRUE}
+A <- matrix(data = 1:12, nrow = 3, ncol = 4)
+A
+```
+
+
+```{r, echo = TRUE}
+# MARGIN = 1 => rows,  MARGIN = 2 => columns
+apply(X = A, MARGIN = 1, FUN = sum)
+```
+
+This generalises functions from `{matrixStats}`
+
+```{r, echo = TRUE}
+rowSums(A)
+```
+
+### `{purrr}` 
+
+Iterate over a single object with `map()`. 
+
+```{r, echo = TRUE}
+mu <- c(-10, 0, 10)
+purrr::map(.x = mu, .f = rnorm, n = 5)
+```
+
+Iterate over multiple objects `map2()` and `pmap()`.
+
+```{r, echo = TRUE}
+mu <- c(-10, 0, 10)
+sigma <- c(0, 0.1, 0)
+purrr::map2(.x = mu, .y = sigma, .f = rnorm, n = 5)
+```
+
+
+```{r, echo = TRUE}
+mu <- c(-10, 0, 10)
+sigma <- c(0, 0.1, 0)
+
+purrr::pmap(
+  .f = rnorm, 
+  n = 5,
+  .l = list(
+    mean = mu, 
+    sd = sigma))
+```
+
+For more details and variants see Advanced R [chapters 9-11](https://adv-r.hadley.nz/functionals.html) on functional programming. 
+
+## Easy parallelisation with furrr 
+
+
+- `{parallel}` and `{futures}` allow parallel coding over multiple cores. 
+
+- Powerful, but steep learning curve.
+
+- `{furrr}` makes this very easy, just add `future_` to purrr verbs. 
+
+
+```{r, echo=TRUE}
+mu <- c(-10, 0, 10)
+furrr::future_map(
+  .x = mu, 
+  .f = rnorm,
+  .options = furrr::furrr_options(seed = TRUE),
+  n = 5) 
+```
+
+
+This is, of course excessive for this small example!
+
+One thing to be aware of is that we need to be very careful handling random number generation in relation to parallelisation. There are many options for how you might want to set this up, see [R-bloggers](https://www.r-bloggers.com/2020/09/future-1-19-1-making-sure-proper-random-numbers-are-produced-in-parallel-processing/) for more details. 
+
+## Sometimes R doesn't cut it 
+
+::: .medium_right
+![](images/403-production-scalability/Rccp.png){alt="Logo of the Rcpp package. A speed dial turned up to 11 out of 10 in a blue hexagon."}
+:::
+
+RCPP: An API for running C++ code in R. Useful when you need: 
+
+  - loops to be run in order 
+  - lots of function calls (e.g. deep recursion)
+  - optimised data structures 
+  
+Rewriting R code in C++ and other low-level programming languages is beyond our scope, but good to know exists. Starting point: Advanced R [Chapter 25](https://adv-r.hadley.nz/rcpp.html).
+
+
+## Wrapping up 
+
+### Summary {.unnumbered}
+
+1. Pick you battles wisely
+2. Target your energy with profiling
+3. Scale loops with vectors
+4. Scale loops in parallel processing
+5. Scale in another language
+
+### Help! {.unnumbered}
+- Articles and blog links
+- The R inferno [(Circles 2-4)](https://www.burns-stat.com/pages/Tutor/R_inferno.pdf) 
+- Advanced R [(Chapters 23-25)](https://adv-r.hadley.nz/techniques.html), 
+- Efficient R [(Chapter 7)](https://csgillespie.github.io/efficientR/performance.html#prerequisites-6). 
+
