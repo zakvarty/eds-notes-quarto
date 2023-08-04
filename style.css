@@ -1,12 +1,3 @@
-.small_right, .small_left {
-  display: inline-block;
-  width: 25%;
-  max-width: 200px;
-}
-.small_right { float: right; margin: 0 0 1em 1em;}
-.small_left { float: left; margin: 0 1em 1em 0;}
-.small_right img, .small_left img { max-width: 100%; }
-
 p.caption {
   color: #777;
   margin-top: 10px;
@@ -22,19 +13,35 @@ pre code {
   white-space: inherit;
 }
 
+/* Part heading is left menu */
+.text-start .menu-text {
+  font-weight: bold;
+}
+
+/* Floats for images */
+.small_right, .small_left {
+  display: inline-block;
+  width: 25%;
+  max-width: 200px;
+}
+.small_right { float: right; margin: 0 0 1em 1em;}
+.small_left { float: left; margin: 0 1em 1em 0;}
+.small_right img, .small_left img { max-width: 100%; }
+
 .medium_right, .medium_left {
   display: inline-block;
   width: 55%;
-  max-width: 270px;
+  max-width: 440px;
 }
-.medium_left {
-  float: left;
-  margin: 1em 1em 1em 0;
+.medium_left  {float: left; margin: 1em 1em 1em 0;}
+.medium_right {float: right; margin: 0 0 1em 1em;}
+.medium_left img, .medium_right img{max-width: 100%;}
+
+.large_right, .large_left {
+  display: inline-block;
+  width: 75%;
+  max-width: 600px;
 }
-.medium_right {
-  float: right;
-  margin: 0 0 1em 1em;
-}
-.medium_left img, .medium_right img{
-  max-width: 100%;
-}
+.large_left  {float: left; margin: 1em 1em 1em 0;}
+.large_right {float: right; margin: 0 0 1em 1em;}
+.large_left img, .large_right img{max-width: 100%;}

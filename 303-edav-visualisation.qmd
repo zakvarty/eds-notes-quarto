@@ -1,6 +1,8 @@
 # Data Visualisation {#edav-visualisation}
 
-```{r, results='asis', echo=FALSE}
+```{r edav-visualisation-setup}
+#| results: asis
+#| echo: false
 source("_common.R")
 status("complete")
 ```
@@ -35,7 +37,12 @@ When you think of data visualisation, you might immediately think of impressive 
 
 Such tools are no doubt impressive but they are by no means necessary for an effective data visualisation. In many cases there is no technology is needed at all. The history of data visualisation vastly pre-dates that of computers and some of the most effective visualisations remain analogue creations. 
 
-```{r,echo = FALSE, out.width="100%", fig.cap="Coffee consumption, visualised. Jaime Serra Palou.", fig.alt="12 sheets of paper arranged to make a calendar. Each sheet has been folded into squares, with each square and used as a coaster for a single day. Ring-shaped coffee stains visualise daily coffee consumption over the year, which is greatest in May and least in December."}
+```{r coffee-consumption-visualisation}
+#| eval: true
+#| echo: false
+#| out-width: "100%"
+#| fig-cap: "Coffee consumption, visualised. Jaime Serra Palou."
+#| fig-alt: "12 sheets of paper arranged to make a calendar. Each sheet has been folded into squares, with each square and used as a coaster for a single day. Ring-shaped coffee stains visualise daily coffee consumption over the year, which is greatest in May and least in December."
 knitr::include_graphics(
   path = "images/303-data-visualisation/coffee-2.png")
 ```
@@ -49,11 +56,14 @@ This visualisation of a year's coffee consumption is an ideal example. Displayin
 
 Here we have another example of an analogue data visualisation that is created as part of data collection. Each member of the department is invited to place a Lego brick on a grid to indicate how much caffeine they have consumed and how much sleep they have had. The beauty of using Lego bricks here is that they are stackable and so create a bar plot over two dimensions. 
 
-```{r,echo = FALSE, out.width="100%", fig.cap="Caffeination vs sleep, shown in lego. Elsie Lee-Robbins", fig.alt="A 2D barplot with axes for how caffeinated staf members are and how much sleep they have had. The height of stacked bricks appears to show a fairly uniform distribution, other than there being lots of people who have not had much sleep or caffeine."}
-knitr::include_graphics(
-  path = "images/303-data-visualisation/lego-coffee.jpg")
+```{r lego-sleep-visualisation}
+#| eval: true
+#| echo: false
+#| out-width: "100%"
+#| fig-cap: "Caffeination vs sleep, shown in lego. Elsie Lee-Robbins" 
+#| fig-alt: "A 2D barplot with axes for how caffeinated staf members are and how much sleep they have had. The height of stacked bricks appears to show a fairly uniform distribution, other than there being lots of people who have not had much sleep or caffeine."
+knitr::include_graphics(path = "images/303-data-visualisation/lego-coffee.jpg")
 ```
-
 
 
 A third example can be found next to the tills in many supermarkets. Each customer is given a token as they pay for their goods. They can then drop this token into one of three large perspex containers as they leave the shop, each representing a different charity. At the end of the month £10,000 is split between the charities in proportion to the number of tokens. Because the containers are made from a transparent material you can see how the tokens are distributed, giving a visualisation of the level of support for each of the charities.
@@ -164,9 +174,15 @@ It's worth considering these prior beliefs and how strongly they are held when c
 When crafting a visualisation we want to require as little work as possible from the viewer. 
 To do this, we can use pre-attentive attributes, such as colour, shape size and position to encode our data values. 
 
-```{r,echo = FALSE, out.width="100%", fig.cap="Examples of preattentive attributes", fig.alt="An illustration of how several pre-attentive attributes can be used to draw the attention of the viewer. In each case there is a grid of nine hollow squares and attention is drawn to a subset of those but altering the following attributes: shape, enclosure, line weight, fill colour/saturation, size and position. Similar examples are given of line length and line curvature."}
+```{r preattentive-attributes}
+#| eval: true
+#| echo: false
+#| out-width: "100%"
+#| fig-cap: "Examples of preattentive attributes"
+#| fig-alt: "An illustration of how several pre-attentive attributes can be used to draw the attention of the viewer. In each case there is a grid of nine hollow squares and attention is drawn to a subset of those but altering the following attributes: shape, enclosure, line weight, fill colour/saturation, size and position. Similar examples are given of line length and line curvature."
 knitr::include_graphics(
-  path = "images/303-data-visualisation/preattentive-attributes.png")
+  path = "images/303-data-visualisation/preattentive-attributes.png"
+)
 ```
 
 
@@ -199,7 +215,12 @@ If you are representing a measurement that has a _reference value_ (for example 
 For colour scales without such a reference point then a gradient in a single colour is likely the best option. In either case, it is important to check that a unit change in data value represents a consistent change in colour across all values. This is not the case for the rainbow palette here (which is neither a single gradient or diverging). 
 
 
-```{r,echo = FALSE, out.width="100%", fig.cap="Some default colour scales in R", fig.alt="Six default continuous colour scales used by various R packages, including gradient and diverging and rainbow palette types."}
+```{r r-colour-scales}
+#| eval: true
+#| echo: false
+#| out-width: "100%"
+#| fig-cap: "Some default colour scales in R" 
+#| fig-alt: "Six default continuous colour scales used by various R packages, including gradient and diverging and rainbow palette types."
 knitr::include_graphics(
   path = "images/303-data-visualisation/saturated-colour-scales.png")
 ```
@@ -207,7 +228,12 @@ knitr::include_graphics(
 
 To ensure accessibility of your designs, I would recommend one of the many on-line tools to simulate colour vision deficiency or using a pre-made palette where this has been considered for you. A good, low-tech rule of thumb is to design your visualisations so that they're still easily understood when printed in grey-scale. This can mean picking appropriate colours or additionally varying the point shape, line width or line types used. 
 
-```{r,echo = FALSE, out.width="100%", fig.cap="Desatureated colour scales in R", fig.alt="Six default continuous colour scales used by various R packages, this time shown in greyscale."}
+```{r desaturated-colour-scales}
+#| eval: true
+#| echo: false
+#| out-width: "100%"
+#| fig-cap: "Desatureated colour scales in R"
+#| fig-alt: "Six default continuous colour scales used by various R packages, this time shown in greyscale."
 knitr::include_graphics(
   path = "images/303-data-visualisation/desaturated-colour-scales.png")
 ```

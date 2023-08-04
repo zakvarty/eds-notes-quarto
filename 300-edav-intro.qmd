@@ -1,6 +1,6 @@
-# (PART) Data Exploration and Visualisation
+# Data Exploration and Visualisation
 
-# Introduction {#edav-introduction .unnumbered}
+## Introduction {#edav-introduction .unnumbered}
 
 ```{r edav-intro-setup}
 #| results: asis

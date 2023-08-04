@@ -1,6 +1,6 @@
 # Acquiring and Sharing Data {-}
 
-# Introduction {#data-introduction .unnumbered}
+## Introduction {#data-introduction .unnumbered}
 
 ```{r setup-data-introduction}
 #| results: 'asis'

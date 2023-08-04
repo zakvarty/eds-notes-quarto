@@ -1,5 +1,7 @@
 # Effective Workflows {#workflows-introduction}
 
+## Introduction 
+
 ```{r, results='asis', echo=FALSE}
 source("_common.R")
 status("polishing")
