@@ -1,6 +1,8 @@
 # Reproducibility {#production-reproducibility}
 
-```{r, results='asis', echo=FALSE}
+```{r reproducibility-setup}
+#| results: asis
+#| echo: false
 source("_common.R")
 status("complete")
 ```
@@ -10,6 +12,11 @@ status("complete")
 In what we have covered so far we have been very much focused on the first aspect of data science: the data. When we come to consider about whether our work can be reproduced or our results can be replicated, this shifts our focus to the second other, the science. 
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE, fig.cap="Cycle of scientific enqiry."}
+#| echo: false
+#| warning: false
+#| message: false
+#| fig-cap: "Cycle of scientific enquiry."
+#| fig-alt: "The scientific method show as a cycle: hypotheis, literature search, design experiment, gather evidence, information synthesis, draw inference, repeat."
 knitr::include_graphics(path = "images/401-production-reproducibility/scientific-method.png")
 ```
 
@@ -38,7 +45,7 @@ That sounds excellent and is, in an ideal world, how both science and data scien
 The aims of a data science project are rarely framed as a clear an unambiguous hypothesis, for which we will design a study and perform a single statistical analysis. Apart from in special cases, like A/B testing, we have a much more general aim for our data science projects. 
 
 ::: medium_right
-![[Gelmand and Loken (2013) ](http://www.stat.columbia.edu/~gelman/research/unpublished/forking.pdf) consider the issue of multiple comparisons](images/401-production-reproducibility/forking-paths-abstract.png)
+![[Gelman and Loken (2013) ](http://www.stat.columbia.edu/~gelman/research/unpublished/forking.pdf) consider the issue of multiple comparisons](images/401-production-reproducibility/forking-paths-abstract.png){Abstract text of Gelman and Loken (2013).}
 :::
 
 We might want to construct a model for a given phenomenon and we'll try many variants of that model along the way. By taking a more relaxed approach to data analysis, data scientists can run the risk of finding spurious relationships within our data that don't hold more generally. If you look for a relationship between the quantity you are trying to predict and enough samples of random noise will almost surely find a significant relationship, even though there is no true link.
@@ -46,7 +53,7 @@ We might want to construct a model for a given phenomenon and we'll try many var
 ## Issues: $p$-hacking and Publiction Bias  
 
 ::: medium_left
-![Distribution of p-values in medical publications. From [Perneger and Combescure (2017)](https://doi.org/10.1016/j.jclinepi.2017.04.003)](images/401-production-reproducibility/p-values-in-medical-papers.jpg)
+![Distribution of p-values in medical publications. From [Perneger and Combescure (2017)](https://doi.org/10.1016/j.jclinepi.2017.04.003)](images/401-production-reproducibility/p-values-in-medical-papers.jpg){Bar chart of p-values in medical publications, showing a large drop between 4-5 percent and 5-6 percent.}
 :::
 
 Okay, so our methods of investigation as data scientists might not be completely sound, but that should be balanced by the results of other studies that exist, right? Well, the second worrisome aspect of this process is that we can't always trust the published literature to be a fair representation of what people have tried in the past.
@@ -128,7 +135,10 @@ Parallel deployment or A/B tests have both the current and the proposed new mode
 In data science we rely a lot on the use of stochastic methods. These are often used to increase the chance of our findings being replicated by another person or in production. However, they also make it more difficult to ensure that our exact results can be reproduced, whether by another person or our future selves.   
 
 ::: medium_left
-```{r, echo=FALSE, fig.cap="Monte Carlo approximation of $\\pi$"}
+```{r monte-carlo-approximation-of-pi}
+#| echo: false
+#| fig-cap:"Monte Carlo approximation of $\\pi$"
+#| fig-alt: "Points randomly located on [-1,1] x [-1,1], with the unit circle overlaid."
 library(ggplot2)
 
 N <- 1000
@@ -196,7 +206,9 @@ This is especially useful for simulations that involve random variables, as it a
 
 ------ 
 
-```{r, echo=TRUE}
+```{r unset-seet}
+#| eval: true
+#| echo: true
 # different values
 rnorm(n = 4)
 rnorm(n = 4)
@@ -204,7 +216,9 @@ rnorm(n = 4)
 
 ------
 
-```{r, echo=TRUE}
+```{r set-seed}
+#| eval: true
+#| echo: true
 # the same value
 set.seed(1234)
 rnorm(n = 4)
