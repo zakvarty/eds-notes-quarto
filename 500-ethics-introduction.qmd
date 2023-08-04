@@ -1,0 +1,8 @@
+# (PART) Data Science Ethics
+
+# Introduction {#ethics-introduction .unnumbered} 
+
+```{r, results='asis', echo=FALSE}
+source("_common.R")
+status("drafting")
+```
