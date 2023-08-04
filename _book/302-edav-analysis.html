@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.353">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Effective Data Science - 8&nbsp; Exploratory Data Analysis</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./310-edav-checklist.html" rel="next">
+<link href="./301-edav-wrangling.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./302-edav-analysis.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Exploratory Data Analysis</span></a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Effective Data Science</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">About this Course</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <span class="sidebar-item-text sidebar-link text-start">
+ <span class="menu-text">Effective Workflows</span></span>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./101-workflows-organising-your-work.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Organising your work</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./102-workflows-naming-files.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Naming Files</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./103-workflows-organising-your-code.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Code</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./110-workflows-checklist.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Workflows Checklist</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <span class="sidebar-item-text sidebar-link text-start">
+ <span class="menu-text">Acquiring and Sharing Data</span></span>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./201-data-tabular.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Tabular Data</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./202-data-webscraping.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Web Scraping</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./203-data-apis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">APIs</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./210-data-checklist.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Checklist</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <span class="sidebar-item-text sidebar-link text-start">
+ <span class="menu-text">(PART) Data Exploration and Visualisation</span></span>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./301-edav-wrangling.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Data Wrangling</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./302-edav-analysis.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Exploratory Data Analysis</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./310-edav-checklist.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Checklist</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">8.1</span> Introduction</a></li>
+  <li><a href="#get-to-know-your-data" id="toc-get-to-know-your-data" class="nav-link" data-scroll-target="#get-to-know-your-data"><span class="header-section-number">8.2</span> Get to know your data</a></li>
+  <li><a href="#start-a-conversation" id="toc-start-a-conversation" class="nav-link" data-scroll-target="#start-a-conversation"><span class="header-section-number">8.3</span> Start a conversation</a>
+  <ul class="collapse">
+  <li><a href="#communicating-with-specialists" id="toc-communicating-with-specialists" class="nav-link" data-scroll-target="#communicating-with-specialists"><span class="header-section-number">8.3.1</span> Communicating with specialists</a></li>
+  <li><a href="#communicating-with-project-manager" id="toc-communicating-with-project-manager" class="nav-link" data-scroll-target="#communicating-with-project-manager"><span class="header-section-number">8.3.2</span> Communicating with project manager</a></li>
+  </ul></li>
+  <li><a href="#scope-your-project" id="toc-scope-your-project" class="nav-link" data-scroll-target="#scope-your-project"><span class="header-section-number">8.4</span> Scope Your Project</a></li>
+  <li><a href="#investigate-your-data" id="toc-investigate-your-data" class="nav-link" data-scroll-target="#investigate-your-data"><span class="header-section-number">8.5</span> Investigate Your Data</a></li>
+  <li><a href="#what-is-not-eda" id="toc-what-is-not-eda" class="nav-link" data-scroll-target="#what-is-not-eda"><span class="header-section-number">8.6</span> What is not EDA?</a></li>
+  <li><a href="#issue-forking-paths" id="toc-issue-forking-paths" class="nav-link" data-scroll-target="#issue-forking-paths"><span class="header-section-number">8.7</span> Issue: Forking Paths</a></li>
+  <li><a href="#correction-methods" id="toc-correction-methods" class="nav-link" data-scroll-target="#correction-methods"><span class="header-section-number">8.8</span> Correction Methods</a></li>
+  <li><a href="#learning-more" id="toc-learning-more" class="nav-link" data-scroll-target="#learning-more"><span class="header-section-number">8.9</span> Learning More</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span id="edav-analysis" class="quarto-section-identifier"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Exploratory Data Analysis</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Effective Data Science is still a work-in-progress. This chapter is largely complete and just needs final proof reading.</p>
+<p>If you would like to contribute to the development of EDS, you may do so at <a href="https://github.com/zakvarty/data_science_notes" class="uri">https://github.com/zakvarty/data_science_notes</a>.</p>
+</div>
+</div>
+<section id="introduction" class="level2" data-number="8.1">
+<h2 data-number="8.1" class="anchored" data-anchor-id="introduction"><span class="header-section-number">8.1</span> Introduction</h2>
+<p>Exploratory data analysis is an essential stage in any data science project. It allows you to become familiar with the data you are working with while also to identify potential strategies for progressing the project and flagging any areas of concern.</p>
+<p>In this chapter we will look at three different perspectives on exploratory data analysis: its purpose for you as a data scientist, its purpose for the broader team working on the project and finally its purpose for the project itself.</p>
+</section>
+<section id="get-to-know-your-data" class="level2" data-number="8.2">
+<h2 data-number="8.2" class="anchored" data-anchor-id="get-to-know-your-data"><span class="header-section-number">8.2</span> Get to know your data</h2>
+<p>Let’s first focus on an exploratory data analysis from our own point of view, as data scientists.</p>
+<p>Exploratory data analysis (or EDA) is a process of examining a data set to understand its overall structure, contents, and the relationships between the variables it contains. EDA is an iterative process that’s often done before building a model or making other data-driven decisions within a data science project.</p>
+<blockquote class="blockquote">
+<p>Exploratory Data Analysis: quick and simple exerpts, summaries and plots to better understand a data set.</p>
+</blockquote>
+<p>One key aspect of EDA is generating quick and simple summaries and plots of the data. These plots and summary statistics can help to quickly understand the distribution of and relationships between the recorded variables. Additionally, during an exploratory analysis you will familiarise yourself with the structure of the data you’re working with and how that data was collected.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="302-edav-analysis_files/figure-html/iris-plot-1.png" class="img-fluid figure-img" style="width:80.0%"></p>
+<figcaption class="figure-caption">Investigating marginal and pairwise relationships in the Iris dataset.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Since EDA is an initial and iterative process, it’s rare that any component of the analysis will be put into production. Instead, the goal is to get a general understanding of the data that can inform the next steps of the analysis.</p>
+<p>In terms of workflow, this means that using one or more notebooks is often an effective way of organising your work during an exploratory analysis. This allows for rapid iteration and experimentation, while also providing a level of reproducibility and documentation. Since notebooks allow you to combine code, plots, tables and text in a single document, this makes it easy to share your initial findings with stakeholders and project managers.</p>
+</section>
+<section id="start-a-conversation" class="level2" data-number="8.3">
+<h2 data-number="8.3" class="anchored" data-anchor-id="start-a-conversation"><span class="header-section-number">8.3</span> Start a conversation</h2>
+<blockquote class="blockquote">
+<p>An effective EDA sets a precedent for open communication with the stakeholder and project manager.</p>
+</blockquote>
+<p>We’ve seen the benefits of an EDA for you as a data scientist, but this isn’t the only perspective.</p>
+<p>One key benefit of an EDA is that it can kick-start your communication with subject matter experts and project managers. You can build rapport and trust early in a project’s life cycle by sharing your preliminary findings with these stakeholders . This can lead to a deeper understanding of both the available data and the problem being addressed for everyone involved. If done well, it also starts to build trust in your work before you even begin the modelling stage of a project.</p>
+<section id="communicating-with-specialists" class="level3" data-number="8.3.1">
+<h3 data-number="8.3.1" class="anchored" data-anchor-id="communicating-with-specialists"><span class="header-section-number">8.3.1</span> Communicating with specialists</h3>
+<p>Sharing an exploratory analysis will inevitably require a time investment. The graphics, tables, and summaries you produce need to be presented to a higher standard and explained in a way that is clear to a non-specialist. However, this time investment will often pay dividends because of the additional contextual knowledge that the domain-expert can provide. They have a deep understanding of the business or technical domain surrounding the problem. This can provide important insights that aren’t in the data itself, but which are vital to the project’s success.</p>
+<p>As an example, these stakeholder conversations often reveal important features in the data generating or measurement process that should be accounted for when modelling. These details are usually left out of the data documentation because they would be immediately obvious to any specialist in that field.</p>
+</section>
+<section id="communicating-with-project-manager" class="level3" data-number="8.3.2">
+<h3 data-number="8.3.2" class="anchored" data-anchor-id="communicating-with-project-manager"><span class="header-section-number">8.3.2</span> Communicating with project manager</h3>
+<p>An EDA can sometimes allow us to identify cases where the strength of signal within the available data is clearly insufficient to answer the question of interest. By clearly communicating this to the project manager, the project can be postponed while different, better quality or simply more data are collected. It’s important to note that this data collection is not trivial and can have a high cost in terms of both time and capital. It might be that collecting the data needed to answer a question will cost more than we’re likely to gain from knowing that answer. Whether the project is postponed or cancelled, this constitutes a successful outcome for the project, the aim is to to produce insight or profit - not to fit models for their own sake.</p>
+</section>
+</section>
+<section id="scope-your-project" class="level2" data-number="8.4">
+<h2 data-number="8.4" class="anchored" data-anchor-id="scope-your-project"><span class="header-section-number">8.4</span> Scope Your Project</h2>
+<blockquote class="blockquote">
+<p>EDA is an initial assessment of whether the available data measure the correct values, in sufficient quality and quantity, to answer a particular question.</p>
+</blockquote>
+<p>A third view on EDA is as an initial assessment of whether the available data measure the correct values, with sufficient quality and quantity, to answer a particular question. In order for EDA to be successful, it’s important to take a few key steps.</p>
+<p>First, it’s important to formulate a specific question of interest or line of investigation and agree on it with the stakeholder. By having a clear question in mind, it will be easier to focus the analysis and identify whether the data at hand can answer it.</p>
+<p>Next, it’s important to make a record (if one doesn’t already exist) of how the data were collected, by whom it was collected, what each recorded variable represents and the units in which they are recorded. This meta-data is often known as a data sheet. Having this information in written form is crucial when adding a new collaborator to a project, so that they can understand the data generating and measurement processes, and are aware of the quality and accuracy of the recorded values.</p>
+</section>
+<section id="investigate-your-data" class="level2" data-number="8.5">
+<h2 data-number="8.5" class="anchored" data-anchor-id="investigate-your-data"><span class="header-section-number">8.5</span> Investigate Your Data</h2>
+<blockquote class="blockquote">
+<p>EDA is an opportunitiy to quantify data completeness and investigate the possibility of informative missingness.</p>
+</blockquote>
+<p>In addition, it’s essential to investigate and document the structure, precision, completeness and quantity of data available. This includes assessing the degree of measurement noise or misclassification in the data, looking for clear linear or non-linear dependencies between any of the variables, and identifying if any data are missing or if there’s any structure to this missingness. Other data features to be aware of are the presence of any censoring or whether some values tend to be missing together.</p>
+<p>Furthermore, a more advanced EDA might include a simulation study to estimate the amount of data needed to detect the smallest meaningful effect. This is more in-depth than a typical EDA but if you suspect that the signals within your data are weak relative to measurement noise, can help to demonstrate the limitations of the current line of enquiry with the information that is currently available.</p>
+</section>
+<section id="what-is-not-eda" class="level2" data-number="8.6">
+<h2 data-number="8.6" class="anchored" data-anchor-id="what-is-not-eda"><span class="header-section-number">8.6</span> What is not EDA?</h2>
+<p>It’s important to understand that an exploratory data analysis is not the same thing as modelling. In particular is <em>not</em> the construction of your baseline model, which is sometimes called initial data analysis.</p>
+<p>Though it might inform the choice of baseline model, EDA is usually not model based. Simple plots and summaries are used to identify patterns in the data that inform how you approach the rest of the project.</p>
+<p>Some degree of statistical rigour can be added through the use of non-parametric techniques; methods like rolling averages, smoothing or partitioning can to help identify trends or patterns while making minimal assumptions about the data generating process.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="302-edav-analysis_files/figure-html/dow-jones-rolling-mean-plot-1.png" class="img-fluid figure-img" style="width:80.0%"></p>
+<figcaption class="figure-caption">Daily change in Dow Jones Index with smoothed estimate of mean and 95% confidence interval.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<caption>Mean and standard deviation of daily change in Dow Jones Index, before and after 1st of June 1998.</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">after_june_98</th>
+<th style="text-align: right;">mean</th>
+<th style="text-align: right;">sd</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: right;">5.916798</td>
+<td style="text-align: right;">65.19093</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">3.972929</td>
+<td style="text-align: right;">119.56067</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>Though the assumptions in an EDA are often minimal it can help to make them explicit. For example, in this plot a moving averages is shown with a confidence band, but the construction of this band makes the implicit assumption that, at least locally, our observations have the same distribution and so are exchangeable.</p>
+<p>Finally, EDA is not a prescriptive process. While I have given a lot of suggestions on what you might usually want to consider, there is no correct way to go about an EDA because it is so heavily dependent on the particular dataset, its interpretation and the task you want to achieve with it. This is one of the parts of data science that make it a craft that you hone with experience, rather than an algorithmic process. When you work in a particular area for a long time you develop a knowledge for common data quirks in that area, which may or may not translate to other applications.</p>
+<p>Now that we have a better idea of what is and what is not EDA, let’s talk about the issue that an EDA tries to resolve and the other issues that it generates.</p>
+</section>
+<section id="issue-forking-paths" class="level2" data-number="8.7">
+<h2 data-number="8.7" class="anchored" data-anchor-id="issue-forking-paths"><span class="header-section-number">8.7</span> Issue: Forking Paths</h2>
+<p>In any data science project you have a sequence of very many decisions that you must make, each with many potential options and is difficult to decide upon <em>a priori</em>.</p>
+<div class="small_right">
+<p><img src="images/302-data-exploration/forking-paths.jpg" class="img-fluid"></p>
+</div>
+<p>Focusing in on only one small part of the process, we might consider picking a null or baseline model, which we will then try and improve on. Should that null model make constant predictions, incorporate a simple linear trend or is something more flexible obviously needed? Do you have the option to try all of these or are you working under time constraints? Are there contextual clues that rule some of these null models out on contextual grounds?</p>
+<p>An EDA lets you narrow down your options by looking at your data and helps you to decide what might be reasonable modelling approaches.</p>
+<div class="medium_left">
+<p><img src="images/302-data-exploration/supervise_learning_schematic.png" class="img-fluid"></p>
+</div>
+<p>The problem that sneaks in here is data leakage. Formally this is where training data is included in test set, but this sort of information leak can happen informally too. Usually this is because you’ve seen the data you’re trying to model or predict and then selected your modelling approach based on that information.</p>
+<p>Standard, frequentist statistical methods for estimation and testing assume no “peeking” of this type has occurred. If we use these methods without acknowledging that we have already observed our data then we will artificially inflate the significance of our findings. For example, we might be comparing two models: the first of which makes constant predictions with regard to a predictor, while the second includes a linear trend. We will of course use a statistical test to confirm that what we are seeing is unlikely by chance. However, we must be aware this test was only performed because we had previously examined at the data and noticed what looked to be a trend.</p>
+<p>Similar issues arise in Bayesian approaches, particularly when constructing or eliciting prior distributions for our model parameters. One nice thing that we can do in the Bayesian setting is to simulating data from the prior predictive distribution and then get an expert to check that these datasets seem seem reasonable. However, it is often the case this expert is also the person who collected the data we will soon be modelling. It’s very difficult for them to ignore what they have seen, which leads to similar, subtle leakage problems.</p>
+</section>
+<section id="correction-methods" class="level2" data-number="8.8">
+<h2 data-number="8.8" class="anchored" data-anchor-id="correction-methods"><span class="header-section-number">8.8</span> Correction Methods</h2>
+<p>There are various methods or corrections that we can apply during our testing and estimation procedures to ensure that our error rates or confidence intervals account for our previous “peeking” during EDA.</p>
+<p>Examples of these corrections have been developed across many fields of statistics. In medical statistics we have approaches like the Bonferroni correction, to account for carrying out multiple hypothesis tests. In the change-point literature there are techniques for estimating a change location given that a change has been detected somewhere in a time series. While in the extreme value literature there are methods to estimate the required level of protection against rare events, given that the analysis was triggered by the current protections having been compromised.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="302-edav-analysis_files/figure-html/eva-and-changepoint-plots-1.png" class="img-fluid figure-img" style="width:80.0%"></p>
+<figcaption class="figure-caption">Example sea-height datasets where an analysis has been triggered by an extreme value (above) or a visually identified change in mean (below).</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>::: ::::</p>
+<p>All of these corrections require us to make assumptions about the nature of the peeking. They are either very specific about the process that has occurred, or else are very pessimistic about how much information has been leaked. Developing such corrections to account for EDA isn’t really possible, given its adaptive and non-prescriptive nature.</p>
+<p>In addition to being either highly specific or pessimistic, these corrections can also be hard to derive and complicated to implement. This is why in settings where the power of tests or level of estimation is critically important, the entire analysis is pre-registered. In clinical trials, for example, every step of the analysis is specified before any data are collected. In data science this rigorous approach is rarely taken.</p>
+<p>As statistically trained data scientists, it is important for us to remain humble about our potential findings and to suggest follow up studies to confirm the presence of any relationships we do find.</p>
+</section>
+<section id="learning-more" class="level2" data-number="8.9">
+<h2 data-number="8.9" class="anchored" data-anchor-id="learning-more"><span class="header-section-number">8.9</span> Learning More</h2>
+<p>In this chapter we have acknowledged that exploratory analyses are an important part of the data science workflow; this is true not only for us as data scientists, but also for the other people who are involved with our projects.</p>
+<p>We’ve also seen that an exploratory analysis can help to guide the progression of our projects, but that in doing so we must take care to prevent and acknowledge the risk of data leakage.</p>
+<p>If you want to explore this topic further, it can be quite challenging: examples of good, exploratory data analyses can be difficult to come by. This is because they are not often made publicly available in the same way that papers and technical reports are. Additionally, they are often kept out of public repositories because they are not as “polished” as the rest of the project. Personally, I think this is a shame and the culture on this is slowly changing.</p>
+<p>For now, your best approach to learning about what makes a good exploratory analysis is to do lots of your own and to talk to you colleagues about their approaches.</p>
+<p>There are lots of list-articles out there claiming to give you a comprehensive list of steps for any exploratory analysis. These can be good for inspiration, but I strongly suggest you don’t treat these as gospel.</p>
+<p>Despite the name of the chapter, <a href="https://bookdown.org/rdpeng/exdata/exploratory-data-analysis-checklist.html#follow-up-questions">Roger Peng’s EDA check-list</a> gives an excellent worked example of an exploratory analysis in R. The the discussion article “<a href="http://www.stat.columbia.edu/~gelman/research/published/p755.pdf">Exploratory Data Analysis for Complex Models</a>”, Andrew Gelman makes a more abstract discussion of both exploratory analyses (which happen before modelling) and confirmatory analyses (which happen afterwards).</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./301-edav-wrangling.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Data Wrangling</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./310-edav-checklist.html" class="pagination-link">
+        <span class="nav-page-text">Checklist</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>

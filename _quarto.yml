@@ -21,7 +21,7 @@ book:
     - 210-data-checklist.qmd
     - part: 300-edav-intro.qmd
     - 301-edav-wrangling.qmd
-    #- 302-edav-analysis.qmd
+    - 302-edav-analysis.qmd
     #- 303-edav-visualisation.qmd
     - 310-edav-checklist.qmd
     - references.qmd

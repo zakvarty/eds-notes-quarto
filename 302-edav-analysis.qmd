@@ -1,6 +1,8 @@
 # Exploratory Data Analysis {#edav-analysis}
 
-```{r, results='asis', echo=FALSE}
+```{r edav-analysis-setup}
+#| results: asis
+#| echo: false
 source("_common.R")
 status("complete")
 ```
@@ -25,11 +27,20 @@ Exploratory data analysis (or EDA) is a process of examining a data set to under
 One key aspect of EDA is generating quick and simple summaries and plots of the data. These plots and summary statistics can help to quickly understand the distribution of and relationships between the recorded variables. Additionally, during an exploratory analysis you will familiarise yourself with the structure of the data you're working with and how that data was collected.
 
 
-```{r, echo=FALSE, warning=FALSE, message=FALSE, fig.cap="Investigating marginal and pairwise relationships in the Iris dataset."}
+```{r iris-plot}
+#| eval: true
+#| echo: false
+#| warning: false
+#| message: false
+#| fig.cap: "Investigating marginal and pairwise relationships in the Iris dataset."
 library("ggplot2")                     
 library("GGally")
-colours <- colorspace::adjust_transparency(PrettyCols::prettycols(name = "Fun",n = 3), alpha = 0.6)
-ggpairs(iris,mapping = aes(col=Species)) +
+
+colours <- colorspace::adjust_transparency(
+  col = PrettyCols::prettycols(name = "Fun", n = 3),
+  alpha = 0.6)
+
+ggpairs(iris,mapping = aes(col = Species)) +
   scale_colour_manual(values = colours) +
   scale_fill_manual(values = colours) +
   theme_minimal() + 
@@ -87,7 +98,12 @@ Though it might inform the choice of baseline model, EDA is usually not model ba
 Some degree of statistical rigour can be added through the use of non-parametric techniques; methods like rolling averages, smoothing or partitioning can to help identify trends or patterns while making minimal assumptions about the data generating process.
 
 
-```{r echo=FALSE, message=FALSE, warning=FALSE, fig.cap="Daily change in Dow Jones Index with smoothed estimate of mean and 95% confidence interval."}
+```{r dow-jones-rolling-mean-plot}
+#| eval: true
+#| echo: false
+#| message: false
+#| warning: false
+#| fig.cap: "Daily change in Dow Jones Index with smoothed estimate of mean and 95% confidence interval."
 library(tidyverse)
 library(ismev)
 library(cowplot)
@@ -114,12 +130,14 @@ p2 <- dowjones %>%
   mutate(index_change = Index - lag(Index)) %>% 
   filter(!is.na(index_change)) %>% 
   ggplot(aes(x = Date, y = index_change)) + 
-  geom_point(col = rgb(0,0,0,0.2), size = 2) + 
-  geom_smooth(col = "darkorange", fill = colorspace::adjust_transparency("darkorange", 0.05), lwd = 1.5) +
+  geom_point(col = rgb(0, 0, 0, 0.2), size = 2) + 
+  geom_smooth(
+    col = "darkorange", 
+    fill = colorspace::adjust_transparency("darkorange", 0.05),
+    lwd = 1.5) +
   geom_vline(xintercept = as.Date("1998-06-01")) +
-  #ggtitle("Daily change of in Dow Jones Index", "with smoothed estimate of mean change") +
   ylab("") +
-  coord_cartesian(ylim=c(-2,12)) +
+  coord_cartesian(ylim = c(-2, 12)) +
   theme_minimal() + 
   theme(
     axis.text = element_text(size = 10),
@@ -133,7 +151,7 @@ plot_grid(p1,p2)
 
 ```{r, echo = FALSE}
 knitr::kable(
-  x= dowjones %>% 
+  x = dowjones %>% 
   mutate(index_change = Index - lag(Index)) %>%
   mutate(after_june_98 = Date > as.Date("1998-06-01")) %>%
   group_by(after_june_98) %>% 
@@ -178,14 +196,21 @@ There are various methods or corrections that we can apply during our testing an
 
 Examples of these corrections have been developed across many fields of statistics. In medical statistics we have approaches like the Bonferroni correction, to account for carrying out multiple hypothesis tests. In the change-point literature there are techniques for estimating a change location given that a change has been detected somewhere in a time series. While in the extreme value literature there are methods to estimate the required level of protection against rare events, given that the analysis was triggered by the current protections having been compromised.
 
-```{r, echo = FALSE, fig.cap= "Example sea-height datasets where an analysis has been triggered by an extreme value (above) or a visually identified change in mean (below)."}
-date <- seq.Date(from = as.Date("2018-03-01"), to = as.Date("2022-05-03"), by = "day")
-surge_height <- rnorm(n = 1525) + c(rep(-3, 1524), 3)
+```{r eva-and-changepoint-plots}
+#| eval: true
+#| echo: false
+#| fig.cap: "Example sea-height datasets where an analysis has been triggered by an extreme value (above) or a visually identified change in mean (below)."
+date <- seq.Date(
+  from = as.Date("2018-03-01"),
+  to = as.Date("2022-05-03"),
+  by = "day")
 
+set.seed(1234)
+surge_height <- rnorm(n = 1525) + c(rep(-3, 1524), 3)
 surface_height <- rnorm(n = 1525) + rep(x = c(-5,-3), times = c(1234, 1525 - 1234))
 
 
-waves <- tibble::tibble(date = date, surge_height = surge_height, surface_height)
+waves <- tibble::tibble(date, surge_height, surface_height)
 
 p3 <- waves %>% 
   mutate(is_extreme = surge_height > 1) %>%
@@ -194,7 +219,7 @@ p3 <- waves %>%
   scale_color_manual(values = c("FALSE" = "black", "TRUE" = "darkorange")) +
   ylab("Wave surge height (m)") +
   theme_minimal() +
-    theme(
+  theme(
     axis.text = element_text(size = 10),
     axis.title = element_text(size = 9, face = "bold",  hjust = 0.98, vjust = 2),
     plot.title = element_text(size = 15, hjust = 0.02),
