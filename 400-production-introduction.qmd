@@ -2,7 +2,9 @@
 
 # Introduction {#production-introduction .unnumbered}
 
-```{r, results='asis', echo=FALSE}
+```{r production-intro-setup}
+#| results: asis
+#| echo: false
 source("_common.R")
 status("drafting")
 ```
