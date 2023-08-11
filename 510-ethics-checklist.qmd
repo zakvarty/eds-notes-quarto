@@ -1,11 +1,11 @@
 # Checklist {#ethics-checklist .unnumbered}
 
-
-::: {.rmdnote} 
-Effective Data Science is still a work-in-progress. This chapter is largely complete and just needs final proof reading. 
-
-If you would like to contribute to the development of EDS, you may do so at <https://github.com/zakvarty/data_science_notes>.
-:::
+```{r ethics-checklist}
+#| echo: false
+#| results: asis
+source("_common.R")
+status("complete")
+```
 
 ## Videos / Chapters 
 
@@ -40,6 +40,6 @@ _Bonus_
 
 ## Live Session 
 
-In the live session this week we will begin with a few minutes of Q&A about the assessments. We will then break into groups to discuss and compare the professional guidelines on ethical data science. 
+In the live session this week we will begin with a few minutes of Q & A about the assessments. We will then break into groups to discuss and compare the professional guidelines on ethical data science. 
 
 Finally, if time allows we will round up the session with an activity on randomised response survey designs.
