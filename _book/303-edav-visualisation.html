@@ -1,12 +1,9 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
-
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.3.353">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-
-
 <title>Effective Data Science - 9&nbsp; Data Visualisation</title>
 <style>
 code{white-space: pre-wrap;}
@@ -21,7 +18,6 @@ ul.task-list li input[type="checkbox"] {
   vertical-align: middle;
 }
 </style>
-
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="site_libs/quarto-nav/headroom.min.js"></script>
@@ -40,8 +36,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
-<script id="quarto-search-options" type="application/json">{
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
@@ -59,37 +54,47 @@ ul.task-list li input[type="checkbox"] {
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit"
   }
-}</script>
-
-
-<link rel="stylesheet" href="style.css">
+}</script><link rel="stylesheet" href="style.css">
 </head>
-
 <body class="nav-sidebar floating">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
-  <nav class="quarto-secondary-nav">
-    <div class="container-fluid d-flex">
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./303-edav-visualisation.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Data Visualisation</span></a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./300-edav-intro.html">Data Exploration and Visualisation</a></li><li class="breadcrumb-item"><a href="./303-edav-visualisation.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Data Visualisation</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
-  </nav>
-</header>
-<!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Effective Data Science</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/zakvarty/eds-notes-quarto/" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+    <div class="dropdown">
+      <a href="" title="Share" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Share"><i class="bi bi-share"></i></a>
+      <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
+<li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://twitter.com/intent/tweet?url=%7Curl%7C">
+              <i class="bi bi-bi-twitter pe-1"></i>
+            Twitter
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://www.linkedin.com/sharing/share-offsite/?url=%7Curl%7C">
+              <i class="bi bi-bi-linkedin pe-1"></i>
+            LinkedIn
+            </a>
+          </li>
+      </ul>
+</div>
+</div>
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -99,178 +104,256 @@ ul.task-list li input[type="checkbox"] {
         </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
-        <li class="sidebar-item">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">About this Course</span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
-      <span class="sidebar-item-text sidebar-link text-start">
- <span class="menu-text">Effective Workflows</span></span>
-  </li>
-        <li class="sidebar-item">
+      <div class="sidebar-item-container"> 
+            <a href="./100-workflows-introduction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Effective Workflows</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./101-workflows-organising-your-work.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Organising your work</span></span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./102-workflows-naming-files.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Naming Files</span></span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./103-workflows-organising-your-code.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Code</span></span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./110-workflows-checklist.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Workflows Checklist</span></a>
   </div>
 </li>
+      </ul>
+</li>
         <li class="sidebar-item sidebar-item-section">
-      <span class="sidebar-item-text sidebar-link text-start">
- <span class="menu-text">Acquiring and Sharing Data</span></span>
-  </li>
-        <li class="sidebar-item">
+      <div class="sidebar-item-container"> 
+            <a href="./200-data-introduction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Acquiring and Sharing Data</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./201-data-tabular.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Tabular Data</span></span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./202-data-webscraping.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Web Scraping</span></span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./203-data-apis.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">APIs</span></span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./210-data-checklist.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Checklist</span></a>
   </div>
 </li>
+      </ul>
+</li>
         <li class="sidebar-item sidebar-item-section">
-      <span class="sidebar-item-text sidebar-link text-start">
- <span class="menu-text">Data Exploration and Visualisation</span></span>
-  </li>
-        <li class="sidebar-item">
+      <div class="sidebar-item-container"> 
+            <a href="./300-edav-intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Data Exploration and Visualisation</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./301-edav-wrangling.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Data Wrangling</span></span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./302-edav-analysis.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Exploratory Data Analysis</span></span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./303-edav-visualisation.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Data Visualisation</span></span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./310-edav-checklist.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Checklist</span></a>
   </div>
 </li>
+      </ul>
+</li>
         <li class="sidebar-item sidebar-item-section">
-      <span class="sidebar-item-text sidebar-link text-start">
- <span class="menu-text">Preparing for Production</span></span>
-  </li>
-        <li class="sidebar-item">
+      <div class="sidebar-item-container"> 
+            <a href="./400-production-introduction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preparing for Production</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./401-production-reproducibility.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Reproducibility</span></span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./402-production-explainability.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Explainability</span></span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./403-production-scalability.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Scalability</span></span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./410-production-checklist.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Checklist</span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./500-ethics-introduction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Data Science Ethics</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./501-ethics-privacy.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Privacy</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./502-ethics-fairness.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Fairness</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./503-ethics-conduct.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Codes of Conduct</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./510-ethics-checklist.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Checklist</span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true">
+ <span class="menu-text">Appendices</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./references.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">References</span></a>
   </div>
 </li>
+      </ul>
+</li>
     </ul>
-    </div>
-</nav>
-<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+</div>
+</nav><div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Table of contents</h2>
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">9.1</span> Introduction</a>
+<li>
+<a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">9.1</span> Introduction</a>
   <ul class="collapse">
-  <li><a href="#more-than-a-pretty-picture" id="toc-more-than-a-pretty-picture" class="nav-link" data-scroll-target="#more-than-a-pretty-picture"><span class="header-section-number">9.1.1</span> More than a pretty picture</a></li>
-  </ul></li>
-  <li><a href="#your-tools" id="toc-your-tools" class="nav-link" data-scroll-target="#your-tools"><span class="header-section-number">9.2</span> Your Tools 🔨</a>
+<li><a href="#more-than-a-pretty-picture" id="toc-more-than-a-pretty-picture" class="nav-link" data-scroll-target="#more-than-a-pretty-picture"><span class="header-section-number">9.1.1</span> More than a pretty picture</a></li>
+  </ul>
+</li>
+  <li>
+<a href="#your-tools" id="toc-your-tools" class="nav-link" data-scroll-target="#your-tools"><span class="header-section-number">9.2</span> Your Tools 🔨</a>
   <ul class="collapse">
-  <li><a href="#picking-the-right-tool-for-the-job" id="toc-picking-the-right-tool-for-the-job" class="nav-link" data-scroll-target="#picking-the-right-tool-for-the-job"><span class="header-section-number">9.2.1</span> Picking the right tool for the job</a></li>
+<li><a href="#picking-the-right-tool-for-the-job" id="toc-picking-the-right-tool-for-the-job" class="nav-link" data-scroll-target="#picking-the-right-tool-for-the-job"><span class="header-section-number">9.2.1</span> Picking the right tool for the job</a></li>
   <li><a href="#analogue-or-digital" id="toc-analogue-or-digital" class="nav-link" data-scroll-target="#analogue-or-digital"><span class="header-section-number">9.2.2</span> Analogue or Digital</a></li>
   <li><a href="#ggplot2" id="toc-ggplot2" class="nav-link" data-scroll-target="#ggplot2"><span class="header-section-number">9.2.3</span> ggplot2</a></li>
-  </ul></li>
-  <li><a href="#your-medium" id="toc-your-medium" class="nav-link" data-scroll-target="#your-medium"><span class="header-section-number">9.3</span> Your Medium 📽</a>
+  </ul>
+</li>
+  <li>
+<a href="#your-medium" id="toc-your-medium" class="nav-link" data-scroll-target="#your-medium"><span class="header-section-number">9.3</span> Your Medium 📽</a>
   <ul class="collapse">
-  <li><a href="#where-is-your-visualisation-going" id="toc-where-is-your-visualisation-going" class="nav-link" data-scroll-target="#where-is-your-visualisation-going"><span class="header-section-number">9.3.1</span> Where is your visualisation going?</a></li>
+<li><a href="#where-is-your-visualisation-going" id="toc-where-is-your-visualisation-going" class="nav-link" data-scroll-target="#where-is-your-visualisation-going"><span class="header-section-number">9.3.1</span> Where is your visualisation going?</a></li>
   <li><a href="#file-types" id="toc-file-types" class="nav-link" data-scroll-target="#file-types"><span class="header-section-number">9.3.2</span> File Types</a></li>
-  </ul></li>
-  <li><a href="#your-audience" id="toc-your-audience" class="nav-link" data-scroll-target="#your-audience"><span class="header-section-number">9.4</span> Your Audience 👥</a>
+  </ul>
+</li>
+  <li>
+<a href="#your-audience" id="toc-your-audience" class="nav-link" data-scroll-target="#your-audience"><span class="header-section-number">9.4</span> Your Audience 👥</a>
   <ul class="collapse">
-  <li><a href="#know-your-audience" id="toc-know-your-audience" class="nav-link" data-scroll-target="#know-your-audience"><span class="header-section-number">9.4.1</span> Know Your Audience</a></li>
+<li><a href="#know-your-audience" id="toc-know-your-audience" class="nav-link" data-scroll-target="#know-your-audience"><span class="header-section-number">9.4.1</span> Know Your Audience</a></li>
   <li><a href="#preattentive-attributes" id="toc-preattentive-attributes" class="nav-link" data-scroll-target="#preattentive-attributes"><span class="header-section-number">9.4.2</span> Preattentive Attributes</a></li>
   <li><a href="#example-first-impressions-count" id="toc-example-first-impressions-count" class="nav-link" data-scroll-target="#example-first-impressions-count"><span class="header-section-number">9.4.3</span> Example: First Impressions Count</a></li>
   <li><a href="#visual-perception" id="toc-visual-perception" class="nav-link" data-scroll-target="#visual-perception"><span class="header-section-number">9.4.4</span> Visual Perception</a></li>
   <li><a href="#alt-text-titles-and-captions" id="toc-alt-text-titles-and-captions" class="nav-link" data-scroll-target="#alt-text-titles-and-captions"><span class="header-section-number">9.4.5</span> Alt-text, Titles and Captions</a></li>
-  </ul></li>
-  <li><a href="#your-story" id="toc-your-story" class="nav-link" data-scroll-target="#your-story"><span class="header-section-number">9.5</span> Your Story 📖</a></li>
-  <li><a href="#your-guidelines" id="toc-your-guidelines" class="nav-link" data-scroll-target="#your-guidelines"><span class="header-section-number">9.6</span> Your Guidelines 📝</a>
-  <ul class="collapse">
-  <li><a href="#standardise-and-document" id="toc-standardise-and-document" class="nav-link" data-scroll-target="#standardise-and-document"><span class="header-section-number">9.6.1</span> Standardise and Document</a></li>
-  <li><a href="#example-style-guides" id="toc-example-style-guides" class="nav-link" data-scroll-target="#example-style-guides"><span class="header-section-number">9.6.2</span> Example Style Guides</a></li>
-  </ul></li>
-  <li><a href="#wrapping-up" id="toc-wrapping-up" class="nav-link" data-scroll-target="#wrapping-up"><span class="header-section-number">9.7</span> Wrapping Up</a></li>
   </ul>
-</nav>
+</li>
+  <li><a href="#your-story" id="toc-your-story" class="nav-link" data-scroll-target="#your-story"><span class="header-section-number">9.5</span> Your Story 📖</a></li>
+  <li>
+<a href="#your-guidelines" id="toc-your-guidelines" class="nav-link" data-scroll-target="#your-guidelines"><span class="header-section-number">9.6</span> Your Guidelines 📝</a>
+  <ul class="collapse">
+<li><a href="#standardise-and-document" id="toc-standardise-and-document" class="nav-link" data-scroll-target="#standardise-and-document"><span class="header-section-number">9.6.1</span> Standardise and Document</a></li>
+  <li><a href="#example-style-guides" id="toc-example-style-guides" class="nav-link" data-scroll-target="#example-style-guides"><span class="header-section-number">9.6.2</span> Example Style Guides</a></li>
+  </ul>
+</li>
+  <li><a href="#wrapping-up" id="toc-wrapping-up" class="nav-link" data-scroll-target="#wrapping-up"><span class="header-section-number">9.7</span> Wrapping Up</a></li>
+  </ul><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/zakvarty/eds-notes-quarto/edit/master/303-edav-visualisation.qmd" class="toc-action">Edit this page</a></p></div></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
-
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
 <h1 class="title"><span id="edav-visualisation" class="quarto-section-identifier"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Data Visualisation</span></span></h1>
 </div>
 
@@ -284,9 +367,7 @@ ul.task-list li input[type="checkbox"] {
   </div>
   
 
-</header>
-
-<div class="callout callout-style-default callout-note callout-titled">
+</header><div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -300,17 +381,15 @@ Note
 <p>If you would like to contribute to the development of EDS, you may do so at <a href="https://github.com/zakvarty/data_science_notes" class="uri">https://github.com/zakvarty/data_science_notes</a>.</p>
 </div>
 </div>
-<section id="introduction" class="level2" data-number="9.1">
-<h2 data-number="9.1" class="anchored" data-anchor-id="introduction"><span class="header-section-number">9.1</span> Introduction</h2>
-<section id="more-than-a-pretty-picture" class="level3" data-number="9.1.1">
-<h3 data-number="9.1.1" class="anchored" data-anchor-id="more-than-a-pretty-picture"><span class="header-section-number">9.1.1</span> More than a pretty picture</h3>
+<section id="introduction" class="level2" data-number="9.1"><h2 data-number="9.1" class="anchored" data-anchor-id="introduction">
+<span class="header-section-number">9.1</span> Introduction</h2>
+<section id="more-than-a-pretty-picture" class="level3" data-number="9.1.1"><h3 data-number="9.1.1" class="anchored" data-anchor-id="more-than-a-pretty-picture">
+<span class="header-section-number">9.1.1</span> More than a pretty picture</h3>
 <p>Data visualisation is an integral part of your work as a data scientist.</p>
 <div class="medium_left">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="images/303-data-visualisation/the-climate-book-jacket.jpg" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">Book jacked showing the effect of global temperatures rising. A series of vertical stripes represent the annual global average temperature, progressing from blue on the left to red on the right.</figcaption>
-</figure>
+<figure class="figure"><p><img src="images/303-data-visualisation/the-climate-book-jacket.jpg" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Book jacked showing the effect of global temperatures rising. A series of vertical stripes represent the annual global average temperature, progressing from blue on the left to red on the right.</figcaption></figure>
 </div>
 </div>
 <p>You’ll use visualisations to rapidly explore new data sets, to understand their structure and to establish which types of model might be suitable for the task at hand. Visualisation is also vital during model evaluation and when check the validity of the assumptions on which that model is based. These are relatively technical uses of visualisation, but graphics have a much broader role within your work of an effective data scientist.</p>
@@ -318,75 +397,62 @@ Note
 <p>Data visualisation is an amalgamation of science, statistics, graphic design and storytelling. It’s multi-disciplinary nature means that we have to draw on all of our skills to ensure success. While there are certainly many ways to go wrong when visualising data, there are many more ways to get it right.</p>
 <p>This chapter won’t be a a step-by-step tutorial of how to visualise any type of data. Nor will it be a line-up of visualisations gone wrong. Instead, I hope to pose some questions that’ll get you thinking critically about exactly what you want from each graphic that you produce.</p>
 <p>There are five things that you should think about when producing any sort of data visualisation. We will consider each of these in turn.</p>
-</section>
-</section>
-<section id="your-tools" class="level2" data-number="9.2">
-<h2 data-number="9.2" class="anchored" data-anchor-id="your-tools"><span class="header-section-number">9.2</span> Your Tools 🔨</h2>
-<section id="picking-the-right-tool-for-the-job" class="level3" data-number="9.2.1">
-<h3 data-number="9.2.1" class="anchored" data-anchor-id="picking-the-right-tool-for-the-job"><span class="header-section-number">9.2.1</span> Picking the right tool for the job</h3>
+</section></section><section id="your-tools" class="level2" data-number="9.2"><h2 data-number="9.2" class="anchored" data-anchor-id="your-tools">
+<span class="header-section-number">9.2</span> Your Tools 🔨</h2>
+<section id="picking-the-right-tool-for-the-job" class="level3" data-number="9.2.1"><h3 data-number="9.2.1" class="anchored" data-anchor-id="picking-the-right-tool-for-the-job">
+<span class="header-section-number">9.2.1</span> Picking the right tool for the job</h3>
 <p>When you think of data visualisation, you might immediately think of impressive animations or complex, interactive dashboards that allow users to explore relationships within the data for themselves.</p>
 <p>Such tools are no doubt impressive but they are by no means necessary for an effective data visualisation. In many cases there is no technology is needed at all. The history of data visualisation vastly pre-dates that of computers and some of the most effective visualisations remain analogue creations.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="images/303-data-visualisation/coffee-2.png" class="img-fluid figure-img" style="width:100.0%" alt="12 sheets of paper arranged to make a calendar. Each sheet has been folded into squares, with each square and used as a coaster for a single day. Ring-shaped coffee stains visualise daily coffee consumption over the year, which is greatest in May and least in December."></p>
-<figcaption class="figure-caption">Coffee consumption, visualised. Jaime Serra Palou.</figcaption>
-</figure>
+<figure class="figure"><p><img src="images/303-data-visualisation/coffee-2.png" class="img-fluid figure-img" style="width:100.0%" alt="12 sheets of paper arranged to make a calendar. Each sheet has been folded into squares, with each square and used as a coaster for a single day. Ring-shaped coffee stains visualise daily coffee consumption over the year, which is greatest in May and least in December."></p>
+<figcaption class="figure-caption">Coffee consumption, visualised. Jaime Serra Palou.</figcaption></figure>
 </div>
 </div>
 </div>
 <p>This visualisation of a year’s coffee consumption is an ideal example. Displaying the number of cups of coffee in a bar chart or line graph would have been a more accurate way to collect and display this data, but that wouldn’t have the same resonance or impact and it certainly wouldn’t have been as memorable.</p>
-</section>
-<section id="analogue-or-digital" class="level3" data-number="9.2.2">
-<h3 data-number="9.2.2" class="anchored" data-anchor-id="analogue-or-digital"><span class="header-section-number">9.2.2</span> Analogue or Digital</h3>
-<section id="analogue-data-viz" class="level4" data-number="9.2.2.1">
-<h4 data-number="9.2.2.1" class="anchored" data-anchor-id="analogue-data-viz"><span class="header-section-number">9.2.2.1</span> Analogue Data Viz</h4>
+</section><section id="analogue-or-digital" class="level3" data-number="9.2.2"><h3 data-number="9.2.2" class="anchored" data-anchor-id="analogue-or-digital">
+<span class="header-section-number">9.2.2</span> Analogue or Digital</h3>
+<section id="analogue-data-viz" class="level4" data-number="9.2.2.1"><h4 data-number="9.2.2.1" class="anchored" data-anchor-id="analogue-data-viz">
+<span class="header-section-number">9.2.2.1</span> Analogue Data Viz</h4>
 <p>Here we have another example of an analogue data visualisation that is created as part of data collection. Each member of the department is invited to place a Lego brick on a grid to indicate how much caffeine they have consumed and how much sleep they have had. The beauty of using Lego bricks here is that they are stackable and so create a bar plot over two dimensions.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="images/303-data-visualisation/lego-coffee.jpg" class="img-fluid figure-img" style="width:100.0%" alt="A 2D barplot with axes for how caffeinated staf members are and how much sleep they have had. The height of stacked bricks appears to show a fairly uniform distribution, other than there being lots of people who have not had much sleep or caffeine."></p>
-<figcaption class="figure-caption">Caffeination vs sleep, shown in lego. Elsie Lee-Robbins</figcaption>
-</figure>
+<figure class="figure"><p><img src="images/303-data-visualisation/lego-coffee.jpg" class="img-fluid figure-img" style="width:100.0%" alt="A 2D barplot with axes for how caffeinated staf members are and how much sleep they have had. The height of stacked bricks appears to show a fairly uniform distribution, other than there being lots of people who have not had much sleep or caffeine."></p>
+<figcaption class="figure-caption">Caffeination vs sleep, shown in lego. Elsie Lee-Robbins</figcaption></figure>
 </div>
 </div>
 </div>
 <p>A third example can be found next to the tills in many supermarkets. Each customer is given a token as they pay for their goods. They can then drop this token into one of three large perspex containers as they leave the shop, each representing a different charity. At the end of the month £10,000 is split between the charities in proportion to the number of tokens. Because the containers are made from a transparent material you can see how the tokens are distributed, giving a visualisation of the level of support for each of the charities.</p>
 <p>There are many other way of constructing a physical, analogue visualisation of your data and this doesn’t need to be done as part of the data collection process. The simplest and perhaps most obvious most obvious is to create a plot of tabular data using a pen and paper.</p>
-</section>
-<section id="digital-data-viz" class="level4" data-number="9.2.2.2">
-<h4 data-number="9.2.2.2" class="anchored" data-anchor-id="digital-data-viz"><span class="header-section-number">9.2.2.2</span> Digital Data Viz</h4>
+</section><section id="digital-data-viz" class="level4" data-number="9.2.2.2"><h4 data-number="9.2.2.2" class="anchored" data-anchor-id="digital-data-viz">
+<span class="header-section-number">9.2.2.2</span> Digital Data Viz</h4>
 <p>When it comes to digital tools for data visualisation you have a plethora of options. The most similar to pen-and-paper plotting is to draw your visualisations using a Photoshop, or an open source equivalent like Inkscape. The benefit here is that if you misplace a line or dot you can correct this small error without having to start all over again.</p>
 <p>There are then more data-focused tools that have point-and-click interfaces. These are things like Excel’s chart tools, or specialist visualisation software like Tableau. These are great because they scale with the quantity of data, so that you can plot larger amounts of raw data values that you wouldn’t have the time or patience to do by hand - whether that’s in an analogue or digital format.</p>
 <p>Analogue and point-and-click approaches to visualisation have the shared limitation of not being reproducible, at least not without extensive documentation explaining how the graphic was created.</p>
 <p>Using code to create your visualisations can resolve this reproducibility issue, and includes visualisation as a part of your larger, reproducible workflow for data science. Scripted visualisations also scale easily to large data sets and are easy to alter if any changes are required. The downside here is that there is a relatively steep learning curve to creating such visualisations, which is exactly what point-and-click methods are trying to avoid.</p>
 <p>No matter how you produce your visualisations, the time cost of developing your skills in that medium is what buys you the ability to control and customise what you create. This upfront time investment will also often make you faster at producing future graphics in that medium.</p>
 <p>Whenever you approach a new visualisation problem, you should pick your tools and medium judiciously. You have to balance your immediate needs for speed, accuracy and reproducibility against your current skill level and improving those skills in the medium to long term. Unfortunately, the only way to make good visualisations is to make lots of bad ones and even more mediocre ones first.</p>
-</section>
-</section>
-<section id="ggplot2" class="level3" data-number="9.2.3">
-<h3 data-number="9.2.3" class="anchored" data-anchor-id="ggplot2"><span class="header-section-number">9.2.3</span> ggplot2</h3>
-<p>If your aim is to produce a wide range of high quality data visualisation using R, then the <code>{ggplot2}</code> package is one of the most versatile and well documented tools available to you.</p>
+</section></section><section id="ggplot2" class="level3" data-number="9.2.3"><h3 data-number="9.2.3" class="anchored" data-anchor-id="ggplot2">
+<span class="header-section-number">9.2.3</span> ggplot2</h3>
+<p>If your aim is to produce a wide range of high quality data visualisation using R, then the <a href="https://ggplot2.tidyverse.org">ggplot2</a> package is one of the most versatile and well documented tools available to you.</p>
 <p>The g’s at the start of the package name stand for grammar of graphics. This is an opinionated, abstract approach to constructing data visualisations programmatically, by building them up slowly and adding additional plot elements one layer at a time.</p>
 <div class="medium_right">
 <p><img src="images/303-data-visualisation/grammar-of-graphics-abstract.png" class="img-fluid" alt="Abstract of Grammar of Graphics paper by Hadley Wickham."></p>
 </div>
-<p>This idea of a “grammar of Graphics” was originally introduced by Leland Wilkinson. The paper shown by Hadley Wickham, and the associated <code>{ggplot2}</code> package popularised this approach within the R community. Like many of the tidyverse collection of packages, <code>{ggplot2}</code> provides simple but specialised modular functions that can be composed to create complex visualisations.</p>
-<p>If you’d like to learn how to use <code>{ggplot2}</code>, I wouldn’t recommend starting with the paper nor would I recommend trying to get started with the docs alone. Instead, I would suggest you work through an introductory tutorial, or one of the resources linked within the package documentation. Once you have a grasp of the basic principles the best way to improve is to try making your own plots, using reference texts and other people’s work as a guide. A great source of inspiration here is the Tidy Tuesday data visualisation challenge. You can search for the challenge on Github to inspect both the plots made by other people and the code that was used to make them.</p>
+<p>This idea of a “grammar of Graphics” was originally introduced by Leland Wilkinson. The paper shown by Hadley Wickham, and the associated <a href="https://ggplot2.tidyverse.org">ggplot2</a> package popularised this approach within the R community. Like many of the tidyverse collection of packages, <a href="https://ggplot2.tidyverse.org">ggplot2</a> provides simple but specialised modular functions that can be composed to create complex visualisations.</p>
+<p>If you’d like to learn how to use <a href="https://ggplot2.tidyverse.org">ggplot2</a>, I wouldn’t recommend starting with the paper nor would I recommend trying to get started with the docs alone. Instead, I would suggest you work through an introductory tutorial, or one of the resources linked within the package documentation. Once you have a grasp of the basic principles the best way to improve is to try making your own plots, using reference texts and other people’s work as a guide. A great source of inspiration here is the Tidy Tuesday data visualisation challenge. You can search for the challenge on Github to inspect both the plots made by other people and the code that was used to make them.</p>
 <p><strong>Learning <code>ggplot2</code>:</strong></p>
 <ul>
 <li><a href="https://ggplot2.tidyverse.org/#learning-ggplot2">Resources</a></li>
 <li><a href="https://www.cedricscherer.com/2019/08/05/a-ggplot2-tutorial-for-beautiful-plotting-in-r/">Tutorial</a></li>
 <li><a href="https://github.com/search?p=1&amp;q=tidy+tuesday&amp;type=Repositories">Tidy Tuesday Github</a></li>
-</ul>
-</section>
-</section>
-<section id="your-medium" class="level2" data-number="9.3">
-<h2 data-number="9.3" class="anchored" data-anchor-id="your-medium"><span class="header-section-number">9.3</span> Your Medium 📽</h2>
-<section id="where-is-your-visualisation-going" class="level3" data-number="9.3.1">
-<h3 data-number="9.3.1" class="anchored" data-anchor-id="where-is-your-visualisation-going"><span class="header-section-number">9.3.1</span> Where is your visualisation going?</h3>
+</ul></section></section><section id="your-medium" class="level2" data-number="9.3"><h2 data-number="9.3" class="anchored" data-anchor-id="your-medium">
+<span class="header-section-number">9.3</span> Your Medium 📽</h2>
+<section id="where-is-your-visualisation-going" class="level3" data-number="9.3.1"><h3 data-number="9.3.1" class="anchored" data-anchor-id="where-is-your-visualisation-going">
+<span class="header-section-number">9.3.1</span> Where is your visualisation going?</h3>
 <p>The second aspect that I recommend you think about before starting a data visualisation is where that graphic is going to be used. The intended location for your visualisation will influence both the composition of your graphic and also the amount of effort that you dedicate to it.</p>
 <div class="medium_right">
 <p><img src="images/303-data-visualisation/visualisation-purposes.png" class="img-fluid" alt="Hand drawn illustration showing different versions of the same graphic being used in an analysis, presentation, newspaper artilce and technical report."></p>
@@ -395,15 +461,12 @@ Note
 <p>When working on figure that will be included in a daily stand-up meeting with your team, then you should take a little more care to ensure that your work can be clearly understood by others, for example that the legend and axis labels are both large and sufficiently informative.</p>
 <p>Further refinement again will be required of this is for an external presentation. Is the message of the visualisation immediately clear? Will the graphic it still be clear when displayed in a boardroom or conference hall, or will it pixellate? Finally, how long will the audience have to interpret the visualisation while you are speaking? Even if slide decks are made available, very few audience members will actually refer to them before or after the presentation.</p>
 <p>The opposing consideration has to be made when preparing a visualisation for a report or scientific paper. In this case plots and tables can be very small, particularly in two-column or grid layouts. You have to be wary about the legibility of your smallest text (think values on axes) and your visualisation can be clearly understood, whether the document is being read zoomed-in on a computer screen or printed out in black and white.</p>
-</section>
-<section id="file-types" class="level3" data-number="9.3.2">
-<h3 data-number="9.3.2" class="anchored" data-anchor-id="file-types"><span class="header-section-number">9.3.2</span> File Types</h3>
+</section><section id="file-types" class="level3" data-number="9.3.2"><h3 data-number="9.3.2" class="anchored" data-anchor-id="file-types">
+<span class="header-section-number">9.3.2</span> File Types</h3>
 <div class="medium_left">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="images/303-data-visualisation/dalle-pixellated-image.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">Exaggerated example of a pixellated image. Picture shows a stag standing in the countryside with a resolution of approximated 40 x 40 pixels.</figcaption>
-</figure>
+<figure class="figure"><p><img src="images/303-data-visualisation/dalle-pixellated-image.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Exaggerated example of a pixellated image. Picture shows a stag standing in the countryside with a resolution of approximated 40 x 40 pixels.</figcaption></figure>
 </div>
 </div>
 <p>To ensure that your graphics are suitable for the intended medium it is helpful to know a little bit about image file types.</p>
@@ -412,12 +475,10 @@ Note
 <p><strong>Vector graphics</strong> create images using continuous paths and then filling the areas that they enclose with flat colour. These vector images can be enlarged as much as you like without image quality becoming compromised. This is great for simple simple designs like logos, which have to be clear when used on both letterhead and billboards.</p>
 <p>However, these vector graphics are more memory intensive than bitmap images, particularly when there are many distinct colours or objects within the image. This can be a particular problem in data science, for example when creating a scatter plot with many thousands of data points.</p>
 <p>It can often be useful to save both a bitmap and vector version of your graphics. This way you can use bitmap when you need small files that load quickly (like when loading a webpage) and vector graphics when you need your visualisation to stay sharp when enlarged (like when creating a poster or giving a presentation in an auditorium).</p>
-</section>
-</section>
-<section id="your-audience" class="level2" data-number="9.4">
-<h2 data-number="9.4" class="anchored" data-anchor-id="your-audience"><span class="header-section-number">9.4</span> Your Audience 👥</h2>
-<section id="know-your-audience" class="level3" data-number="9.4.1">
-<h3 data-number="9.4.1" class="anchored" data-anchor-id="know-your-audience"><span class="header-section-number">9.4.1</span> Know Your Audience</h3>
+</section></section><section id="your-audience" class="level2" data-number="9.4"><h2 data-number="9.4" class="anchored" data-anchor-id="your-audience">
+<span class="header-section-number">9.4</span> Your Audience 👥</h2>
+<section id="know-your-audience" class="level3" data-number="9.4.1"><h3 data-number="9.4.1" class="anchored" data-anchor-id="know-your-audience">
+<span class="header-section-number">9.4.1</span> Know Your Audience</h3>
 <p>Data visualisations are a tool for communicating information. To make this communication as effective as possible, you have to target your delivery to the intended audience.</p>
 <ul>
 <li><p>Who is the intended audience for your visualisation?</p></li>
@@ -431,39 +492,32 @@ Note
 <p>To know <em>how</em> to target your delivery to a particular audience, you fist have to identify exactly who that is.</p>
 <p>To make a compelling data visualisation you have to have some idea of the background knowledge that the viewer brings. Are they a specialist in statistics or data science, or does their expertise lie in area application? Are the findings that you’re presenting going to come as a surprise to them, or act confirmation of their pre-existing body of knowledge.</p>
 <p>It’s worth considering these prior beliefs and how strongly they are held when constructing your visualisation. Take the time to consider how this existing knowledge could alter or influence their interpretation of what you’re showing to them. On the flip-side, you might be presenting information on a topic that the viewer is the best case ambivalent about or in the worst case is actively bored by. In that case, you can take special care to compose engaging visualisations to capture and hold the attention of the audience.</p>
-</section>
-<section id="preattentive-attributes" class="level3" data-number="9.4.2">
-<h3 data-number="9.4.2" class="anchored" data-anchor-id="preattentive-attributes"><span class="header-section-number">9.4.2</span> Preattentive Attributes</h3>
+</section><section id="preattentive-attributes" class="level3" data-number="9.4.2"><h3 data-number="9.4.2" class="anchored" data-anchor-id="preattentive-attributes">
+<span class="header-section-number">9.4.2</span> Preattentive Attributes</h3>
 <p>When crafting a visualisation we want to require as little work as possible from the viewer. To do this, we can use pre-attentive attributes, such as colour, shape size and position to encode our data values.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="images/303-data-visualisation/preattentive-attributes.png" class="img-fluid figure-img" style="width:100.0%" alt="An illustration of how several pre-attentive attributes can be used to draw the attention of the viewer. In each case there is a grid of nine hollow squares and attention is drawn to a subset of those but altering the following attributes: shape, enclosure, line weight, fill colour/saturation, size and position. Similar examples are given of line length and line curvature."></p>
-<figcaption class="figure-caption">Examples of preattentive attributes</figcaption>
-</figure>
+<figure class="figure"><p><img src="images/303-data-visualisation/preattentive-attributes.png" class="img-fluid figure-img" style="width:100.0%" alt="An illustration of how several pre-attentive attributes can be used to draw the attention of the viewer. In each case there is a grid of nine hollow squares and attention is drawn to a subset of those but altering the following attributes: shape, enclosure, line weight, fill colour/saturation, size and position. Similar examples are given of line length and line curvature."></p>
+<figcaption class="figure-caption">Examples of preattentive attributes</figcaption></figure>
 </div>
 </div>
 </div>
 <p>These preattentive attributes are properties of lines and shapes that provide immediate visual contrast without requiring active thought from the viewer. As we will see, care needs to be taken here to ensure that we are don’t mislead the viewer with how we use these attributes.</p>
-</section>
-<section id="example-first-impressions-count" class="level3" data-number="9.4.3">
-<h3 data-number="9.4.3" class="anchored" data-anchor-id="example-first-impressions-count"><span class="header-section-number">9.4.3</span> Example: First Impressions Count</h3>
+</section><section id="example-first-impressions-count" class="level3" data-number="9.4.3"><h3 data-number="9.4.3" class="anchored" data-anchor-id="example-first-impressions-count">
+<span class="header-section-number">9.4.3</span> Example: First Impressions Count</h3>
 <div class="medium_left">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="images/303-data-visualisation/average-male-height.jpg" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">A questionably designed barchart of average male heights in the Nederlands, United Kingdom, USA Inida and Indonesia.</figcaption>
-</figure>
+<figure class="figure"><p><img src="images/303-data-visualisation/average-male-height.jpg" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">A questionably designed barchart of average male heights in the Nederlands, United Kingdom, USA Inida and Indonesia.</figcaption></figure>
 </div>
 </div>
 <p>This figure presents a bar chart of the mean height of males in several countries, but has swapped out the bars for human outlines. While the visualisation has an attractive, minimal design and a pleasant colour scheme, it doesn’t do a good job of immediately conveying the relevant information to the viewer.</p>
 <p>The three main issues with this plot are all caused by swapping the bars of this plot for male silhouettes, and are linked to the difference in how lengths and areas are perceived by humans. Typically, we make immediate pre-attentive comparisons based on area but draw more accurate, considered comparisons when comparing lengths.</p>
 <p>By replacing bars with human outlines and not starting the height scale at zero, this plot breaks the proportionality of length and area that is inherent in a bar plot. This causes dissonance between immediate and considered interpretation of this plot. An additional issue is that the silhouettes overlap, creating a forced perspective that makes it seem like the outlines are also further back and therefore even larger if this perspective is taken into account.</p>
 <p>These three issues are important to consider when constructing your own visualisations. Are you showing all the values that the data could take, or focusing on a smaller interval to provide better contrast? If you are using the size of a circle to represent a value, are you changing the diameter or area in proportion to the data value? And finally, if you are making a plot that appears three-dimensional, have you done so on purpose and, if so, can one of those dimensions be better represented by an attribute that isn’t position?</p>
-</section>
-<section id="visual-perception" class="level3" data-number="9.4.4">
-<h3 data-number="9.4.4" class="anchored" data-anchor-id="visual-perception"><span class="header-section-number">9.4.4</span> Visual Perception</h3>
+</section><section id="visual-perception" class="level3" data-number="9.4.4"><h3 data-number="9.4.4" class="anchored" data-anchor-id="visual-perception">
+<span class="header-section-number">9.4.4</span> Visual Perception</h3>
 <p>When reducing the dimensionality of your plot you may wish to represent a data value using colour rather than position. When deciding on how to use colour, you should keep your audience in mind.</p>
 <p>Is your aim to two or more categories? In that case, you’ll need to select your finite set of colours and ensure that these can be distinguished.</p>
 <p>Are you are representing a data value that is continuous or has an associated ordering? Then you will again have to select your palette to provide sufficient contrast to all viewers of your work.</p>
@@ -472,10 +526,8 @@ Note
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="images/303-data-visualisation/saturated-colour-scales.png" class="img-fluid figure-img" style="width:100.0%" alt="Six default continuous colour scales used by various R packages, including gradient and diverging and rainbow palette types."></p>
-<figcaption class="figure-caption">Some default colour scales in R</figcaption>
-</figure>
+<figure class="figure"><p><img src="images/303-data-visualisation/saturated-colour-scales.png" class="img-fluid figure-img" style="width:100.0%" alt="Six default continuous colour scales used by various R packages, including gradient and diverging and rainbow palette types."></p>
+<figcaption class="figure-caption">Some default colour scales in R</figcaption></figure>
 </div>
 </div>
 </div>
@@ -483,77 +535,67 @@ Note
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="images/303-data-visualisation/desaturated-colour-scales.png" class="img-fluid figure-img" style="width:100.0%" alt="Six default continuous colour scales used by various R packages, this time shown in greyscale."></p>
-<figcaption class="figure-caption">Desatureated colour scales in R</figcaption>
-</figure>
+<figure class="figure"><p><img src="images/303-data-visualisation/desaturated-colour-scales.png" class="img-fluid figure-img" style="width:100.0%" alt="Six default continuous colour scales used by various R packages, this time shown in greyscale."></p>
+<figcaption class="figure-caption">Desatureated colour scales in R</figcaption></figure>
 </div>
 </div>
 </div>
 <p>For a practical guide on setting colours see this <a href="https://bookdown.org/rdpeng/exdata/plotting-and-color-in-r.html">chapter</a> of exploratory data analysis by Roger Peng.</p>
-</section>
-<section id="alt-text-titles-and-captions" class="level3" data-number="9.4.5">
-<h3 data-number="9.4.5" class="anchored" data-anchor-id="alt-text-titles-and-captions"><span class="header-section-number">9.4.5</span> Alt-text, Titles and Captions</h3>
+</section><section id="alt-text-titles-and-captions" class="level3" data-number="9.4.5"><h3 data-number="9.4.5" class="anchored" data-anchor-id="alt-text-titles-and-captions">
+<span class="header-section-number">9.4.5</span> Alt-text, Titles and Captions</h3>
 <blockquote class="blockquote">
 <p><strong>Captions</strong> describe a figure or table so that it may be identified in a list of figures and (where appropriate).</p>
 <p><strong>Alternative text</strong> describes the content of an image for a person who cannot view it. (<a href="https://myaccessible.website/infographic/images/images-accessibility-alt-text">Guide to writing alt-text</a>)</p>
 <p><strong>Titles</strong> give additional context or identify key findings. Active titles are preferable.</p>
 </blockquote>
 <p>When visualisations are included in a report, article or website, they are often accompanied by three pieces of text. The title, the caption and the alt-text all help the audience to understand a visualisation but each serves a distinct purpose.</p>
-<section id="captions" class="level4" data-number="9.4.5.1">
-<h4 data-number="9.4.5.1" class="anchored" data-anchor-id="captions"><span class="header-section-number">9.4.5.1</span> Captions</h4>
+<section id="captions" class="level4" data-number="9.4.5.1"><h4 data-number="9.4.5.1" class="anchored" data-anchor-id="captions">
+<span class="header-section-number">9.4.5.1</span> Captions</h4>
 <p>A caption is short description of a visualisation. Captions usually displayed directly above or below the figure or table that they describe. These captions serve two purposes: in a report, the caption can be used to look up the visualisation from a list of figures or tables. The second purpose of a caption is to add additional detail that you don’t want to add to the plot directly. For example caption might be “Time series of GDP in the United States of America, 2017-2022. Lines show daily (solid), monthly (dashed) and five-year (dotted) mean values.”</p>
-</section>
-<section id="alt-text" class="level4" data-number="9.4.5.2">
-<h4 data-number="9.4.5.2" class="anchored" data-anchor-id="alt-text"><span class="header-section-number">9.4.5.2</span> Alt-text</h4>
+</section><section id="alt-text" class="level4" data-number="9.4.5.2"><h4 data-number="9.4.5.2" class="anchored" data-anchor-id="alt-text">
+<span class="header-section-number">9.4.5.2</span> Alt-text</h4>
 <p>Alt text or alternative text is used to describe the content of an image to a person who can’t view it. This text is helpful for people with a visual impairment, particularly those who uses a screen reader. Screen reading software reads digital text out loud but can’t interpret images. Such software replaces the image with the provided alternative text. Alt text is also valuable in cases when the image can’t be found or loaded, for example because of an incorrect file path or a slow internet connection, because it’ll be displayed in place of the image.</p>
 <p>The purpose of alt-text is different from a caption. It’s designed as a replacement for the image, not just a shorthand or to provide additional information. If there is an important trend or conclusion to be drawn from the visualisation (that is not already mentioned in the main text) this should be identified in the alt-text. This sort of interpretation is a key aspect of alt-text that shouldn’t be included in a caption.</p>
-</section>
-<section id="titles" class="level4" data-number="9.4.5.3">
-<h4 data-number="9.4.5.3" class="anchored" data-anchor-id="titles"><span class="header-section-number">9.4.5.3</span> Titles</h4>
+</section><section id="titles" class="level4" data-number="9.4.5.3"><h4 data-number="9.4.5.3" class="anchored" data-anchor-id="titles">
+<span class="header-section-number">9.4.5.3</span> Titles</h4>
 <p>Titles give additional context that is not conveyed by the axis labels or chart annotations. Alternatively the title can be used like a newspaper headline to deliver the key findings of the visualisation. One example of this might be when looking at a visualisation that is composed of many smaller plots, each showing the GDP for a US state over the last five years. Title for each smaller plot would identify the state it is describing, while the overall title might be something like “All US states have increased GDP in the period 2017-2022”.</p>
 <p>If you are including this type of interpretive title, make sure that the same interpretation is clear in the alt-text.</p>
-</section>
-</section>
-</section>
-<section id="your-story" class="level2" data-number="9.5">
-<h2 data-number="9.5" class="anchored" data-anchor-id="your-story"><span class="header-section-number">9.5</span> Your Story 📖</h2>
+</section></section></section><section id="your-story" class="level2" data-number="9.5"><h2 data-number="9.5" class="anchored" data-anchor-id="your-story">
+<span class="header-section-number">9.5</span> Your Story 📖</h2>
 <p>The fourth aspect of a successful data visualisation is that it must tell a story. This story doesn’t need to be a multi-generational novel or even a captivating novella. If a picture speaks a thousand words, really what your aiming for is an engaging anecdote.</p>
 <p>Your visualisation should be something the grabs viewers attention and through its through its composition or content alters their knowledge or view of world in some way.</p>
 <p>Telling effective stories requires planning. How you construct your narrative depends on what effect you want to have on your audience. I’d encourage you to think like a data journalist and go into your work with the intended effect clear in your mind. Is your purpose to inform them of a fact, to persuade them to use a different methodology or entertain them by presenting dull or commonplace data in a fresh and engaging way?</p>
 <div class="medium_right">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="images/303-data-visualisation/entertain-persuade-inform.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">Illustration of a blue triangle with the words entertain, persuade and inform written at each corner.</figcaption>
-</figure>
+<figure class="figure"><p><img src="images/303-data-visualisation/entertain-persuade-inform.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Illustration of a blue triangle with the words entertain, persuade and inform written at each corner.</figcaption></figure>
 </div>
 </div>
 <p>In reality your goal will be some mixture of these, at an interior point of this triangle. Clearly identifying this point will help you to present your visual story in a way that works towards your aims, rather than against them.</p>
 <p>On the point of presentation, it is important to realise that there is no neutral way to present information. In creating a visualisation you’re choosing which aspects of the data to emphasise, what gets summarised and what is not presented at all. This is how you construct a plot that tells a clear and coherent story. However, there is more than one story that you could tell from a single dataset.</p>
 <p>As an example of this, let’s consider a time-series showing the price of two stocks and in particular the choice of scale on the y-axis. Suppose the two stock have values fluctuating around $100 per share. Choosing a scale that goes from $90 to $110 would emphasise the differences between the two stocks. Setting the lower limit to $0 would instead emphasise that these variations are small relative to the overall value of the stocks. Both are valid approaches but tell different stories. Be clear and be open about which of these you are telling and why you have chosen that over the alternative.</p>
 <p>A final cross-over from data journalism is that your visualisations will be competing for your viewers attention. You have to compete against everything else that is going on in their lives. Establish a clear “hook” within your visualisation to attract your viewer’s attention and immediately deliver the core message. This might be done with a contrasting trend-line or an intriguing title. Lead their attention first to the key message and then the supporting evidence.</p>
-</section>
-<section id="your-guidelines" class="level2" data-number="9.6">
-<h2 data-number="9.6" class="anchored" data-anchor-id="your-guidelines"><span class="header-section-number">9.6</span> Your Guidelines 📝</h2>
-<section id="standardise-and-document" class="level3" data-number="9.6.1">
-<h3 data-number="9.6.1" class="anchored" data-anchor-id="standardise-and-document"><span class="header-section-number">9.6.1</span> Standardise and Document</h3>
+</section><section id="your-guidelines" class="level2" data-number="9.6"><h2 data-number="9.6" class="anchored" data-anchor-id="your-guidelines">
+<span class="header-section-number">9.6</span> Your Guidelines 📝</h2>
+<section id="standardise-and-document" class="level3" data-number="9.6.1"><h3 data-number="9.6.1" class="anchored" data-anchor-id="standardise-and-document">
+<span class="header-section-number">9.6.1</span> Standardise and Document</h3>
 <p>The final consideration when creating visualisations is to reduce the number of considerations that you have to make in the future. This is done by thinking carefully about each of the decisions that you make and writing guidelines so that you make these choices consistently.</p>
 <p>The choices that go into making an effective data visualisation are important and deserve careful consideration. However, this consideration comes at a cost. To the employer this is the literal, financial cost of paying for your time. More broadly this is the opportunity cost of all the other things that you could have been doing instead.</p>
 <p>To be efficient in our visualisation design, we should extend our DRY coding principles the design processes. Make choices carefully and document your decisions to externalise the cognitive work required of you in the future.</p>
 <p>Many companies aware of these financial and opportunity costs and provide style guides for visualisations in a similar manner to a coding or writing style guide. This not only externalises and formalises many decisions, but it also leads to a more uniform style across visualisations and the data scientists producing them. This leads to a unified, house-style for graphic design and a visual brand that is easily identifiable. This is beneficial for large companies or personal projects alike.</p>
-</section>
-<section id="example-style-guides" class="level3" data-number="9.6.2">
-<h3 data-number="9.6.2" class="anchored" data-anchor-id="example-style-guides"><span class="header-section-number">9.6.2</span> Example Style Guides</h3>
+</section><section id="example-style-guides" class="level3" data-number="9.6.2"><h3 data-number="9.6.2" class="anchored" data-anchor-id="example-style-guides">
+<span class="header-section-number">9.6.2</span> Example Style Guides</h3>
 <p>I’d highly recommend exploring some visualisation guides to get an idea of how these are constructed and how you might develop your own.</p>
 <p>Unsurprisingly some of the best guides come from media outlets and government agencies. These businesses are used to writing style guides for text to create and maintain a distinctive style across all of their writers.</p>
 <ul>
-<li><p>BBC</p>
+<li>
+<p>BBC</p>
 <ul>
 <li><a href="https://www.bbc.co.uk/gel/features/how-to-design-infographics">Infographics Guidelines</a></li>
 <li><a href="https://bbc.github.io/rcookbook/">R Cookbook</a></li>
 <li><a href="https://github.com/bbc/bbplot"><code>{bbplot}</code></a></li>
-</ul></li>
+</ul>
+</li>
 <li><p><a href="https://design-system.economist.com/documents/CHARTstyleguide_20170505.pdf">The Economist</a></p></li>
 <li><p><a href="https://style.ons.gov.uk/category/data-visualisation/">The Office for National Statistics</a></p></li>
 <li><p><a href="https://ec.europa.eu/eurostat/web/products-eurostat-news/-/STYLE-GUIDE_2016">Eurostat</a></p></li>
@@ -561,10 +603,8 @@ Note
 <li><p><a href="https://pudding.cool/resources/">The Pudding</a> (learning resources)</p></li>
 </ul>
 <p>The level of detail and technicality varies wildly between these examples. For instance, the BBC do not provide strong guidelines on the details of the final visualisation but do provide a lot of technical tools and advice on how to construct those in a consistent way across the corporation. They’ve even gone so far as to write their own theme for ggplot and to publish this as an R package!</p>
-</section>
-</section>
-<section id="wrapping-up" class="level2" data-number="9.7">
-<h2 data-number="9.7" class="anchored" data-anchor-id="wrapping-up"><span class="header-section-number">9.7</span> Wrapping Up</h2>
+</section></section><section id="wrapping-up" class="level2" data-number="9.7"><h2 data-number="9.7" class="anchored" data-anchor-id="wrapping-up">
+<span class="header-section-number">9.7</span> Wrapping Up</h2>
 <p>🔨 Think about your <em>tools</em>.</p>
 <p>📽 Think about your <em>medium</em>.</p>
 <p>👥 Think about your <em>audience</em>.</p>
@@ -575,10 +615,7 @@ Note
 <p>When constructing visualisations it is important to consider whether there are existing guidelines that provide helpful constraints to your work. From there, determine the story that you wish to tell and exactly who it is that your are telling that story to. Once this is decided you can select the medium and the tools that you use to craft your visualisation so that you have the greatest chance of achieving your intended effect.</p>
 
 
-</section>
-
-</main> <!-- /main -->
-<script id="quarto-html-after-body" type="application/javascript">
+</section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
     const mode = bsSheetEl.getAttribute("data-mode");
@@ -810,9 +847,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
 });
-</script>
-<nav class="page-navigation">
-  <div class="nav-page nav-page-previous">
+</script><nav class="page-navigation"><div class="nav-page nav-page-previous">
       <a href="./302-edav-analysis.html" class="pagination-link">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Exploratory Data Analysis</span></span>
       </a>          

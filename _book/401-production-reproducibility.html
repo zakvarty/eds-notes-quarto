@@ -1,12 +1,9 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
-
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.3.353">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-
-
 <title>Effective Data Science - 10&nbsp; Reproducibility</title>
 <style>
 code{white-space: pre-wrap;}
@@ -56,7 +53,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }
 </style>
 
-
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="site_libs/quarto-nav/headroom.min.js"></script>
 <script src="site_libs/clipboard/clipboard.min.js"></script>
@@ -74,8 +70,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
-<script id="quarto-search-options" type="application/json">{
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
@@ -93,39 +88,47 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit"
   }
-}</script>
-
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<link rel="stylesheet" href="style.css">
+}</script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script><link rel="stylesheet" href="style.css">
 </head>
-
 <body class="nav-sidebar floating">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
-  <nav class="quarto-secondary-nav">
-    <div class="container-fluid d-flex">
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./401-production-reproducibility.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Reproducibility</span></a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./400-production-introduction.html">Preparing for Production</a></li><li class="breadcrumb-item"><a href="./401-production-reproducibility.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Reproducibility</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
-  </nav>
-</header>
-<!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Effective Data Science</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/zakvarty/eds-notes-quarto/" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+    <div class="dropdown">
+      <a href="" title="Share" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Share"><i class="bi bi-share"></i></a>
+      <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
+<li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://twitter.com/intent/tweet?url=%7Curl%7C">
+              <i class="bi bi-bi-twitter pe-1"></i>
+            Twitter
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://www.linkedin.com/sharing/share-offsite/?url=%7Curl%7C">
+              <i class="bi bi-bi-linkedin pe-1"></i>
+            LinkedIn
+            </a>
+          </li>
+      </ul>
+</div>
+</div>
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -135,165 +138,237 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
-        <li class="sidebar-item">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">About this Course</span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
-      <span class="sidebar-item-text sidebar-link text-start">
- <span class="menu-text">Effective Workflows</span></span>
-  </li>
-        <li class="sidebar-item">
+      <div class="sidebar-item-container"> 
+            <a href="./100-workflows-introduction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Effective Workflows</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./101-workflows-organising-your-work.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Organising your work</span></span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./102-workflows-naming-files.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Naming Files</span></span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./103-workflows-organising-your-code.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Code</span></span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./110-workflows-checklist.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Workflows Checklist</span></a>
   </div>
 </li>
+      </ul>
+</li>
         <li class="sidebar-item sidebar-item-section">
-      <span class="sidebar-item-text sidebar-link text-start">
- <span class="menu-text">Acquiring and Sharing Data</span></span>
-  </li>
-        <li class="sidebar-item">
+      <div class="sidebar-item-container"> 
+            <a href="./200-data-introduction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Acquiring and Sharing Data</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./201-data-tabular.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Tabular Data</span></span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./202-data-webscraping.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Web Scraping</span></span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./203-data-apis.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">APIs</span></span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./210-data-checklist.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Checklist</span></a>
   </div>
 </li>
+      </ul>
+</li>
         <li class="sidebar-item sidebar-item-section">
-      <span class="sidebar-item-text sidebar-link text-start">
- <span class="menu-text">Data Exploration and Visualisation</span></span>
-  </li>
-        <li class="sidebar-item">
+      <div class="sidebar-item-container"> 
+            <a href="./300-edav-intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Data Exploration and Visualisation</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./301-edav-wrangling.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Data Wrangling</span></span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./302-edav-analysis.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Exploratory Data Analysis</span></span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./303-edav-visualisation.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Data Visualisation</span></span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./310-edav-checklist.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Checklist</span></a>
   </div>
 </li>
+      </ul>
+</li>
         <li class="sidebar-item sidebar-item-section">
-      <span class="sidebar-item-text sidebar-link text-start">
- <span class="menu-text">Preparing for Production</span></span>
-  </li>
-        <li class="sidebar-item">
+      <div class="sidebar-item-container"> 
+            <a href="./400-production-introduction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preparing for Production</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./401-production-reproducibility.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Reproducibility</span></span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./402-production-explainability.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Explainability</span></span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./403-production-scalability.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Scalability</span></span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./410-production-checklist.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Checklist</span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./500-ethics-introduction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Data Science Ethics</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./501-ethics-privacy.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Privacy</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./502-ethics-fairness.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Fairness</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./503-ethics-conduct.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Codes of Conduct</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./510-ethics-checklist.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Checklist</span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true">
+ <span class="menu-text">Appendices</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./references.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">References</span></a>
   </div>
 </li>
+      </ul>
+</li>
     </ul>
-    </div>
-</nav>
-<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+</div>
+</nav><div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Table of contents</h2>
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#the-data-scientific-method" id="toc-the-data-scientific-method" class="nav-link active" data-scroll-target="#the-data-scientific-method"><span class="header-section-number">10.1</span> The Data Scientific Method</a></li>
+<li><a href="#the-data-scientific-method" id="toc-the-data-scientific-method" class="nav-link active" data-scroll-target="#the-data-scientific-method"><span class="header-section-number">10.1</span> The Data Scientific Method</a></li>
   <li><a href="#issue-multiple-dependent-tests" id="toc-issue-multiple-dependent-tests" class="nav-link" data-scroll-target="#issue-multiple-dependent-tests"><span class="header-section-number">10.2</span> Issue: Multiple, Dependent Tests</a></li>
   <li><a href="#issues-p-hacking-and-publiction-bias" id="toc-issues-p-hacking-and-publiction-bias" class="nav-link" data-scroll-target="#issues-p-hacking-and-publiction-bias"><span class="header-section-number">10.3</span> Issues: <span class="math inline">\(p\)</span>-hacking and Publiction Bias</a></li>
   <li><a href="#reproducibility" id="toc-reproducibility" class="nav-link" data-scroll-target="#reproducibility"><span class="header-section-number">10.4</span> Reproducibility</a></li>
-  <li><a href="#replicability" id="toc-replicability" class="nav-link" data-scroll-target="#replicability"><span class="header-section-number">10.5</span> Replicability</a>
+  <li>
+<a href="#replicability" id="toc-replicability" class="nav-link" data-scroll-target="#replicability"><span class="header-section-number">10.5</span> Replicability</a>
   <ul class="collapse">
-  <li><a href="#shadow-deployment" id="toc-shadow-deployment" class="nav-link" data-scroll-target="#shadow-deployment"><span class="header-section-number">10.5.1</span> Shadow deployment</a></li>
+<li><a href="#shadow-deployment" id="toc-shadow-deployment" class="nav-link" data-scroll-target="#shadow-deployment"><span class="header-section-number">10.5.1</span> Shadow deployment</a></li>
   <li><a href="#parallel-deployment" id="toc-parallel-deployment" class="nav-link" data-scroll-target="#parallel-deployment"><span class="header-section-number">10.5.2</span> Parallel deployment</a></li>
-  </ul></li>
-  <li><a href="#reproduction-and-replication-in-statistical-data-science" id="toc-reproduction-and-replication-in-statistical-data-science" class="nav-link" data-scroll-target="#reproduction-and-replication-in-statistical-data-science"><span class="header-section-number">10.6</span> Reproduction and Replication in Statistical Data Science</a>
+  </ul>
+</li>
+  <li>
+<a href="#reproduction-and-replication-in-statistical-data-science" id="toc-reproduction-and-replication-in-statistical-data-science" class="nav-link" data-scroll-target="#reproduction-and-replication-in-statistical-data-science"><span class="header-section-number">10.6</span> Reproduction and Replication in Statistical Data Science</a>
   <ul class="collapse">
-  <li><a href="#monte-carlo-methods" id="toc-monte-carlo-methods" class="nav-link" data-scroll-target="#monte-carlo-methods"><span class="header-section-number">10.6.1</span> Monte Carlo Methods</a></li>
+<li><a href="#monte-carlo-methods" id="toc-monte-carlo-methods" class="nav-link" data-scroll-target="#monte-carlo-methods"><span class="header-section-number">10.6.1</span> Monte Carlo Methods</a></li>
   <li><a href="#optimisation" id="toc-optimisation" class="nav-link" data-scroll-target="#optimisation"><span class="header-section-number">10.6.2</span> Optimisation</a></li>
   <li><a href="#pseudo-random-numbers" id="toc-pseudo-random-numbers" class="nav-link" data-scroll-target="#pseudo-random-numbers"><span class="header-section-number">10.6.3</span> (Pseudo-)Random Numbers</a></li>
-  </ul></li>
+  </ul>
+</li>
   <li><a href="#beware" id="toc-beware" class="nav-link" data-scroll-target="#beware"><span class="header-section-number">10.7</span> Beware</a></li>
   <li><a href="#wrapping-up" id="toc-wrapping-up" class="nav-link" data-scroll-target="#wrapping-up"><span class="header-section-number">10.8</span> Wrapping Up</a></li>
-  </ul>
-</nav>
+  </ul><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/zakvarty/eds-notes-quarto/edit/master/401-production-reproducibility.qmd" class="toc-action">Edit this page</a></p></div></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
-
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
 <h1 class="title"><span id="production-reproducibility" class="quarto-section-identifier"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Reproducibility</span></span></h1>
 </div>
 
@@ -307,9 +382,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </div>
   
 
-</header>
-
-<div class="callout callout-style-default callout-note callout-titled">
+</header><div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -323,16 +396,14 @@ Note
 <p>If you would like to contribute to the development of EDS, you may do so at <a href="https://github.com/zakvarty/data_science_notes" class="uri">https://github.com/zakvarty/data_science_notes</a>.</p>
 </div>
 </div>
-<section id="the-data-scientific-method" class="level2" data-number="10.1">
-<h2 data-number="10.1" class="anchored" data-anchor-id="the-data-scientific-method"><span class="header-section-number">10.1</span> The Data Scientific Method</h2>
+<section id="the-data-scientific-method" class="level2" data-number="10.1"><h2 data-number="10.1" class="anchored" data-anchor-id="the-data-scientific-method">
+<span class="header-section-number">10.1</span> The Data Scientific Method</h2>
 <p>In what we have covered so far we have been very much focused on the first aspect of data science: the data. When we come to consider about whether our work can be reproduced or our results can be replicated, this shifts our focus to the second other, the science.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="images/401-production-reproducibility/scientific-method.png" class="img-fluid figure-img" style="width:80.0%" alt="The scientific method show as a cycle: hypotheis, literature search, design experiment, gather evidence, information synthesis, draw inference, repeat."></p>
-<figcaption class="figure-caption">Cycle of scientific enquiry.</figcaption>
-</figure>
+<figure class="figure"><p><img src="images/401-production-reproducibility/scientific-method.png" class="img-fluid figure-img" style="width:80.0%" alt="The scientific method show as a cycle: hypotheis, literature search, design experiment, gather evidence, information synthesis, draw inference, repeat."></p>
+<figcaption class="figure-caption">Cycle of scientific enquiry.</figcaption></figure>
 </div>
 </div>
 </div>
@@ -340,9 +411,8 @@ Note
 <p>We start with a question we want to answer or a problem we want to solve. This is followed by a search of the existing literature: is this is a well-known problem that lots of people have solved before? If it is, fantastic, we can learn from their efforts. If not, then we proceed to gather our own evidence and combine this with whatever existing knowledge we could scrape together. Finally, we draw conclusions from this synthesised information.</p>
 <p>When doing so we acknowledge that the conclusions we reach are not the truth, just our current best approximation of it. We have a usefully simplified model of the messy reality that we can share with the world. We will happily update our model as we become aware of new evidence, whether that new information supports or contradicts our current way of thinking.</p>
 <p>That sounds excellent and is, in an ideal world, how both science and data science would progress. However, just like our models this is a simplified (and in this case idealised) description of what really happens.</p>
-</section>
-<section id="issue-multiple-dependent-tests" class="level2" data-number="10.2">
-<h2 data-number="10.2" class="anchored" data-anchor-id="issue-multiple-dependent-tests"><span class="header-section-number">10.2</span> Issue: Multiple, Dependent Tests</h2>
+</section><section id="issue-multiple-dependent-tests" class="level2" data-number="10.2"><h2 data-number="10.2" class="anchored" data-anchor-id="issue-multiple-dependent-tests">
+<span class="header-section-number">10.2</span> Issue: Multiple, Dependent Tests</h2>
 <ul>
 <li><p>Projects are usually not a single hypothesis test</p></li>
 <li><p>Sequence of dependent decisions</p></li>
@@ -354,9 +424,8 @@ Note
 <p><img src="images/401-production-reproducibility/forking-paths-abstract.png" class="img-fluid" alt="Gelman and Loken (2013) consider the issue of multiple comparisons">{Abstract text of Gelman and Loken (2013).}</p>
 </div>
 <p>We might want to construct a model for a given phenomenon and we’ll try many variants of that model along the way. By taking a more relaxed approach to data analysis, data scientists can run the risk of finding spurious relationships within our data that don’t hold more generally. If you look for a relationship between the quantity you are trying to predict and enough samples of random noise will almost surely find a significant relationship, even though there is no true link.</p>
-</section>
-<section id="issues-p-hacking-and-publiction-bias" class="level2" data-number="10.3">
-<h2 data-number="10.3" class="anchored" data-anchor-id="issues-p-hacking-and-publiction-bias"><span class="header-section-number">10.3</span> Issues: <span class="math inline">\(p\)</span>-hacking and Publiction Bias</h2>
+</section><section id="issues-p-hacking-and-publiction-bias" class="level2" data-number="10.3"><h2 data-number="10.3" class="anchored" data-anchor-id="issues-p-hacking-and-publiction-bias">
+<span class="header-section-number">10.3</span> Issues: <span class="math inline">\(p\)</span>-hacking and Publiction Bias</h2>
 <div class="medium_left">
 <p><img src="images/401-production-reproducibility/p-values-in-medical-papers.jpg" class="img-fluid" alt="Distribution of p-values in medical publications. From Perneger and Combescure (2017)">{Bar chart of p-values in medical publications, showing a large drop between 4-5 percent and 5-6 percent.}</p>
 </div>
@@ -366,9 +435,8 @@ Note
 <p>These influences also lead to a much more subtle problem than direct <span class="math inline">\(p\)</span>-hacking. Consider a model with an obvious but unnecessary additional property to add: a example here might be adding an unnecessary term to a regression. Because this extension is such low hanging fruit, many scientists independently design experiments to test it out. Most of these experiments provide insufficient evidence against the null hypothesis and don’t get developed into published papers or technical reports, because they just support the status-quo. However, after enough people have attempted this some scientist will get “lucky” and find a significant (and potentially relevant) benefit. Of all the experiments that were done, this is the only one that makes it onto the public record.</p>
 <p>All of these studies being left in the proverbial desk drawer induces publication bias in the scientific literature. When we come to assess the state of existing knowledge, we are unable to properly assess the importance of findings, because we lack the context of all those null results that went unreported.</p>
 <p>This same process means that the results of many more scientific studies than we would expect cannot be recreated. This is what is known as the scientific replication crisis.</p>
-</section>
-<section id="reproducibility" class="level2" data-number="10.4">
-<h2 data-number="10.4" class="anchored" data-anchor-id="reproducibility"><span class="header-section-number">10.4</span> Reproducibility</h2>
+</section><section id="reproducibility" class="level2" data-number="10.4"><h2 data-number="10.4" class="anchored" data-anchor-id="reproducibility">
+<span class="header-section-number">10.4</span> Reproducibility</h2>
 <blockquote class="blockquote">
 <p><em>Reproducibility:</em> given the original raw data and code, can you get all of the results again?</p>
 </blockquote>
@@ -385,9 +453,8 @@ Note
 <p>With a little more context this isn’t so unreasonable. Across many scientific disciplines, code-based approaches to analysis is not standard; statistical software with a graphical user interface is used instead. The idea here is to allow scientists to analyse their own data by providing tools trough a combination of menus and buttons. However, these interfaces often leave no record of how the data were manipulated and the software itself can be highly specialised or proprietary. This combination means that even when full datasets are provided, it is often impossible for others to reproduce the original analysis.</p>
 <p>None of this is meant to scold or disparage scientists who use this type of software to allow them to perform statistical analyses. You’re well aware of how much time and effort it takes to learn how to use and implement statistical methods correctly. This is time that other scientists invest in learning their subject, so that they can get to the point of doing research in the first place. This is one of the wonders of data science: the ability to work in multi-disciplinary teams where individual members are specialised in different areas.</p>
 <p>This is where we need to pause and check ourselves, because the same fate can easily befall us as data scientists. Yes, it take time to learn the skills and practices to ensure reproducibility, but it also takes time to implement them and the time of an expert data practitioner doesn’t come cheap. If you wait until the end of a project before you make it reproducible then you’ll usually be too late - time or money will have run out.</p>
-</section>
-<section id="replicability" class="level2" data-number="10.5">
-<h2 data-number="10.5" class="anchored" data-anchor-id="replicability"><span class="header-section-number">10.5</span> Replicability</h2>
+</section><section id="replicability" class="level2" data-number="10.5"><h2 data-number="10.5" class="anchored" data-anchor-id="replicability">
+<span class="header-section-number">10.5</span> Replicability</h2>
 <blockquote class="blockquote">
 <p><em>Replicable:</em> if the experiment were repeated by an independent investigator, you would get slightly different data but would the substative conclusions be the same?</p>
 </blockquote>
@@ -401,29 +468,24 @@ Note
 <p>If you come to data science from a statistical background then you are well accustomed to these sorts of considerations. Whenever you perform a hypothesis test or compare two models, you take steps to make sure the comparison is not only valid for this particular sample, but that is also true out-of-sample. This is the whole reason data scientists make training and test sets in the first place, as an approximate test for this sort of generalisation. We we do any of these things we are asking of ourselves: will this good performance replicate if we had different inputs?</p>
 <p>Of course train-test split, bootstrap resampling or asymptotic arguments can only ever approximate the ways in which our sample differs from the production population, to which our models will be applied. The only way to truly assess the out-of-sample performance of our models or generalisability of our findings is to put that work into production.</p>
 <p>This opens us up to risk: what if our findings don’t generalise and our new model is actually much worse than the current one? It’s not possible to both deploy our new model and also avoid this risk entirely. However, we can take some steps to mitigate our level of exposure.</p>
-<section id="shadow-deployment" class="level3" data-number="10.5.1">
-<h3 data-number="10.5.1" class="anchored" data-anchor-id="shadow-deployment"><span class="header-section-number">10.5.1</span> Shadow deployment</h3>
+<section id="shadow-deployment" class="level3" data-number="10.5.1"><h3 data-number="10.5.1" class="anchored" data-anchor-id="shadow-deployment">
+<span class="header-section-number">10.5.1</span> Shadow deployment</h3>
 <p>In the most risk-adverse setting we might implement a shadow deployment of our new model. In this case, the current model is still used for all decision making but our candidate model is also run in the background so that we can see how it might behave in the wild. This is good in that we can identify any points of catastrophic failure for the new model, but is also expensive to run and can give us only limited information.</p>
 <p>Suppose, for example, our model is a recommender system on a retail website. A shadow deployment will let us check that the new system functions correctly and we can gather data on what products are recommended to each customer and investigate how these differ from those recommended by the current system. A shadow deployment cannot in this case tell us what the customer would have done had they been shown those products instead. This means that a shadow deployment doesn’t allow is to investigate whether the new system leads to equivalent or greater revenue than the current system.</p>
-</section>
-<section id="parallel-deployment" class="level3" data-number="10.5.2">
-<h3 data-number="10.5.2" class="anchored" data-anchor-id="parallel-deployment"><span class="header-section-number">10.5.2</span> Parallel deployment</h3>
+</section><section id="parallel-deployment" class="level3" data-number="10.5.2"><h3 data-number="10.5.2" class="anchored" data-anchor-id="parallel-deployment">
+<span class="header-section-number">10.5.2</span> Parallel deployment</h3>
 <p>Parallel deployment or A/B tests have both the current and the proposed new models running at the same time. This allows us to truly test whether our findings generalise to the production population while controlling our level of risk exposure by setting the proportion of times each model is used. The more instances we assign to the new model the faster we will learn about its performance but this also increases our risk exposure.</p>
-</section>
-</section>
-<section id="reproduction-and-replication-in-statistical-data-science" class="level2" data-number="10.6">
-<h2 data-number="10.6" class="anchored" data-anchor-id="reproduction-and-replication-in-statistical-data-science"><span class="header-section-number">10.6</span> Reproduction and Replication in Statistical Data Science</h2>
-<section id="monte-carlo-methods" class="level3" data-number="10.6.1">
-<h3 data-number="10.6.1" class="anchored" data-anchor-id="monte-carlo-methods"><span class="header-section-number">10.6.1</span> Monte Carlo Methods</h3>
+</section></section><section id="reproduction-and-replication-in-statistical-data-science" class="level2" data-number="10.6"><h2 data-number="10.6" class="anchored" data-anchor-id="reproduction-and-replication-in-statistical-data-science">
+<span class="header-section-number">10.6</span> Reproduction and Replication in Statistical Data Science</h2>
+<section id="monte-carlo-methods" class="level3" data-number="10.6.1"><h3 data-number="10.6.1" class="anchored" data-anchor-id="monte-carlo-methods">
+<span class="header-section-number">10.6.1</span> Monte Carlo Methods</h3>
 <p>In data science we rely a lot on the use of stochastic methods. These are often used to increase the chance of our findings being replicated by another person or in production. However, they also make it more difficult to ensure that our exact results can be reproduced, whether by another person or our future selves.</p>
 <div class="medium_left">
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="401-production-reproducibility_files/figure-html/monte-carlo-approximation-of-pi-1.png" class="img-fluid figure-img" style="width:80.0%" alt="Points randomly located on [-1,1] x [-1,1], with the unit circle overlaid."></p>
-<figcaption class="figure-caption">Monte Carlo approximation of <span class="math inline">\(\pi\)</span></figcaption>
-</figure>
+<figure class="figure"><p><img src="401-production-reproducibility_files/figure-html/monte-carlo-approximation-of-pi-1.png" class="img-fluid figure-img" style="width:80.0%" alt="Points randomly located on [-1,1] x [-1,1], with the unit circle overlaid."></p>
+<figcaption class="figure-caption">Monte Carlo approximation of <span class="math inline">\(\pi\)</span></figcaption></figure>
 </div>
 </div>
 </div>
@@ -434,9 +496,8 @@ Note
 <p>Monte Carlo methods can also be used to express uncertainties more generally, or to approximate difficult integrals. These are both common applications of Monte Carlo methods in Bayesian modelling, where (unless our models are particularly simple) the posterior or posterior-predictive distribution has to be approximated by a collection of values sampled from that distribution.</p>
 <p>Each time we run any of these analyses we’ll get slightly different outcomes. For our work to be replicable we need to quantify this level of variation. For example, if we had a different sample from the posterior distribution, how much would the estimated posterior mean change by? Sometimes, as in this case, we can appeal to the law of large numbers to help us out. If we take more samples, the variation between realisations will shrink. We can then collect enough samples to our estimated mean is stable across realisations, up to our desired number of significant figures.</p>
 <p>To make our results reproducible we will have to ensure that we can reproduce the remaining, unstable digits for any particular realisation. We can do this by setting the seed of our random number generator, an idea we will return to shortly.</p>
-</section>
-<section id="optimisation" class="level3" data-number="10.6.2">
-<h3 data-number="10.6.2" class="anchored" data-anchor-id="optimisation"><span class="header-section-number">10.6.2</span> Optimisation</h3>
+</section><section id="optimisation" class="level3" data-number="10.6.2"><h3 data-number="10.6.2" class="anchored" data-anchor-id="optimisation">
+<span class="header-section-number">10.6.2</span> Optimisation</h3>
 <p>Optimisation is the second aspect of data science that can be very difficult to ensure is reproducible and replicable.</p>
 <p>Is the optimum you find stable over:</p>
 <ul>
@@ -447,58 +508,51 @@ Note
 </ul>
 <div class="medium_right">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="images/401-production-reproducibility/contour-optimisation.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">A poorly drawn contour plot. Local modes make this optimiation unstable to the choice of starting point.</figcaption>
-</figure>
+<figure class="figure"><p><img src="images/401-production-reproducibility/contour-optimisation.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">A poorly drawn contour plot. Local modes make this optimiation unstable to the choice of starting point.</figcaption></figure>
 </div>
 </div>
 <p>If optimisation routines are used in parameter estimation, we have to ensure that the results they find for a particular data set are reproducible for a given configuration. This might be a given data set, initial set of starting parameters and step size, the learning rate (which controls how that step size changes) and the maximum number of iterations to perform.</p>
 <p>We additionally need to be concerned about replication here. If we had chosen a different starting point would the optimisation still converge, and would it converge to the same mode? Our original method may have found a local optimum but how can we confirm that this is a global optimum?</p>
 <p>If the optimisation fails to converge, can your reproduce that case to diagnose the problem? This can be particularly tricky when the optimisation routine itself uses Monte Carlo methods, such as stochastic gradient descent or simulated annealing.</p>
-</section>
-<section id="pseudo-random-numbers" class="level3" data-number="10.6.3">
-<h3 data-number="10.6.3" class="anchored" data-anchor-id="pseudo-random-numbers"><span class="header-section-number">10.6.3</span> (Pseudo-)Random Numbers</h3>
+</section><section id="pseudo-random-numbers" class="level3" data-number="10.6.3"><h3 data-number="10.6.3" class="anchored" data-anchor-id="pseudo-random-numbers">
+<span class="header-section-number">10.6.3</span> (Pseudo-)Random Numbers</h3>
 <p>Sometimes we have stochastic elements to our work that we can’t use brute force to eliminate. Perhaps this is beyond our computational abilities or else the number of realisations is an important, fixed aspect of our study.</p>
 <p>Fortunately, in computing it’s not common to have truly random numbers. Instead, what we usually have is a complex but deterministic function that generates a sequence of numbers that are statistically indistinguishable from a series of independent random variates.</p>
-<p>The next term in this sequence of pseudo-random numbers is generated generated based on value the current one. This means that, by setting the starting point, we can always get the same sequence of pseudo-random variates each time we run the code. In R we set this starting point using <code>set.seed()</code></p>
+<p>The next term in this sequence of pseudo-random numbers is generated generated based on value the current one. This means that, by setting the starting point, we can always get the same sequence of pseudo-random variates each time we run the code. In R we set this starting point using <code><a href="https://rdrr.io/r/base/Random.html">set.seed()</a></code></p>
 <p>This is especially useful for simulations that involve random variables, as it allows us to recreate the same results exactly. This not only makes it possible for others to recreate our results but it can also make it much easier to test and debug our own code.</p>
 <hr>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># different values</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">4</span>)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] -1.6508772 -1.2176918  1.0958955 -0.6258297</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">4</span>)</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1]  0.8003329  0.0394195 -1.6283002 -1.1414527</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># different values</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] -2.0548817  0.8280833 -0.7620445 -2.1187527</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1]  0.4040604  0.3909239  0.6265590 -1.7305210</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <hr>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># the same value</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1234</span>)</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">4</span>)</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] -1.2070657  0.2774292  1.0844412 -2.3456977</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1234</span>)</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">4</span>)</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] -1.2070657  0.2774292  1.0844412 -2.3456977</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># the same value</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">1234</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] -1.2070657  0.2774292  1.0844412 -2.3456977</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">1234</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] -1.2070657  0.2774292  1.0844412 -2.3456977</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<hr>
-</section>
-</section>
-<section id="beware" class="level2" data-number="10.7">
-<h2 data-number="10.7" class="anchored" data-anchor-id="beware"><span class="header-section-number">10.7</span> Beware</h2>
+<hr></section></section><section id="beware" class="level2" data-number="10.7"><h2 data-number="10.7" class="anchored" data-anchor-id="beware">
+<span class="header-section-number">10.7</span> Beware</h2>
 <p>When running code sequentially and interactively, setting the seed is about all you will need to solve reproducibility problems. However, I’d advise you to take great care when combining this with some of the methods we’ll see for speeding up your code. In some cases, the strategies to optimize your code performance can interfere with the generation of random numbers and lead to unintended results.</p>
 <p>When writing code that’s executed in parallel across multiple cores or processors, you have to carefully consider is whether or not to give each the same seed value. The correct decision here is context specific and depends on the interpretation of the random variates you will be generating. If you are making a comparison between iterations it might be important the the random aspects are kept as similar as possible, while if you are paralleling only for speed gains this might not be important at all.</p>
 <p>Finally, it’s important to be wary of the quality of pseudo-random number generation and the interfacing R with other programming languages. R was developed as a <em>statistical</em> programming language and most other languages are not as statistically focused. Different languages may use different algorithms for generating pseudo-random numbers, and the quality of the generated numbers can vary. It’s important to make sure that seeds are appropriately passed between languages to ensure that the correct sequence of random numbers is generated.</p>
-</section>
-<section id="wrapping-up" class="level2" data-number="10.8">
-<h2 data-number="10.8" class="anchored" data-anchor-id="wrapping-up"><span class="header-section-number">10.8</span> Wrapping Up</h2>
+</section><section id="wrapping-up" class="level2" data-number="10.8"><h2 data-number="10.8" class="anchored" data-anchor-id="wrapping-up">
+<span class="header-section-number">10.8</span> Wrapping Up</h2>
 <p>To get our work put into production it should be both reproducible and replicable.</p>
 <ul>
 <li><p><em>Reproducible:</em> can recreate the same results from the same code and data</p></li>
 <li><p><em>Replicable:</em> core results remain valid when using different data</p></li>
 </ul>
-<p>While randomness is a key part of most data science workflows but can lead to reproducibility nightmares. We can manage these by appealing to the stability of averages in large samples and by explicitly setting the sequence of pseudo-random numbers that we generate using <code>set.seed()</code>.</p>
+<p>While randomness is a key part of most data science workflows but can lead to reproducibility nightmares. We can manage these by appealing to the stability of averages in large samples and by explicitly setting the sequence of pseudo-random numbers that we generate using <code><a href="https://rdrr.io/r/base/Random.html">set.seed()</a></code>.</p>
 <p>Finally, we should take special care when we have to combine efficiency with replicable workflows.</p>
 <p>With these ideas you can now use good data to do good science.</p>
 <!-- 
@@ -520,10 +574,7 @@ hypothesis was posited ahead of time. A Gelman and E loken (2013) http://stat.co
 -->
 
 
-</section>
-
-</main> <!-- /main -->
-<script id="quarto-html-after-body" type="application/javascript">
+</section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
     const mode = bsSheetEl.getAttribute("data-mode");
@@ -755,9 +806,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
 });
-</script>
-<nav class="page-navigation">
-  <div class="nav-page nav-page-previous">
+</script><nav class="page-navigation"><div class="nav-page nav-page-previous">
       <a href="./400-production-introduction.html" class="pagination-link">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Preparing for Production</span>
       </a>          

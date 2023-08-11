@@ -45,3 +45,7 @@ pre code {
 .large_left  {float: left; margin: 1em 1em 1em 0;}
 .large_right {float: right; margin: 0 0 1em 1em;}
 .large_left img, .large_right img{max-width: 100%;}
+
+.hide-captions .figure-caption {
+    display: none;
+}

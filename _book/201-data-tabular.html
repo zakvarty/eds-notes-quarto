@@ -1,12 +1,9 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
-
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.3.353">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-
-
 <title>Effective Data Science - 4&nbsp; Tabular Data</title>
 <style>
 code{white-space: pre-wrap;}
@@ -56,7 +53,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }
 </style>
 
-
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="site_libs/quarto-nav/headroom.min.js"></script>
 <script src="site_libs/clipboard/clipboard.min.js"></script>
@@ -74,8 +70,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
-<script id="quarto-search-options" type="application/json">{
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
@@ -93,37 +88,47 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit"
   }
-}</script>
-
-
-<link rel="stylesheet" href="style.css">
+}</script><link rel="stylesheet" href="style.css">
 </head>
-
 <body class="nav-sidebar floating">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
-  <nav class="quarto-secondary-nav">
-    <div class="container-fluid d-flex">
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./201-data-tabular.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Tabular Data</span></a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./200-data-introduction.html">Acquiring and Sharing Data</a></li><li class="breadcrumb-item"><a href="./201-data-tabular.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Tabular Data</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
-  </nav>
-</header>
-<!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Effective Data Science</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/zakvarty/eds-notes-quarto/" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+    <div class="dropdown">
+      <a href="" title="Share" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Share"><i class="bi bi-share"></i></a>
+      <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
+<li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://twitter.com/intent/tweet?url=%7Curl%7C">
+              <i class="bi bi-bi-twitter pe-1"></i>
+            Twitter
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://www.linkedin.com/sharing/share-offsite/?url=%7Curl%7C">
+              <i class="bi bi-bi-linkedin pe-1"></i>
+            LinkedIn
+            </a>
+          </li>
+      </ul>
+</div>
+</div>
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -133,167 +138,239 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
-        <li class="sidebar-item">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">About this Course</span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
-      <span class="sidebar-item-text sidebar-link text-start">
- <span class="menu-text">Effective Workflows</span></span>
-  </li>
-        <li class="sidebar-item">
+      <div class="sidebar-item-container"> 
+            <a href="./100-workflows-introduction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Effective Workflows</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./101-workflows-organising-your-work.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Organising your work</span></span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./102-workflows-naming-files.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Naming Files</span></span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./103-workflows-organising-your-code.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Code</span></span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./110-workflows-checklist.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Workflows Checklist</span></a>
   </div>
 </li>
+      </ul>
+</li>
         <li class="sidebar-item sidebar-item-section">
-      <span class="sidebar-item-text sidebar-link text-start">
- <span class="menu-text">Acquiring and Sharing Data</span></span>
-  </li>
-        <li class="sidebar-item">
+      <div class="sidebar-item-container"> 
+            <a href="./200-data-introduction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Acquiring and Sharing Data</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./201-data-tabular.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Tabular Data</span></span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./202-data-webscraping.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Web Scraping</span></span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./203-data-apis.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">APIs</span></span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./210-data-checklist.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Checklist</span></a>
   </div>
 </li>
+      </ul>
+</li>
         <li class="sidebar-item sidebar-item-section">
-      <span class="sidebar-item-text sidebar-link text-start">
- <span class="menu-text">Data Exploration and Visualisation</span></span>
-  </li>
-        <li class="sidebar-item">
+      <div class="sidebar-item-container"> 
+            <a href="./300-edav-intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Data Exploration and Visualisation</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./301-edav-wrangling.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Data Wrangling</span></span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./302-edav-analysis.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Exploratory Data Analysis</span></span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./303-edav-visualisation.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Data Visualisation</span></span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./310-edav-checklist.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Checklist</span></a>
   </div>
 </li>
+      </ul>
+</li>
         <li class="sidebar-item sidebar-item-section">
-      <span class="sidebar-item-text sidebar-link text-start">
- <span class="menu-text">Preparing for Production</span></span>
-  </li>
-        <li class="sidebar-item">
+      <div class="sidebar-item-container"> 
+            <a href="./400-production-introduction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preparing for Production</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./401-production-reproducibility.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Reproducibility</span></span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./402-production-explainability.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Explainability</span></span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./403-production-scalability.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Scalability</span></span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./410-production-checklist.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Checklist</span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./500-ethics-introduction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Data Science Ethics</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./501-ethics-privacy.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Privacy</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./502-ethics-fairness.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Fairness</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./503-ethics-conduct.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Codes of Conduct</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./510-ethics-checklist.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Checklist</span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true">
+ <span class="menu-text">Appendices</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./references.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">References</span></a>
   </div>
 </li>
+      </ul>
+</li>
     </ul>
-    </div>
-</nav>
-<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+</div>
+</nav><div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Table of contents</h2>
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#loading-tabular-data" id="toc-loading-tabular-data" class="nav-link active" data-scroll-target="#loading-tabular-data"><span class="header-section-number">4.1</span> Loading Tabular Data</a>
+<li>
+<a href="#loading-tabular-data" id="toc-loading-tabular-data" class="nav-link active" data-scroll-target="#loading-tabular-data"><span class="header-section-number">4.1</span> Loading Tabular Data</a>
   <ul class="collapse">
-  <li><a href="#base-r" id="toc-base-r" class="nav-link" data-scroll-target="#base-r"><span class="header-section-number">4.1.1</span> Base R</a></li>
+<li><a href="#base-r" id="toc-base-r" class="nav-link" data-scroll-target="#base-r"><span class="header-section-number">4.1.1</span> Base R</a></li>
   <li><a href="#readr" id="toc-readr" class="nav-link" data-scroll-target="#readr"><span class="header-section-number">4.1.2</span> <code>{readr}</code></a></li>
   <li><a href="#wtf-tibbles" id="toc-wtf-tibbles" class="nav-link" data-scroll-target="#wtf-tibbles"><span class="header-section-number">4.1.3</span> WTF: Tibbles</a></li>
   <li><a href="#other-readr-functions" id="toc-other-readr-functions" class="nav-link" data-scroll-target="#other-readr-functions"><span class="header-section-number">4.1.4</span> Other <code>{readr}</code> functions</a></li>
   <li><a href="#need-for-speed" id="toc-need-for-speed" class="nav-link" data-scroll-target="#need-for-speed"><span class="header-section-number">4.1.5</span> Need for Speed</a></li>
-  </ul></li>
-  <li><a href="#tidy-data" id="toc-tidy-data" class="nav-link" data-scroll-target="#tidy-data"><span class="header-section-number">4.2</span> Tidy Data</a>
+  </ul>
+</li>
+  <li>
+<a href="#tidy-data" id="toc-tidy-data" class="nav-link" data-scroll-target="#tidy-data"><span class="header-section-number">4.2</span> Tidy Data</a>
   <ul class="collapse">
-  <li><a href="#wide-vs.-tall-data" id="toc-wide-vs.-tall-data" class="nav-link" data-scroll-target="#wide-vs.-tall-data"><span class="header-section-number">4.2.1</span> Wide vs.&nbsp;Tall Data</a></li>
+<li><a href="#wide-vs.-tall-data" id="toc-wide-vs.-tall-data" class="nav-link" data-scroll-target="#wide-vs.-tall-data"><span class="header-section-number">4.2.1</span> Wide vs.&nbsp;Tall Data</a></li>
   <li><a href="#tidy-what" id="toc-tidy-what" class="nav-link" data-scroll-target="#tidy-what"><span class="header-section-number">4.2.2</span> Tidy What?</a></li>
   <li><a href="#example---tidy-longer" id="toc-example---tidy-longer" class="nav-link" data-scroll-target="#example---tidy-longer"><span class="header-section-number">4.2.3</span> Example - Tidy Longer</a></li>
   <li><a href="#example---tidy-wider" id="toc-example---tidy-wider" class="nav-link" data-scroll-target="#example---tidy-wider"><span class="header-section-number">4.2.4</span> Example - Tidy Wider</a></li>
   <li><a href="#other-helpful-functions" id="toc-other-helpful-functions" class="nav-link" data-scroll-target="#other-helpful-functions"><span class="header-section-number">4.2.5</span> Other helpful functions</a></li>
   <li><a href="#missing-data" id="toc-missing-data" class="nav-link" data-scroll-target="#missing-data"><span class="header-section-number">4.2.6</span> Missing Data</a></li>
-  </ul></li>
+  </ul>
+</li>
   <li><a href="#wrapping-up" id="toc-wrapping-up" class="nav-link" data-scroll-target="#wrapping-up"><span class="header-section-number">4.3</span> Wrapping Up</a></li>
   <li><a href="#session-information" id="toc-session-information" class="nav-link" data-scroll-target="#session-information"><span class="header-section-number">4.4</span> Session Information</a></li>
-  </ul>
-</nav>
+  </ul><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/zakvarty/eds-notes-quarto/edit/master/201-data-tabular.qmd" class="toc-action">Edit this page</a></p></div></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
-
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
 <h1 class="title"><span id="data-tabular" class="quarto-section-identifier"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Tabular Data</span></span></h1>
 </div>
 
@@ -307,9 +384,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </div>
   
 
-</header>
-
-<div class="callout callout-style-default callout-important callout-titled">
+</header><div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -323,8 +398,8 @@ Important
 <p>If you would like to contribute to the development of EDS, you may do so at <a href="https://github.com/zakvarty/data_science_notes" class="uri">https://github.com/zakvarty/data_science_notes</a>.</p>
 </div>
 </div>
-<section id="loading-tabular-data" class="level2" data-number="4.1">
-<h2 data-number="4.1" class="anchored" data-anchor-id="loading-tabular-data"><span class="header-section-number">4.1</span> Loading Tabular Data</h2>
+<section id="loading-tabular-data" class="level2" data-number="4.1"><h2 data-number="4.1" class="anchored" data-anchor-id="loading-tabular-data">
+<span class="header-section-number">4.1</span> Loading Tabular Data</h2>
 <div class="medium_right">
 <p><img src="images/201-tabular-data/xls-is-not-the-only-extension.png" alt="Text reading 'xls is not the only extension'"></p>
 </div>
@@ -336,182 +411,170 @@ Important
 </ul>
 <p>Each of these data sets contains 26 observations of 4 variables:</p>
 <ul>
-<li><code>id</code>, a Roman letter identifier;</li>
-<li><code>gaussian</code>, standard normal random variates;</li>
-<li><code>gamma</code>, gamma(1,1) random variates;</li>
-<li><code>uniform</code>, uniform(0,1) random variates.</li>
+<li>
+<code>id</code>, a Roman letter identifier;</li>
+<li>
+<code>gaussian</code>, standard normal random variates;</li>
+<li>
+<code>gamma</code>, gamma(1,1) random variates;</li>
+<li>
+<code>uniform</code>, uniform(0,1) random variates.</li>
 </ul>
-<section id="base-r" class="level3" data-number="4.1.1">
-<h3 data-number="4.1.1" class="anchored" data-anchor-id="base-r"><span class="header-section-number">4.1.1</span> Base R</h3>
+<section id="base-r" class="level3" data-number="4.1.1"><h3 data-number="4.1.1" class="anchored" data-anchor-id="base-r">
+<span class="header-section-number">4.1.1</span> Base R</h3>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>random_df <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="at">file =</span> <span class="st">'random-data.csv'</span>)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(random_df)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    id    gaussian      gamma    uniform</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1   a -1.20706575 0.98899970 0.22484576</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2   b  0.27742924 0.03813386 0.08498474</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3   c  1.08444118 1.09462335 0.63729826</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4   d -2.34569770 1.49301101 0.43101637</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5   e  0.42912469 5.40361248 0.07271609</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6   f  0.50605589 1.72386539 0.80240202</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 7   g -0.57473996 1.95357133 0.32527830</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 8   h -0.54663186 0.07807803 0.75728904</span></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 9   i -0.56445200 0.21198194 0.58427152</span></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 10  j -0.89003783 0.20803673 0.70883941</span></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 11  k -0.47719270 2.08607862 0.42697577</span></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 12  l -0.99838644 0.49463708 0.34357270</span></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 13  m -0.77625389 0.77171305 0.75911999</span></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 14  n  0.06445882 0.37216648 0.42403021</span></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 15  o  0.95949406 1.88207991 0.56088725</span></span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 16  p -0.11028549 0.76622568 0.11613577</span></span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 17  q -0.51100951 0.50488585 0.30302180</span></span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 18  r -0.91119542 0.22979791 0.47880269</span></span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 19  s -0.83717168 0.75637275 0.34483055</span></span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 20  t  2.41583518 0.62435969 0.60071414</span></span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 21  u  0.13408822 0.64638373 0.07608332</span></span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 22  v -0.49068590 0.11247545 0.95599261</span></span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 23  w -0.44054787 0.11924307 0.02220682</span></span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 24  x  0.45958944 4.91805535 0.84171063</span></span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 25  y -0.69372025 0.60282666 0.63244245</span></span>
-<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 26  z -1.44820491 0.64446571 0.31009417</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">random_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span>file <span class="op">=</span> <span class="st">'random-data.csv'</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">random_df</span><span class="op">)</span></span>
+<span><span class="co">#&gt;    id    gaussian      gamma    uniform</span></span>
+<span><span class="co">#&gt; 1   a -1.20706575 0.98899970 0.22484576</span></span>
+<span><span class="co">#&gt; 2   b  0.27742924 0.03813386 0.08498474</span></span>
+<span><span class="co">#&gt; 3   c  1.08444118 1.09462335 0.63729826</span></span>
+<span><span class="co">#&gt; 4   d -2.34569770 1.49301101 0.43101637</span></span>
+<span><span class="co">#&gt; 5   e  0.42912469 5.40361248 0.07271609</span></span>
+<span><span class="co">#&gt; 6   f  0.50605589 1.72386539 0.80240202</span></span>
+<span><span class="co">#&gt; 7   g -0.57473996 1.95357133 0.32527830</span></span>
+<span><span class="co">#&gt; 8   h -0.54663186 0.07807803 0.75728904</span></span>
+<span><span class="co">#&gt; 9   i -0.56445200 0.21198194 0.58427152</span></span>
+<span><span class="co">#&gt; 10  j -0.89003783 0.20803673 0.70883941</span></span>
+<span><span class="co">#&gt; 11  k -0.47719270 2.08607862 0.42697577</span></span>
+<span><span class="co">#&gt; 12  l -0.99838644 0.49463708 0.34357270</span></span>
+<span><span class="co">#&gt; 13  m -0.77625389 0.77171305 0.75911999</span></span>
+<span><span class="co">#&gt; 14  n  0.06445882 0.37216648 0.42403021</span></span>
+<span><span class="co">#&gt; 15  o  0.95949406 1.88207991 0.56088725</span></span>
+<span><span class="co">#&gt; 16  p -0.11028549 0.76622568 0.11613577</span></span>
+<span><span class="co">#&gt; 17  q -0.51100951 0.50488585 0.30302180</span></span>
+<span><span class="co">#&gt; 18  r -0.91119542 0.22979791 0.47880269</span></span>
+<span><span class="co">#&gt; 19  s -0.83717168 0.75637275 0.34483055</span></span>
+<span><span class="co">#&gt; 20  t  2.41583518 0.62435969 0.60071414</span></span>
+<span><span class="co">#&gt; 21  u  0.13408822 0.64638373 0.07608332</span></span>
+<span><span class="co">#&gt; 22  v -0.49068590 0.11247545 0.95599261</span></span>
+<span><span class="co">#&gt; 23  w -0.44054787 0.11924307 0.02220682</span></span>
+<span><span class="co">#&gt; 24  x  0.45958944 4.91805535 0.84171063</span></span>
+<span><span class="co">#&gt; 25  y -0.69372025 0.60282666 0.63244245</span></span>
+<span><span class="co">#&gt; 26  z -1.44820491 0.64446571 0.31009417</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Output is a <code>data.frame</code> object. (List of vectors with some nice methods)</p>
-</section>
-<section id="readr" class="level3" data-number="4.1.2">
-<h3 data-number="4.1.2" class="anchored" data-anchor-id="readr"><span class="header-section-number">4.1.2</span> <code>{readr}</code></h3>
+</section><section id="readr" class="level3" data-number="4.1.2"><h3 data-number="4.1.2" class="anchored" data-anchor-id="readr">
+<span class="header-section-number">4.1.2</span> <code>{readr}</code>
+</h3>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>random_tbl <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="at">file =</span> <span class="st">'random-data.csv'</span>)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Rows: 26 Columns: 4</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ── Column specification ─────────────────────────────────────────────────────</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Delimiter: ","</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; chr (1): id</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; dbl (3): gaussian, gamma, uniform</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ℹ Use `spec()` to retrieve the full column specification for this data.</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(random_tbl)</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 26 × 4</span></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   id    gaussian  gamma uniform</span></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;    &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;</span></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 a       -1.21  0.989   0.225 </span></span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 b        0.277 0.0381  0.0850</span></span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 c        1.08  1.09    0.637 </span></span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4 d       -2.35  1.49    0.431 </span></span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5 e        0.429 5.40    0.0727</span></span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6 f        0.506 1.72    0.802 </span></span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # ℹ 20 more rows</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">random_tbl</span> <span class="op">&lt;-</span> <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span>file <span class="op">=</span> <span class="st">'random-data.csv'</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Rows: 26 Columns: 4</span></span>
+<span><span class="co">#&gt; ── Column specification ─────────────────────────────────────────────────────</span></span>
+<span><span class="co">#&gt; Delimiter: ","</span></span>
+<span><span class="co">#&gt; chr (1): id</span></span>
+<span><span class="co">#&gt; dbl (3): gaussian, gamma, uniform</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; ℹ Use `spec()` to retrieve the full column specification for this data.</span></span>
+<span><span class="co">#&gt; ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">random_tbl</span><span class="op">)</span></span>
+<span><span class="co">#&gt; # A tibble: 26 × 4</span></span>
+<span><span class="co">#&gt;   id    gaussian  gamma uniform</span></span>
+<span><span class="co">#&gt;   &lt;chr&gt;    &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;</span></span>
+<span><span class="co">#&gt; 1 a       -1.21  0.989   0.225 </span></span>
+<span><span class="co">#&gt; 2 b        0.277 0.0381  0.0850</span></span>
+<span><span class="co">#&gt; 3 c        1.08  1.09    0.637 </span></span>
+<span><span class="co">#&gt; 4 d       -2.35  1.49    0.431 </span></span>
+<span><span class="co">#&gt; 5 e        0.429 5.40    0.0727</span></span>
+<span><span class="co">#&gt; 6 f        0.506 1.72    0.802 </span></span>
+<span><span class="co">#&gt; # ℹ 20 more rows</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Output is a <code>tibble</code> object. (List of vectors with some nicer methods)</p>
-<section id="benefits-of-readrread_csv" class="level4" data-number="4.1.2.1">
-<h4 data-number="4.1.2.1" class="anchored" data-anchor-id="benefits-of-readrread_csv"><span class="header-section-number">4.1.2.1</span> Benefits of <code>readr::read_csv()</code></h4>
+<section id="benefits-of-readrread_csv" class="level4" data-number="4.1.2.1"><h4 data-number="4.1.2.1" class="anchored" data-anchor-id="benefits-of-readrread_csv">
+<span class="header-section-number">4.1.2.1</span> Benefits of <code>readr::read_csv()</code>
+</h4>
 <ol type="1">
 <li><p>Increased speed (approx. 10x) and progress bar.</p></li>
 <li><p>Strings are not coerced to factors. No more <code>stringsAsFactors = FALSE</code></p></li>
 <li><p>No row names and nice column names.</p></li>
 <li><p>Reproducibility bonus: does not depend on operating system.</p></li>
-</ol>
-</section>
-</section>
-<section id="wtf-tibbles" class="level3" data-number="4.1.3">
-<h3 data-number="4.1.3" class="anchored" data-anchor-id="wtf-tibbles"><span class="header-section-number">4.1.3</span> WTF: Tibbles</h3>
-<section id="printing" class="level4" data-number="4.1.3.1">
-<h4 data-number="4.1.3.1" class="anchored" data-anchor-id="printing"><span class="header-section-number">4.1.3.1</span> Printing</h4>
+</ol></section></section><section id="wtf-tibbles" class="level3" data-number="4.1.3"><h3 data-number="4.1.3" class="anchored" data-anchor-id="wtf-tibbles">
+<span class="header-section-number">4.1.3</span> WTF: Tibbles</h3>
+<section id="printing" class="level4" data-number="4.1.3.1"><h4 data-number="4.1.3.1" class="anchored" data-anchor-id="printing">
+<span class="header-section-number">4.1.3.1</span> Printing</h4>
 <ul>
 <li><p>Default to first 10 rows and as many columns as will comfortably fit on your screen.</p></li>
 <li><p>Can adjust this behaviour in the print call:</p></li>
 </ul>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># print first three rows and all columns</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(random_tbl, <span class="at">n =</span> <span class="dv">3</span>, <span class="at">width =</span> <span class="cn">Inf</span>)</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 26 × 4</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   id    gaussian  gamma uniform</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;    &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 a       -1.21  0.989   0.225 </span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 b        0.277 0.0381  0.0850</span></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 c        1.08  1.09    0.637 </span></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # ℹ 23 more rows</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># print first three rows and all columns</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">random_tbl</span>, n <span class="op">=</span> <span class="fl">3</span>, width <span class="op">=</span> <span class="cn">Inf</span><span class="op">)</span></span>
+<span><span class="co">#&gt; # A tibble: 26 × 4</span></span>
+<span><span class="co">#&gt;   id    gaussian  gamma uniform</span></span>
+<span><span class="co">#&gt;   &lt;chr&gt;    &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;</span></span>
+<span><span class="co">#&gt; 1 a       -1.21  0.989   0.225 </span></span>
+<span><span class="co">#&gt; 2 b        0.277 0.0381  0.0850</span></span>
+<span><span class="co">#&gt; 3 c        1.08  1.09    0.637 </span></span>
+<span><span class="co">#&gt; # ℹ 23 more rows</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><strong>Bonus:</strong> Colour formatting in IDE and each column tells you it’s type.</p>
-</section>
-<section id="subsetting" class="level4" data-number="4.1.3.2">
-<h4 data-number="4.1.3.2" class="anchored" data-anchor-id="subsetting"><span class="header-section-number">4.1.3.2</span> Subsetting</h4>
+</section><section id="subsetting" class="level4" data-number="4.1.3.2"><h4 data-number="4.1.3.2" class="anchored" data-anchor-id="subsetting">
+<span class="header-section-number">4.1.3.2</span> Subsetting</h4>
 <p>Subsetting tibbles will always return another tibble.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Row Subsetting</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>random_tbl[<span class="dv">1</span>, ] <span class="co"># returns tibble</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>random_df[<span class="dv">1</span>, ]  <span class="co"># returns data.frame</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Column Subsetting</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>random_tbl[ , <span class="dv">1</span>]      <span class="co"># returns tibble</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>random_df[ , <span class="dv">1</span>]       <span class="co"># returns vector</span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Combined Subsetting</span></span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>random_tbl[<span class="dv">1</span>, <span class="dv">1</span>]      <span class="co"># returns 1x1 tibble</span></span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>random_df[<span class="dv">1</span>, <span class="dv">1</span>]       <span class="co"># returns single value</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Row Subsetting</span></span>
+<span><span class="va">random_tbl</span><span class="op">[</span><span class="fl">1</span>, <span class="op">]</span> <span class="co"># returns tibble</span></span>
+<span><span class="va">random_df</span><span class="op">[</span><span class="fl">1</span>, <span class="op">]</span>  <span class="co"># returns data.frame</span></span>
+<span></span>
+<span><span class="co"># Column Subsetting</span></span>
+<span><span class="va">random_tbl</span><span class="op">[</span> , <span class="fl">1</span><span class="op">]</span>      <span class="co"># returns tibble</span></span>
+<span><span class="va">random_df</span><span class="op">[</span> , <span class="fl">1</span><span class="op">]</span>       <span class="co"># returns vector</span></span>
+<span></span>
+<span><span class="co"># Combined Subsetting</span></span>
+<span><span class="va">random_tbl</span><span class="op">[</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">]</span>      <span class="co"># returns 1x1 tibble</span></span>
+<span><span class="va">random_df</span><span class="op">[</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">]</span>       <span class="co"># returns single value</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><br></p>
 <p>This helps to avoids edge cases associated with working on data frames.</p>
-</section>
-</section>
-<section id="other-readr-functions" class="level3" data-number="4.1.4">
-<h3 data-number="4.1.4" class="anchored" data-anchor-id="other-readr-functions"><span class="header-section-number">4.1.4</span> Other <code>{readr}</code> functions</h3>
-<p>See <code>{readr}</code> <a href="https://readr.tidyverse.org/">documentation</a>, there are lots of useful additional arguments that can help you when reading messy data.</p>
+</section></section><section id="other-readr-functions" class="level3" data-number="4.1.4"><h3 data-number="4.1.4" class="anchored" data-anchor-id="other-readr-functions">
+<span class="header-section-number">4.1.4</span> Other <code>{readr}</code> functions</h3>
+<p>See <a href="https://readr.tidyverse.org">readr</a> <a href="https://readr.tidyverse.org/">documentation</a>, there are lots of useful additional arguments that can help you when reading messy data.</p>
 <p>Functions for reading and writing other types of tabular data work analogously.</p>
-<section id="reading-tabular-data" class="level4" data-number="4.1.4.1">
-<h4 data-number="4.1.4.1" class="anchored" data-anchor-id="reading-tabular-data"><span class="header-section-number">4.1.4.1</span> Reading Tabular Data</h4>
+<section id="reading-tabular-data" class="level4" data-number="4.1.4.1"><h4 data-number="4.1.4.1" class="anchored" data-anchor-id="reading-tabular-data">
+<span class="header-section-number">4.1.4.1</span> Reading Tabular Data</h4>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">read_tsv</span>(<span class="st">"random-data.tsv"</span>)</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">read_delim</span>(<span class="st">"random-data.txt"</span>, <span class="at">delim =</span> <span class="st">" "</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://readr.tidyverse.org">readr</a></span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_tsv</a></span><span class="op">(</span><span class="st">"random-data.tsv"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_delim</a></span><span class="op">(</span><span class="st">"random-data.txt"</span>, delim <span class="op">=</span> <span class="st">" "</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section>
-<section id="writing-tabular-data" class="level4" data-number="4.1.4.2">
-<h4 data-number="4.1.4.2" class="anchored" data-anchor-id="writing-tabular-data"><span class="header-section-number">4.1.4.2</span> Writing Tabular Data</h4>
+</section><section id="writing-tabular-data" class="level4" data-number="4.1.4.2"><h4 data-number="4.1.4.2" class="anchored" data-anchor-id="writing-tabular-data">
+<span class="header-section-number">4.1.4.2</span> Writing Tabular Data</h4>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(random_tbl, <span class="st">"random-data-2.csv"</span>)</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">write_tsv</span>(random_tbl, <span class="st">"random-data-2.tsv"</span>)</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">write_delim</span>(random_tbl, <span class="st">"random-data-2.tsv"</span>, <span class="at">delim =</span> <span class="st">" "</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://readr.tidyverse.org/reference/write_delim.html">write_csv</a></span><span class="op">(</span><span class="va">random_tbl</span>, <span class="st">"random-data-2.csv"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://readr.tidyverse.org/reference/write_delim.html">write_tsv</a></span><span class="op">(</span><span class="va">random_tbl</span>, <span class="st">"random-data-2.tsv"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://readr.tidyverse.org/reference/write_delim.html">write_delim</a></span><span class="op">(</span><span class="va">random_tbl</span>, <span class="st">"random-data-2.tsv"</span>, delim <span class="op">=</span> <span class="st">" "</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section>
-</section>
-<section id="need-for-speed" class="level3" data-number="4.1.5">
-<h3 data-number="4.1.5" class="anchored" data-anchor-id="need-for-speed"><span class="header-section-number">4.1.5</span> Need for Speed</h3>
+</section></section><section id="need-for-speed" class="level3" data-number="4.1.5"><h3 data-number="4.1.5" class="anchored" data-anchor-id="need-for-speed">
+<span class="header-section-number">4.1.5</span> Need for Speed</h3>
 <p>Some times you have to load <em>lots of large data sets</em>, in which case a 10x speed-up might not be sufficient.</p>
-<p>If each data set still fits inside RAM, then check out <code>data.table::fread()</code> which is optimised for speed. (Alternatives exist for optimal memory usage and data too large for working memory, but not covered here.)</p>
+<p>If each data set still fits inside RAM, then check out <code><a href="https://Rdatatable.gitlab.io/data.table/reference/fread.html">data.table::fread()</a></code> which is optimised for speed. (Alternatives exist for optimal memory usage and data too large for working memory, but not covered here.)</p>
 <p><strong>Note:</strong> While it can be much faster, the resulting data.table object lacks the consistancy properties of a tibble so be sure to check for edge cases, where the returned value is not what you might expect.</p>
-</section>
-</section>
-<section id="tidy-data" class="level2" data-number="4.2">
-<h2 data-number="4.2" class="anchored" data-anchor-id="tidy-data"><span class="header-section-number">4.2</span> Tidy Data</h2>
-<section id="wide-vs.-tall-data" class="level3" data-number="4.2.1">
-<h3 data-number="4.2.1" class="anchored" data-anchor-id="wide-vs.-tall-data"><span class="header-section-number">4.2.1</span> Wide vs.&nbsp;Tall Data</h3>
-<section id="wide-data" class="level4" data-number="4.2.1.1">
-<h4 data-number="4.2.1.1" class="anchored" data-anchor-id="wide-data"><span class="header-section-number">4.2.1.1</span> Wide Data</h4>
+</section></section><section id="tidy-data" class="level2" data-number="4.2"><h2 data-number="4.2" class="anchored" data-anchor-id="tidy-data">
+<span class="header-section-number">4.2</span> Tidy Data</h2>
+<section id="wide-vs.-tall-data" class="level3" data-number="4.2.1"><h3 data-number="4.2.1" class="anchored" data-anchor-id="wide-vs.-tall-data">
+<span class="header-section-number">4.2.1</span> Wide vs.&nbsp;Tall Data</h3>
+<section id="wide-data" class="level4" data-number="4.2.1.1"><h4 data-number="4.2.1.1" class="anchored" data-anchor-id="wide-data">
+<span class="header-section-number">4.2.1.1</span> Wide Data</h4>
 <ul>
 <li><p>First column has unique entries</p></li>
 <li><p>Easier for humans to read and compute on</p></li>
 <li><p>Harder for machines to compute on</p></li>
-</ul>
-</section>
-<section id="tall-data" class="level4" data-number="4.2.1.2">
-<h4 data-number="4.2.1.2" class="anchored" data-anchor-id="tall-data"><span class="header-section-number">4.2.1.2</span> Tall Data</h4>
+</ul></section><section id="tall-data" class="level4" data-number="4.2.1.2"><h4 data-number="4.2.1.2" class="anchored" data-anchor-id="tall-data">
+<span class="header-section-number">4.2.1.2</span> Tall Data</h4>
 <ul>
 <li><p>First column has repeating entries</p></li>
 <li><p>Harder for humans to read and compute on</p></li>
 <li><p>Easier for machines to compute on</p></li>
-</ul>
-</section>
-<section id="examples" class="level4" data-number="4.2.1.3">
-<h4 data-number="4.2.1.3" class="anchored" data-anchor-id="examples"><span class="header-section-number">4.2.1.3</span> Examples</h4>
+</ul></section><section id="examples" class="level4" data-number="4.2.1.3"><h4 data-number="4.2.1.3" class="anchored" data-anchor-id="examples">
+<span class="header-section-number">4.2.1.3</span> Examples</h4>
 <p><strong>Example 1 (Wide)</strong></p>
 <table class="table">
-<thead>
-<tr class="header">
+<thead><tr class="header">
 <th><strong>Person </strong></th>
 <th><strong>Age </strong></th>
 <th><strong>Weight </strong></th>
 <th><strong>Height </strong></th>
-</tr>
-</thead>
+</tr></thead>
 <tbody>
 <tr class="odd">
 <td>Bob</td>
@@ -535,13 +598,11 @@ Important
 </table>
 <p><strong>Example 1 (Tall)</strong></p>
 <table class="table">
-<thead>
-<tr class="header">
+<thead><tr class="header">
 <th style="text-align: center;"><strong>Person </strong></th>
 <th style="text-align: center;"><strong>Variable </strong></th>
 <th style="text-align: center;"><strong>Value </strong></th>
-</tr>
-</thead>
+</tr></thead>
 <tbody>
 <tr class="odd">
 <td style="text-align: center;">Bob</td>
@@ -593,14 +654,12 @@ Important
 <p>[Source: Wikipedia - Wide and narrow data]</p>
 <p><strong>Example 2 (Wide)</strong></p>
 <table class="table">
-<thead>
-<tr class="header">
+<thead><tr class="header">
 <th>Team</th>
 <th>Points</th>
 <th>Assists</th>
 <th>Rebounds</th>
-</tr>
-</thead>
+</tr></thead>
 <tbody>
 <tr class="odd">
 <td>A</td>
@@ -630,13 +689,11 @@ Important
 </table>
 <p><strong>Example 2 (Tall)</strong></p>
 <table class="table">
-<thead>
-<tr class="header">
+<thead><tr class="header">
 <th>Team</th>
 <th>Variable</th>
 <th>Value</th>
-</tr>
-</thead>
+</tr></thead>
 <tbody>
 <tr class="odd">
 <td>A</td>
@@ -701,27 +758,22 @@ Important
 </tbody>
 </table>
 <p>[Source: Statology - Long vs wide data]</p>
-</section>
-<section id="pivoting-wider-and-longer" class="level4" data-number="4.2.1.4">
-<h4 data-number="4.2.1.4" class="anchored" data-anchor-id="pivoting-wider-and-longer"><span class="header-section-number">4.2.1.4</span> Pivoting Wider and Longer</h4>
+</section><section id="pivoting-wider-and-longer" class="level4" data-number="4.2.1.4"><h4 data-number="4.2.1.4" class="anchored" data-anchor-id="pivoting-wider-and-longer">
+<span class="header-section-number">4.2.1.4</span> Pivoting Wider and Longer</h4>
 <ul>
 <li><p>Error control at input and analysis is format-dependent.</p></li>
 <li><p>Switching between long and wide formats useful to control errors.</p></li>
-<li><p>Easy with the <code>{tidyr}</code> package functions</p></li>
+<li><p>Easy with the <a href="https://tidyr.tidyverse.org">tidyr</a> package functions</p></li>
 </ul>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>tidyr<span class="sc">::</span><span class="fu">pivot_longer</span>()</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>tidyr<span class="sc">::</span><span class="fu">pivot_wider</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html">pivot_longer</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_wider.html">pivot_wider</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section>
-</section>
-<section id="tidy-what" class="level3" data-number="4.2.2">
-<h3 data-number="4.2.2" class="anchored" data-anchor-id="tidy-what"><span class="header-section-number">4.2.2</span> Tidy What?</h3>
+</section></section><section id="tidy-what" class="level3" data-number="4.2.2"><h3 data-number="4.2.2" class="anchored" data-anchor-id="tidy-what">
+<span class="header-section-number">4.2.2</span> Tidy What?</h3>
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="images/201-tabular-data/tidy-1.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">[Image: R4DS - Chapter 12]</figcaption>
-</figure>
+<figure class="figure"><p><img src="images/201-tabular-data/tidy-1.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">[Image: R4DS - Chapter 12]</figcaption></figure>
 </div>
 <p><em>Tidy Data</em> is an opinionated way to store tabular data.</p>
 <p>Image Source: Chapter 12 of R for Data Science.</p>
@@ -734,10 +786,8 @@ Important
 <ul>
 <li><p><em>Consistent data format:</em> Reduces cognitive load and allows specialised tools (functions) to efficiently work with tabular data.</p></li>
 <li><p><em>Vectorisation</em>: Keeping variables as columns allows for very efficient data manipulation. (this goes back to data frames and tibbles being lists of vectors)</p></li>
-</ul>
-</section>
-<section id="example---tidy-longer" class="level3" data-number="4.2.3">
-<h3 data-number="4.2.3" class="anchored" data-anchor-id="example---tidy-longer"><span class="header-section-number">4.2.3</span> Example - Tidy Longer</h3>
+</ul></section><section id="example---tidy-longer" class="level3" data-number="4.2.3"><h3 data-number="4.2.3" class="anchored" data-anchor-id="example---tidy-longer">
+<span class="header-section-number">4.2.3</span> Example - Tidy Longer</h3>
 <p>Consider trying to plot these data as time series. The <code>year</code> variable is trapped in the column names!</p>
 <div class="cell" data-layout-align="center">
 <pre><code>#&gt; # A tibble: 3 × 3
@@ -749,34 +799,31 @@ Important
 </div>
 <p>To tidy this data, we need to <code>pivot_longer()</code>. We will turn the column names into a new <code>year</code> variable and retaining cell contents as a new variable called <code>cases</code>.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(magrittr)</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>countries <span class="sc">%&gt;%</span> </span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  tidyr<span class="sc">::</span><span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">c</span>(<span class="st">`</span><span class="at">1999</span><span class="st">`</span>,<span class="st">`</span><span class="at">2000</span><span class="st">`</span>), <span class="at">names_to =</span> <span class="st">"year"</span>, <span class="at">values_to =</span> <span class="st">"cases"</span>)</span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 6 × 3</span></span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   country     year   cases</span></span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;       &lt;chr&gt;  &lt;dbl&gt;</span></span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 Afghanistan 1999     745</span></span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 Afghanistan 2000    2666</span></span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 Brazil      1999   37737</span></span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4 Brazil      2000   80488</span></span>
-<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5 China       1999  212258</span></span>
-<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6 China       2000  213766</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://magrittr.tidyverse.org">magrittr</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">countries</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html">pivot_longer</a></span><span class="op">(</span>cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">`1999`</span>,<span class="va">`2000`</span><span class="op">)</span>, names_to <span class="op">=</span> <span class="st">"year"</span>, values_to <span class="op">=</span> <span class="st">"cases"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; # A tibble: 6 × 3</span></span>
+<span><span class="co">#&gt;   country     year   cases</span></span>
+<span><span class="co">#&gt;   &lt;chr&gt;       &lt;chr&gt;  &lt;dbl&gt;</span></span>
+<span><span class="co">#&gt; 1 Afghanistan 1999     745</span></span>
+<span><span class="co">#&gt; 2 Afghanistan 2000    2666</span></span>
+<span><span class="co">#&gt; 3 Brazil      1999   37737</span></span>
+<span><span class="co">#&gt; 4 Brazil      2000   80488</span></span>
+<span><span class="co">#&gt; 5 China       1999  212258</span></span>
+<span><span class="co">#&gt; 6 China       2000  213766</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Much better!</p>
-</section>
-<section id="example---tidy-wider" class="level3" data-number="4.2.4">
-<h3 data-number="4.2.4" class="anchored" data-anchor-id="example---tidy-wider"><span class="header-section-number">4.2.4</span> Example - Tidy Wider</h3>
+</section><section id="example---tidy-wider" class="level3" data-number="4.2.4"><h3 data-number="4.2.4" class="anchored" data-anchor-id="example---tidy-wider">
+<span class="header-section-number">4.2.4</span> Example - Tidy Wider</h3>
 <p>There are other times where we might have to widen our data to tidy it.</p>
 <p>This example is not tidy. Why not?</p>
 <table class="table">
-<thead>
-<tr class="header">
+<thead><tr class="header">
 <th>Team</th>
 <th>Variable</th>
 <th>Value</th>
-</tr>
-</thead>
+</tr></thead>
 <tbody>
 <tr class="odd">
 <td>A</td>
@@ -844,51 +891,43 @@ Important
 <p>To tidy this data we first generate it as a tibble. We use the <code>tribble()</code> function, which allows us to create a tibble row-wise rather than column-wise.</p>
 <p>We can then tidy it by creating new columns for each value of the current <code>Variable</code> column and taking the values for these from the current <code>Value</code> column.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>tournament <span class="sc">%&gt;%</span> </span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  tidyr<span class="sc">::</span><span class="fu">pivot_wider</span>(</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">id_cols =</span> <span class="st">"Team"</span>, </span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_from =</span> <span class="st">"Variable"</span>,</span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_from =</span> <span class="st">"Value"</span>)</span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 4 × 4</span></span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   Team  Points Assists Rebounds</span></span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;  &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;</span></span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 A         88      12       22</span></span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 B         91      17       28</span></span>
-<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 C         99      24       30</span></span>
-<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4 D         94      28       31</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tournament</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_wider.html">pivot_wider</a></span><span class="op">(</span></span>
+<span>    id_cols <span class="op">=</span> <span class="st">"Team"</span>, </span>
+<span>    names_from <span class="op">=</span> <span class="st">"Variable"</span>,</span>
+<span>    values_from <span class="op">=</span> <span class="st">"Value"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; # A tibble: 4 × 4</span></span>
+<span><span class="co">#&gt;   Team  Points Assists Rebounds</span></span>
+<span><span class="co">#&gt;   &lt;chr&gt;  &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;</span></span>
+<span><span class="co">#&gt; 1 A         88      12       22</span></span>
+<span><span class="co">#&gt; 2 B         91      17       28</span></span>
+<span><span class="co">#&gt; 3 C         99      24       30</span></span>
+<span><span class="co">#&gt; 4 D         94      28       31</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section>
-<section id="other-helpful-functions" class="level3" data-number="4.2.5">
-<h3 data-number="4.2.5" class="anchored" data-anchor-id="other-helpful-functions"><span class="header-section-number">4.2.5</span> Other helpful functions</h3>
+</section><section id="other-helpful-functions" class="level3" data-number="4.2.5"><h3 data-number="4.2.5" class="anchored" data-anchor-id="other-helpful-functions">
+<span class="header-section-number">4.2.5</span> Other helpful functions</h3>
 <p>The <code>pivot_*()</code> family of functions resolve issues with rows (too many observations per row or rows per observation).</p>
 <p><br></p>
 <p>There are similar helper functions to solve column issues:</p>
 <ul>
-<li><p>Multiple variables per column: <code>tidyr::separate()</code>,</p></li>
-<li><p>Multiple columns per variable: <code>tidyr::unite()</code>.</p></li>
-</ul>
-</section>
-<section id="missing-data" class="level3" data-number="4.2.6">
-<h3 data-number="4.2.6" class="anchored" data-anchor-id="missing-data"><span class="header-section-number">4.2.6</span> Missing Data</h3>
+<li><p>Multiple variables per column: <code><a href="https://tidyr.tidyverse.org/reference/separate.html">tidyr::separate()</a></code>,</p></li>
+<li><p>Multiple columns per variable: <code><a href="https://tidyr.tidyverse.org/reference/unite.html">tidyr::unite()</a></code>.</p></li>
+</ul></section><section id="missing-data" class="level3" data-number="4.2.6"><h3 data-number="4.2.6" class="anchored" data-anchor-id="missing-data">
+<span class="header-section-number">4.2.6</span> Missing Data</h3>
 <p>In tidy data, every cell contains a value. Including cells with missing values.</p>
 <ul>
 <li><p>Missing values are coded as <code>NA</code> (generic) or a type-specific <code>NA</code>, such as <code>NA_character_</code>.</p></li>
-<li><p>The <code>{readr}</code> family of <code>read_*()</code> function have good defaults and helpful <code>na</code> argument.</p></li>
+<li><p>The <a href="https://readr.tidyverse.org">readr</a> family of <code>read_*()</code> function have good defaults and helpful <code>na</code> argument.</p></li>
 <li><p>Explicitly code <code>NA</code> values when collecting data, avoid ambiguity: ” “, -999 or worst of all 0.</p></li>
 <li><p>More on missing values in EDA videos…</p></li>
-</ul>
-</section>
-</section>
-<section id="wrapping-up" class="level2" data-number="4.3">
-<h2 data-number="4.3" class="anchored" data-anchor-id="wrapping-up"><span class="header-section-number">4.3</span> Wrapping Up</h2>
+</ul></section></section><section id="wrapping-up" class="level2" data-number="4.3"><h2 data-number="4.3" class="anchored" data-anchor-id="wrapping-up">
+<span class="header-section-number">4.3</span> Wrapping Up</h2>
 <ol type="1">
 <li><p>Reading in tabular data by a range of methods</p></li>
 <li><p>Introduced the <code>tibble</code> and tidy data (+ tidy not always best)</p></li>
 <li><p>Tools for tidying messy tabular data</p></li>
-</ol>
-</section>
-<section id="session-information" class="level2" data-number="4.4">
-<h2 data-number="4.4" class="anchored" data-anchor-id="session-information"><span class="header-section-number">4.4</span> Session Information</h2>
+</ol></section><section id="session-information" class="level2" data-number="4.4"><h2 data-number="4.4" class="anchored" data-anchor-id="session-information">
+<span class="header-section-number">4.4</span> Session Information</h2>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <p><strong>R version 4.2.2 (2022-10-31)</strong></p>
@@ -901,10 +940,7 @@ Important
 </div>
 
 
-</section>
-
-</main> <!-- /main -->
-<script id="quarto-html-after-body" type="application/javascript">
+</section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
     const mode = bsSheetEl.getAttribute("data-mode");
@@ -1136,9 +1172,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
 });
-</script>
-<nav class="page-navigation">
-  <div class="nav-page nav-page-previous">
+</script><nav class="page-navigation"><div class="nav-page nav-page-previous">
       <a href="./200-data-introduction.html" class="pagination-link">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Acquiring and Sharing Data</span>
       </a>          
