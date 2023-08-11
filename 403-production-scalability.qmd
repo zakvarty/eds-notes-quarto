@@ -121,7 +121,7 @@ toc()
 
 With `{tictoc}` we can get fancy 
 
-```{r, tictoc-mutiple-timers}
+```{r tictoc-mutiple-timers}
 #| eval: true
 #| echo: true
 tic("total")

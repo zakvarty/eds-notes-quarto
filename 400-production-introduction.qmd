@@ -1,4 +1,4 @@
-# (PART) Preparing for Production {-}
+# Preparing for Production {-}
 
 # Introduction {#production-introduction .unnumbered}
 

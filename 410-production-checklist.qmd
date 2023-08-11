@@ -1,6 +1,8 @@
 # Checklist {#production-checklist .unnumbered}
 
-```{r, results='asis', echo=FALSE}
+```{r production-checklist}
+#| echo: false
+#| results: asis
 source("_common.R")
 status("drafting")
 ```

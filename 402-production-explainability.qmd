@@ -1,6 +1,8 @@
 # Explainability {#production-explainability}
 
-```{r, results='asis', echo=FALSE}
+```{r production-explainability-setup}
+#| results: asis
+#| echo: false
 source("_common.R")
 status("complete")
 ```
@@ -26,12 +28,17 @@ Between each of these examples, the level of technical detail differs but more i
 
 ## Explaining a Decision Tree
 
-```{r, echo=FALSE, fig.align='center', fig.cap="An example of a decision tree, optimised to correctly identify category 1 ambulance calls in as few questions as possible.", alt="Descision tree to traige ambulance calls into urgency categories."}
+With some models giving an explanation is relatively straightforward. Decision trees are perhaps the easiest model to explain because they mimic human decision making and can be represented like flow-charts that make sequential, linear partitions of the predictor space.
+
+```{r fig-abulance-triage}
+#| eval: true
+#| echo: false
+#| fig-align: center
+#| fig-cap: "An example of a decision tree, optimised to correctly identify category 1 ambulance calls in as few questions as possible."
+#| fig-alt: "Descision tree to traige ambulance calls into urgency categories."
 knitr::include_graphics("images/402-production-explainability/ambulance-triage.png")
 ```
-<!--![An example of a decision tree, optimised to correctly identify category 1 ambulance calls in as pew questions as possible.](images/402-production-explainability/ambulance-triage.png){alt="Descision tree to traige ambulance calls into urgency categories.", width="80%"}-->
 
-With some models giving an explanation is relatively straightforward. Decision trees are perhaps the easiest model to explain because they mimic human decision making and can be represented like flow-charts that make sequential, linear partitions of the predictor space.
 
 These models use the same sort of logic that is used for medical triage when you call an ambulance, to determine the urgency of the call. The binary decisions used in this type of triage are optimised to identify critical calls as soon as possible, but this is just one form of loss function we could use. We might instead pick these partitions to get the most accurate overall classification of calls to urgency categories. This might not be an appropriate loss function for ambulance calls but might be when deciding which loan applicants to grant credit to.
 
@@ -42,7 +49,12 @@ The issue is that these decision trees are limited in the relationships they can
 Another model that is relatively straightforward to interpret is a linear regression. We can interpret this model using the estimated regression coefficients, which describe how the predicted outcome changes with a unit change in each covariate while the values of all other covariates are held constant. 
 
 
-```{r, echo=FALSE, fig.align='center', fig.cap="Linear models have global, conditional explanations, provided by the estimated regression coefficients.", alt="sketch of estimated linear regression model overlaid on data. The gratient of the fitted line is labelled as the estimated regression coefficient."}
+```{r fig-interpreting-linear-regression}
+#| eval: true
+#| echo: false
+#| fig-align: center
+#| fig-cap: "Linear models have global, conditional explanations, provided by the estimated regression coefficients."
+#| fig-alt: "Sketch of estimated linear regression model overlaid on data. The gratient of the fitted line is labelled as the estimated regression coefficient."
 knitr::include_graphics("images/402-production-explainability/interpreting-linear-regression.png")
 ```
 
@@ -54,7 +66,12 @@ The explanation is __conditional__ because it assumes that all other values are 
 
 This can be contrasted against non-linear regression, where covariate effects are still interpreted conditional on the value of other covariates but the size or direction of that effect might vary depending on the value of the covariate. 
 
-```{r, echo=FALSE, fig.align='center', fig.cap="Non-linear models have local, conditional explanations, provided by the estimated regression coefficients.", alt="Estimated non-linear regression curve overlaid on raw data. At low values of the covariate a unit increase produces a large increase in the estimated response. This gradient is descreasing so that at large covariate values the same change in the covariate produces almost no change in the response."}
+```{r fig-interpreting-nonlinear-models}
+#| eval: true
+#| echo: false
+#| fig-align: center
+#| fig-cap: "Non-linear models have local, conditional explanations, provided by the estimated regression coefficients."
+#| fig-alt: "Estimated non-linear regression curve overlaid on raw data. At low values of the covariate a unit increase produces a large increase in the estimated response. This gradient is descreasing so that at large covariate values the same change in the covariate produces almost no change in the response."
 knitr::include_graphics("images/402-production-explainability/interpreting-nonlinear-regression.png")
 ```
 
@@ -67,7 +84,15 @@ As an example of this we can look at the height, girth and volume of some cherry
 
 If we are wanting to use a lathe to produce pretty, cherry wood ornaments we might be interested in understanding how the girth of the trees varies with their height and total volume. Using a linear model, we see that both have a positive linear association with girth. 
 
-```{r, warning=FALSE, note=FALSE, message=FALSE, fig.cap="Cherry tree girth can be well modelled as a linear function of either tree height or harvestable volume", collapse=TRUE, fig.align='center'}
+```{r fig-cherry-tree-lm}
+#| eval: true
+#| echo: false
+#| warning: false
+#| note: false
+#| message: false
+#| fig-align: center
+#| fig-cap: "Cherry tree girth can be well modelled as a linear function of either tree height or harvestable volume."
+#| fig-alt: "Linear regression models overlaid on data for predicting tree girth as a linear function of either height or volume. Both have positive coefficients."
 library(tidyverse)
 library(ggtext)
 
@@ -92,17 +117,23 @@ p2 <- ggplot(data = trees, aes(x = Volume, y = Girth)) +
 cowplot::plot_grid(p1, p2, ncol = 2)
 ```
 
-```{r}
+```{r cherry-tree-lm-1}
+#| eval: true
+#| echo: true
 lm(Girth ~ 1 + Height, data = trees)
 ```
 
-```{r}
+```{r cherry-tree-lm-2}
+#| eval: true
+#| echo: true
 lm(Girth ~ 1 + Volume, data = trees)
 ```
 
 However, when we include both terms in our model, our interpretation changes dramatically.
 
-```{r echo = TRUE}
+```{r cherry-tree-lm-combined}
+#| eval: true
+#| echo: true
 lm(Girth ~ 1 + Height + Volume, data = trees)
 ```
 
@@ -119,10 +150,18 @@ This regularly arises in fields like epidemiology, where population level trends
 
 Actually, Simpson's parodox is a terrible name, because it isn't actually a paradox at all. It's not surprising that we have two different answers to two different questions, the supposed contradiction only arises when we fail to distinguish between those questions. 
 
-```{r, fig.cap="A simulated example in which a covariate has a negative trend at the population level but a positive trend within each sub-group.", fig.align='center'}
-data_1 <- mgcv::rmvn(n = 100, mu = c(0,4), V = matrix(c(2,0.8,0.8,2), nrow = 2))
-data_2 <- mgcv::rmvn(n = 100, mu = c(2,2), V = matrix(c(2,0.8,0.8,2), nrow = 2))
-data_3 <- mgcv::rmvn(n = 100, mu = c(4,0), V = matrix(c(2,0.8,0.8,2), nrow = 2))
+```{r fig-simpsons-paradox}
+#| eval: true
+#| echo: false
+#| message: false
+#| fig-align: center
+#| fig-cap: "A simulated example in which a covariate has a negative trend at the population level but a positive trend within each sub-group."
+
+set.seed(1234)
+
+data_1 <- mgcv::rmvn(n = 100, mu = c(0,4), V = matrix(c(2,0.6,0.6,2), nrow = 2))
+data_2 <- mgcv::rmvn(n = 100, mu = c(2,2), V = matrix(c(2,0.2,0.2,2), nrow = 2))
+data_3 <- mgcv::rmvn(n = 100, mu = c(4,0), V = matrix(c(2,0.9,0.9,2), nrow = 2))
 
 simpson <- data.frame(
   x_1 = c(data_1[,1], data_2[,1], data_3[,1]), 
@@ -142,18 +181,18 @@ p4 <- simpson %>%
   ggplot(aes(x = x_1, y = x_2, col = group)) +
   geom_point() + 
   geom_smooth(method = "lm") + 
-  ggtitle("", "Groupings Unknown") +
+  ggtitle("", "Groupings known") +
   theme_minimal()
 
 cowplot::plot_grid(p3, p4, ncol = 2)
 ```
 
-What I hope to have highlighted here is that for some of the simplest models we might use as data scietists, explanations are very much possible but must be made with care and attention to detail - correctly interpreting these models in context can be far from straightforward.  
+What I hope to have highlighted here is that for some of the simplest models we might use as data scientists, explanations are very much possible but must be made with care and attention to detail - correctly interpreting these models in context can be far from straightforward.  
 
 
 ## What hope do we have?
 
-At this stage, you might be asking yourself what hope we have of explaining more complex models like random forests or neural networks, given how difficuly it is to explain even the simple models we might take as our benchmark. You'd be right to worry about this and it is important to remain humble in what we can and cannot know about these complex systems that we are building. 
+At this stage, you might be asking yourself what hope we have of explaining more complex models like random forests or neural networks, given how difficult it is to explain even the simple models we might take as our benchmark. You'd be right to worry about this and it is important to remain humble in what we can and cannot know about these complex systems that we are building. 
 
 All hope isn't lost though - we still have a few tricks up our sleeve! 
 
@@ -178,7 +217,12 @@ The idea here is to look at a small region of the covariate space that is covere
 
 However, we can interrogate the model's behaviour within a small region and construct a simplified version of the model (a meta-model) that lets us explain the model within that small region. Often this meta-model is chosen as a linear model. 
 
-```{r, echo=FALSE, fig.align='center', fig.cap="A local linear approximation in two dimensions", alt="A sketch of a non-linear response surface with two input dimensions. In a small region this is locally approximated by a linear function."}
+```{r fig-function-approximation}
+#| eval: true
+#| echo: false
+#| fig-align: center
+#| fig-cap: "A local linear approximation in two dimensions"
+#| fig-alt: "A sketch of a non-linear response surface with two input dimensions. In a small region this is locally approximated by a linear function."
 knitr::include_graphics("images/402-production-explainability/local-linear-approximation.png")
 ```
 
@@ -202,7 +246,12 @@ Don't worry though, we can take the easy way out and do both of these things app
 If we construct a local, conditional model for each loan applicant in our data set, we can approximate the marginal effect of each covariate by averaging the conditional effects we obtain for each loan applicant. 
 
 
-```{r, echo=FALSE, fig.align='center', fig.cap="Local approximations around each observation can be combined to understand global model behaviour.", alt="A sketch of a two dimensional data set where the local region around each observed value is indicated by a blue square."}
+```{r fig-local-approximation}
+#| eval: true
+#| echo: false
+#| fig-align: center
+#| fig-cap: "Local approximations around each observation can be combined to understand global model behaviour."
+#| fig-alt: "A sketch of a two dimensional data set where the local region around each observed value is indicated by a blue square."
 knitr::include_graphics("images/402-production-explainability/local-neighbourhoods.png")
 ```
 
