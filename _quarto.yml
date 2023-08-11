@@ -29,6 +29,11 @@ book:
     - 402-production-explainability.qmd
     - 403-production-scalability.qmd
     - 410-production-checklist.qmd
+    - part: 500-ethics-introduction.qmd
+    - 501-ethics-privacy.qmd
+    - 502-ethics-fairness.qmd
+    - 503-ethics-conduct.qmd
+    - 510-ethics-checklist.qmd
     - references.qmd
 
 bibliography: references.bib
