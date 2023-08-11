@@ -2,7 +2,9 @@
 
 # Introduction {#ethics-introduction .unnumbered} 
 
-```{r, results='asis', echo=FALSE}
+```{r ethics-introduction}
+#| results: asis
+#| echo: false
 source("_common.R")
 status("drafting")
 ```
