@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.353">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Effective Data Science - 10&nbsp; Reproducibility</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./402-production-explainability.html" rel="next">
+<link href="./400-production-introduction.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./401-production-reproducibility.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Reproducibility</span></a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Effective Data Science</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">About this Course</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <span class="sidebar-item-text sidebar-link text-start">
+ <span class="menu-text">Effective Workflows</span></span>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./101-workflows-organising-your-work.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Organising your work</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./102-workflows-naming-files.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Naming Files</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./103-workflows-organising-your-code.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Code</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./110-workflows-checklist.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Workflows Checklist</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <span class="sidebar-item-text sidebar-link text-start">
+ <span class="menu-text">Acquiring and Sharing Data</span></span>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./201-data-tabular.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Tabular Data</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./202-data-webscraping.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Web Scraping</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./203-data-apis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">APIs</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./210-data-checklist.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Checklist</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <span class="sidebar-item-text sidebar-link text-start">
+ <span class="menu-text">Data Exploration and Visualisation</span></span>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./301-edav-wrangling.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Data Wrangling</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./302-edav-analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Exploratory Data Analysis</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./303-edav-visualisation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Data Visualisation</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./310-edav-checklist.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Checklist</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <span class="sidebar-item-text sidebar-link text-start">
+ <span class="menu-text">Preparing for Production</span></span>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./401-production-reproducibility.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Reproducibility</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./402-production-explainability.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Explainability</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./403-production-scalability.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Scalability</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./410-production-checklist.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Checklist</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#the-data-scientific-method" id="toc-the-data-scientific-method" class="nav-link active" data-scroll-target="#the-data-scientific-method"><span class="header-section-number">10.1</span> The Data Scientific Method</a></li>
+  <li><a href="#issue-multiple-dependent-tests" id="toc-issue-multiple-dependent-tests" class="nav-link" data-scroll-target="#issue-multiple-dependent-tests"><span class="header-section-number">10.2</span> Issue: Multiple, Dependent Tests</a></li>
+  <li><a href="#issues-p-hacking-and-publiction-bias" id="toc-issues-p-hacking-and-publiction-bias" class="nav-link" data-scroll-target="#issues-p-hacking-and-publiction-bias"><span class="header-section-number">10.3</span> Issues: <span class="math inline">\(p\)</span>-hacking and Publiction Bias</a></li>
+  <li><a href="#reproducibility" id="toc-reproducibility" class="nav-link" data-scroll-target="#reproducibility"><span class="header-section-number">10.4</span> Reproducibility</a></li>
+  <li><a href="#replicability" id="toc-replicability" class="nav-link" data-scroll-target="#replicability"><span class="header-section-number">10.5</span> Replicability</a>
+  <ul class="collapse">
+  <li><a href="#shadow-deployment" id="toc-shadow-deployment" class="nav-link" data-scroll-target="#shadow-deployment"><span class="header-section-number">10.5.1</span> Shadow deployment</a></li>
+  <li><a href="#parallel-deployment" id="toc-parallel-deployment" class="nav-link" data-scroll-target="#parallel-deployment"><span class="header-section-number">10.5.2</span> Parallel deployment</a></li>
+  </ul></li>
+  <li><a href="#reproduction-and-replication-in-statistical-data-science" id="toc-reproduction-and-replication-in-statistical-data-science" class="nav-link" data-scroll-target="#reproduction-and-replication-in-statistical-data-science"><span class="header-section-number">10.6</span> Reproduction and Replication in Statistical Data Science</a>
+  <ul class="collapse">
+  <li><a href="#monte-carlo-methods" id="toc-monte-carlo-methods" class="nav-link" data-scroll-target="#monte-carlo-methods"><span class="header-section-number">10.6.1</span> Monte Carlo Methods</a></li>
+  <li><a href="#optimisation" id="toc-optimisation" class="nav-link" data-scroll-target="#optimisation"><span class="header-section-number">10.6.2</span> Optimisation</a></li>
+  <li><a href="#pseudo-random-numbers" id="toc-pseudo-random-numbers" class="nav-link" data-scroll-target="#pseudo-random-numbers"><span class="header-section-number">10.6.3</span> (Pseudo-)Random Numbers</a></li>
+  </ul></li>
+  <li><a href="#beware" id="toc-beware" class="nav-link" data-scroll-target="#beware"><span class="header-section-number">10.7</span> Beware</a></li>
+  <li><a href="#wrapping-up" id="toc-wrapping-up" class="nav-link" data-scroll-target="#wrapping-up"><span class="header-section-number">10.8</span> Wrapping Up</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span id="production-reproducibility" class="quarto-section-identifier"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Reproducibility</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Effective Data Science is still a work-in-progress. This chapter is largely complete and just needs final proof reading.</p>
+<p>If you would like to contribute to the development of EDS, you may do so at <a href="https://github.com/zakvarty/data_science_notes" class="uri">https://github.com/zakvarty/data_science_notes</a>.</p>
+</div>
+</div>
+<section id="the-data-scientific-method" class="level2" data-number="10.1">
+<h2 data-number="10.1" class="anchored" data-anchor-id="the-data-scientific-method"><span class="header-section-number">10.1</span> The Data Scientific Method</h2>
+<p>In what we have covered so far we have been very much focused on the first aspect of data science: the data. When we come to consider about whether our work can be reproduced or our results can be replicated, this shifts our focus to the second other, the science.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/401-production-reproducibility/scientific-method.png" class="img-fluid figure-img" style="width:80.0%" alt="The scientific method show as a cycle: hypotheis, literature search, design experiment, gather evidence, information synthesis, draw inference, repeat."></p>
+<figcaption class="figure-caption">Cycle of scientific enquiry.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>As data scientists, we like to think that we are applying the scientific method in our work.</p>
+<p>We start with a question we want to answer or a problem we want to solve. This is followed by a search of the existing literature: is this is a well-known problem that lots of people have solved before? If it is, fantastic, we can learn from their efforts. If not, then we proceed to gather our own evidence and combine this with whatever existing knowledge we could scrape together. Finally, we draw conclusions from this synthesised information.</p>
+<p>When doing so we acknowledge that the conclusions we reach are not the truth, just our current best approximation of it. We have a usefully simplified model of the messy reality that we can share with the world. We will happily update our model as we become aware of new evidence, whether that new information supports or contradicts our current way of thinking.</p>
+<p>That sounds excellent and is, in an ideal world, how both science and data science would progress. However, just like our models this is a simplified (and in this case idealised) description of what really happens.</p>
+</section>
+<section id="issue-multiple-dependent-tests" class="level2" data-number="10.2">
+<h2 data-number="10.2" class="anchored" data-anchor-id="issue-multiple-dependent-tests"><span class="header-section-number">10.2</span> Issue: Multiple, Dependent Tests</h2>
+<ul>
+<li><p>Projects are usually not a single hypothesis test</p></li>
+<li><p>Sequence of dependent decisions</p></li>
+<li><p>e.g.&nbsp;Model development</p></li>
+<li><p>Can fool ourselves by looking lots of times or ignoring sequential and dependent structure.</p></li>
+</ul>
+<p>The aims of a data science project are rarely framed as a clear an unambiguous hypothesis, for which we will design a study and perform a single statistical analysis. Apart from in special cases, like A/B testing, we have a much more general aim for our data science projects.</p>
+<div class="medium_right">
+<p><img src="images/401-production-reproducibility/forking-paths-abstract.png" class="img-fluid" alt="Gelman and Loken (2013) consider the issue of multiple comparisons">{Abstract text of Gelman and Loken (2013).}</p>
+</div>
+<p>We might want to construct a model for a given phenomenon and we’ll try many variants of that model along the way. By taking a more relaxed approach to data analysis, data scientists can run the risk of finding spurious relationships within our data that don’t hold more generally. If you look for a relationship between the quantity you are trying to predict and enough samples of random noise will almost surely find a significant relationship, even though there is no true link.</p>
+</section>
+<section id="issues-p-hacking-and-publiction-bias" class="level2" data-number="10.3">
+<h2 data-number="10.3" class="anchored" data-anchor-id="issues-p-hacking-and-publiction-bias"><span class="header-section-number">10.3</span> Issues: <span class="math inline">\(p\)</span>-hacking and Publiction Bias</h2>
+<div class="medium_left">
+<p><img src="images/401-production-reproducibility/p-values-in-medical-papers.jpg" class="img-fluid" alt="Distribution of p-values in medical publications. From Perneger and Combescure (2017)">{Bar chart of p-values in medical publications, showing a large drop between 4-5 percent and 5-6 percent.}</p>
+</div>
+<p>Okay, so our methods of investigation as data scientists might not be completely sound, but that should be balanced by the results of other studies that exist, right? Well, the second worrisome aspect of this process is that we can’t always trust the published literature to be a fair representation of what people have tried in the past.</p>
+<p>Studies that don’t provide strong evidence against the null hypothesis rarely make it into publications, reports or the news. This is largely because of the way that scientific enquiry is rewarded in the the academy, business and the media. Funding and attention tend to go to studies with new findings, rather than those which aim to confirm or strengthen the findings of existing studies.</p>
+<p>This systemic problem incentives scientists to ‘massage’ numbers to obtain a <span class="math inline">\(p\)</span>-value less than 0.05 so that a result can be reported as statistically significant. This process is known as <span class="math inline">\(p\)</span>-hacking and can occur through deliberate malpractice but more often it’s a result of scientists generally not receiving adequate training in statistics. As statistically trained data scientists we know that a declaration of significance is no indication of a meaningful effect size and that the conventional significance level of 5% is entirely arbitrary. However, we need to be aware that this is not the case across science and that even we aren’t immune to the societal and systematic influences that favour the publication of novel results over confirmatory ones.</p>
+<p>These influences also lead to a much more subtle problem than direct <span class="math inline">\(p\)</span>-hacking. Consider a model with an obvious but unnecessary additional property to add: a example here might be adding an unnecessary term to a regression. Because this extension is such low hanging fruit, many scientists independently design experiments to test it out. Most of these experiments provide insufficient evidence against the null hypothesis and don’t get developed into published papers or technical reports, because they just support the status-quo. However, after enough people have attempted this some scientist will get “lucky” and find a significant (and potentially relevant) benefit. Of all the experiments that were done, this is the only one that makes it onto the public record.</p>
+<p>All of these studies being left in the proverbial desk drawer induces publication bias in the scientific literature. When we come to assess the state of existing knowledge, we are unable to properly assess the importance of findings, because we lack the context of all those null results that went unreported.</p>
+<p>This same process means that the results of many more scientific studies than we would expect cannot be recreated. This is what is known as the scientific replication crisis.</p>
+</section>
+<section id="reproducibility" class="level2" data-number="10.4">
+<h2 data-number="10.4" class="anchored" data-anchor-id="reproducibility"><span class="header-section-number">10.4</span> Reproducibility</h2>
+<blockquote class="blockquote">
+<p><em>Reproducibility:</em> given the original raw data and code, can you get all of the results again?</p>
+</blockquote>
+<ul>
+<li><p>Reproducible != Correct</p></li>
+<li><p>“Code available on request” is the new “Data available on request”</p></li>
+<li><p>Reproducible data analysis requires effort, time and skill.</p></li>
+</ul>
+<p>This idea of reproducibility requires us to be able to recover the exact same numerical summaries as the original investigator. In particular this means we should be able to reproduce the exact same point estimates and measures of uncertainty that they did, which ensures we’ll draw the same conclusions as that original investigator.</p>
+<p>When putting our work into production there are several reasons why we might require it to be reproducible. The first is logistical: production code needs to be robust and efficient - this often means your code will be re-factored, rewritten or translated into another language. If your results are not reproducible then there is no way to verify that this has been done correctly. Secondly, if a problem is identified in your work (say a customer raises a complaint that their loan application was incorrectly rejected) you need to be able to accurately recreate that instance to diagnose if there is a problem and exactly what caused it.</p>
+<p>Note that just because findings are reproducible, that doesn’t by any means imply that they’re correct. We could have a very well documented but flawed analysis that is entirely reproducible but is also completely unsuitable or just plain wrong.</p>
+<p>In our data science projects, we have already taken several steps that greatly improve the reproducibility of our work. Although we scripted, tested and documented our work to improve the management of our project, these decisions improve the scientific quality of our work too. This puts us in a strong position relative to the scientific literature as a whole.</p>
+<p>At a point now where it is almost standard to publish data along with papers, but for a long time this was not the case and data if data were available at all, this was only by request. We are now in a similar situation when it comes to code. It’s still far from standard for the analysis code to be required and put up to detailed scrutiny as part of the peer-review process.</p>
+<p>With a little more context this isn’t so unreasonable. Across many scientific disciplines, code-based approaches to analysis is not standard; statistical software with a graphical user interface is used instead. The idea here is to allow scientists to analyse their own data by providing tools trough a combination of menus and buttons. However, these interfaces often leave no record of how the data were manipulated and the software itself can be highly specialised or proprietary. This combination means that even when full datasets are provided, it is often impossible for others to reproduce the original analysis.</p>
+<p>None of this is meant to scold or disparage scientists who use this type of software to allow them to perform statistical analyses. You’re well aware of how much time and effort it takes to learn how to use and implement statistical methods correctly. This is time that other scientists invest in learning their subject, so that they can get to the point of doing research in the first place. This is one of the wonders of data science: the ability to work in multi-disciplinary teams where individual members are specialised in different areas.</p>
+<p>This is where we need to pause and check ourselves, because the same fate can easily befall us as data scientists. Yes, it take time to learn the skills and practices to ensure reproducibility, but it also takes time to implement them and the time of an expert data practitioner doesn’t come cheap. If you wait until the end of a project before you make it reproducible then you’ll usually be too late - time or money will have run out.</p>
+</section>
+<section id="replicability" class="level2" data-number="10.5">
+<h2 data-number="10.5" class="anchored" data-anchor-id="replicability"><span class="header-section-number">10.5</span> Replicability</h2>
+<blockquote class="blockquote">
+<p><em>Replicable:</em> if the experiment were repeated by an independent investigator, you would get slightly different data but would the substative conclusions be the same?</p>
+</blockquote>
+<ul>
+<li><p>In the specific sense, this is the core worry for a statistician!</p></li>
+<li><p>Also used more generally: are results stable to perturbations in population / study design / modelling / analysis?</p></li>
+<li><p>Only real test is to try it. Control risk with shadow and parallel deployment. Statisticians are well aware that if we were to repeat an experiment we would get slightly different data. This would lead to slightly different estimates and slightly different results.</p></li>
+</ul>
+<p>Ultimately, this is the core problem that statisticians get paid to worry about: will those changes be small enough that the substantive conclusions are not impacted? Yes, point estimates will vary slightly but do your conclusions about the existence, direction or magnitude of an effect still hold? Alternatively, if you are estimating a relationship between two variables, is the same functional form chosen as the most suitable?</p>
+<p>In a general scientific context, replication takes a more broad meaning and asks whether the key properties of your results could be replicated by another person. In the context of getting your work put into production, we acre concerned about whether your the results of your findings will also hold when applied to future instances that might differ from those you have seen already.</p>
+<p>If you come to data science from a statistical background then you are well accustomed to these sorts of considerations. Whenever you perform a hypothesis test or compare two models, you take steps to make sure the comparison is not only valid for this particular sample, but that is also true out-of-sample. This is the whole reason data scientists make training and test sets in the first place, as an approximate test for this sort of generalisation. We we do any of these things we are asking of ourselves: will this good performance replicate if we had different inputs?</p>
+<p>Of course train-test split, bootstrap resampling or asymptotic arguments can only ever approximate the ways in which our sample differs from the production population, to which our models will be applied. The only way to truly assess the out-of-sample performance of our models or generalisability of our findings is to put that work into production.</p>
+<p>This opens us up to risk: what if our findings don’t generalise and our new model is actually much worse than the current one? It’s not possible to both deploy our new model and also avoid this risk entirely. However, we can take some steps to mitigate our level of exposure.</p>
+<section id="shadow-deployment" class="level3" data-number="10.5.1">
+<h3 data-number="10.5.1" class="anchored" data-anchor-id="shadow-deployment"><span class="header-section-number">10.5.1</span> Shadow deployment</h3>
+<p>In the most risk-adverse setting we might implement a shadow deployment of our new model. In this case, the current model is still used for all decision making but our candidate model is also run in the background so that we can see how it might behave in the wild. This is good in that we can identify any points of catastrophic failure for the new model, but is also expensive to run and can give us only limited information.</p>
+<p>Suppose, for example, our model is a recommender system on a retail website. A shadow deployment will let us check that the new system functions correctly and we can gather data on what products are recommended to each customer and investigate how these differ from those recommended by the current system. A shadow deployment cannot in this case tell us what the customer would have done had they been shown those products instead. This means that a shadow deployment doesn’t allow is to investigate whether the new system leads to equivalent or greater revenue than the current system.</p>
+</section>
+<section id="parallel-deployment" class="level3" data-number="10.5.2">
+<h3 data-number="10.5.2" class="anchored" data-anchor-id="parallel-deployment"><span class="header-section-number">10.5.2</span> Parallel deployment</h3>
+<p>Parallel deployment or A/B tests have both the current and the proposed new models running at the same time. This allows us to truly test whether our findings generalise to the production population while controlling our level of risk exposure by setting the proportion of times each model is used. The more instances we assign to the new model the faster we will learn about its performance but this also increases our risk exposure.</p>
+</section>
+</section>
+<section id="reproduction-and-replication-in-statistical-data-science" class="level2" data-number="10.6">
+<h2 data-number="10.6" class="anchored" data-anchor-id="reproduction-and-replication-in-statistical-data-science"><span class="header-section-number">10.6</span> Reproduction and Replication in Statistical Data Science</h2>
+<section id="monte-carlo-methods" class="level3" data-number="10.6.1">
+<h3 data-number="10.6.1" class="anchored" data-anchor-id="monte-carlo-methods"><span class="header-section-number">10.6.1</span> Monte Carlo Methods</h3>
+<p>In data science we rely a lot on the use of stochastic methods. These are often used to increase the chance of our findings being replicated by another person or in production. However, they also make it more difficult to ensure that our exact results can be reproduced, whether by another person or our future selves.</p>
+<div class="medium_left">
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="401-production-reproducibility_files/figure-html/monte-carlo-approximation-of-pi-1.png" class="img-fluid figure-img" style="width:80.0%" alt="Points randomly located on [-1,1] x [-1,1], with the unit circle overlaid."></p>
+<figcaption class="figure-caption">Monte Carlo approximation of <span class="math inline">\(\pi\)</span></figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<p>Monte Carlo methods are any modelling, estimation or approximation technique that leverages randomness in some way.</p>
+<p>We have seen examples of this to improve the probability of successful replication. The most obvious example of this is the random allocation of data in a Train/Test split for model selection.</p>
+<p>Another example focused on improving replication is the use of bootstrap resampling to approximate the sampling distribution of a test statistic. This might be a parametric bootstrap, where alternative datasets are generated by sampling values from the fitted model of our observed data. Alternatively, a non-parametric bootstrap would generate these alternative datasets by sampling from the original data with replacement.</p>
+<p>Monte Carlo methods can also be used to express uncertainties more generally, or to approximate difficult integrals. These are both common applications of Monte Carlo methods in Bayesian modelling, where (unless our models are particularly simple) the posterior or posterior-predictive distribution has to be approximated by a collection of values sampled from that distribution.</p>
+<p>Each time we run any of these analyses we’ll get slightly different outcomes. For our work to be replicable we need to quantify this level of variation. For example, if we had a different sample from the posterior distribution, how much would the estimated posterior mean change by? Sometimes, as in this case, we can appeal to the law of large numbers to help us out. If we take more samples, the variation between realisations will shrink. We can then collect enough samples to our estimated mean is stable across realisations, up to our desired number of significant figures.</p>
+<p>To make our results reproducible we will have to ensure that we can reproduce the remaining, unstable digits for any particular realisation. We can do this by setting the seed of our random number generator, an idea we will return to shortly.</p>
+</section>
+<section id="optimisation" class="level3" data-number="10.6.2">
+<h3 data-number="10.6.2" class="anchored" data-anchor-id="optimisation"><span class="header-section-number">10.6.2</span> Optimisation</h3>
+<p>Optimisation is the second aspect of data science that can be very difficult to ensure is reproducible and replicable.</p>
+<p>Is the optimum you find stable over:</p>
+<ul>
+<li>runs of the procedure?</li>
+<li>starting points?</li>
+<li>step size / learning rate?</li>
+<li>realisations of the data?</li>
+</ul>
+<div class="medium_right">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/401-production-reproducibility/contour-optimisation.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">A poorly drawn contour plot. Local modes make this optimiation unstable to the choice of starting point.</figcaption>
+</figure>
+</div>
+</div>
+<p>If optimisation routines are used in parameter estimation, we have to ensure that the results they find for a particular data set are reproducible for a given configuration. This might be a given data set, initial set of starting parameters and step size, the learning rate (which controls how that step size changes) and the maximum number of iterations to perform.</p>
+<p>We additionally need to be concerned about replication here. If we had chosen a different starting point would the optimisation still converge, and would it converge to the same mode? Our original method may have found a local optimum but how can we confirm that this is a global optimum?</p>
+<p>If the optimisation fails to converge, can your reproduce that case to diagnose the problem? This can be particularly tricky when the optimisation routine itself uses Monte Carlo methods, such as stochastic gradient descent or simulated annealing.</p>
+</section>
+<section id="pseudo-random-numbers" class="level3" data-number="10.6.3">
+<h3 data-number="10.6.3" class="anchored" data-anchor-id="pseudo-random-numbers"><span class="header-section-number">10.6.3</span> (Pseudo-)Random Numbers</h3>
+<p>Sometimes we have stochastic elements to our work that we can’t use brute force to eliminate. Perhaps this is beyond our computational abilities or else the number of realisations is an important, fixed aspect of our study.</p>
+<p>Fortunately, in computing it’s not common to have truly random numbers. Instead, what we usually have is a complex but deterministic function that generates a sequence of numbers that are statistically indistinguishable from a series of independent random variates.</p>
+<p>The next term in this sequence of pseudo-random numbers is generated generated based on value the current one. This means that, by setting the starting point, we can always get the same sequence of pseudo-random variates each time we run the code. In R we set this starting point using <code>set.seed()</code></p>
+<p>This is especially useful for simulations that involve random variables, as it allows us to recreate the same results exactly. This not only makes it possible for others to recreate our results but it can also make it much easier to test and debug our own code.</p>
+<hr>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># different values</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">4</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] -1.6508772 -1.2176918  1.0958955 -0.6258297</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">4</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1]  0.8003329  0.0394195 -1.6283002 -1.1414527</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<hr>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># the same value</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1234</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">4</span>)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] -1.2070657  0.2774292  1.0844412 -2.3456977</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1234</span>)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">4</span>)</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] -1.2070657  0.2774292  1.0844412 -2.3456977</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<hr>
+</section>
+</section>
+<section id="beware" class="level2" data-number="10.7">
+<h2 data-number="10.7" class="anchored" data-anchor-id="beware"><span class="header-section-number">10.7</span> Beware</h2>
+<p>When running code sequentially and interactively, setting the seed is about all you will need to solve reproducibility problems. However, I’d advise you to take great care when combining this with some of the methods we’ll see for speeding up your code. In some cases, the strategies to optimize your code performance can interfere with the generation of random numbers and lead to unintended results.</p>
+<p>When writing code that’s executed in parallel across multiple cores or processors, you have to carefully consider is whether or not to give each the same seed value. The correct decision here is context specific and depends on the interpretation of the random variates you will be generating. If you are making a comparison between iterations it might be important the the random aspects are kept as similar as possible, while if you are paralleling only for speed gains this might not be important at all.</p>
+<p>Finally, it’s important to be wary of the quality of pseudo-random number generation and the interfacing R with other programming languages. R was developed as a <em>statistical</em> programming language and most other languages are not as statistically focused. Different languages may use different algorithms for generating pseudo-random numbers, and the quality of the generated numbers can vary. It’s important to make sure that seeds are appropriately passed between languages to ensure that the correct sequence of random numbers is generated.</p>
+</section>
+<section id="wrapping-up" class="level2" data-number="10.8">
+<h2 data-number="10.8" class="anchored" data-anchor-id="wrapping-up"><span class="header-section-number">10.8</span> Wrapping Up</h2>
+<p>To get our work put into production it should be both reproducible and replicable.</p>
+<ul>
+<li><p><em>Reproducible:</em> can recreate the same results from the same code and data</p></li>
+<li><p><em>Replicable:</em> core results remain valid when using different data</p></li>
+</ul>
+<p>While randomness is a key part of most data science workflows but can lead to reproducibility nightmares. We can manage these by appealing to the stability of averages in large samples and by explicitly setting the sequence of pseudo-random numbers that we generate using <code>set.seed()</code>.</p>
+<p>Finally, we should take special care when we have to combine efficiency with replicable workflows.</p>
+<p>With these ideas you can now use good data to do good science.</p>
+<!-- 
+Write chapter following structure of this article
+
+* https://www.kdnuggets.com/2019/11/reproducibility-replicability-data-science.html
+
+* The Ethical Algorithm M Kearns and A Roth (Chapter 4) https://library-search.imperial.ac.uk/discovery/fulldisplay?docid=alma991000531083101591&context=L&vid=44IMP_INST:ICL_VU1&lang=en&search_scope=MyInst_and_CI&adaptor=Local%20Search%20Engine&tab=Everything&query=any,contains,kearns%20and%20roth&mode=Basic 
+
+* The ASA Statement on $p$-values: Context, Process and Purpose https://library-search.imperial.ac.uk/discovery/fulldisplay?docid=cdi_informaworld_taylorfrancis_310_1080_00031305_2016_1154108&context=PC&vid=44IMP_INST:ICL_VU1&lang=en&search_scope=MyInst_and_CI&adaptor=Primo%20Central&tab=Everything&query=any,contains,ASA%20p-value&offset=0
+
+* The garden of forking paths: Why multiple comparisons can be a problem,
+even when there is no "Fishing expedition" or "p-hacking" and the research
+hypothesis was posited ahead of time. A Gelman and E loken (2013) http://stat.columbia.edu/~gelman/research/unpublished/forking.pdf 
+
+
+* https://docker-curriculum.com/ by Prakhar Srivastav
+
+-->
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./400-production-introduction.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Preparing for Production</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./402-production-explainability.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Explainability</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>

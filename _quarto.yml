@@ -24,6 +24,11 @@ book:
     - 302-edav-analysis.qmd
     - 303-edav-visualisation.qmd
     - 310-edav-checklist.qmd
+    - part: 400-production-introduction.qmd
+    - 401-production-reproducibility.qmd
+    - 402-production-explainability.qmd
+    - 403-production-scalability.qmd
+    - 410-production-checklist.qmd
     - references.qmd
 
 bibliography: references.bib

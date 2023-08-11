@@ -1,0 +1,41 @@
+# Checklist {#production-checklist .unnumbered}
+
+```{r production-checklist}
+#| echo: false
+#| results: asis
+source("_common.R")
+status("drafting")
+```
+
+## Videos / Chapters 
+
+- [ ] [Reproducibility](https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=f48d43b4-b370-4cfb-a438-af9e00bf79b5) (26 min) [[slides]](https://github.com/zakvarty/effective-data-science-slides-2022/raw/main/04-01-reproducibility/04-01-reproducibility.pdf)
+
+- [ ] [Explainability](https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=f2c64757-faea-470f-9dfc-af9e00ba4929) (16 min) [[slides]](https://github.com/zakvarty/effective-data-science-slides-2022/raw/main/04-02-explainability/04-02-explainability.pdf)
+ 
+- [ ] [Scalability](https://imperial.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=5305fbb1-8dc9-4232-82d0-afa00187f942) (30 min) [[slides]](https://github.com/zakvarty/effective-data-science-slides-2022/raw/main/04-03-scalability/04-03-scalability.pdf)
+
+## Reading 
+
+Use the [Preparing for Production](#production-reading) section of the reading list to support and guide your exploration of this week's topics. Note that these texts are divided into core reading, reference materials and materials of interest. 
+
+## Activities 
+
+This week has fewer activities, since you will be working on the first assessment. 
+
+_Core_ 
+
+- Read the LIME paper, which we will discuss during the live session.
+
+- Work through the [understanding LIME R tutorial](https://cran.r-project.org/web/packages/lime/vignettes/Understanding_lime.html) 
+
+- Use code profiling tools to assess the performance of your `rolling_mean()` and `rolling_sd()` functions.  Identify any efficiencies that can be made.
+
+_Bonus:_
+
+- Write two functions to simulate a [homogeneous Poisson process](https://en.wikipedia.org/wiki/Poisson_point_process#Homogeneous_case_2) with intensity $\lambda >0$ on the interval $(t_1, t_2) \subset \mathbb{R}$. The first should use the exponential distribution of inter-event times to simulate events in sequence. The second should use the Poisson distribution of the total event count to first simulate the number of events and then randomly allocate locations over the interval. Evaluate and compare the reproducibility and scalability of each implementation.  
+
+
+## Live Session 
+
+In the live session we will begin with a discussion of this week's tasks. We will then break into small groups for a reading group style discussion of the LIME paper that was set as reading for this week.  
