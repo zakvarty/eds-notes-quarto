@@ -1,17 +1,19 @@
 # Codes of Conduct {#ethics-conduct}
 
-```{r, results='asis', echo=FALSE}
+```{r ethics-conduct-setup}
+#| echo: false
+#| results: asis
 source("_common.R")
 status("complete")
 ```
 
 ## Data Science: Miracle Cure and Sexiest Job
 
-It has been more than 10 years since it was proclaimed that data science was the sexiest job of the century. Current turbulence in the technology sector may have you questioning the veracity of that claim, but it still rings true if we take a less myopic view of where data science is used.
-
 ::: medium_left
 ![Title of Harvard Business Review article: Is data scientist still the sexiest job of the 21st Century?](images/503-ethics-conduct/harvard-business-review-sexiest-job.png)
 :::
+
+It has been more than 10 years since it was proclaimed that data science was the sexiest job of the century. Current turbulence in the technology sector may have you questioning the veracity of that claim, but it still rings true if we take a less myopic view of where data science is used.
 
 Data science and machine learning are being used more extensively than ever across fields including medicine, healthcare and sociology. Data science is also applied to understand our environment, study ecological systems and inform our strategies for their preservation. In addition to this, data science is used widely across the private sector, where it informs business strategies and financial services, alongside the public sector where it influences governance and policy development.
 
@@ -44,7 +46,12 @@ You might be thinking at this doesn't effect you because you don't work in image
 Consider a retailer implementing targeted promotions. They might combine previous shopping habits and recent product searches to target their offers.
 
 ::: medium_right
-```{r, fig.align="center", echo=FALSE, out.width="90%", fig.cap="Predicting pregnancy from search and purchase history.", fig.alt="An arrow connects a supemarket points card and search bar to a pregancy test, representing pregancy prediction."}
+```{r fig-pregnancy-prediction}
+#| eval: true
+#| echo: false
+#| fig-align: center
+#| fig-cap: "Predicting pregnancy from search and purchase history."
+#| fig-alt: "An arrow connects a supemarket points card and search bar to a pregancy test, representing pregancy prediction."
 knitr::include_graphics("images/503-ethics-conduct/pregnancy-prediction.png")
 ```
 :::
@@ -56,7 +63,12 @@ This could be seriously upsetting if that customer also happened to be experienc
 ## Technological Adoption Relies on Public Trust {.smaller}
 
 ::: medium_left
-```{r, echo= FALSE, fig.align='center', out.width="100%", fig.cap="Thirteen people were killed and 145 injured during the Interstate 35W bridge collapse in 2007.", fig.alt="Eight-lane roadbridge collapsed into the Mississippi river."}
+```{r mississippi-bridge-collapse}
+#| eval: true
+#| echo: false
+#| fig-align: center
+#| fig-cap: "Thirteen people were killed and 145 injured during the Interstate 35W bridge collapse in 2007."
+#| fig-alt: "Eight-lane roadbridge collapsed into the Mississippi river."
 knitr::include_graphics("images/503-ethics-conduct/collapsed-bridge.png")
 ```
 :::
@@ -73,7 +85,12 @@ Google's original internal code encapsulated a more extreme version of this non-
 
 ## A Hippocratic Oath for Data Scientists
 
-```{r, echo=FALSE, fig.align="center", out.width="90%", fig.alt="Wired article: To work for society, data scientists need a hippocratic oath with teeth", fig.cap="In Weapons of Math Destruction (2016), Cathy O’Neil was among the first authors to make a call for a Hippocratic oath for data scientists"}
+```{r weapons-of-math-destruction}
+#| eval: true
+#| echo: false
+#| fig-align: center
+#| fig-cap: "In Weapons of Math Destruction (2016), Cathy O’Neil was among the first authors to make a call for a Hippocratic oath for data scientists"
+#| fig-alt: "Wired article: To work for society, data scientists need a hippocratic oath with teeth"
 knitr::include_graphics("images/503-ethics-conduct/wired-hippocratic.png")
 ```
 
@@ -109,7 +126,7 @@ This provides individual data scientists with accountability for their actions i
 
 It can also be useful as a form of external support, to convince organisations who employ data scientists that ethical considerations are an important aspect of our work. There is also the opportunity for peer-to-peer support, so that best practices can be established and improved in a unified way across industries, rather than in isolation within individual organisations. This might be through informal networking and knowledge sharing or through formal training organised by that professional body.
 
-Data science is still a developing field and there currently is no professional body specifically dedicated to data science. Instead, data scientists might join one or more related professional bodies, such as the [Royal Statistical Society](https://rss.org.uk/), the [Operational Research Society](https://www.theorsociety.com/),) or the [Society for Industrial and Applied Mathematics](https://www.siam.org/).
+Data science is still a developing field and there currently is no professional body specifically dedicated to data science. Instead, data scientists might join one or more related professional bodies, such as the [Royal Statistical Society](https://rss.org.uk/), the [Operational Research Society](https://www.theorsociety.com/), or the [Society for Industrial and Applied Mathematics](https://www.siam.org/).
 
 ## Wrapping Up 
 
