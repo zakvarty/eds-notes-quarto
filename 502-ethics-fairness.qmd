@@ -1,32 +1,46 @@
 # Fairness {#ethics-fairness}
 
-```{r, results='asis', echo=FALSE}
+```{r ethics-fairness-setup}
+#| results: asis
+#| echo: false
 source("_common.R")
 status("complete")
 ```
 
 ## Fairness and the Data Revolution 
-
-```{r, fig.align='center', fig.alt="Windows 95 logo on a background of white fluffy clouds. Text below reads: We're living in the 90s. Image is stylised to look like it is on a low resolution screen from the 90s.", out.width="100%", echo=FALSE}
+<!--
+```{r fig-windows-wallpaper}
+#| eval: true
+#| echo: false
+#| fig-align: center
+#| fig-cap: ""
+#| fig-alt: "Windows 95 logo on a background of white fluffy clouds. Text below reads: We're living in the 90s. Image is stylised to look like it is on a low resolution screen from the 90s."
 knitr::include_graphics("images/502-ethics-fairness/90s-windows-wallpaper.jpg")
 ```
+-->
 
+::: {.medium_left}
+![](images/502-ethics-fairness/90s-windows-wallpaper.jpg){alt="Windows 95 logo on a background of white fluffy clouds. Text below reads: We're living in the 90s. Image is stylised to look like it is on a low resolution screen from the 90s."}
+:::
 
-Before the 1990s, large datasets were typically only collected to understand huge, complex systems such as:
+Before the 1990s, large datasets were typically only collected to understand huge, complex systems. These systems might be the weather, public infrastructure
+(e.g. hospitals, roads or train networks), the stock market or even populations of people. 
 
-- the weather
-- infrastructure
-  - hospitals 
-  - roads
-  - train networks 
-- stock markets 
-- populations. 
 
 Collecting high quality data on these systems was immensely expensive but paid dividends by allowing us to describe the expected behaviour of these systems at an aggregate level. Using this sort of information, we can’t make journeys or healthcare better at an individual level but we _can_ make changes to try and make these experiences better on average. 
 
+
 Things changed with the widespread adoption of the internet in the mid-1990s and the subsequent surge in data collection, sharing and processing. Suddenly, we as individuals shifted from being just one part of these huge processes to being a complex process worth of modelling all on our own. 
 
-```{r, warning=FALSE, message=FALSE, echo=FALSE, fig.align='center',fig.alt="Barplot showing an exponential-like increase in the volume of data created, captured, copied, and consumed worldwide in each year from 2010 to 2022."}
+
+```{r fig-global-data-barplot}
+#| eval: true
+#| echo: false
+#| message: false
+#| fig-align: center
+#| fig-cap: "Volume of data created, captured, copied, and consumed worldwide from 2010 to 2022."
+#| fig-alt: "Barplot showing an exponential-like increase in the volume of data created, captured, copied, and consumed worldwide in each year from 2010 to 2022."
+ 
 library(tidyverse)
 
 title_string <- "Volume of data created, captured, copied, and consumed worldwide"
@@ -45,13 +59,17 @@ data_use %>%
   ggtitle(label = title_string , subtitle =  subtitle_string) 
 ```
 
+
 It was at this point that focus shifted toward making individual, personalised predictions for specific people, based on the vast amounts of data that we generate as we go about our daily lives. 
 
 This shift from aggregate to individual behaviour creates the opportunity not only for these predictions to systematically harm groups of people, as they always could, but also to acutely harm individuals.
 
 ## You are Your Data 
 
-```{r, echo=FALSE}
+```{r you-are-your-data-sim}
+#| eval: true
+#| echo: false
+
 set.seed(1234)
 group_means <- list(
   c( 3, 1.5),
@@ -97,7 +115,13 @@ data$group_id[2] <- NA
 
 The blunt truth is that, as far as a data science model is concerned, you are nothing more than a point in a high-dimensional predictor space. 
 
-```{r you-are-just-a-point-plot, fig.align='center', fig.alt="scatter plot of two predictors, x_1 and x_2. An arrow points to one observation, with the caption 'you are just a point in predictor space.'", out.width="100%", echo=FALSE}
+```{r you-are-your-data-plot}
+#| eval: true
+#| echo: false
+#| message: false
+#| fig-align: center
+#| fig-alt: "scatter plot of two predictors, x_1 and x_2. An arrow points to one observation, with the caption 'you are just a point in predictor space.'"
+
 arrow_df_1 <- data.frame(x1 = 3.3, x2 = 4.1, y1 = -3.4, y2 = -1.2)
 
 ggplot(data = data, mapping = aes(x = x_1, y = x_2)) + 
@@ -119,7 +143,12 @@ ggplot(data = data, mapping = aes(x = x_1, y = x_2)) +
 
 The model might use your location in that space to group you with other points that are in some sense “nearby”. Alternatively, the model might estimate some information about you that it currently doesn’t have, based on what it knows about those surrounding points. These other points also represent unique humans with rich and fascinating lives - but the model doesn’t care about that, it is just there to group some points or predict some values.  
 
-```{r classification-plot, fig.align='center', fig.alt= "Two scatter plots illustrating classification and regression with two predictors. The outcome values are shown by colour for all but one point. This point is grey and represents the predictor values at a prediction point representing the reader.", out.width="100%", echo=FALSE}
+```{r classification-plot}
+#| eval: true
+#| echo: false
+#| message: false
+#| fig-align: center
+#| fig-alt: "Two scatter plots illustrating classification and regression with two predictors. The outcome values are shown by colour for all but one point. This point is grey and represents the predictor values at a prediction point representing the reader."
 p1 <- ggplot(data = data, mapping = aes(x = x_1, y = x_2)) + 
   geom_point(aes(col = as.factor(group_id)), size = 2.5) + 
   ggtitle("Classification") + 
@@ -153,17 +182,21 @@ This natural lead us to ask what classifies as an important decision?
 TODO: Format as two columns. Would be prettier but needs separate latex / html implementation
 --> 
 
+:::: {.columns}
+::: {.column width="50%"}
 - age
 - gender reassignment
 - marriage / civil partnership
 - pregnancy / parental leave
 - disability
-
+:::
+::: {.column width=50%}
 - race including colour, nationality, ethnic or national origin
 - religion or belief
 - sex
 - sexual orientation
-
+:::
+::::
 
 -----
 
@@ -279,13 +312,9 @@ To do actually resolve this issue we need to define our relative preference betw
 
 ### Other Approaches 
 
------
-
-- Re-weighting or resampling to better represent minority groups. 
-- Forgetting factor to reduce impact of bias in historical data.
-- Meta-modelling to intervene in harmful feedback loops.
-
------
+> - Re-weighting or resampling to better represent minority groups. 
+> - Forgetting factor to reduce impact of bias in historical data.
+> - Meta-modelling to intervene in harmful feedback loops.
 
 Whenever we treating all predictions equally and our loss function optimises purely for predictive performance, good predictions for minority groups will never be prioritised. One strategy to correct for this is to either re-weighting or re-sample each observation so that minority groups are given greater importance within the loss function. 
 
@@ -299,6 +328,7 @@ This not only reduces the number of loans that will be granted to that racial gr
 The decisions made using this model are impacting its future training data and creating a harmful and self-reinforcing feedback loop. Historical down weighting will do nothing to address this sort of issue, which requires active intervention.
 
 A meta-modelling approach is possible type of intervention. Here post-hoc methods used to estimate the biases within a fitted model and these estimates are used to explicitly correct for historical biases, _before_ the model is used to make predictions or decisions. 
+
 
 ## Wrapping Up 
 
