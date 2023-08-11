@@ -1,0 +1,1025 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.353">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>Effective Data Science - 13&nbsp; Privacy</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./502-ethics-fairness.html" rel="next">
+<link href="./500-ethics-introduction.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script><link rel="stylesheet" href="style.css">
+</head>
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./500-ethics-introduction.html">Data Science Ethics</a></li><li class="breadcrumb-item"><a href="./501-ethics-privacy.html"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Privacy</span></a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Effective Data Science</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/zakvarty/eds-notes-quarto/" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+    <div class="dropdown">
+      <a href="" title="Share" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Share"><i class="bi bi-share"></i></a>
+      <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
+<li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://twitter.com/intent/tweet?url=%7Curl%7C">
+              <i class="bi bi-bi-twitter pe-1"></i>
+            Twitter
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://www.linkedin.com/sharing/share-offsite/?url=%7Curl%7C">
+              <i class="bi bi-bi-linkedin pe-1"></i>
+            LinkedIn
+            </a>
+          </li>
+      </ul>
+</div>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">About this Course</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./100-workflows-introduction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Effective Workflows</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./101-workflows-organising-your-work.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Organising your work</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./102-workflows-naming-files.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Naming Files</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./103-workflows-organising-your-code.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Code</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./110-workflows-checklist.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Workflows Checklist</span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./200-data-introduction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Acquiring and Sharing Data</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./201-data-tabular.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Tabular Data</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./202-data-webscraping.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Web Scraping</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./203-data-apis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">APIs</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./210-data-checklist.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Checklist</span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./300-edav-intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Data Exploration and Visualisation</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./301-edav-wrangling.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Data Wrangling</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./302-edav-analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Exploratory Data Analysis</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./303-edav-visualisation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Data Visualisation</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./310-edav-checklist.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Checklist</span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./400-production-introduction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preparing for Production</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./401-production-reproducibility.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Reproducibility</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./402-production-explainability.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Explainability</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./403-production-scalability.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Scalability</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./410-production-checklist.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Checklist</span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./500-ethics-introduction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Data Science Ethics</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./501-ethics-privacy.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Privacy</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./502-ethics-fairness.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Fairness</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./503-ethics-conduct.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Codes of Conduct</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./510-ethics-checklist.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Checklist</span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true">
+ <span class="menu-text">Appendices</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+      </ul>
+</li>
+    </ul>
+</div>
+</nav><div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+<li><a href="#privacy-and-data-science" id="toc-privacy-and-data-science" class="nav-link active" data-scroll-target="#privacy-and-data-science"><span class="header-section-number">13.1</span> Privacy and Data Science</a></li>
+  <li>
+<a href="#privacy-as-a-human-right" id="toc-privacy-as-a-human-right" class="nav-link" data-scroll-target="#privacy-as-a-human-right"><span class="header-section-number">13.2</span> Privacy as a Human Right</a>
+  <ul class="collapse">
+<li><a href="#article-12-of-the-universal-declaration-of-human-rights" id="toc-article-12-of-the-universal-declaration-of-human-rights" class="nav-link" data-scroll-target="#article-12-of-the-universal-declaration-of-human-rights"><span class="header-section-number">13.2.1</span> Article 12 of the Universal Declaration of Human Rights</a></li>
+  </ul>
+</li>
+  <li>
+<a href="#data-privacy-and-the-european-union" id="toc-data-privacy-and-the-european-union" class="nav-link" data-scroll-target="#data-privacy-and-the-european-union"><span class="header-section-number">13.3</span> Data Privacy and the European Union</a>
+  <ul class="collapse">
+<li><a href="#general-date-protection-regulation-2018" id="toc-general-date-protection-regulation-2018" class="nav-link" data-scroll-target="#general-date-protection-regulation-2018"><span class="header-section-number">13.3.1</span> General Date Protection Regulation (2018)</a></li>
+  </ul>
+</li>
+  <li><a href="#privacy-key-terms" id="toc-privacy-key-terms" class="nav-link" data-scroll-target="#privacy-key-terms"><span class="header-section-number">13.4</span> Privacy: Key Terms</a></li>
+  <li>
+<a href="#measuring-privacy" id="toc-measuring-privacy" class="nav-link" data-scroll-target="#measuring-privacy"><span class="header-section-number">13.5</span> Measuring Privacy</a>
+  <ul class="collapse">
+<li><a href="#pseudo-identifiers-and-k-anonymity" id="toc-pseudo-identifiers-and-k-anonymity" class="nav-link" data-scroll-target="#pseudo-identifiers-and-k-anonymity"><span class="header-section-number">13.5.1</span> Pseudo-identifiers and <span class="math inline">\(k\)</span>-anonymity</a></li>
+  <li><a href="#k-anonymity-example" id="toc-k-anonymity-example" class="nav-link" data-scroll-target="#k-anonymity-example"><span class="header-section-number">13.5.2</span> <span class="math inline">\(k\)</span>-anonymity example</a></li>
+  </ul>
+</li>
+  <li><a href="#improving-privacy" id="toc-improving-privacy" class="nav-link" data-scroll-target="#improving-privacy"><span class="header-section-number">13.6</span> Improving Privacy</a></li>
+  <li><a href="#breaking-k-anonymity" id="toc-breaking-k-anonymity" class="nav-link" data-scroll-target="#breaking-k-anonymity"><span class="header-section-number">13.7</span> Breaking <span class="math inline">\(k\)</span>-anonymity</a></li>
+  <li>
+<a href="#cautionary-tales" id="toc-cautionary-tales" class="nav-link" data-scroll-target="#cautionary-tales"><span class="header-section-number">13.8</span> Cautionary tales</a>
+  <ul class="collapse">
+<li><a href="#massachussets-medical-data" id="toc-massachussets-medical-data" class="nav-link" data-scroll-target="#massachussets-medical-data"><span class="header-section-number">13.8.1</span> Massachussets Medical Data</a></li>
+  <li><a href="#neflix-competition" id="toc-neflix-competition" class="nav-link" data-scroll-target="#neflix-competition"><span class="header-section-number">13.8.2</span> Neflix Competition</a></li>
+  </ul>
+</li>
+  <li><a href="#wrapping-up" id="toc-wrapping-up" class="nav-link" data-scroll-target="#wrapping-up"><span class="header-section-number">13.9</span> Wrapping Up</a></li>
+  </ul><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/zakvarty/eds-notes-quarto/edit/master/501-ethics-privacy.qmd" class="toc-action">Edit this page</a></p></div></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
+<h1 class="title"><span id="ethics-privacy" class="quarto-section-identifier"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Privacy</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header><div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Effective Data Science is still a work-in-progress. This chapter is largely complete and just needs final proof reading.</p>
+<p>If you would like to contribute to the development of EDS, you may do so at <a href="https://github.com/zakvarty/data_science_notes" class="uri">https://github.com/zakvarty/data_science_notes</a>.</p>
+</div>
+</div>
+<section id="privacy-and-data-science" class="level2" data-number="13.1"><h2 data-number="13.1" class="anchored" data-anchor-id="privacy-and-data-science">
+<span class="header-section-number">13.1</span> Privacy and Data Science</h2>
+<p>Data privacy is all about keeping people’s personal information confidential and secure. It’s the idea that people have control over their personal data, and that companies and organizations are responsible for protecting it. Personal data can include things like names, addresses, phone numbers, email addresses, medical information, and even online activity.</p>
+<blockquote class="blockquote">
+<p>What is personal data?</p>
+<ul>
+<li>Name, national insurance number, passport number</li>
+<li>Contact details: address, phone number, email address</li>
+<li>Medical history</li>
+<li>Online activity, GPS data, finger print or face-ID,</li>
+</ul>
+<p>Should not be collected, analysed or distributed without consent.</p>
+</blockquote>
+<p>Under the concept of data privacy, individuals have the right to know what information is being collected about them, how it’s being used, who it’s being shared with, and to have the ability to control that information. Companies and organizations, on the other hand, have a responsibility to keep this information secure and to use it only for the purpose it was intended.</p>
+<p>It’s important to remember that with the growing use of machine learning and data science methods, personal information is being collected, stored, and shared more than ever before. This makes data privacy a critical issue to our work as data scientists. By ensuring that personal information is handled responsibly and with respect for people’s privacy, we can build trust and confidence in the digital world. In this section of the course I hope to introduce you to some key ideas around data privacy and use some case studies to demonstrate that privacy is not an easy thing to ensure.</p>
+</section><section id="privacy-as-a-human-right" class="level2" data-number="13.2"><h2 data-number="13.2" class="anchored" data-anchor-id="privacy-as-a-human-right">
+<span class="header-section-number">13.2</span> Privacy as a Human Right</h2>
+<section id="article-12-of-the-universal-declaration-of-human-rights" class="level3" data-number="13.2.1"><h3 data-number="13.2.1" class="anchored" data-anchor-id="article-12-of-the-universal-declaration-of-human-rights">
+<span class="header-section-number">13.2.1</span> Article 12 of the Universal Declaration of Human Rights</h3>
+<blockquote class="blockquote">
+<p>No one shall be subjected to arbitrary interference with his privacy, family, home or correspondence, nor to attacks upon his honour and reputation. Everyone has the right to the protection of the law against such interference or attacks. - <a href="https://www.un.org/en/about-us/universal-declaration-of-human-rights">UN General Assembly</a>, 1948.</p>
+</blockquote>
+<p>The idea of a right to privacy is not a new one. Article 12 of the Universal Declaration of Human Rights, written in 1948, states that everyone has the right to privacy in their personal and family life, home and correspondence (this includes communication via the post, telephone, and email).</p>
+<p>This means that everyone has the right to keep their personal information, private and protected from being disclosed to others without their consent. This right to privacy is essential for protecting an individual’s autonomy, dignity, and freedom.</p>
+<p>The Universal Declaration of Human Rights it is often considered as a benchmark for human rights and many countries have incorporated its principles into their own laws and regulations. This means that in many countries the right to privacy is legally protected and people have the right to take action if their privacy is violated.</p>
+<p>This means we have to take particular care in our work as data scientists when handling any information personal information, whether that is at the individual level or in aggregate.</p>
+</section></section><section id="data-privacy-and-the-european-union" class="level2" data-number="13.3"><h2 data-number="13.3" class="anchored" data-anchor-id="data-privacy-and-the-european-union">
+<span class="header-section-number">13.3</span> Data Privacy and the European Union</h2>
+<section id="general-date-protection-regulation-2018" class="level3" data-number="13.3.1"><h3 data-number="13.3.1" class="anchored" data-anchor-id="general-date-protection-regulation-2018">
+<span class="header-section-number">13.3.1</span> General Date Protection Regulation (2018)</h3>
+<blockquote class="blockquote">
+<p>‘Consent’ of the data subject means any freely given, specific, informed and unambiguous indication of the data subject’s wishes by which he or she, by a statement or by a clear affirmative action, signifies agreement to the processing of personal data relating to him or her; - GDPR <a href="https://gdpr-info.eu/art-4-gdpr/">Article 4</a></p>
+</blockquote>
+<p>A more recent set of regulations relating to the use of personal data is the General Data Protection Regulation (GDPR). This is a comprehensive data privacy regulation that went into effect on May 2018 within the European Union. The purpose of the GDPR is to give individuals more control over their personal information and how it’s used, and to unify data protection laws across the EU.</p>
+<p>The GDPR is an extensive legal document that lays down strict rules for how companies and organizations must handle the personal data of EU citizens, <em>regardless of where that data is stored or processed</em>.</p>
+<p>Some key provisions of the GDPR include the requirement to obtain explicit, informed and active consent from individuals before the collection and processing of their personal data. This is precisely why banner notifications about cookies on websites became ubiquitous,</p>
+<p>GDPR also establishes the right for individuals to request access to, or deletion of, their personal data. Furthermore, it states that in the event of a data breach (where unauthorised access or use of personal data occurs) the data holder must inform the affected individuals and relevant authorities within 72 hours.</p>
+</section></section><section id="privacy-key-terms" class="level2" data-number="13.4"><h2 data-number="13.4" class="anchored" data-anchor-id="privacy-key-terms">
+<span class="header-section-number">13.4</span> Privacy: Key Terms</h2>
+<p>Measuring privacy within a dataset is a complex task that involves assessing the degree to which personal information is protected from unauthorized access, use, or disclosure. There are many ways of measuring and increasing the degree of privacy within a data set. To understand these, and the literature on data privacy, it helps to be familiar with a few key terms.</p>
+<blockquote class="blockquote">
+<p><em>Pseudonmisation</em>: processing data so that it does not relate to an identifiable person.</p>
+</blockquote>
+<p>A data entry is pseudonymised when it has been processed in a way that it does not relate to an identifiable person. The key word here is identifiable. Replacing your name with your CID would be considered a form of pseudonymisation, because based on that information alone you cannot be identified.</p>
+<blockquote class="blockquote">
+<p><em>Re-identification</em>: relating a pseudonymised data entry to an identifiable person.</p>
+</blockquote>
+<p>Re-identification is the act of relating a pseudonymised data entry to an identifiable person. Re-identification makes something about that person known that wasn’t known beforehand, perhaps by using processing techniques or cross-referencing against external information. In the previous grading scenario, re-identification occurs after marking so that your grades can be returned to you.</p>
+<blockquote class="blockquote">
+<p><em>Anonymisation</em>: A pseudonmisation method that precludes re-identification.</p>
+</blockquote>
+<p>Anonymisation is a word that in casual usage is often conflated with our previous definition of pseudonymisation. In the technical sense, anonymisation is any form of pseudonymisation that precludes the possibility of re-identification.</p>
+<p>We don’t want to anonymise test scores, or we would not be able to map them back to individual students. However, if grades were to be published online then we would want to ensure that this is only done in an anonymised format.</p>
+</section><section id="measuring-privacy" class="level2" data-number="13.5"><h2 data-number="13.5" class="anchored" data-anchor-id="measuring-privacy">
+<span class="header-section-number">13.5</span> Measuring Privacy</h2>
+<section id="pseudo-identifiers-and-k-anonymity" class="level3" data-number="13.5.1"><h3 data-number="13.5.1" class="anchored" data-anchor-id="pseudo-identifiers-and-k-anonymity">
+<span class="header-section-number">13.5.1</span> Pseudo-identifiers and <span class="math inline">\(k\)</span>-anonymity</h3>
+<blockquote class="blockquote">
+<p><em>Pseudo-identifiers</em>: Attributes that can also be observed in public data. For example, someone’s name, job title, zip code, or email.</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>For the set of quasi-identifiers <span class="math inline">\(A_1, \ldots ,A_p\)</span>, a table is <em><span class="math inline">\(k\)</span>-anonymous</em> if each possible value assignment to these variables <span class="math inline">\((a_1, . . . , a_n)\)</span> is observed for either 0 or at least <span class="math inline">\(k\)</span> individuals.</p>
+</blockquote>
+<p><span class="math inline">\(k\)</span>-anonymity is a technique that ensures each combination of attributes within a table, is shared by at least k records within that dataset. This ensures that each individual’s data can’t be distinguished from at least <span class="math inline">\(k-1\)</span> other individuals.</p>
+<p>This provides some rudimentary level of privacy, where <span class="math inline">\(k\)</span> corresponds to the size of smallest equivalence class of pseudo-identifiers within the data. Therefore larger values of <span class="math inline">\(k\)</span> correspond to greater levels of privacy.</p>
+<p>To see this more concretely, let’s take a look at an example.</p>
+</section><section id="k-anonymity-example" class="level3" data-number="13.5.2"><h3 data-number="13.5.2" class="anchored" data-anchor-id="k-anonymity-example">
+<span class="header-section-number">13.5.2</span> <span class="math inline">\(k\)</span>-anonymity example</h3>
+<p>In this example we have a dataset recording visits to a sexual health clinic. We wish to establish the <span class="math inline">\(k\)</span>-anonymity of this data set, where the diagnosed condition should be kept private. To do help with this, the drug use status has been removed for all patients and only partial information is available about their postcode and age.</p>
+<table class="table">
+<thead><tr class="header">
+<th></th>
+<th>Post Code</th>
+<th>Age</th>
+<th>Drug Use</th>
+<th><strong>Condition</strong></th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>OX1****</td>
+<td>&lt;20</td>
+<td>*</td>
+<td><strong>Herpes</strong></td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>OX1****</td>
+<td>&lt;20</td>
+<td>*</td>
+<td><strong>Herpes</strong></td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>OX2****</td>
+<td>&gt;=30</td>
+<td>*</td>
+<td><strong>Chlamydia</strong></td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>OX2****</td>
+<td>&gt;=30</td>
+<td>*</td>
+<td><strong>Herpes</strong></td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>OX1****</td>
+<td>&lt;20</td>
+<td>*</td>
+<td><strong>Gonorrhoea</strong></td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td>OX2****</td>
+<td>&gt;=30</td>
+<td>*</td>
+<td><strong>Gonorrhoea</strong></td>
+</tr>
+<tr class="odd">
+<td>7</td>
+<td>OX1****</td>
+<td>&lt;20</td>
+<td>*</td>
+<td><strong>Gonorrhoea</strong></td>
+</tr>
+<tr class="even">
+<td>8</td>
+<td>LA1****</td>
+<td>2*</td>
+<td>*</td>
+<td><strong>Chlamydia</strong></td>
+</tr>
+<tr class="odd">
+<td>9</td>
+<td>LA1****</td>
+<td>2*</td>
+<td>*</td>
+<td><strong>Chlamydia</strong></td>
+</tr>
+<tr class="even">
+<td>10</td>
+<td>OX2****</td>
+<td>&gt;=30</td>
+<td>*</td>
+<td><strong>Gonorrhoea</strong></td>
+</tr>
+<tr class="odd">
+<td>11</td>
+<td>LA1****</td>
+<td>2*</td>
+<td>*</td>
+<td><strong>Chlamydia</strong></td>
+</tr>
+<tr class="even">
+<td>12</td>
+<td>LA1****</td>
+<td>2*</td>
+<td>*</td>
+<td><strong>Chlamydia</strong></td>
+</tr>
+</tbody>
+</table>
+<p>By grouping observations by each distinct combination of pseudo-identifiers we can establish the equivalence classes within the data.</p>
+<table class="table">
+<colgroup>
+<col style="width: 5%">
+<col style="width: 16%">
+<col style="width: 8%">
+<col style="width: 14%">
+<col style="width: 23%">
+<col style="width: 30%">
+</colgroup>
+<thead><tr class="header">
+<th></th>
+<th>Post Code</th>
+<th>Age</th>
+<th>Drug Use</th>
+<th><strong>Condition</strong></th>
+<th><em>Equivalence Class</em></th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>OX1****</td>
+<td>&lt;20</td>
+<td>*</td>
+<td><strong>Herpes</strong></td>
+<td><em>1</em></td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>OX1****</td>
+<td>&lt;20</td>
+<td>*</td>
+<td><strong>Herpes</strong></td>
+<td><em>1</em></td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>OX2****</td>
+<td>&gt;=30</td>
+<td>*</td>
+<td><strong>Chlamydia</strong></td>
+<td><em>2</em></td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>OX2****</td>
+<td>&gt;=30</td>
+<td>*</td>
+<td><strong>Herpes</strong></td>
+<td><em>2</em></td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>OX1****</td>
+<td>&lt;20</td>
+<td>*</td>
+<td><strong>Gonorrhoea</strong></td>
+<td><em>1</em></td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td>OX2****</td>
+<td>&gt;=30</td>
+<td>*</td>
+<td><strong>Gonorrhoea</strong></td>
+<td><em>2</em></td>
+</tr>
+<tr class="odd">
+<td>7</td>
+<td>OX1****</td>
+<td>&lt;20</td>
+<td>*</td>
+<td><strong>Gonorrhoea</strong></td>
+<td><em>1</em></td>
+</tr>
+<tr class="even">
+<td>8</td>
+<td>LA1****</td>
+<td>2*</td>
+<td>*</td>
+<td><strong>Chlamydia</strong></td>
+<td><em>3</em></td>
+</tr>
+<tr class="odd">
+<td>9</td>
+<td>LA1****</td>
+<td>2*</td>
+<td>*</td>
+<td><strong>Chlamydia</strong></td>
+<td><em>3</em></td>
+</tr>
+<tr class="even">
+<td>10</td>
+<td>OX2****</td>
+<td>&gt;=30</td>
+<td>*</td>
+<td><strong>Gonorrhoea</strong></td>
+<td><em>2</em></td>
+</tr>
+<tr class="odd">
+<td>11</td>
+<td>LA1****</td>
+<td>2*</td>
+<td>*</td>
+<td><strong>Chlamydia</strong></td>
+<td><em>3</em></td>
+</tr>
+<tr class="even">
+<td>12</td>
+<td>LA1****</td>
+<td>2*</td>
+<td>*</td>
+<td><strong>Chlamydia</strong></td>
+<td><em>3</em></td>
+</tr>
+</tbody>
+</table>
+<p>Here we have three distinct equivalence classes, each with four observations. Therefore the smallest equivalence class is also of size four and this data set is 4-anonymous.</p>
+<p>While we can easily identify the equivalence classes in this small dataset, doing so in large datasets is a non-trivial task.</p>
+</section></section><section id="improving-privacy" class="level2" data-number="13.6"><h2 data-number="13.6" class="anchored" data-anchor-id="improving-privacy">
+<span class="header-section-number">13.6</span> Improving Privacy</h2>
+<p>There are three main ways that you can improve the level of privacy within your data, and we have seen examples of two of these already.</p>
+<p><strong>Redaction</strong> may be applied to individual or to an attribute, leading to a whole row or column being censored. This is quite an extreme approach: it can lead to a large amount of information being removed from the data set. However, sometimes redacting a full row is necessary; for example when that row contains identifying information like a person’s name or national insurance number. An additional concern when redacting <em>rows</em> from your data is that it will artificially alter the distribution of your sample, making it unrepresentative of the population values.</p>
+<p><strong>Aggregation</strong> or coarsening is a second approach where the level of anonymity can be increased by binning continuous variables into discrete ranges or by combining categories within a variable that already takes discrete values. The idea here is to reduce the number of equivalence classes within the quasi-identifiers so that the level of k-anonymity is increased.</p>
+<p>A similar approach is to corrupt or obfuscate the observed data by <strong>adding noise to the observations</strong>, or permuting some portion of them. The aim is to retain overall patterns but ensure individual recorded values no longer correspond to an individual in the raw data set. The difficulty here is in setting the type and amount of noise to be added to the data to grant sufficient privacy without removing all information from the dataset.</p>
+<p>This trade-off between information loss and privacy is a common theme throughout all of these methods.</p>
+</section><section id="breaking-k-anonymity" class="level2" data-number="13.7"><h2 data-number="13.7" class="anchored" data-anchor-id="breaking-k-anonymity">
+<span class="header-section-number">13.7</span> Breaking <span class="math inline">\(k\)</span>-anonymity</h2>
+<p><span class="math inline">\(k\)</span>-anonymity ensures that there are at least <span class="math inline">\(k-1\)</span> other people with your particular combination of pseudo-identifiers. What it does not do is ensure that there is any variation within a particular group. The dataset on sexual health we just saw was 4-anonymous, but if we know a person how attended the clinic was from a Lancashire (LA) postcode (and in their 20s) then we know for certain that they have Chlamydia. An alternative privacy measure called <span class="math inline">\(l\)</span>-diversity tries to address this issue.</p>
+<table class="table">
+<thead><tr class="header">
+<th></th>
+<th>Post Code</th>
+<th>Age</th>
+<th>Drug Use</th>
+<th>Condition</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td>8</td>
+<td>LA1****</td>
+<td>2*</td>
+<td>*</td>
+<td><em>Chlamydia</em></td>
+</tr>
+<tr class="even">
+<td>9</td>
+<td>LA1****</td>
+<td>2*</td>
+<td>*</td>
+<td><em>Chlamydia</em></td>
+</tr>
+<tr class="odd">
+<td>11</td>
+<td>LA1****</td>
+<td>2*</td>
+<td>*</td>
+<td><em>Chlamydia</em></td>
+</tr>
+<tr class="even">
+<td>12</td>
+<td>LA1****</td>
+<td>2*</td>
+<td>*</td>
+<td><em>Chlamydia</em></td>
+</tr>
+</tbody>
+</table>
+<p>A second problem with <span class="math inline">\(k\)</span>-anonymity is that this type of privacy measure is focused entirely on the data available within this dataset. It does not take into account data that might be available elsewhere or might become publicly available in the future. An <strong>external data-linkage attack</strong> can cross-reference this table against other information to reduce the size of equivalence classes and reveal personal information.</p>
+</section><section id="cautionary-tales" class="level2" data-number="13.8"><h2 data-number="13.8" class="anchored" data-anchor-id="cautionary-tales">
+<span class="header-section-number">13.8</span> Cautionary tales</h2>
+<section id="massachussets-medical-data" class="level3" data-number="13.8.1"><h3 data-number="13.8.1" class="anchored" data-anchor-id="massachussets-medical-data">
+<span class="header-section-number">13.8.1</span> Massachussets Medical Data</h3>
+<p>Medical research is often slow because it is very difficult to share medical records while maintaining patients’ privacy. In the 1990s a government agency in Massachusetts wanted to improve this by releasing a dataset summarising the hospital visits made by all state employees. They were understandably quite careful about this, making this information available only to academic researchers and redacted all information like names, addresses and security numbers. They did include the the patient’s date of birth, zip code, and sex - this information was deemed sufficiently general while allowing difference in healthcare provision to be investigated.</p>
+<div class="small_left">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="images/501-ethics-privacy/latanya-sweeney.jpg" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Latanya Sweeney Speaking in New York, 2017. Image CC-4.0 from <a href="https://en.wikipedia.org/wiki/User:ParkerHiggins">Parker Higgins</a>.</figcaption></figure>
+</div>
+</div>
+<p>Latanya Sweeney is now a pre-eminent researcher in the field of data privacy. In the 1990s she was studying for a PhD and MIT and wanted to demonstrate the potential risks of de-anonymising this sort of data. To demonstrate her point she chose to focus on the public records of Massachusetts’ governor, William Weld. For a small fee, Sweeney was able to obtain the voter registration records for the area in which the governor lived. By cross-referencing the two datasets Sweeney was able to uniquely identify the governors medical history and send them to him in the post. This was particularly embarrassing for Weld. since he had previously given a statement reassuring the public that this data release would not compromise the privacy of public servants.</p>
+<p>This interaction between Sweeney and the Governor of Massachusetts was significant because it highlighted the potential privacy risks associated with the release of publicly available information. It demonstrated that even when data is stripped of names and other identifying information, it can still be possible to re-identify individuals and potentially access sensitive information. The problem here only grows with the dimension of the dataset - the more characteristics that are measures the greater the chance of one person having a unique combination of those.</p>
+</section><section id="neflix-competition" class="level3" data-number="13.8.2"><h3 data-number="13.8.2" class="anchored" data-anchor-id="neflix-competition">
+<span class="header-section-number">13.8.2</span> Neflix Competition</h3>
+<div class="small_left">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="images/501-ethics-privacy/netflix-logo-old.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Netflix logo 2001-2014. Public domain image.</figcaption></figure>
+</div>
+</div>
+<p>In 2006 Netflix announced a public competition to improve the performance of their recommender system with a pros of 1 million USD to the first person or group to improve its performance by at least 10%. For this competition over 100 million ratings from 480,000 users were made public. Each entry contained a pseudonymised user ID, a film id, the rating out of 5 stars and the date that rating was given.</p>
+<table class="table">
+<thead><tr class="header">
+<th><strong>User ID</strong></th>
+<th><strong>Film ID</strong></th>
+<th><strong>Rating</strong></th>
+<th><strong>Date</strong></th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td>000001</td>
+<td>548782</td>
+<td>5</td>
+<td>2001-01-01</td>
+</tr>
+<tr class="even">
+<td>000001</td>
+<td>549325</td>
+<td>1</td>
+<td>2001-01-01</td>
+</tr>
+<tr class="odd">
+<td>…</td>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+</tr>
+</tbody>
+</table>
+<p>Although the Netflix team had pseudonymised the data (and taken other steps like adding noise to the observations), two researchers at the University of Texas were able to successfully re-identify a 96% of individuals within the data. They did this by cross reference the competition dataset against reviews on the openly available internet movie database (IMDb), working on the supposition that users would rate films on both services at approximately the same time - the 96% figure uses a margin of 3 days.</p>
+<p>The researchers went further, showing that if we were to alter the data to achieve even a modest 2-anonymity then almost all of the useful information would be removed from competition data set.</p>
+<p>This example should show how difficult it can be to ensure individual privacy in the face of unknown external data sources. It might seem like a trivial example compared to medical records but the media that you consume, and in particular how you rate that media, cam reveal you religious beliefs, your political stance or your sexual orientation. These are protected characteristics that you might not want to broadcast freely.</p>
+<p>It might not be important if you, or even the average Netflix user, if that information becomes public. What is important is whether any user would find this privacy breach objectionable and potentially come to harm because of it.</p>
+</section></section><section id="wrapping-up" class="level2" data-number="13.9"><h2 data-number="13.9" class="anchored" data-anchor-id="wrapping-up">
+<span class="header-section-number">13.9</span> Wrapping Up</h2>
+<blockquote class="blockquote">
+<ul>
+<li>Privacy is a fundamental concern.</li>
+<li>Privacy is hard to measure and hard to ensure.</li>
+<li>Also a model issue, since models are trained on data.</li>
+<li>No universal answers, but an exciting area of ongoing research.</li>
+</ul>
+</blockquote>
+<p>Although we have only scratched the surface of privacy in data science, we will have to wrap this video up here.</p>
+<p>We have seen that privacy should be a fundamental concern when working with any from of human-related data. This is chiefly because we aren’t in a position to determine what types of privacy breach might significantly and negatively impact the lives of the people we hold data about.</p>
+<p>We have seen through one example metric that privacy can be both difficult to measure and even more difficult to preserve. This is not only an issue when releasing data into the world, but also when publishing models trained on this data. Approaches analogous to those used by Latanya Sweeney’s can be used be used by bad-actors to identify with high precision whether a given individual was included within the data that was used to train a published model.</p>
+<p>There are no universal answers to the question of privacy in data science, this is what makes it an exciting area of ongoing research. It is also for this reason that a lot of Sweeney’s work was published only after overcoming great resistance: it exposed systematic vulnerabilities for which there are currently few reliable solutions.</p>
+
+
+</section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script><nav class="page-navigation"><div class="nav-page nav-page-previous">
+      <a href="./500-ethics-introduction.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Data Science Ethics</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./502-ethics-fairness.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Fairness</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>

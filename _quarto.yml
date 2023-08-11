@@ -1,34 +1,52 @@
 project:
   type: book
+  output-dir: _book
 
 book:
   title: "Effective Data Science"
   author: "Zak Varty"
+  cover-image: images/EDS-logo.jpg
+  site-url: https://eds-notes.zakvarty.com/
+  repo-url: https://github.com/zakvarty/eds-notes-quarto/
+  repo-branch: master
+  repo-actions: [edit]
+  sharing: [twitter, linkedin]
   date: today
   chapters:
     - index.qmd
     - part: 100-workflows-introduction.qmd
-    - 101-workflows-organising-your-work.qmd
-    - 102-workflows-naming-files.qmd
-    - 103-workflows-organising-your-code.qmd
-    #- 104-workflows-project-management.qmd
-    - 110-workflows-checklist.qmd
+      chapters:
+        - 101-workflows-organising-your-work.qmd
+        - 102-workflows-naming-files.qmd
+        - 103-workflows-organising-your-code.qmd
+        #- 104-workflows-project-management.qmd
+        - 110-workflows-checklist.qmd
     - part: 200-data-introduction.qmd
-    - 201-data-tabular.qmd
-    - 202-data-webscraping.qmd
-    - 203-data-apis.qmd
-    #- 204-data-sql.qmd
-    - 210-data-checklist.qmd
+      chapters:
+        - 201-data-tabular.qmd
+        - 202-data-webscraping.qmd
+        - 203-data-apis.qmd
+        #- 204-data-sql.qmd
+        - 210-data-checklist.qmd
     - part: 300-edav-intro.qmd
-    - 301-edav-wrangling.qmd
-    - 302-edav-analysis.qmd
-    - 303-edav-visualisation.qmd
-    - 310-edav-checklist.qmd
+      chapters:
+        - 301-edav-wrangling.qmd
+        - 302-edav-analysis.qmd
+        - 303-edav-visualisation.qmd
+        - 310-edav-checklist.qmd
     - part: 400-production-introduction.qmd
-    - 401-production-reproducibility.qmd
-    - 402-production-explainability.qmd
-    - 403-production-scalability.qmd
-    - 410-production-checklist.qmd
+      chapters:
+        - 401-production-reproducibility.qmd
+        - 402-production-explainability.qmd
+        - 403-production-scalability.qmd
+        - 410-production-checklist.qmd
+    - part: 500-ethics-introduction.qmd
+      chapters:
+        - 501-ethics-privacy.qmd
+        - 502-ethics-fairness.qmd
+        - 503-ethics-conduct.qmd
+        - 510-ethics-checklist.qmd
+  appendices:
     - references.qmd
 
 bibliography: references.bib
@@ -38,6 +56,7 @@ format:
     theme: cosmo
     css: "style.css"
     cover-image: "images/eds-logo.jpg"
+    code-link: true
   pdf:
     documentclass: scrreprt
     cover-image: "images/eds-logo.jpg"

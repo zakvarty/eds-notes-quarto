@@ -1,12 +1,9 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
-
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.3.353">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-
-
 <title>Effective Data Science - 1&nbsp; Organising your work</title>
 <style>
 code{white-space: pre-wrap;}
@@ -56,7 +53,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }
 </style>
 
-
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="site_libs/quarto-nav/headroom.min.js"></script>
 <script src="site_libs/clipboard/clipboard.min.js"></script>
@@ -74,8 +70,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
-<script id="quarto-search-options" type="application/json">{
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
@@ -93,37 +88,47 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit"
   }
-}</script>
-
-
-<link rel="stylesheet" href="style.css">
+}</script><link rel="stylesheet" href="style.css">
 </head>
-
 <body class="nav-sidebar floating">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
-  <nav class="quarto-secondary-nav">
-    <div class="container-fluid d-flex">
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./101-workflows-organising-your-work.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Organising your work</span></a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./100-workflows-introduction.html">Effective Workflows</a></li><li class="breadcrumb-item"><a href="./101-workflows-organising-your-work.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Organising your work</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
-  </nav>
-</header>
-<!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Effective Data Science</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/zakvarty/eds-notes-quarto/" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+    <div class="dropdown">
+      <a href="" title="Share" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Share"><i class="bi bi-share"></i></a>
+      <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
+<li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://twitter.com/intent/tweet?url=%7Curl%7C">
+              <i class="bi bi-bi-twitter pe-1"></i>
+            Twitter
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://www.linkedin.com/sharing/share-offsite/?url=%7Curl%7C">
+              <i class="bi bi-bi-linkedin pe-1"></i>
+            LinkedIn
+            </a>
+          </li>
+      </ul>
+</div>
+</div>
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -133,153 +138,228 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
-        <li class="sidebar-item">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">About this Course</span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
-      <span class="sidebar-item-text sidebar-link text-start">
- <span class="menu-text">Effective Workflows</span></span>
-  </li>
-        <li class="sidebar-item">
+      <div class="sidebar-item-container"> 
+            <a href="./100-workflows-introduction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Effective Workflows</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./101-workflows-organising-your-work.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Organising your work</span></span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./102-workflows-naming-files.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Naming Files</span></span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./103-workflows-organising-your-code.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Code</span></span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./110-workflows-checklist.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Workflows Checklist</span></a>
   </div>
 </li>
+      </ul>
+</li>
         <li class="sidebar-item sidebar-item-section">
-      <span class="sidebar-item-text sidebar-link text-start">
- <span class="menu-text">Acquiring and Sharing Data</span></span>
-  </li>
-        <li class="sidebar-item">
+      <div class="sidebar-item-container"> 
+            <a href="./200-data-introduction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Acquiring and Sharing Data</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./201-data-tabular.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Tabular Data</span></span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./202-data-webscraping.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Web Scraping</span></span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./203-data-apis.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">APIs</span></span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./210-data-checklist.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Checklist</span></a>
   </div>
 </li>
+      </ul>
+</li>
         <li class="sidebar-item sidebar-item-section">
-      <span class="sidebar-item-text sidebar-link text-start">
- <span class="menu-text">Data Exploration and Visualisation</span></span>
-  </li>
-        <li class="sidebar-item">
+      <div class="sidebar-item-container"> 
+            <a href="./300-edav-intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Data Exploration and Visualisation</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./301-edav-wrangling.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Data Wrangling</span></span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./302-edav-analysis.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Exploratory Data Analysis</span></span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./303-edav-visualisation.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Data Visualisation</span></span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./310-edav-checklist.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Checklist</span></a>
   </div>
 </li>
+      </ul>
+</li>
         <li class="sidebar-item sidebar-item-section">
-      <span class="sidebar-item-text sidebar-link text-start">
- <span class="menu-text">Preparing for Production</span></span>
-  </li>
-        <li class="sidebar-item">
+      <div class="sidebar-item-container"> 
+            <a href="./400-production-introduction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preparing for Production</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./401-production-reproducibility.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Reproducibility</span></span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./402-production-explainability.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Explainability</span></span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./403-production-scalability.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Scalability</span></span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./410-production-checklist.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Checklist</span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./500-ethics-introduction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Data Science Ethics</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./501-ethics-privacy.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Privacy</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./502-ethics-fairness.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Fairness</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./503-ethics-conduct.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Codes of Conduct</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./510-ethics-checklist.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Checklist</span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true">
+ <span class="menu-text">Appendices</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./references.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">References</span></a>
   </div>
 </li>
+      </ul>
+</li>
     </ul>
-    </div>
-</nav>
-<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+</div>
+</nav><div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Table of contents</h2>
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#what-are-we-trying-to-do" id="toc-what-are-we-trying-to-do" class="nav-link active" data-scroll-target="#what-are-we-trying-to-do"><span class="header-section-number">1.1</span> What are we trying to do?</a></li>
+<li><a href="#what-are-we-trying-to-do" id="toc-what-are-we-trying-to-do" class="nav-link active" data-scroll-target="#what-are-we-trying-to-do"><span class="header-section-number">1.1</span> What are we trying to do?</a></li>
   <li><a href="#an-r-focused-approach" id="toc-an-r-focused-approach" class="nav-link" data-scroll-target="#an-r-focused-approach"><span class="header-section-number">1.2</span> An R Focused Approach</a></li>
   <li><a href="#one-project-one-directory" id="toc-one-project-one-directory" class="nav-link" data-scroll-target="#one-project-one-directory"><span class="header-section-number">1.3</span> One Project = One Directory</a></li>
-  <li><a href="#properties-of-a-well-orgainsed-project" id="toc-properties-of-a-well-orgainsed-project" class="nav-link" data-scroll-target="#properties-of-a-well-orgainsed-project"><span class="header-section-number">1.4</span> Properties of a Well-Orgainsed Project</a>
+  <li>
+<a href="#properties-of-a-well-orgainsed-project" id="toc-properties-of-a-well-orgainsed-project" class="nav-link" data-scroll-target="#properties-of-a-well-orgainsed-project"><span class="header-section-number">1.4</span> Properties of a Well-Orgainsed Project</a>
   <ul class="collapse">
-  <li><a href="#portability" id="toc-portability" class="nav-link" data-scroll-target="#portability"><span class="header-section-number">1.4.1</span> Portability</a></li>
+<li><a href="#portability" id="toc-portability" class="nav-link" data-scroll-target="#portability"><span class="header-section-number">1.4.1</span> Portability</a></li>
   <li><a href="#version-control-friendly" id="toc-version-control-friendly" class="nav-link" data-scroll-target="#version-control-friendly"><span class="header-section-number">1.4.2</span> Version Control Friendly</a></li>
   <li><a href="#reproducibility" id="toc-reproducibility" class="nav-link" data-scroll-target="#reproducibility"><span class="header-section-number">1.4.3</span> Reproducibility</a></li>
   <li><a href="#ide-friendly" id="toc-ide-friendly" class="nav-link" data-scroll-target="#ide-friendly"><span class="header-section-number">1.4.4</span> IDE Friendly</a></li>
-  </ul></li>
-  <li><a href="#project-structure" id="toc-project-structure" class="nav-link" data-scroll-target="#project-structure"><span class="header-section-number">1.5</span> Project Structure</a>
+  </ul>
+</li>
+  <li>
+<a href="#project-structure" id="toc-project-structure" class="nav-link" data-scroll-target="#project-structure"><span class="header-section-number">1.5</span> Project Structure</a>
   <ul class="collapse">
-  <li><a href="#readme.md" id="toc-readme.md" class="nav-link" data-scroll-target="#readme.md"><span class="header-section-number">1.5.1</span> README.md</a></li>
+<li><a href="#readme.md" id="toc-readme.md" class="nav-link" data-scroll-target="#readme.md"><span class="header-section-number">1.5.1</span> README.md</a></li>
   <li><a href="#inside-the-readme" id="toc-inside-the-readme" class="nav-link" data-scroll-target="#inside-the-readme"><span class="header-section-number">1.5.2</span> Inside the README</a></li>
   <li><a href="#data" id="toc-data" class="nav-link" data-scroll-target="#data"><span class="header-section-number">1.5.3</span> data</a></li>
   <li><a href="#src" id="toc-src" class="nav-link" data-scroll-target="#src"><span class="header-section-number">1.5.4</span> src</a></li>
@@ -288,17 +368,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#outputs" id="toc-outputs" class="nav-link" data-scroll-target="#outputs"><span class="header-section-number">1.5.7</span> outputs</a></li>
   <li><a href="#reports" id="toc-reports" class="nav-link" data-scroll-target="#reports"><span class="header-section-number">1.5.8</span> reports</a></li>
   <li><a href="#make-file" id="toc-make-file" class="nav-link" data-scroll-target="#make-file"><span class="header-section-number">1.5.9</span> make file</a></li>
-  </ul></li>
+  </ul>
+</li>
   <li><a href="#wrapping-up" id="toc-wrapping-up" class="nav-link" data-scroll-target="#wrapping-up"><span class="header-section-number">1.6</span> Wrapping up</a></li>
   <li><a href="#session-information" id="toc-session-information" class="nav-link" data-scroll-target="#session-information"><span class="header-section-number">1.7</span> Session Information</a></li>
-  </ul>
-</nav>
+  </ul><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/zakvarty/eds-notes-quarto/edit/master/101-workflows-organising-your-work.qmd" class="toc-action">Edit this page</a></p></div></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
-
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
 <h1 class="title"><span id="workflows-organising-your-work" class="quarto-section-identifier"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Organising your work</span></span></h1>
 </div>
 
@@ -312,10 +389,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </div>
   
 
-</header>
-
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"_common.R"</span>)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">status</span>(<span class="st">"polishing"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</header><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/source.html">source</a></span><span class="op">(</span><span class="st">"_common.R"</span><span class="op">)</span></span>
+<span><span class="fu">status</span><span class="op">(</span><span class="st">"polishing"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -332,8 +407,8 @@ Note
 </div>
 <p>Welcome to this course on effective data science. This week we’ll be considering effective data science workflows. These workflows are ways of progressing a project that will help you to produce high quality work and help to make you a good collaborator.</p>
 <p>In this Chapter, we’ll kick things off by looking at how you can structure data science projects and organize your work. Familiarity with these skills, processes and practices for collaborative working are going to be instrumental as you become a successful data scientist.</p>
-<section id="what-are-we-trying-to-do" class="level2" data-number="1.1">
-<h2 data-number="1.1" class="anchored" data-anchor-id="what-are-we-trying-to-do"><span class="header-section-number">1.1</span> What are we trying to do?</h2>
+<section id="what-are-we-trying-to-do" class="level2" data-number="1.1"><h2 data-number="1.1" class="anchored" data-anchor-id="what-are-we-trying-to-do">
+<span class="header-section-number">1.1</span> What are we trying to do?</h2>
 <p>First, let’s consider why we want to provide our data science projects with some sense of structure and organization.</p>
 <p>As a data scientist you’ll never work alone. Within a single project you’ll interact with a whole range of other people. This might be a project manager, one or more business stakeholders or a variety of subject matter experts. These experts might be trained as sociologists, chemists, or civil servants depending on the exact type of data science work that you’re doing.</p>
 <p>To then get your project put into use and working at scale you’ll have to collaborate with data engineers. You’ll also likely work closely with other data scientists. For smaller projects this might be to act as reviewers for one another’s work. For larger projects working collaboratively will allow you to tackle larger challenges. These are the sorts of project that wouldn’t be feasible alone, because of the inherent limitations on the time and skill of any one individual person.</p>
@@ -341,16 +416,14 @@ Note
 <p>This is exactly like working with a current colleague who has shoddy or poor working practices. Nobody wants to be that colleague to somebody else, let alone to their future self. Even when working alone, treating your future self as a current collaborator (and one that you want to get along well with) makes you a kind colleague and a pleasure to work with.</p>
 <p>The aim of this week is to provide you with a guiding structure on how you organize and perform your work. None of this is going to be particularly difficult or onerous. However it will require a bit more effort up front and daily discipline. Like with flossing, the daily effort required is not large but the benefits will compound over time.</p>
 <p>You’ll get more done by wasting less time staring quizzically at a mess of folders and indecipherable code. You’ll also get a reputation as someone who’s well organized and good to work with. This promotes better professional relationships and greater levels of trust within your team. These can then, in turn, tead to you working on more exciting and more impactful projects in the future.</p>
-</section>
-<section id="an-r-focused-approach" class="level2" data-number="1.2">
-<h2 data-number="1.2" class="anchored" data-anchor-id="an-r-focused-approach"><span class="header-section-number">1.2</span> An R Focused Approach</h2>
+</section><section id="an-r-focused-approach" class="level2" data-number="1.2"><h2 data-number="1.2" class="anchored" data-anchor-id="an-r-focused-approach">
+<span class="header-section-number">1.2</span> An R Focused Approach</h2>
 <p>The structures and workflows that are recommend here and throughout the rest of this module are focused strongly on a workflow that predominantly uses R, markdown and LaTeX.</p>
 <p>Similar techniques, code and software can achieve the same results that I show you here when coding in Python or C, or when writing up projects in Quarto or some other markup language. Similarly, different organizations have their own variations on these best practices that we’ll go through together. Often organisations will have extensive guidance on these topics.</p>
 <p>The important thing is that once you understand what good habits are and have build them in one programming language or business, then transferring these skills to a new setting is largely a matter of learning some new vocabulary or slightly different syntax.</p>
 <p>With that said, let’s get going!</p>
-</section>
-<section id="one-project-one-directory" class="level2" data-number="1.3">
-<h2 data-number="1.3" class="anchored" data-anchor-id="one-project-one-directory"><span class="header-section-number">1.3</span> One Project = One Directory</h2>
+</section><section id="one-project-one-directory" class="level2" data-number="1.3"><h2 data-number="1.3" class="anchored" data-anchor-id="one-project-one-directory">
+<span class="header-section-number">1.3</span> One Project = One Directory</h2>
 <p>If there’s one thing you should take away from this chapter, it’s this one Golden Rule:</p>
 <blockquote class="blockquote">
 <p>Every individual project you work on as a data scientist should be in a single, self-contained directory or folder.</p>
@@ -359,8 +432,7 @@ Note
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="images/101-workflows-organising-your-work/directory-structure-drawings/directory-structure-drawing-1.png" class="img-fluid figure-img" style="width:80.0%"></p>
+<figure class="figure"><p><img src="images/101-workflows-organising-your-work/directory-structure-drawings/directory-structure-drawing-1.png" class="img-fluid figure-img" style="width:80.0%"></p>
 </figure>
 </div>
 </div>
@@ -369,9 +441,8 @@ Note
 <p>The first issue here is that it requires a predetermined scope of what is and what isn’t going to be covered by this particular project. This seems straightforward but at the outset of the project you often do not know exactly where your project will go, or how it will link to other pieces of work within your organization.</p>
 <p>The second issue is the second law of Thermodynamics, which applies equally well to project management as it does to the heatdeath of the universe. It takes continual external effort to prevent the contents of this one folder from becoming chaotic and disordered over time.</p>
 <p>That being said, having a single directory has several benefits which more than justify this additional work.</p>
-</section>
-<section id="properties-of-a-well-orgainsed-project" class="level2" data-number="1.4">
-<h2 data-number="1.4" class="anchored" data-anchor-id="properties-of-a-well-orgainsed-project"><span class="header-section-number">1.4</span> Properties of a Well-Orgainsed Project</h2>
+</section><section id="properties-of-a-well-orgainsed-project" class="level2" data-number="1.4"><h2 data-number="1.4" class="anchored" data-anchor-id="properties-of-a-well-orgainsed-project">
+<span class="header-section-number">1.4</span> Properties of a Well-Orgainsed Project</h2>
 <p>What are the properties that we would like this single, well-organized project to have? Ideally, we’d like to organize our projects so that I have the following properties:</p>
 <ul>
 <li>Portable</li>
@@ -380,29 +451,26 @@ Note
 <li>IDE friendly.</li>
 </ul>
 <p>Don’t worry if you haven’t heard of some of these terms already. We’re going to look at each of them in a little bit of detail.</p>
-<section id="portability" class="level3" data-number="1.4.1">
-<h3 data-number="1.4.1" class="anchored" data-anchor-id="portability"><span class="header-section-number">1.4.1</span> Portability</h3>
+<section id="portability" class="level3" data-number="1.4.1"><h3 data-number="1.4.1" class="anchored" data-anchor-id="portability">
+<span class="header-section-number">1.4.1</span> Portability</h3>
 <p>A project is said to be portable if it can be easily moved without breaking.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="images/101-workflows-organising-your-work/directory-structure-drawings/directory-structure-drawing-2.png" class="img-fluid figure-img" style="width:80.0%"></p>
+<figure class="figure"><p><img src="images/101-workflows-organising-your-work/directory-structure-drawings/directory-structure-drawing-2.png" class="img-fluid figure-img" style="width:80.0%"></p>
 </figure>
 </div>
 </div>
 </div>
 <p>This might be a small move, like relocating the directory to a different location on your own computer. It might also mean a moderate move, say to another machine if yours dies just before a big deadline. Alternatively, it might be a large shift - to be uses by another person who is using a different operating system.</p>
 <p>From this thought experiment you can see that there’s a full spectrum of how portable a project may or may not need to be.</p>
-</section>
-<section id="version-control-friendly" class="level3" data-number="1.4.2">
-<h3 data-number="1.4.2" class="anchored" data-anchor-id="version-control-friendly"><span class="header-section-number">1.4.2</span> Version Control Friendly</h3>
+</section><section id="version-control-friendly" class="level3" data-number="1.4.2"><h3 data-number="1.4.2" class="anchored" data-anchor-id="version-control-friendly">
+<span class="header-section-number">1.4.2</span> Version Control Friendly</h3>
 <p>A project under Version Control has all changes tracked either manually or automatically. This means that snapshots of the project are taken regularly as it gradually develops and evolves over time. Having these snapshots as many, incremental changes are made to the project allow it to be rolled back to a specific previous state if something goes wrong.</p>
 <p>A version controlled pattern of working helps to avoid the horrendous state that we have all found ourselves in - renaming <code>final_version.doc</code> to <code>final_final_version.doc</code> and so on.</p>
 <p>By organising your workflow around incremental changes helps you to acknowledge that no work is ever finally complete. There will always be small changes that need to be done in the future.</p>
-</section>
-<section id="reproducibility" class="level3" data-number="1.4.3">
-<h3 data-number="1.4.3" class="anchored" data-anchor-id="reproducibility"><span class="header-section-number">1.4.3</span> Reproducibility</h3>
+</section><section id="reproducibility" class="level3" data-number="1.4.3"><h3 data-number="1.4.3" class="anchored" data-anchor-id="reproducibility">
+<span class="header-section-number">1.4.3</span> Reproducibility</h3>
 <blockquote class="blockquote">
 <p>A study is <em>reproducible</em> if <u>you</u> can take <u>the original data and the computer code</u> used to analyze the data and <u>recreate all of the numerical findings</u> from the study. <br><br></p>
 <p>Broman et al (2017). “Recommendations to Funding Agencies for Supporting Reproducible Research”</p>
@@ -413,19 +481,16 @@ Note
 <p>Another important question is <em>when</em> this project needs to be reproduced. Will it be in a few weeks time or in 10 years time? Do you need to protect your project from changes in dependencies, like new versions of packages or modules? How about different versions of R or Python? Taking this time scale out even further, what about different operating systems and hardware?</p>
 <p>It’s unlikely you’d consider someone handing you a floppy disk of code that only runs on Windows XP to be acceptably reproducible. Sure, you could probably find a way to get it to work, but that would be an awful lot of effort on your end.</p>
 <p>That’s perhaps a bit of an extreme example, but it emphasizes the importance of clearly defining the level of reproducibility that you’re aiming for within every project you work on. This example also highlights the amount of work that can be required to reproduce an analysis, especially after quite some time. It is important to explicitly think about how we dividing that effort between ourselves as the original developer and the person trying to reproduce the analysis in the future.</p>
-</section>
-<section id="ide-friendly" class="level3" data-number="1.4.4">
-<h3 data-number="1.4.4" class="anchored" data-anchor-id="ide-friendly"><span class="header-section-number">1.4.4</span> IDE Friendly</h3>
+</section><section id="ide-friendly" class="level3" data-number="1.4.4"><h3 data-number="1.4.4" class="anchored" data-anchor-id="ide-friendly">
+<span class="header-section-number">1.4.4</span> IDE Friendly</h3>
 <p>Our final desirable property is that we’d like our projects to play nicely with integrated development environments.</p>
 <p>When you’re coding document and writing your data science projects it’d be possible for you to work entirely in either a plain text editor or typing code directly at the command line. While these approaches to a data science workflow have the benefit of simplicity, they also expect a great deal from you as a data scientist.</p>
 <p>These workflows expect that you should type everything perfectly accurately every time, that you recall the names and argument orders of every function you use, and that you are constantly aware of the current state of all objects within your working environment.</p>
 <p>Integrated Development Environments (IDEs) are applications that help to reduce this burden, helping make you a more effective programmer and data scientist. IDEs offer tools like code completion and highlighting to make your code easier to read and to write. They offer tools for debugging, to fix where things are going wrong, and they also offer environment panes so that you don’t have to hold everything in your head all at once. Many IDEs also often have templating facilities. These let you save and reuse snippets of code so that you can avoid typing out repetitive, boilerplate code and introducing errors in the process.</p>
 <p>Even if you haven’t heard of IDEs before, you’ve likely already used one. Some common examples might be RStudio for R-users, PyCharm for python users, or Visual Studio as a more language agnostic coding environment.</p>
 <p>Whichever of these we use, we’d like our project to play nicely with them. This lets us reap their benefits while keeping our project portable, version controlled, and reproducible for someone working with a different set-up.</p>
-</section>
-</section>
-<section id="project-structure" class="level2" data-number="1.5">
-<h2 data-number="1.5" class="anchored" data-anchor-id="project-structure"><span class="header-section-number">1.5</span> Project Structure</h2>
+</section></section><section id="project-structure" class="level2" data-number="1.5"><h2 data-number="1.5" class="anchored" data-anchor-id="project-structure">
+<span class="header-section-number">1.5</span> Project Structure</h2>
 <p>I’ve given a pretty exhaustive argument for why having a single directory for each project is a good idea. Let’s now take a look <em>inside</em> that directory and define a common starting layout for the content of all of your projects.</p>
 <p>Having this sort of project directory template will mean that you’ll always know where to find what you’re looking for and other members of your team will too. Again, before we start I’ll reiterate that we’re taking an opinionated approach here and providing a sensible starting point for organizing many projects.</p>
 <p>Every project is going to be slightly different and some might require slight alterations to what I suggest here. Indeed, even if you start as I suggest then you might have to adapt your project structure as it develops and grows. I think it’s helpful to consider yourself as a tailor when making these changes. I’m providing you with a one size fits all design, that’s great for lots of projects but perfect for none of them. It’s your job to alter and refine this design for each individual case.</p>
@@ -434,8 +499,7 @@ Note
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="images/101-workflows-organising-your-work/directory-structure-drawings/directory-structure-drawing-3.png" class="img-fluid figure-img" style="width:80.0%"></p>
+<figure class="figure"><p><img src="images/101-workflows-organising-your-work/directory-structure-drawings/directory-structure-drawing-3.png" class="img-fluid figure-img" style="width:80.0%"></p>
 </figure>
 </div>
 </div>
@@ -444,20 +508,18 @@ Note
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="images/101-workflows-organising-your-work/directory-structure-drawings/directory-structure-drawing-4.png" class="img-fluid figure-img" style="width:80.0%"></p>
+<figure class="figure"><p><img src="images/101-workflows-organising-your-work/directory-structure-drawings/directory-structure-drawing-4.png" class="img-fluid figure-img" style="width:80.0%"></p>
 </figure>
 </div>
 </div>
 </div>
 <p>Within the project directory there will be some subdirectories, which you can tell a folders in this file structure because they have a forward slash following their names. There will also be some files directly in the root directory. One of these is called <code>readme.md</code> and the another called either <code>makefile</code> or <code>make.r</code>. We’re going to explore each of these files and directories in turn.</p>
-<section id="readme.md" class="level3" data-number="1.5.1">
-<h3 data-number="1.5.1" class="anchored" data-anchor-id="readme.md"><span class="header-section-number">1.5.1</span> README.md</h3>
+<section id="readme.md" class="level3" data-number="1.5.1"><h3 data-number="1.5.1" class="anchored" data-anchor-id="readme.md">
+<span class="header-section-number">1.5.1</span> README.md</h3>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="images/101-workflows-organising-your-work/directory-structure-drawings/directory-structure-drawing-5.png" class="img-fluid figure-img" style="width:80.0%"></p>
+<figure class="figure"><p><img src="images/101-workflows-organising-your-work/directory-structure-drawings/directory-structure-drawing-5.png" class="img-fluid figure-img" style="width:80.0%"></p>
 </figure>
 </div>
 </div>
@@ -467,9 +529,8 @@ Note
 <p>The readme file should be the first thing that someone who’s new to your project reads. By placing the readme in the root directory and capitalising the file name you are increase the visibility of this file and increase the chances of this actually happening.</p>
 <p>An additional benefit to keeping the readme in the root directory of your project is that code hosting services like GitHub, GitLab or BitBucket will display the contents of that readme file next to the contents of your project. Those services will also nicely format any markdown that you use for you in your readme file.</p>
 <p>When writing the readme, it can be useful to imaginge that you are writing this for a new, junior team member. The readme file should let them get started with the project and make some simple contributions after reading only that file. It might also link out to more detailed project documentation that will help the new team member toward a more advanced understanding or complex contribution.</p>
-</section>
-<section id="inside-the-readme" class="level3" data-number="1.5.2">
-<h3 data-number="1.5.2" class="anchored" data-anchor-id="inside-the-readme"><span class="header-section-number">1.5.2</span> Inside the README</h3>
+</section><section id="inside-the-readme" class="level3" data-number="1.5.2"><h3 data-number="1.5.2" class="anchored" data-anchor-id="inside-the-readme">
+<span class="header-section-number">1.5.2</span> Inside the README</h3>
 <p>let’s take a quick aside to see in more detail what should be covered within a readme file.</p>
 <p>A readme we should include the name of the project, which should be self-explanatory (so nothing like my generic choice of <code>exciting-new-project</code>). The readme should also give the project status, which is just a couple of sentences to say whether your project is still under development, the version oft the current release or, on the other end of the project life-cycle, if the project is being deprecated or closed.</p>
 <p>Following this, we should also include a description of your project. This will state the purpose of your work and to provide, or link to, any additional context or references that visitors aren’t assumed to be familiar with.</p>
@@ -478,14 +539,12 @@ Note
 <p>For longer or more complicated examples that aren’t necessary in this short introductory document you can add links to those in the readme and explain them in detail elsewhere.</p>
 <p>There should ideally be a short description of how people can report issues with the project and also how people can get started in resolving those issues or extend the project in some way.</p>
 <p>That leads me on to one point that I’ve forgotten to list here. There there should be a section listing the authors of the work and the license in which under which it’s distributed. This is to give credit to all the people who’ve contributed to your project and the license file then says how other people may use your work. The license declares how other may use your project and whether they have to give direct attribution to your work in any modifications that they use.</p>
-</section>
-<section id="data" class="level3" data-number="1.5.3">
-<h3 data-number="1.5.3" class="anchored" data-anchor-id="data"><span class="header-section-number">1.5.3</span> data</h3>
+</section><section id="data" class="level3" data-number="1.5.3"><h3 data-number="1.5.3" class="anchored" data-anchor-id="data">
+<span class="header-section-number">1.5.3</span> data</h3>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="images/101-workflows-organising-your-work/directory-structure-drawings/directory-structure-drawing-7.png" class="img-fluid figure-img" style="width:80.0%"></p>
+<figure class="figure"><p><img src="images/101-workflows-organising-your-work/directory-structure-drawings/directory-structure-drawing-7.png" class="img-fluid figure-img" style="width:80.0%"></p>
 </figure>
 </div>
 </div>
@@ -495,8 +554,7 @@ Note
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="images/101-workflows-organising-your-work/directory-structure-drawings/directory-structure-drawing-8.png" class="img-fluid figure-img" style="width:80.0%"></p>
+<figure class="figure"><p><img src="images/101-workflows-organising-your-work/directory-structure-drawings/directory-structure-drawing-8.png" class="img-fluid figure-img" style="width:80.0%"></p>
 </figure>
 </div>
 </div>
@@ -507,21 +565,18 @@ Note
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="images/101-workflows-organising-your-work/directory-structure-drawings/directory-structure-drawing-12.png" class="img-fluid figure-img" style="width:80.0%"></p>
+<figure class="figure"><p><img src="images/101-workflows-organising-your-work/directory-structure-drawings/directory-structure-drawing-12.png" class="img-fluid figure-img" style="width:80.0%"></p>
 </figure>
 </div>
 </div>
 </div>
 <p>In our exciting new project, we can see the clean versions of the previous data sets which are ready for modelling. There’s also a third file in this folder. This is data that we’ve acquired for ourselves through web scraping, using a script within the project.</p>
-</section>
-<section id="src" class="level3" data-number="1.5.4">
-<h3 data-number="1.5.4" class="anchored" data-anchor-id="src"><span class="header-section-number">1.5.4</span> src</h3>
+</section><section id="src" class="level3" data-number="1.5.4"><h3 data-number="1.5.4" class="anchored" data-anchor-id="src">
+<span class="header-section-number">1.5.4</span> src</h3>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="images/101-workflows-organising-your-work/directory-structure-drawings/directory-structure-drawing-16.png" class="img-fluid figure-img" style="width:80.0%"></p>
+<figure class="figure"><p><img src="images/101-workflows-organising-your-work/directory-structure-drawings/directory-structure-drawing-16.png" class="img-fluid figure-img" style="width:80.0%"></p>
 </figure>
 </div>
 </div>
@@ -529,28 +584,24 @@ Note
 <p>The <code>src</code> or source directory contains all the source code for your project. This will typically be the functions that you’ve written to make the analysis or modelling code more accessible.</p>
 <p>Here we’ve saved each function in its own R script and, in this project, we’ve used subdirectories to organise these by their use case. We’ve got two functions used in data cleaning: the first replaces <code>NA</code> values with a given value, the second replaces these by the mean of all non-missing values.</p>
 <p>We also have three helper functions: the first two calculate rolling mean and the geometric mean of a given vector, the third is a function that scrapes the web data we saw in the derived data subdirectory.</p>
-</section>
-<section id="tests" class="level3" data-number="1.5.5">
-<h3 data-number="1.5.5" class="anchored" data-anchor-id="tests"><span class="header-section-number">1.5.5</span> tests</h3>
+</section><section id="tests" class="level3" data-number="1.5.5"><h3 data-number="1.5.5" class="anchored" data-anchor-id="tests">
+<span class="header-section-number">1.5.5</span> tests</h3>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="images/101-workflows-organising-your-work/directory-structure-drawings/directory-structure-drawing-12.png" class="img-fluid figure-img" style="width:80.0%"></p>
+<figure class="figure"><p><img src="images/101-workflows-organising-your-work/directory-structure-drawings/directory-structure-drawing-12.png" class="img-fluid figure-img" style="width:80.0%"></p>
 </figure>
 </div>
 </div>
 </div>
 <p>Moving on then to the tests directory. The structure of this directory mirrors that of the source directory. Each function file has its own counterpart file of tests.</p>
 <p>These test files provide example sets of inputs and the expected outputs for each function. The test files are used to check edge cases of a function or to assure yourself that you haven’t broken anything while fixing some small bug or adding new capabilities to that function.</p>
-</section>
-<section id="analyses" class="level3" data-number="1.5.6">
-<h3 data-number="1.5.6" class="anchored" data-anchor-id="analyses"><span class="header-section-number">1.5.6</span> analyses</h3>
+</section><section id="analyses" class="level3" data-number="1.5.6"><h3 data-number="1.5.6" class="anchored" data-anchor-id="analyses">
+<span class="header-section-number">1.5.6</span> analyses</h3>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="images/101-workflows-organising-your-work/directory-structure-drawings/directory-structure-drawing-23.png" class="img-fluid figure-img" style="width:80.0%"></p>
+<figure class="figure"><p><img src="images/101-workflows-organising-your-work/directory-structure-drawings/directory-structure-drawing-23.png" class="img-fluid figure-img" style="width:80.0%"></p>
 </figure>
 </div>
 </div>
@@ -558,28 +609,24 @@ Note
 <p>The analyses directory contains what you probably think of as the bulk of your data science work. It’s going to have one subdirectory for each major analysis that’s performed within your project and within each of these there might be a series of steps that we collect into separate scripts.</p>
 <p>The activity performed at each step is made clear by the name of each script, as is the order in which we’re going to perform these steps. Here we can see the scripts used for the 2021 annual report. First is a script used to take the raw monthly receipts and produce the <em>cleaned</em> version of the same data set that we saw earlier. This is followed by a trend analysis of this cleaned data set.</p>
 <p>Similarly for the spending review we have a data cleaning step, followed by some forecast modelling and finally the production of some diagnostic plots to compare these forecasts.</p>
-</section>
-<section id="outputs" class="level3" data-number="1.5.7">
-<h3 data-number="1.5.7" class="anchored" data-anchor-id="outputs"><span class="header-section-number">1.5.7</span> outputs</h3>
+</section><section id="outputs" class="level3" data-number="1.5.7"><h3 data-number="1.5.7" class="anchored" data-anchor-id="outputs">
+<span class="header-section-number">1.5.7</span> outputs</h3>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="images/101-workflows-organising-your-work/directory-structure-drawings/directory-structure-drawing-26.png" class="img-fluid figure-img" style="width:80.0%"></p>
+<figure class="figure"><p><img src="images/101-workflows-organising-your-work/directory-structure-drawings/directory-structure-drawing-26.png" class="img-fluid figure-img" style="width:80.0%"></p>
 </figure>
 </div>
 </div>
 </div>
 <p>The outputs directory has again one subdirectory for each meta-analysis within the project. These are then further organized by the output type whether that be some data, a figure, or a table.</p>
 <p>Depending on the nature of your project, you might want to use a modified subdirectory structure here. For example, if you’re doing several numerical experiments then you might want to arrange your outputs by experiment, rather than by output type.</p>
-</section>
-<section id="reports" class="level3" data-number="1.5.8">
-<h3 data-number="1.5.8" class="anchored" data-anchor-id="reports"><span class="header-section-number">1.5.8</span> reports</h3>
+</section><section id="reports" class="level3" data-number="1.5.8"><h3 data-number="1.5.8" class="anchored" data-anchor-id="reports">
+<span class="header-section-number">1.5.8</span> reports</h3>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="images/101-workflows-organising-your-work/directory-structure-drawings/directory-structure-drawing-29.png" class="img-fluid figure-img" style="width:80.0%"></p>
+<figure class="figure"><p><img src="images/101-workflows-organising-your-work/directory-structure-drawings/directory-structure-drawing-29.png" class="img-fluid figure-img" style="width:80.0%"></p>
 </figure>
 </div>
 </div>
@@ -589,14 +636,12 @@ Note
 <p>If you’re not using markdown or LaTeX to write your reports, but instead use an online platform like overleaf as a latex editor or Google docs to write collaboratively then links to them in the reports directory using additional readme files. Make sure you set the read and write permissions for those links appropriately, too.</p>
 <p>When using these online writing systems, you’ll have to manually upload and update your plots whenever you modify any of your earlier analysis. That’s one of the drawbacks of these online tools that has to be traded off against their ease of use.</p>
 <p>In our exciting new project, here we can see that the annual report is written in a markdown format, which is compiled to both HTML and PDF. The spendiing review is written in LaTeX and we only have the source for it, we don’t have the compiled pdf version of the document.</p>
-</section>
-<section id="make-file" class="level3" data-number="1.5.9">
-<h3 data-number="1.5.9" class="anchored" data-anchor-id="make-file"><span class="header-section-number">1.5.9</span> make file</h3>
+</section><section id="make-file" class="level3" data-number="1.5.9"><h3 data-number="1.5.9" class="anchored" data-anchor-id="make-file">
+<span class="header-section-number">1.5.9</span> make file</h3>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="images/101-workflows-organising-your-work/directory-structure-drawings/directory-structure-drawing-32.png" class="img-fluid figure-img" style="width:80.0%"></p>
+<figure class="figure"><p><img src="images/101-workflows-organising-your-work/directory-structure-drawings/directory-structure-drawing-32.png" class="img-fluid figure-img" style="width:80.0%"></p>
 </figure>
 </div>
 </div>
@@ -605,26 +650,22 @@ Note
 <p>At a high level, the make file is just a text file. What makes it special is what it contains. Similar to a shell or a bash script, make file contains code that could be run at the command line. This code will create or update each element of your project.</p>
 <p>The make file defines shorthand commands for the full lines of code that create each element of your project. The make file also records the order in which these operations have to happen, and which of these steps are dependent on one another. This means that if one step part of your project is updated then any changes will be propagated through your entire project. This is done in quite a clever way so the only part of your projects that are re-run are those that need to be updated.</p>
 <p>We’re omitting make files from this course not because they’re fiendishly difficult to write or read, but rather because they require a reasonable foundation in working at the command line to be understood. What I suggest you do instead throughout this course is to create your own R or markdown file called make. This file will define the intended running order and dependencies of your project and if it is an R file, it might also automate some parts of your analysis.</p>
-</section>
-</section>
-<section id="wrapping-up" class="level2" data-number="1.6">
-<h2 data-number="1.6" class="anchored" data-anchor-id="wrapping-up"><span class="header-section-number">1.6</span> Wrapping up</h2>
+</section></section><section id="wrapping-up" class="level2" data-number="1.6"><h2 data-number="1.6" class="anchored" data-anchor-id="wrapping-up">
+<span class="header-section-number">1.6</span> Wrapping up</h2>
 <p>Wrapping up then, that’s everything for this chapter.</p>
 <p>I’ve introduced a project structure that will serve you well as a baseline for the vast majority of projects in data science.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="images/101-workflows-organising-your-work/directory-structure-drawings/directory-structure-drawing-33.png" class="img-fluid figure-img" style="width:80.0%"></p>
+<figure class="figure"><p><img src="images/101-workflows-organising-your-work/directory-structure-drawings/directory-structure-drawing-33.png" class="img-fluid figure-img" style="width:80.0%"></p>
 </figure>
 </div>
 </div>
 </div>
 <p>In your own work, remember that the key here is standardisation. Working consistently across projects, a company or a group is more important than sticking rigidly to the particular structure that I have defined here.</p>
 <p>There are two notable exceptions where you probably don’t want to use this project structure. That’s when you’re building an app or you’re building a package. These require specific organisation of the files within your project directory. We’ll explore the project structure used for package development during the live session this week.</p>
-</section>
-<section id="session-information" class="level2" data-number="1.7">
-<h2 data-number="1.7" class="anchored" data-anchor-id="session-information"><span class="header-section-number">1.7</span> Session Information</h2>
+</section><section id="session-information" class="level2" data-number="1.7"><h2 data-number="1.7" class="anchored" data-anchor-id="session-information">
+<span class="header-section-number">1.7</span> Session Information</h2>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <p><strong>R version 4.2.2 (2022-10-31)</strong></p>
@@ -636,10 +677,7 @@ Note
 </div>
 
 
-</section>
-
-</main> <!-- /main -->
-<script id="quarto-html-after-body" type="application/javascript">
+</section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
     const mode = bsSheetEl.getAttribute("data-mode");
@@ -871,9 +909,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
 });
-</script>
-<nav class="page-navigation">
-  <div class="nav-page nav-page-previous">
+</script><nav class="page-navigation"><div class="nav-page nav-page-previous">
       <a href="./100-workflows-introduction.html" class="pagination-link">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Effective Workflows</span>
       </a>          
