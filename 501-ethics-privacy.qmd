@@ -1,6 +1,8 @@
 # Privacy {#ethics-privacy}
 
-```{r, results='asis', echo=FALSE}
+```{r ethics-privacy-setup}
+#| results: asis
+#| echo: false
 source("_common.R")
 status("complete")
 ```
@@ -9,18 +11,17 @@ status("complete")
 
 Data privacy is all about keeping people's personal information confidential and secure. It's the idea that people have control over their personal data, and that companies and organizations are responsible for protecting it. Personal data can include things like names, addresses, phone numbers, email addresses, medical information, and even online activity.
 
------
 
-What is personal data? 
+> What is personal data? 
+>
+> - Name, national insurance number, passport number
+> - Contact details: address, phone number, email address
+> - Medical history
+> - Online activity, GPS data, finger print or face-ID,
+> 
+> Should not be collected, analysed or distributed without consent. 
 
-- Name, national insurance number, passport number
-- Contact details: address, phone number, email address
-- Medical history
-- Online activity, GPS data, finger print or face-ID,
 
-Should not be collected, analysed or distributed without consent. 
-
------
 
 Under the concept of data privacy, individuals have the right to know what information is being collected about them, how it's being used, who it's being shared with, and to have the ability to control that information. Companies and organizations, on the other hand, have a responsibility to keep this information secure and to use it only for the purpose it was intended.
 
@@ -70,22 +71,17 @@ Measuring privacy within a dataset is a complex task that involves assessing the
 
 > _Pseudonmisation_: processing data so that it does not relate to an identifiable person.
 
-<br>
+A data entry is pseudonymised when it has been processed in a way that it does not relate to an identifiable person. The key word here is identifiable. Replacing your name with your CID would be considered a form of pseudonymisation, because based on that information alone you cannot be identified. 
 
 > _Re-identification_: relating a pseudonymised data entry to an identifiable person.
 
-<br>
+Re-identification is the act of relating a pseudonymised data entry to an identifiable person. Re-identification makes something about that person known that wasn't known beforehand, perhaps by using processing techniques or cross-referencing against external information. In the previous grading scenario, re-identification occurs after marking so that your grades can be returned to you. 
 
 > _Anonymisation_: A pseudonmisation method that precludes re-identification.
 
-
-A data entry is pseudonymised when it has been processed in a way that it does not relate to an identifiable person. The key word here is identifiable. Replacing your name with your CID would be considered a form of pseudonymisation, because based on that information alone you cannot be identified. 
-
-Re-identification is the act of relating a pseudonymised data entry to an identifiable person. Re-identification makes something about that person known that wasn't known beforehand, perhaps by using processing techniques or cross-referencing against external information. In the previous grading scenario, re-identifiaction occurs after marking so that your grades can be returned to you. 
-
 Anonymisation is a word that in casual usage is often conflated with our previous definition of pseudonymisation. In the technical sense, anonymisation is any form of pseudonymisation that precludes the possibility of re-identification.
 
-We don't wan to to anonymise test scores, or we would not be able to map them back to individual students. However, if grades were to be published online then we would want to ensure that this is only done in an anonymised format. 
+We don't want to anonymise test scores, or we would not be able to map them back to individual students. However, if grades were to be published online then we would want to ensure that this is only done in an anonymised format. 
 
 ## Measuring Privacy 
 
@@ -215,14 +211,10 @@ It might not be important if you, or even the average Netflix user, if that info
 
 ## Wrapping Up 
 
-------
-
-- Privacy is a fundamental concern.
-- Privacy is hard to measure and hard to ensure.
-- Also a model issue, since models are trained on data.
-- No universal answers, but an exciting area of ongoing research. 
-
-------
+> - Privacy is a fundamental concern.
+> - Privacy is hard to measure and hard to ensure.
+> - Also a model issue, since models are trained on data.
+> - No universal answers, but an exciting area of ongoing research. 
 
 Although we have only scratched the surface of privacy in data science, we will have to wrap this video up here. 
 
