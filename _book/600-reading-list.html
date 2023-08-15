@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.353">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>Effective Data Science - Appendix A — Reading List</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./700-references.html" rel="next">
+<link href="./510-ethics-checklist.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script><link rel="stylesheet" href="style.css">
+</head>
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./600-reading-list.html">Appendices</a></li><li class="breadcrumb-item"><a href="./600-reading-list.html"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Reading List</span></a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Effective Data Science</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/zakvarty/eds-notes-quarto/" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+    <div class="dropdown">
+      <a href="" title="Share" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Share"><i class="bi bi-share"></i></a>
+      <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
+<li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://twitter.com/intent/tweet?url=%7Curl%7C">
+              <i class="bi bi-bi-twitter pe-1"></i>
+            Twitter
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://www.linkedin.com/sharing/share-offsite/?url=%7Curl%7C">
+              <i class="bi bi-bi-linkedin pe-1"></i>
+            LinkedIn
+            </a>
+          </li>
+      </ul>
+</div>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">About this Course</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./100-workflows-introduction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Effective Workflows</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./101-workflows-organising-your-work.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Organising your work</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./102-workflows-naming-files.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Naming Files</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./103-workflows-organising-your-code.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Code</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./110-workflows-checklist.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Workflows Checklist</span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./200-data-introduction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Acquiring and Sharing Data</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./201-data-tabular.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Tabular Data</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./202-data-webscraping.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Web Scraping</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./203-data-apis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">APIs</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./210-data-checklist.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Checklist</span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./300-edav-intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Data Exploration and Visualisation</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./301-edav-wrangling.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Data Wrangling</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./302-edav-analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Exploratory Data Analysis</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./303-edav-visualisation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Data Visualisation</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./310-edav-checklist.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Checklist</span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./400-production-introduction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preparing for Production</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./401-production-reproducibility.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Reproducibility</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./402-production-explainability.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Explainability</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./403-production-scalability.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Scalability</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./410-production-checklist.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Checklist</span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./500-ethics-introduction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Data Science Ethics</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./501-ethics-privacy.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Privacy</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./502-ethics-fairness.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Fairness</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./503-ethics-conduct.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Codes of Conduct</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./510-ethics-checklist.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Checklist</span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true">
+ <span class="menu-text">Appendices</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./600-reading-list.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Reading List</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./700-references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+      </ul>
+</li>
+    </ul>
+</div>
+</nav><div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+<li>
+<a href="#workflows-reading" id="toc-workflows-reading" class="nav-link active" data-scroll-target="#workflows-reading"><span class="header-section-number">A.1</span> Effective Data Science Workflows</a>
+  <ul class="collapse">
+<li><a href="#core-materials" id="toc-core-materials" class="nav-link" data-scroll-target="#core-materials">Core Materials</a></li>
+  <li><a href="#reference-materials" id="toc-reference-materials" class="nav-link" data-scroll-target="#reference-materials">Reference Materials</a></li>
+  <li><a href="#materials-of-interest" id="toc-materials-of-interest" class="nav-link" data-scroll-target="#materials-of-interest">Materials of Interest</a></li>
+  </ul>
+</li>
+  <li>
+<a href="#data-reading" id="toc-data-reading" class="nav-link" data-scroll-target="#data-reading"><span class="header-section-number">A.2</span> Aquiring and Sharing Data</a>
+  <ul class="collapse">
+<li><a href="#core-materials-1" id="toc-core-materials-1" class="nav-link" data-scroll-target="#core-materials-1">Core Materials</a></li>
+  <li><a href="#reference-materials-1" id="toc-reference-materials-1" class="nav-link" data-scroll-target="#reference-materials-1">Reference Materials</a></li>
+  <li><a href="#materials-of-interest-1" id="toc-materials-of-interest-1" class="nav-link" data-scroll-target="#materials-of-interest-1">Materials of Interest</a></li>
+  </ul>
+</li>
+  <li>
+<a href="#edav-reading" id="toc-edav-reading" class="nav-link" data-scroll-target="#edav-reading"><span class="header-section-number">A.3</span> Data Exploration and Visualisation</a>
+  <ul class="collapse">
+<li><a href="#core-materials-2" id="toc-core-materials-2" class="nav-link" data-scroll-target="#core-materials-2">Core Materials</a></li>
+  <li><a href="#referene-materials" id="toc-referene-materials" class="nav-link" data-scroll-target="#referene-materials">Referene Materials</a></li>
+  <li><a href="#materials-of-interest-2" id="toc-materials-of-interest-2" class="nav-link" data-scroll-target="#materials-of-interest-2">Materials of Interest</a></li>
+  </ul>
+</li>
+  <li>
+<a href="#production-reading" id="toc-production-reading" class="nav-link" data-scroll-target="#production-reading"><span class="header-section-number">A.4</span> Preparing for Production</a>
+  <ul class="collapse">
+<li><a href="#core-materials-3" id="toc-core-materials-3" class="nav-link" data-scroll-target="#core-materials-3">Core Materials</a></li>
+  <li><a href="#reference-materials-2" id="toc-reference-materials-2" class="nav-link" data-scroll-target="#reference-materials-2">Reference Materials</a></li>
+  <li><a href="#materials-of-interest-3" id="toc-materials-of-interest-3" class="nav-link" data-scroll-target="#materials-of-interest-3">Materials of Interest</a></li>
+  </ul>
+</li>
+  <li>
+<a href="#data-science-ethics" id="toc-data-science-ethics" class="nav-link" data-scroll-target="#data-science-ethics"><span class="header-section-number">A.5</span> Data Science Ethics</a>
+  <ul class="collapse">
+<li><a href="#core-materials-4" id="toc-core-materials-4" class="nav-link" data-scroll-target="#core-materials-4">Core Materials</a></li>
+  <li><a href="#reference-materials-3" id="toc-reference-materials-3" class="nav-link" data-scroll-target="#reference-materials-3">Reference Materials</a></li>
+  <li><a href="#materials-of-interest-4" id="toc-materials-of-interest-4" class="nav-link" data-scroll-target="#materials-of-interest-4">Materials of Interest</a></li>
+  </ul>
+</li>
+  </ul><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/zakvarty/eds-notes-quarto/edit/master/600-reading-list.qmd" class="toc-action">Edit this page</a></p></div></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
+<h1 class="title"><span id="reading-list" class="quarto-section-identifier">Appendix A — Reading List</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header><div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Effective Data Science is still a work-in-progress. This chapter is largely complete and just needs final proof reading.</p>
+<p>If you would like to contribute to the development of EDS, you may do so at <a href="https://github.com/zakvarty/data_science_notes" class="uri">https://github.com/zakvarty/data_science_notes</a>.</p>
+</div>
+</div>
+<p>This reading list is organised by topic, according to each week of the course. These are split into several categories.</p>
+<ul>
+<li><p><strong>Core Materials:</strong> These form a core part of the course activities.</p></li>
+<li><p><strong>Reference Materials:</strong> These will be used extensively in the course, but should be seen as helpful guides, rather than required reading from cover to cover.</p></li>
+<li><p><strong>Materials of Interest:</strong> These will not form a core part of the course, but will give you a deeper understanding or interesting perspective on the weekly topic. There might be some fun other stuff in here too.</p></li>
+</ul>
+<section id="workflows-reading" class="level2" data-number="A.1"><h2 data-number="A.1" class="anchored" data-anchor-id="workflows-reading">
+<span class="header-section-number">A.1</span> Effective Data Science Workflows</h2>
+<section id="core-materials" class="level3 unnumbered"><h3 class="unnumbered anchored" data-anchor-id="core-materials">Core Materials</h3>
+<ul>
+<li>The <a href="https://style.tidyverse.org/">Tidyverse R Style Guide</a> by Hadley Wickham.</li>
+</ul>
+<!-- This will be the coding style guide that we will follow in this course. It is a core reading in week 1 and will serve as a reference text in future weeks. --><ul>
+<li>
+<a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1005510&amp;ref=https://githubhelp.com">Wilson, et al (2017)</a>. Good Enough Practices in Scientific Computing. PLOS Computational Biology.</li>
+</ul>
+<!-- A collection of simple ways to implement good computing practices during a research project. The article is aimed specifically at people who are new to computational research. --></section><section id="reference-materials" class="level3 unnumbered"><h3 class="unnumbered anchored" data-anchor-id="reference-materials">Reference Materials</h3>
+<ul>
+<li><p><a href="https://r4ds.had.co.nz/index.html">R For Data Science Chapters 2, 6 and 8</a> by Hadley Wickham and Garrett Grolemund. Chapters covering R workflow basics, a scripting and project based workflow.</p></li>
+<li><p><a href="https://here.r-lib.org/articles/here.html">Documentation</a> for the {here} package</p></li>
+<li><p><a href="https://r-pkgs.org/">R Packages Book</a> (Second Edition) by Hadley Wickham and Jenny Bryan.</p></li>
+</ul>
+<!-- Covers the basics (and much more) of creating your own R package. Will be useful as a reference during the live session in Week 1. The chapter on [function documentation](https://r-pkgs.org/man.html) introduces `{Roxygen2}` and the chapter on [Testing basics](https://r-pkgs.org/testing-basics.html) introduces `{testthat}`. --></section><section id="materials-of-interest" class="level3 unnumbered"><h3 class="unnumbered anchored" data-anchor-id="materials-of-interest">Materials of Interest</h3>
+<ul>
+<li>
+<a href="https://stat545.com/index.html">STAT545, Part 1</a> by Jennifer Bryan and The STAT 545 TAs</li>
+</ul>
+<!-- If this is your first time using R in earnest, you might find part 1 of the STAT545 notes from the University of British Columbia helpful in getting set up. Chapters 1 and 2 cover how to install R and RStudio, basics of programming in R and a bare bones workflow. --><ul>
+<li>
+<a href="https://rstats.wtf/">What they forgot to teach you about R, Chapters 2-4</a> by Jennifer Bryan and Jim Hester.</li>
+</ul>
+<!--Resources on a project oriented workflow, practising safe paths, and how to name files.--><ul>
+<li>
+<a href="https://www.amstat.org/docs/default-source/amstat-documents/pol-reproducibleresearchrecommendations.pdf">Broman et al (2017)</a>. Recommendations to Funding Agencies for Supporting Reproducible Research. American Statistical Association.</li>
+</ul>
+<!-- Source of reproducibility definition used in lecture slides and a fun read! --><ul>
+<li><p><a href="https://adv-r.hadley.nz/">Advanced R</a> by Hadley Wickham Section introductions on <a href="https://adv-r.hadley.nz/fp.html">functional</a> and <a href="https://adv-r.hadley.nz/oo.html">object oriented</a> approaches to programming.</p></li>
+<li><p><a href="https://www.atlassian.com/agile/project-management">Atlassian Article</a> on Agile Project Management</p></li>
+</ul>
+<!-- Taking a broader view of organising your work and functioning well in a team, this article provides an introductory guide to agile development.--><ul>
+<li>
+<a href="https://pragprog.com/titles/tpp20/the-pragmatic-programmer-20th-anniversary-edition/">The Pragmatic Programmer, 20th Anniversary Edition Edition</a> by David Thomas and Andrew Hunt. The section on <a href="https://media.pragprog.com/titles/tpp20/dry.pdf">DRY coding</a> and a few others are freely available.</li>
+</ul>
+<!-- Advice on good practice in programming (language agnostic) and when running projects that involve software. Written in small sections that make the book a joy to dip in and out of. The section on [DRY coding](https://media.pragprog.com/titles/tpp20/dry.pdf) and a few others are freely available. --><ul>
+<li><p><a href="https://csgillespie.github.io/efficientR/">Efficient R programming</a> by Colin Gillespie and Robin Lovelace. Chapter 5 considers <a href="https://csgillespie.github.io/efficientR/input-output.html">Efficient Input/Output</a> is relevant to this week. Chapter 4 on <a href="https://csgillespie.github.io/efficientR/workflow.html">Efficient Workflows</a> links nicely with last week’s topics.</p></li>
+<li><p><a href="https://betanalpha.github.io/assets/case_studies/principled_bayesian_workflow.html#References">Towards A Principled Bayesian Workflow</a> by Michael Betancourt.</p></li>
+</ul>
+<!-- A different perspective on workflows, focusing on the statistical rather than coding and management aspects of a Bayesian data science project. --><ul>
+<li>
+<a href="https://happygitwithr.com/">Happy Git and GitHub for the useR</a> by Jennifer Bryan</li>
+</ul>
+<!-- If you'd like to get started using version control with your R projects this book will be your guiding light. --><hr></section></section><section id="data-reading" class="level2" data-number="A.2"><h2 data-number="A.2" class="anchored" data-anchor-id="data-reading">
+<span class="header-section-number">A.2</span> Aquiring and Sharing Data</h2>
+<section id="core-materials-1" class="level3 unnumbered"><h3 class="unnumbered anchored" data-anchor-id="core-materials-1">Core Materials</h3>
+<ul>
+<li><p><a href="https://r4ds.had.co.nz/tidy-data.html">R for Data Science Chapters 9 - 12</a> by Hadley Wickham. These chapters introduce tibbles as a data structure, how to import data into R and how to wrangle that data into tidy format.</p></li>
+<li><p><a href="https://csgillespie.github.io/efficientR/">Efficient R programming</a> by Colin Gillespie and Robin Lovelace. Chapter 5 considers <a href="https://csgillespie.github.io/efficientR/input-output.html">Efficient Input/Output</a> is relevant to this week.</p></li>
+<li><p><a href="https://vita.had.co.nz/papers/tidy-data.html">Wickham (2014)</a>. Tidy Data. Journal of Statistical Software. The paper that brought tidy data to the mainstream.</p></li>
+</ul></section><section id="reference-materials-1" class="level3 unnumbered"><h3 class="unnumbered anchored" data-anchor-id="reference-materials-1">Reference Materials</h3>
+<ul>
+<li><p>The {readr} <a href="https://readr.tidyverse.org/">documentation</a></p></li>
+<li><p>The {data.table} <a href="https://cran.r-project.org/web/packages/data.table/data.table.pdf">documentation</a> and <a href="https://cran.r-project.org/web/packages/data.table/vignettes/datatable-intro.html">vignette</a></p></li>
+<li><p>The {rvest} <a href="https://rvest.tidyverse.org/">documentation</a></p></li>
+<li><p>The {tidyr} <a href="https://tidyr.tidyverse.org/">documentation</a></p></li>
+<li><p>MDN Web Docs on <a href="https://developer.mozilla.org/en-US/docs/Web/HTML">HTML</a> and <a href="https://developer.mozilla.org/en-US/docs/Web/CSS">CSS</a></p></li>
+</ul></section><section id="materials-of-interest-1" class="level3 unnumbered"><h3 class="unnumbered anchored" data-anchor-id="materials-of-interest-1">Materials of Interest</h3>
+<ul>
+<li>
+<a href="https://zapier.com/learn/apis/chapter-1-introduction-to-apis/">Introduction to APIs</a> by Brian Cooksey</li>
+<li>
+<a href="https://r4ds.hadley.nz/">R for Data Science (Second Edition)</a> Chapters within the <a href="https://r4ds.hadley.nz/import.html">Import</a> section.</li>
+</ul>
+<p>This covers importing data from spreadsheets, databases, using Apache Arrow and importing hierarchical data as well as web scraping.</p>
+</section></section><section id="edav-reading" class="level2" data-number="A.3"><h2 data-number="A.3" class="anchored" data-anchor-id="edav-reading">
+<span class="header-section-number">A.3</span> Data Exploration and Visualisation</h2>
+<section id="core-materials-2" class="level3 unnumbered"><h3 class="unnumbered anchored" data-anchor-id="core-materials-2">Core Materials</h3>
+<ul>
+<li>
+<a href="https://bookdown.org/rdpeng/exdata/">Exploratory Data Analysis with R</a> by Roger Peng.</li>
+</ul>
+<p>Chapters 3 and 4 are core reading, respectively introducing <a href="https://bookdown.org/rdpeng/exdata/managing-data-frames-with-the-dplyr-package.html">data frame manipulation with {dplyr}</a> and an example <a href="https://bookdown.org/rdpeng/exdata/exploratory-data-analysis-checklist.html">workflow for exploratory data analysis</a>. Other chapters may be useful as references.</p>
+<ul>
+<li>
+<a href="https://stefvanbuuren.name/fimd/">Flexible Imputation of Missing Data</a> by Stef van Buuren. <a href="https://stefvanbuuren.name/fimd/ch-introduction.html">Sections 1.1-1.4</a> give a thorough introduction to missing data problems.</li>
+</ul></section><section id="referene-materials" class="level3 unnumbered"><h3 class="unnumbered anchored" data-anchor-id="referene-materials">Referene Materials</h3>
+<ul>
+<li><p><a href="">A ggplot2 Tutorial for Beautiful Plotting in R</a> https://www.cedricscherer.com/2019/08/05/a-ggplot2-tutorial-for-beautiful-plotting-in-r/) by Cédric Scherer.</p></li>
+<li><p>The {dplyr} <a href="https://dplyr.tidyverse.org/">documentation</a></p></li>
+<li><p><a href="https://github.com/rstudio/cheatsheets/blob/main/data-transformation.pdf">RStudio Data Transformation Cheat Sheet</a></p></li>
+<li><p><a href="https://r4ds.had.co.nz/index.html">R for Data Science (First Edition)</a> Chapters on <a href="https://r4ds.had.co.nz/transform.html">Data Transformations</a>, <a href="https://r4ds.had.co.nz/exploratory-data-analysis.html">Exploratory Data Analysis</a> and <a href="https://r4ds.had.co.nz/relational-data.html">Relational Data</a>.</p></li>
+<li><p>Equivalent sections in R for Data Science <a href="https://r4ds.hadley.nz/">Second Edition</a></p></li>
+</ul></section><section id="materials-of-interest-2" class="level3 unnumbered"><h3 class="unnumbered anchored" data-anchor-id="materials-of-interest-2">Materials of Interest</h3>
+<ul>
+<li><p><a href="https://library-search.imperial.ac.uk/discovery/fulldisplay?docid=cdi_informaworld_taylorfrancis_310_1198_jcgs_2009_07098&amp;context=PC&amp;vid=44IMP_INST:ICL_VU1&amp;lang=en&amp;search_scope=MyInst_and_CI&amp;adaptor=Primo%20Central&amp;tab=Everything&amp;query=any,contains,layered%20grammar%20of%20graphics&amp;offset=0">Wickham, H. (2010)</a>. A Layered Grammar of Graphics. Journal of Computational and Graphical Statistics.</p></li>
+<li><p><a href="https://library-search.imperial.ac.uk/discovery/fulldisplay?docid=alma991000664639501591&amp;context=L&amp;vid=44IMP_INST:ICL_VU1&amp;lang=en&amp;search_scope=MyInst_and_CI&amp;adaptor=Local%20Search%20Engine&amp;tab=Everything&amp;query=any,contains,better%20data%20visualisations&amp;offset=0">Better Data Visualisations</a> by Jonathan Schwabish</p></li>
+</ul>
+<!-- Strategies to create more effective data visualizations, presented in a way that is agnostic to the software you use to construct your visualisations. --><ul>
+<li>
+<a href="https://library-search.imperial.ac.uk/discovery/fulldisplay?docid=alma991000211295101591&amp;context=L&amp;vid=44IMP_INST:ICL_VU1&amp;lang=en&amp;search_scope=MyInst_and_CI&amp;adaptor=Local%20Search%20Engine&amp;tab=Everything&amp;query=any,contains,Data%20Visualization%20%E2%80%93%20A%20Practical%20Introduction&amp;offset=0">Data Visualization: A Practical Introduction</a> by Kieran Healy</li>
+</ul></section></section><section id="production-reading" class="level2" data-number="A.4"><h2 data-number="A.4" class="anchored" data-anchor-id="production-reading">
+<span class="header-section-number">A.4</span> Preparing for Production</h2>
+<section id="core-materials-3" class="level3 unnumbered"><h3 class="unnumbered anchored" data-anchor-id="core-materials-3">Core Materials</h3>
+<ul>
+<li><p><a href="https://library-search.imperial.ac.uk/discovery/fulldisplay?docid=alma991000531083101591&amp;context=L&amp;vid=44IMP_INST:ICL_VU1&amp;lang=en&amp;search_scope=MyInst_and_CI&amp;adaptor=Local%20Search%20Engine&amp;tab=Everything&amp;query=any,contains,kearns%20and%20roth&amp;mode=Basic">The Ethical Algorithm</a> M Kearns and A Roth (Chapter 4)</p></li>
+<li><p><a href="https://arxiv.org/abs/1602.04938">Ribeiro et al (2016)</a>. “Why Should I Trust You?”: Explaining the Predictions of Any Classifier.</p></li>
+</ul></section><section id="reference-materials-2" class="level3 unnumbered"><h3 class="unnumbered anchored" data-anchor-id="reference-materials-2">Reference Materials</h3>
+<ul>
+<li><p>The <a href="https://docker-curriculum.com/">Docker Curriculum</a> by Prakhar Srivastav.</p></li>
+<li><p>LIME <a href="https://cran.r-project.org/web/packages/lime/index.html">package documentation</a> on CRAN.</p></li>
+<li><p><a href="https://christophm.github.io/interpretable-ml-book/">Interpretable Machine Learning: A Guide for Making Black Box Models Explainable</a> by Christoph Molnar.</p></li>
+<li><p>Documentation for <a href="https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/apply">apply()</a>, <a href="https://purrr.tidyverse.org/reference/map.html">map()</a> and <a href="https://furrr.futureverse.org/">pmap()</a></p></li>
+<li><p><a href="https://adv-r.hadley.nz/index.html">Advanced R (Second Edition)</a> by Hadley Wickham. <a href="https://adv-r.hadley.nz/perf-measure.html">Chapter 23</a> on measuring performance and <a href="https://adv-r.hadley.nz/perf-improve.html">Chapter 24</a> on improving performance.</p></li>
+</ul></section><section id="materials-of-interest-3" class="level3 unnumbered"><h3 class="unnumbered anchored" data-anchor-id="materials-of-interest-3">Materials of Interest</h3>
+<ul>
+<li><p><a href="https://library-search.imperial.ac.uk/discovery/fulldisplay?docid=cdi_informaworld_taylorfrancis_310_1080_00031305_2016_1154108&amp;context=PC&amp;vid=44IMP_INST:ICL_VU1&amp;lang=en&amp;search_scope=MyInst_and_CI&amp;adaptor=Primo%20Central&amp;tab=Everything&amp;query=any,contains,ASA%20p-value&amp;offset=0">The ASA Statement on <span class="math inline">\(p\)</span>-values: Context, Process and Purpose</a></p></li>
+<li><p><a href="http://stat.columbia.edu/~gelman/research/unpublished/forking.pdf">The Garden of Forking Paths: Why multiple comparisons can be a problem, even when there is no “Fishing expedition” or “p-hacking” and the research hypothesis was posited ahead of time</a>. A Gelman and E loken (2013)</p></li>
+<li><p><a href="https://cran.r-project.org/web/packages/lime/vignettes/Understanding_lime.html">Understanding LIME tutorial</a> by T Pedersen and M Benesty.</p></li>
+<li><p><a href="https://adv-r.hadley.nz/index.html">Advanced R (Second Edition)</a> by Hadley Wickham. <a href="https://adv-r.hadley.nz/rcpp.html">Chapter 25</a> on writing R code in C++.</p></li>
+</ul></section></section><section id="data-science-ethics" class="level2" data-number="A.5"><h2 data-number="A.5" class="anchored" data-anchor-id="data-science-ethics">
+<span class="header-section-number">A.5</span> Data Science Ethics</h2>
+<section id="core-materials-4" class="level3 unnumbered"><h3 class="unnumbered anchored" data-anchor-id="core-materials-4">Core Materials</h3>
+<ul>
+<li><p><a href="https://library-search.imperial.ac.uk/discovery/fulldisplay?docid=alma991000531083101591&amp;context=L&amp;vid=44IMP_INST:ICL_VU1&amp;lang=en&amp;search_scope=MyInst_and_CI&amp;adaptor=Local%20Search%20Engine&amp;tab=Everything&amp;query=any,contains,kearns%20and%20roth&amp;mode=Basic">The Ethical Algorithm</a> M Kearns and A Roth. Chapters 1 and 2 on Algorithmic Privacy and Algortihmic Fairness.</p></li>
+<li><p><a href="https://proceedings.mlr.press/v81/buolamwini18a.html">Gender Shades: Intersectional Accuracy Disparities in Commercial Gender Classification</a> by Joy Buolamwini and Timnit Gebru (2018). Proceedings of the 1st Conference on Fairness, Accountability and Transparency.</p></li>
+<li><p><a href="https://ieeexplore.ieee.org/document/4531148">Robust De-anonymization of Large Sparse Datasets</a> by Arvind Narayanan and Vitaly Shmatikov (2008). IEEE Symposium on Security and Privacy.</p></li>
+</ul></section><section id="reference-materials-3" class="level3 unnumbered"><h3 class="unnumbered anchored" data-anchor-id="reference-materials-3">Reference Materials</h3>
+<ul>
+<li><p><a href="https://fairmlbook.org/">Fairness and machine learning Limitations and Opportunities</a> by Solon Barocas, Moritz Hardt and Arvind Narayanan.</p></li>
+<li>
+<p>Professional Guidleines on Data Ethics from:</p>
+<ul>
+<li><a href="http://www.ams.org/about-us/governance/policy-statements/sec-ethics">The American Mathematical Society</a></li>
+<li><a href="https://op.europa.eu/s/sUPP">The European Union</a></li>
+<li><a href="https://www.gov.uk/guidance/understanding-artificial-intelligence-ethics-and-safety">UK Government</a></li>
+<li><a href="https://rss.org.uk/RSS/media/News-and-publications/Publications/Reports%20and%20guides/A-Guide-for-Ethical-Data-Science-Final-Oct-2019.pdf">Royal Statistical Society</a></li>
+<li><a href="https://www.government.nl/documents/reports/2021/07/31/impact-assessment-fundamental-rights-and-algorithms">Dutch Government</a></li>
+</ul>
+</li>
+</ul></section><section id="materials-of-interest-4" class="level3 unnumbered"><h3 class="unnumbered anchored" data-anchor-id="materials-of-interest-4">Materials of Interest</h3>
+<ul>
+<li>
+<a href="https://arxiv.org/abs/2001.09784">Algorithmic Fairness</a> (2020). Pre-print of review paper by Dana Pessach and Erez Shmueli.</li>
+</ul>
+
+
+</section></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script><nav class="page-navigation"><div class="nav-page nav-page-previous">
+      <a href="./510-ethics-checklist.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Checklist</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./700-references.html" class="pagination-link">
+        <span class="nav-page-text">References</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>

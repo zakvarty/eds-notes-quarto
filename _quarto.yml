@@ -51,9 +51,10 @@ book:
         - 503-ethics-conduct.qmd
         - 510-ethics-checklist.qmd
   appendices:
-    - references.qmd
+    - 600-reading-list.qmd
+    - 700-references.qmd
 
-bibliography: references.bib
+bibliography: [packages.bib, references.bib]
 
 format:
   html:

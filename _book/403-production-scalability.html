@@ -330,7 +330,18 @@ gtag('config', 'G-EFK9JPMVM8', { 'anonymize_ip': true});
       <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+<<<<<<< HEAD
   <a href="./references.html" class="sidebar-item-text sidebar-link">References</a>
+=======
+  <a href="./600-reading-list.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Reading List</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./700-references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+>>>>>>> 114321ad5d8b42044c4328125c2e93922034bdf5
   </div>
 </li>
       </ul>
@@ -492,7 +503,11 @@ Structure talk around Alex's parallelisation slides
 <span><span class="va">t_end</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html">Sys.time</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">t_end</span> <span class="op">-</span> <span class="va">t_start</span></span>
+<<<<<<< HEAD
 <span><span class="co">#&gt; Time difference of 0.5083079 secs</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+=======
+<span><span class="co">#&gt; Time difference of 0.5031278 secs</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+>>>>>>> 114321ad5d8b42044c4328125c2e93922034bdf5
 </div>
 <p>The system.time function provides a shorthand for this if your code runs sequentially and extends the functionality to work for parallel code too.</p>
 <div class="cell" data-layout-align="center">
@@ -500,7 +515,7 @@ Structure talk around Alex's parallelisation slides
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/Sys.sleep.html">Sys.sleep</a></span><span class="op">(</span><span class="fl">0.5</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span><span class="co">#&gt;    user  system elapsed </span></span>
-<span><span class="co">#&gt;   0.000   0.000   0.503</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="co">#&gt;   0.000   0.000   0.505</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The <a href="https://github.com/jabiru/tictoc">tictoc</a> package has similar features, but also allows you to add intermediate timers to more understand which parts of your code are taking the most time to run.</p>
 <div class="cell" data-layout-align="center">
@@ -509,7 +524,7 @@ Structure talk around Alex's parallelisation slides
 <span><span class="fu"><a href="https://rdrr.io/pkg/tictoc/man/tic.html">tic</a></span><span class="op">(</span><span class="op">)</span> </span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/Sys.sleep.html">Sys.sleep</a></span><span class="op">(</span><span class="fl">0.5</span><span class="op">)</span> <span class="co"># YOUR CODE </span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/tictoc/man/tic.html">toc</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; 0.511 sec elapsed</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="co">#&gt; 0.508 sec elapsed</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>With <a href="https://github.com/jabiru/tictoc">tictoc</a> we can get fancy</p>
 <div class="cell" data-layout-align="center">
@@ -517,11 +532,19 @@ Structure talk around Alex's parallelisation slides
 <span><span class="fu"><a href="https://rdrr.io/pkg/tictoc/man/tic.html">tic</a></span><span class="op">(</span><span class="st">"first, easy part"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/Sys.sleep.html">Sys.sleep</a></span><span class="op">(</span><span class="fl">0.5</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/tictoc/man/tic.html">toc</a></span><span class="op">(</span>log <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<<<<<<< HEAD
 <span><span class="co">#&gt; first, easy part: 0.508 sec elapsed</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/tictoc/man/tic.html">tic</a></span><span class="op">(</span><span class="st">"second, hard part"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/Sys.sleep.html">Sys.sleep</a></span><span class="op">(</span><span class="fl">3</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/tictoc/man/tic.html">toc</a></span><span class="op">(</span>log <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="co">#&gt; second, hard part: 3.005 sec elapsed</span></span>
+=======
+<span><span class="co">#&gt; first, easy part: 0.506 sec elapsed</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/tictoc/man/tic.html">tic</a></span><span class="op">(</span><span class="st">"second, hard part"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Sys.sleep.html">Sys.sleep</a></span><span class="op">(</span><span class="fl">3</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/tictoc/man/tic.html">toc</a></span><span class="op">(</span>log <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="co">#&gt; second, hard part: 3.009 sec elapsed</span></span>
+>>>>>>> 114321ad5d8b42044c4328125c2e93922034bdf5
 <span><span class="fu"><a href="https://rdrr.io/pkg/tictoc/man/tic.html">toc</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; total: 3.52 sec elapsed</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -620,7 +643,11 @@ Structure talk around Alex's parallelisation slides
 <span><span class="co">#&gt;         "logical", "numeric", "factor"))</span></span>
 <span><span class="co">#&gt;     c(rep(NA, n_left), x, rep(NA, n_right))</span></span>
 <span><span class="co">#&gt; }</span></span>
+<<<<<<< HEAD
 <span><span class="co">#&gt; &lt;bytecode: 0x7f819210acc0&gt;</span></span>
+=======
+<span><span class="co">#&gt; &lt;bytecode: 0x7fd07d4b5de8&gt;</span></span>
+>>>>>>> 114321ad5d8b42044c4328125c2e93922034bdf5
 <span><span class="co">#&gt; &lt;environment: namespace:eds&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Some functions use <em>compiled code</em> that is written in another language. This is the case for dplyr’s <code>arrange()</code>, which calls some compiled C++ code.</p>
@@ -630,7 +657,11 @@ Structure talk around Alex's parallelisation slides
 <span><span class="co">#&gt; {</span></span>
 <span><span class="co">#&gt;     UseMethod("arrange")</span></span>
 <span><span class="co">#&gt; }</span></span>
+<<<<<<< HEAD
 <span><span class="co">#&gt; &lt;bytecode: 0x7f8192175cf0&gt;</span></span>
+=======
+<span><span class="co">#&gt; &lt;bytecode: 0x7fd07d56b820&gt;</span></span>
+>>>>>>> 114321ad5d8b42044c4328125c2e93922034bdf5
 <span><span class="co">#&gt; &lt;environment: namespace:dplyr&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>It is also true for many functions from base R, for which there is (for obvious reason) no R source code.</p>
@@ -638,7 +669,11 @@ Structure talk around Alex's parallelisation slides
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">mean</span></span>
 <span><span class="co">#&gt; function (x, ...) </span></span>
 <span><span class="co">#&gt; UseMethod("mean")</span></span>
+<<<<<<< HEAD
 <span><span class="co">#&gt; &lt;bytecode: 0x7f818fd37330&gt;</span></span>
+=======
+<span><span class="co">#&gt; &lt;bytecode: 0x7fd075c17470&gt;</span></span>
+>>>>>>> 114321ad5d8b42044c4328125c2e93922034bdf5
 <span><span class="co">#&gt; &lt;environment: namespace:base&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><br></p>
@@ -734,6 +769,7 @@ Structure talk around Alex's parallelisation slides
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">mu</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">10</span>, <span class="fl">0</span>, <span class="fl">10</span><span class="op">)</span></span>
 <span><span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span>.x <span class="op">=</span> <span class="va">mu</span>, .f <span class="op">=</span> <span class="va">rnorm</span>, n <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [[1]]</span></span>
+<<<<<<< HEAD
 <span><span class="co">#&gt; [1]  -8.876572  -9.424607  -8.682438 -11.258476 -10.638463</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; [[2]]</span></span>
@@ -741,6 +777,15 @@ Structure talk around Alex's parallelisation slides
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; [[3]]</span></span>
 <span><span class="co">#&gt; [1]  8.956084 10.046883  8.211559  9.355451  8.800315</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+=======
+<span><span class="co">#&gt; [1] -10.422868 -11.638088  -9.932571  -9.025392 -10.781733</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; [[2]]</span></span>
+<span><span class="co">#&gt; [1] -0.2863980  0.3685672  0.3742572  0.1421569 -1.3022845</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; [[3]]</span></span>
+<span><span class="co">#&gt; [1]  9.843356  7.370247 10.087178 11.008547  9.804995</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+>>>>>>> 114321ad5d8b42044c4328125c2e93922034bdf5
 </div>
 <p>Iterate over multiple objects <code>map2()</code> and <code>pmap()</code>.</p>
 <div class="cell" data-layout-align="center">
@@ -751,7 +796,11 @@ Structure talk around Alex's parallelisation slides
 <span><span class="co">#&gt; [1] -10 -10 -10 -10 -10</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; [[2]]</span></span>
+<<<<<<< HEAD
 <span><span class="co">#&gt; [1] -0.05801018  0.11961581  0.15206135 -0.02410871  0.09876034</span></span>
+=======
+<span><span class="co">#&gt; [1] -0.0993421  0.1714979  0.0774610  0.1056376  0.0265688</span></span>
+>>>>>>> 114321ad5d8b42044c4328125c2e93922034bdf5
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; [[3]]</span></span>
 <span><span class="co">#&gt; [1] 10 10 10 10 10</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -770,7 +819,11 @@ Structure talk around Alex's parallelisation slides
 <span><span class="co">#&gt; [1] -10 -10 -10 -10 -10</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; [[2]]</span></span>
+<<<<<<< HEAD
 <span><span class="co">#&gt; [1] -0.04583593  0.14986969 -0.10910054  0.08660517 -0.10153561</span></span>
+=======
+<span><span class="co">#&gt; [1]  0.03410495  0.12024365 -0.01413384  0.28021118 -0.06291448</span></span>
+>>>>>>> 114321ad5d8b42044c4328125c2e93922034bdf5
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; [[3]]</span></span>
 <span><span class="co">#&gt; [1] 10 10 10 10 10</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -791,6 +844,7 @@ Structure talk around Alex's parallelisation slides
 <span>  .options <span class="op">=</span> <span class="fu">furrr</span><span class="fu">::</span><span class="fu"><a href="https://furrr.futureverse.org/reference/furrr_options.html">furrr_options</a></span><span class="op">(</span>seed <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span>
 <span>  n <span class="op">=</span> <span class="fl">5</span><span class="op">)</span> </span>
 <span><span class="co">#&gt; [[1]]</span></span>
+<<<<<<< HEAD
 <span><span class="co">#&gt; [1] -11.593290  -9.595670 -10.074479 -10.376344  -9.894132</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; [[2]]</span></span>
@@ -798,6 +852,15 @@ Structure talk around Alex's parallelisation slides
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; [[3]]</span></span>
 <span><span class="co">#&gt; [1]  8.947493 10.704697  8.935551 11.370871 10.152588</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+=======
+<span><span class="co">#&gt; [1]  -9.513171  -9.097403 -10.186770  -9.450393 -10.604382</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; [[2]]</span></span>
+<span><span class="co">#&gt; [1] -1.1308262  0.4800375 -0.2833952  1.3670356 -0.1714894</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; [[3]]</span></span>
+<span><span class="co">#&gt; [1] 10.082269  8.010454 10.641328 10.446820  7.758835</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+>>>>>>> 114321ad5d8b42044c4328125c2e93922034bdf5
 </div>
 <p>This is, of course excessive for this small example!</p>
 <p>One thing to be aware of is that we need to be very careful handling random number generation in relation to parallelisation. There are many options for how you might want to set this up, see <a href="https://www.r-bloggers.com/2020/09/future-1-19-1-making-sure-proper-random-numbers-are-produced-in-parallel-processing/">R-bloggers</a> for more details.</p>
