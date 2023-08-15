@@ -6,11 +6,15 @@ book:
   title: "Effective Data Science"
   author: "Zak Varty"
   cover-image: images/EDS-logo.jpg
+  #favicon:
   site-url: https://eds-notes.zakvarty.com/
   repo-url: https://github.com/zakvarty/eds-notes-quarto/
   repo-branch: master
   repo-actions: [edit]
   sharing: [twitter, linkedin]
+  twitter-card:
+    creator: "@zakvarty"
+  google-analytics: "G-EFK9JPMVM8"
   date: today
   chapters:
     - index.qmd

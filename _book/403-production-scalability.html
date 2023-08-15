@@ -2,22 +2,16 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.353">
+<meta name="generator" content="quarto-1.0.38">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <title>Effective Data Science - 12&nbsp; Scalability</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: min(4vw, 1.5em);}
-div.column{flex: auto; overflow-x: auto;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
-ul.task-list li input[type="checkbox"] {
-  width: 0.8em;
-  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
-  vertical-align: middle;
-}
-/* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
@@ -44,13 +38,43 @@ pre.numberSource code > span > a:first-child::before
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
     padding: 0 4px; width: 4em;
+    color: #aaaaaa;
   }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
   {   }
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -88,307 +112,280 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit"
   }
-}</script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script><link rel="stylesheet" href="style.css">
+}</script><script async="" src="https://www.googletagmanager.com/gtag/js?id=G-EFK9JPMVM8"></script><script type="text/javascript">
+
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-EFK9JPMVM8', { 'anonymize_ip': true});
+</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script><link rel="stylesheet" href="style.css">
+<meta name="twitter:title" content="Effective Data Science - 12&nbsp; Scalability">
+<meta name="twitter:description" content="When put into production code gets used more and on more data. We will likely have to consider scalability of our methods in terms of">
+<meta name="twitter:creator" content="@zakvarty">
+<meta name="twitter:card" content="summary">
 </head>
 <body class="nav-sidebar floating">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-        <i class="bi bi-layout-text-sidebar-reverse"></i>
-      </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./400-production-introduction.html">Preparing for Production</a></li><li class="breadcrumb-item"><a href="./403-production-scalability.html"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Scalability</span></a></li></ol></nav>
-      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-      </a>
-      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
-        <i class="bi bi-search"></i>
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }"><div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Scalability</span></h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
       </button>
     </div>
   </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Effective Data Science</a> 
         <div class="sidebar-tools-main">
-    <a href="https://github.com/zakvarty/eds-notes-quarto/" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
-    <div class="dropdown">
-      <a href="" title="Share" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Share"><i class="bi bi-share"></i></a>
-      <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
+    <a href="https://github.com/zakvarty/eds-notes-quarto/" title="Source Code" class="sidebar-tool px-1"><i class="bi bi-github"></i></a>
+    <a href="" title="Share" id="sidebar-tool-dropdown-0" class="sidebar-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-share"></i></a>
+    <ul class="dropdown-menu" aria-labelledby="sidebar-tool-dropdown-0">
 <li>
-            <a class="dropdown-item sidebar-tools-main-item" href="https://twitter.com/intent/tweet?url=%7Curl%7C">
-              <i class="bi bi-bi-twitter pe-1"></i>
-            Twitter
-            </a>
-          </li>
-          <li>
-            <a class="dropdown-item sidebar-tools-main-item" href="https://www.linkedin.com/sharing/share-offsite/?url=%7Curl%7C">
-              <i class="bi bi-bi-linkedin pe-1"></i>
-            LinkedIn
-            </a>
-          </li>
-      </ul>
-</div>
+          <a class="dropdown-item sidebar-tools-main-item" href="https://twitter.com/intent/tweet?url=%7Curl%7C">
+            <i class="bi bi-bi-twitter pe-1"></i>
+          Twitter
+          </a>
+        </li>
+        <li>
+          <a class="dropdown-item sidebar-tools-main-item" href="https://www.linkedin.com/sharing/share-offsite/?url=%7Curl%7C">
+            <i class="bi bi-bi-linkedin pe-1"></i>
+          LinkedIn
+          </a>
+        </li>
+    </ul>
 </div>
     </div>
       </div>
-        <div class="mt-2 flex-shrink-0 align-items-center">
+      <div class="mt-2 flex-shrink-0 align-items-center">
         <div class="sidebar-search">
         <div id="quarto-search" class="" title="Search"></div>
         </div>
-        </div>
+      </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">About this Course</span></a>
+  <a href="./index.html" class="sidebar-item-text sidebar-link">About this Course</a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="./100-workflows-introduction.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Effective Workflows</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <a href="./100-workflows-introduction.html" class="sidebar-item-text sidebar-link">Effective Workflows</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./101-workflows-organising-your-work.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Organising your work</span></span></a>
+  <a href="./101-workflows-organising-your-work.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Organising your work</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./102-workflows-naming-files.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Naming Files</span></span></a>
+  <a href="./102-workflows-naming-files.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Naming Files</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./103-workflows-organising-your-code.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Code</span></span></a>
+  <a href="./103-workflows-organising-your-code.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Code</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./110-workflows-checklist.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Workflows Checklist</span></a>
+  <a href="./110-workflows-checklist.html" class="sidebar-item-text sidebar-link">Workflows Checklist</a>
   </div>
 </li>
       </ul>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="./200-data-introduction.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Acquiring and Sharing Data</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+            <a href="./200-data-introduction.html" class="sidebar-item-text sidebar-link">Acquiring and Sharing Data</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./201-data-tabular.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Tabular Data</span></span></a>
+  <a href="./201-data-tabular.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Tabular Data</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./202-data-webscraping.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Web Scraping</span></span></a>
+  <a href="./202-data-webscraping.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Web Scraping</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./203-data-apis.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">APIs</span></span></a>
+  <a href="./203-data-apis.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">APIs</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./210-data-checklist.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Checklist</span></a>
+  <a href="./210-data-checklist.html" class="sidebar-item-text sidebar-link">Checklist</a>
   </div>
 </li>
       </ul>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="./300-edav-intro.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Data Exploration and Visualisation</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
+            <a href="./300-edav-intro.html" class="sidebar-item-text sidebar-link">Data Exploration and Visualisation</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./301-edav-wrangling.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Data Wrangling</span></span></a>
+  <a href="./301-edav-wrangling.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Data Wrangling</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./302-edav-analysis.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Exploratory Data Analysis</span></span></a>
+  <a href="./302-edav-analysis.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Exploratory Data Analysis</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./303-edav-visualisation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Data Visualisation</span></span></a>
+  <a href="./303-edav-visualisation.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Data Visualisation</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./310-edav-checklist.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Checklist</span></a>
+  <a href="./310-edav-checklist.html" class="sidebar-item-text sidebar-link">Checklist</a>
   </div>
 </li>
       </ul>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="./400-production-introduction.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Preparing for Production</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Toggle section">
+            <a href="./400-production-introduction.html" class="sidebar-item-text sidebar-link">Preparing for Production</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./401-production-reproducibility.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Reproducibility</span></span></a>
+  <a href="./401-production-reproducibility.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Reproducibility</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./402-production-explainability.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Explainability</span></span></a>
+  <a href="./402-production-explainability.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Explainability</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./403-production-scalability.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Scalability</span></span></a>
+  <a href="./403-production-scalability.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Scalability</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./410-production-checklist.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Checklist</span></a>
+  <a href="./410-production-checklist.html" class="sidebar-item-text sidebar-link">Checklist</a>
   </div>
 </li>
       </ul>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="./500-ethics-introduction.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Data Science Ethics</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true" aria-label="Toggle section">
+            <a href="./500-ethics-introduction.html" class="sidebar-item-text sidebar-link">Data Science Ethics</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./501-ethics-privacy.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Privacy</span></span></a>
+  <a href="./501-ethics-privacy.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Privacy</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./502-ethics-fairness.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Fairness</span></span></a>
+  <a href="./502-ethics-fairness.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Fairness</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./503-ethics-conduct.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Codes of Conduct</span></span></a>
+  <a href="./503-ethics-conduct.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Codes of Conduct</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./510-ethics-checklist.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Checklist</span></a>
+  <a href="./510-ethics-checklist.html" class="sidebar-item-text sidebar-link">Checklist</a>
   </div>
 </li>
       </ul>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true">
- <span class="menu-text">Appendices</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true" aria-label="Toggle section">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true">Appendices</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./references.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">References</span></a>
+  <a href="./references.html" class="sidebar-item-text sidebar-link">References</a>
   </div>
 </li>
       </ul>
 </li>
     </ul>
 </div>
-</nav><div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
-<!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
+</nav><!-- margin-sidebar --><div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
 <li>
-<a href="#scalability-and-production" id="toc-scalability-and-production" class="nav-link active" data-scroll-target="#scalability-and-production"><span class="header-section-number">12.1</span> Scalability and Production</a>
+<a href="#scalability-and-production" id="toc-scalability-and-production" class="nav-link active" data-scroll-target="#scalability-and-production"> <span class="header-section-number">12.1</span> Scalability and Production</a>
   <ul class="collapse">
-<li><a href="#example-bayesian-inference" id="toc-example-bayesian-inference" class="nav-link" data-scroll-target="#example-bayesian-inference"><span class="header-section-number">12.1.1</span> Example: Bayesian Inference</a></li>
-  <li><a href="#knowing-when-to-worry" id="toc-knowing-when-to-worry" class="nav-link" data-scroll-target="#knowing-when-to-worry"><span class="header-section-number">12.1.2</span> Knowing when to worry</a></li>
-  <li><a href="#our-focus" id="toc-our-focus" class="nav-link" data-scroll-target="#our-focus"><span class="header-section-number">12.1.3</span> Our Focus</a></li>
+<li><a href="#example-bayesian-inference" id="toc-example-bayesian-inference" class="nav-link" data-scroll-target="#example-bayesian-inference"> <span class="header-section-number">12.1.1</span> Example: Bayesian Inference</a></li>
+  <li><a href="#knowing-when-to-worry" id="toc-knowing-when-to-worry" class="nav-link" data-scroll-target="#knowing-when-to-worry"> <span class="header-section-number">12.1.2</span> Knowing when to worry</a></li>
+  <li><a href="#our-focus" id="toc-our-focus" class="nav-link" data-scroll-target="#our-focus"> <span class="header-section-number">12.1.3</span> Our Focus</a></li>
   </ul>
 </li>
   <li>
-<a href="#basics-of-code-profiling" id="toc-basics-of-code-profiling" class="nav-link" data-scroll-target="#basics-of-code-profiling"><span class="header-section-number">12.2</span> Basics of Code Profiling</a>
+<a href="#basics-of-code-profiling" id="toc-basics-of-code-profiling" class="nav-link" data-scroll-target="#basics-of-code-profiling"> <span class="header-section-number">12.2</span> Basics of Code Profiling</a>
   <ul class="collapse">
-<li><a href="#r-as-a-stopwatch" id="toc-r-as-a-stopwatch" class="nav-link" data-scroll-target="#r-as-a-stopwatch"><span class="header-section-number">12.2.1</span> R as a stopwatch</a></li>
+<li><a href="#r-as-a-stopwatch" id="toc-r-as-a-stopwatch" class="nav-link" data-scroll-target="#r-as-a-stopwatch"> <span class="header-section-number">12.2.1</span> R as a stopwatch</a></li>
   </ul>
 </li>
   <li>
-<a href="#profiling-your-code" id="toc-profiling-your-code" class="nav-link" data-scroll-target="#profiling-your-code"><span class="header-section-number">12.3</span> Profiling Your Code</a>
+<a href="#profiling-your-code" id="toc-profiling-your-code" class="nav-link" data-scroll-target="#profiling-your-code"> <span class="header-section-number">12.3</span> Profiling Your Code</a>
   <ul class="collapse">
-<li><a href="#profiling-toy-example" id="toc-profiling-toy-example" class="nav-link" data-scroll-target="#profiling-toy-example"><span class="header-section-number">12.3.1</span> Profiling: Toy Example</a></li>
+<li><a href="#profiling-toy-example" id="toc-profiling-toy-example" class="nav-link" data-scroll-target="#profiling-toy-example"> <span class="header-section-number">12.3.1</span> Profiling: Toy Example</a></li>
   </ul>
 </li>
   <li>
-<a href="#notes-on-time-profiling" id="toc-notes-on-time-profiling" class="nav-link" data-scroll-target="#notes-on-time-profiling"><span class="header-section-number">12.4</span> Notes on Time Profiling</a>
+<a href="#notes-on-time-profiling" id="toc-notes-on-time-profiling" class="nav-link" data-scroll-target="#notes-on-time-profiling"> <span class="header-section-number">12.4</span> Notes on Time Profiling</a>
   <ul class="collapse">
-<li><a href="#source-code-and-compiled-functions" id="toc-source-code-and-compiled-functions" class="nav-link" data-scroll-target="#source-code-and-compiled-functions"><span class="header-section-number">12.4.1</span> Source code and compiled functions</a></li>
+<li><a href="#source-code-and-compiled-functions" id="toc-source-code-and-compiled-functions" class="nav-link" data-scroll-target="#source-code-and-compiled-functions"> <span class="header-section-number">12.4.1</span> Source code and compiled functions</a></li>
   </ul>
 </li>
-  <li><a href="#memory-profiling" id="toc-memory-profiling" class="nav-link" data-scroll-target="#memory-profiling"><span class="header-section-number">12.5</span> Memory Profiling</a></li>
+  <li><a href="#memory-profiling" id="toc-memory-profiling" class="nav-link" data-scroll-target="#memory-profiling"> <span class="header-section-number">12.5</span> Memory Profiling</a></li>
   <li>
-<a href="#tips-to-work-at-scale" id="toc-tips-to-work-at-scale" class="nav-link" data-scroll-target="#tips-to-work-at-scale"><span class="header-section-number">12.6</span> Tips to work at scale</a>
+<a href="#tips-to-work-at-scale" id="toc-tips-to-work-at-scale" class="nav-link" data-scroll-target="#tips-to-work-at-scale"> <span class="header-section-number">12.6</span> Tips to work at scale</a>
   <ul class="collapse">
-<li><a href="#vectorise" id="toc-vectorise" class="nav-link" data-scroll-target="#vectorise"><span class="header-section-number">12.6.1</span> Vectorise</a></li>
-  <li><a href="#linear-algebra" id="toc-linear-algebra" class="nav-link" data-scroll-target="#linear-algebra"><span class="header-section-number">12.6.2</span> Linear Algebra</a></li>
+<li><a href="#vectorise" id="toc-vectorise" class="nav-link" data-scroll-target="#vectorise"> <span class="header-section-number">12.6.1</span> Vectorise</a></li>
+  <li><a href="#linear-algebra" id="toc-linear-algebra" class="nav-link" data-scroll-target="#linear-algebra"> <span class="header-section-number">12.6.2</span> Linear Algebra</a></li>
   </ul>
 </li>
   <li>
-<a href="#for-loops-in-disguise" id="toc-for-loops-in-disguise" class="nav-link" data-scroll-target="#for-loops-in-disguise"><span class="header-section-number">12.7</span> For loops in disguise</a>
+<a href="#for-loops-in-disguise" id="toc-for-loops-in-disguise" class="nav-link" data-scroll-target="#for-loops-in-disguise"> <span class="header-section-number">12.7</span> For loops in disguise</a>
   <ul class="collapse">
-<li><a href="#the-apply-family" id="toc-the-apply-family" class="nav-link" data-scroll-target="#the-apply-family"><span class="header-section-number">12.7.1</span> The apply family</a></li>
-  <li><a href="#purrr" id="toc-purrr" class="nav-link" data-scroll-target="#purrr"><span class="header-section-number">12.7.2</span> <code>{purrr}</code></a></li>
+<li><a href="#the-apply-family" id="toc-the-apply-family" class="nav-link" data-scroll-target="#the-apply-family"> <span class="header-section-number">12.7.1</span> The apply family</a></li>
+  <li><a href="#purrr" id="toc-purrr" class="nav-link" data-scroll-target="#purrr"> <span class="header-section-number">12.7.2</span> <code>{purrr}</code></a></li>
   </ul>
 </li>
-  <li><a href="#easy-parallelisation-with-furrr" id="toc-easy-parallelisation-with-furrr" class="nav-link" data-scroll-target="#easy-parallelisation-with-furrr"><span class="header-section-number">12.8</span> Easy parallelisation with furrr</a></li>
-  <li><a href="#sometimes-r-doesnt-cut-it" id="toc-sometimes-r-doesnt-cut-it" class="nav-link" data-scroll-target="#sometimes-r-doesnt-cut-it"><span class="header-section-number">12.9</span> Sometimes R doesn’t cut it</a></li>
+  <li><a href="#easy-parallelisation-with-furrr" id="toc-easy-parallelisation-with-furrr" class="nav-link" data-scroll-target="#easy-parallelisation-with-furrr"> <span class="header-section-number">12.8</span> Easy parallelisation with furrr</a></li>
+  <li><a href="#sometimes-r-doesnt-cut-it" id="toc-sometimes-r-doesnt-cut-it" class="nav-link" data-scroll-target="#sometimes-r-doesnt-cut-it"> <span class="header-section-number">12.9</span> Sometimes R doesn’t cut it</a></li>
   <li>
-<a href="#wrapping-up" id="toc-wrapping-up" class="nav-link" data-scroll-target="#wrapping-up"><span class="header-section-number">12.10</span> Wrapping up</a>
+<a href="#wrapping-up" id="toc-wrapping-up" class="nav-link" data-scroll-target="#wrapping-up"> <span class="header-section-number">12.10</span> Wrapping up</a>
   <ul class="collapse">
 <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary">Summary</a></li>
   <li><a href="#help" id="toc-help" class="nav-link" data-scroll-target="#help">Help!</a></li>
@@ -398,7 +395,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
-<h1 class="title"><span id="production-scalability" class="quarto-section-identifier"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Scalability</span></span></h1>
+<h1 class="title"><span id="production-scalability" class="quarto-section-identifier d-none d-lg-block"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Scalability</span></span></h1>
 </div>
 
 
@@ -406,17 +403,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="quarto-title-meta">
 
     
-  
     
   </div>
   
 
-</header><div class="callout callout-style-default callout-important callout-titled">
+</header><div class="callout-important callout callout-style-default callout-captioned">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-title-container flex-fill">
+<div class="callout-caption-container flex-fill">
 Important
 </div>
 </div>
@@ -472,7 +468,7 @@ Structure talk around Alex's parallelisation slides
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="images/403-production-scalability/pareto-frontier.png" class="img-fluid figure-img" style="width:80.0%" alt="Plot of computation time agains coding time with feasible solutions shown as crosses and the Pareto frontier added as an orange curve."></p>
+<figure class="figure"><p><img src="images/403-production-scalability/pareto-frontier.png" class="img-fluid figure-img" alt="Plot of computation time agains coding time with feasible solutions shown as crosses and the Pareto frontier added as an orange curve." style="width:80.0%"></p>
 </figure>
 </div>
 </div>
@@ -496,7 +492,7 @@ Structure talk around Alex's parallelisation slides
 <span><span class="va">t_end</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html">Sys.time</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">t_end</span> <span class="op">-</span> <span class="va">t_start</span></span>
-<span><span class="co">#&gt; Time difference of 0.5065579 secs</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="co">#&gt; Time difference of 0.5083079 secs</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The system.time function provides a shorthand for this if your code runs sequentially and extends the functionality to work for parallel code too.</p>
 <div class="cell" data-layout-align="center">
@@ -521,13 +517,13 @@ Structure talk around Alex's parallelisation slides
 <span><span class="fu"><a href="https://rdrr.io/pkg/tictoc/man/tic.html">tic</a></span><span class="op">(</span><span class="st">"first, easy part"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/Sys.sleep.html">Sys.sleep</a></span><span class="op">(</span><span class="fl">0.5</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/tictoc/man/tic.html">toc</a></span><span class="op">(</span>log <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="co">#&gt; first, easy part: 0.51 sec elapsed</span></span>
+<span><span class="co">#&gt; first, easy part: 0.508 sec elapsed</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/tictoc/man/tic.html">tic</a></span><span class="op">(</span><span class="st">"second, hard part"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/Sys.sleep.html">Sys.sleep</a></span><span class="op">(</span><span class="fl">3</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/tictoc/man/tic.html">toc</a></span><span class="op">(</span>log <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="co">#&gt; second, hard part: 3.007 sec elapsed</span></span>
+<span><span class="co">#&gt; second, hard part: 3.005 sec elapsed</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/tictoc/man/tic.html">toc</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; total: 3.526 sec elapsed</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="co">#&gt; total: 3.52 sec elapsed</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>If your code is already very fast (but will be run <em>very</em> many times, so further efficiency gains are required) then the methods may fail because they do not sample the state of the code at a high enough frequency. In those cases you might want to explore the <code>{mircobenchmark}</code> package.</p>
 </section></section><section id="profiling-your-code" class="level2" data-number="12.3"><h2 data-number="12.3" class="anchored" data-anchor-id="profiling-your-code">
@@ -570,8 +566,9 @@ Structure talk around Alex's parallelisation slides
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="images/403-production-scalability/call-stack.png" class="img-fluid figure-img" style="width:80.0%" alt="Schematic diagram of a call stack. x-axis shows time and nested function calls are shown as stacked blocks of varying widths, with the deepest function call at the top. At time tau = 2.5, the pause function is being evaluated within function h, which is being evaluated within function g, which in turn is being evaluated within function f."></p>
-<figcaption class="figure-caption">Callstack for f()</figcaption></figure>
+<figure class="figure"><p><img src="images/403-production-scalability/call-stack.png" class="img-fluid figure-img" alt="Schematic diagram of a call stack. x-axis shows time and nested function calls are shown as stacked blocks of varying widths, with the deepest function call at the top. At time tau = 2.5, the pause function is being evaluated within function h, which is being evaluated within function g, which in turn is being evaluated within function f." style="width:80.0%"></p>
+<p></p><figcaption class="figure-caption">Callstack for f()</figcaption><p></p>
+</figure>
 </div>
 </div>
 </div>
@@ -583,7 +580,7 @@ Structure talk around Alex's parallelisation slides
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="images/403-production-scalability/profiling-example-speed.png" class="img-fluid figure-img" style="width:100.0%" alt="RStudio window showing interacting profile of function f. A veritcal bar chart shows how much time is spent evaluating functions f,g,h, and pause."></p>
+<figure class="figure"><p><img src="images/403-production-scalability/profiling-example-speed.png" class="img-fluid figure-img" alt="RStudio window showing interacting profile of function f. A veritcal bar chart shows how much time is spent evaluating functions f,g,h, and pause." style="width:100.0%"></p>
 </figure>
 </div>
 </div>
@@ -623,7 +620,7 @@ Structure talk around Alex's parallelisation slides
 <span><span class="co">#&gt;         "logical", "numeric", "factor"))</span></span>
 <span><span class="co">#&gt;     c(rep(NA, n_left), x, rep(NA, n_right))</span></span>
 <span><span class="co">#&gt; }</span></span>
-<span><span class="co">#&gt; &lt;bytecode: 0x7fe332730c20&gt;</span></span>
+<span><span class="co">#&gt; &lt;bytecode: 0x7f819210acc0&gt;</span></span>
 <span><span class="co">#&gt; &lt;environment: namespace:eds&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Some functions use <em>compiled code</em> that is written in another language. This is the case for dplyr’s <code>arrange()</code>, which calls some compiled C++ code.</p>
@@ -633,7 +630,7 @@ Structure talk around Alex's parallelisation slides
 <span><span class="co">#&gt; {</span></span>
 <span><span class="co">#&gt;     UseMethod("arrange")</span></span>
 <span><span class="co">#&gt; }</span></span>
-<span><span class="co">#&gt; &lt;bytecode: 0x7fe3359439c8&gt;</span></span>
+<span><span class="co">#&gt; &lt;bytecode: 0x7f8192175cf0&gt;</span></span>
 <span><span class="co">#&gt; &lt;environment: namespace:dplyr&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>It is also true for many functions from base R, for which there is (for obvious reason) no R source code.</p>
@@ -641,7 +638,7 @@ Structure talk around Alex's parallelisation slides
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">mean</span></span>
 <span><span class="co">#&gt; function (x, ...) </span></span>
 <span><span class="co">#&gt; UseMethod("mean")</span></span>
-<span><span class="co">#&gt; &lt;bytecode: 0x7fe32f1cf470&gt;</span></span>
+<span><span class="co">#&gt; &lt;bytecode: 0x7f818fd37330&gt;</span></span>
 <span><span class="co">#&gt; &lt;environment: namespace:base&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><br></p>
@@ -658,7 +655,7 @@ Structure talk around Alex's parallelisation slides
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="images/403-production-scalability/profiling-example-memory.png" class="img-fluid figure-img" style="width:100.0%" alt="RStudio interactive code profiler. Code to iteratively extend a vector uses and clears a lot of working memory. The garbage collector function GC causes most of the runtime."></p>
+<figure class="figure"><p><img src="images/403-production-scalability/profiling-example-memory.png" class="img-fluid figure-img" alt="RStudio interactive code profiler. Code to iteratively extend a vector uses and clears a lot of working memory. The garbage collector function GC causes most of the runtime." style="width:100.0%"></p>
 </figure>
 </div>
 </div>
@@ -737,13 +734,13 @@ Structure talk around Alex's parallelisation slides
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">mu</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">10</span>, <span class="fl">0</span>, <span class="fl">10</span><span class="op">)</span></span>
 <span><span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span>.x <span class="op">=</span> <span class="va">mu</span>, .f <span class="op">=</span> <span class="va">rnorm</span>, n <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [[1]]</span></span>
-<span><span class="co">#&gt; [1]  -8.800045  -9.963164  -9.080128 -10.359737 -10.563194</span></span>
+<span><span class="co">#&gt; [1]  -8.876572  -9.424607  -8.682438 -11.258476 -10.638463</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; [[2]]</span></span>
-<span><span class="co">#&gt; [1]  0.84124815  0.63602176  0.45632852 -0.04653124  0.56461434</span></span>
+<span><span class="co">#&gt; [1] -0.61653992  0.03389615 -1.17953166  1.24555576  0.38054170</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; [[3]]</span></span>
-<span><span class="co">#&gt; [1] 11.168953  9.040505  9.956977  8.470123  9.366346</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="co">#&gt; [1]  8.956084 10.046883  8.211559  9.355451  8.800315</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Iterate over multiple objects <code>map2()</code> and <code>pmap()</code>.</p>
 <div class="cell" data-layout-align="center">
@@ -754,7 +751,7 @@ Structure talk around Alex's parallelisation slides
 <span><span class="co">#&gt; [1] -10 -10 -10 -10 -10</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; [[2]]</span></span>
-<span><span class="co">#&gt; [1]  0.04986874 -0.09277800  0.06202500  0.10908644 -0.04102728</span></span>
+<span><span class="co">#&gt; [1] -0.05801018  0.11961581  0.15206135 -0.02410871  0.09876034</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; [[3]]</span></span>
 <span><span class="co">#&gt; [1] 10 10 10 10 10</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -773,7 +770,7 @@ Structure talk around Alex's parallelisation slides
 <span><span class="co">#&gt; [1] -10 -10 -10 -10 -10</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; [[2]]</span></span>
-<span><span class="co">#&gt; [1] -0.074242705 -0.077561513  0.050234917  0.002017001  0.184065751</span></span>
+<span><span class="co">#&gt; [1] -0.04583593  0.14986969 -0.10910054  0.08660517 -0.10153561</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; [[3]]</span></span>
 <span><span class="co">#&gt; [1] 10 10 10 10 10</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -794,13 +791,13 @@ Structure talk around Alex's parallelisation slides
 <span>  .options <span class="op">=</span> <span class="fu">furrr</span><span class="fu">::</span><span class="fu"><a href="https://furrr.futureverse.org/reference/furrr_options.html">furrr_options</a></span><span class="op">(</span>seed <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span>
 <span>  n <span class="op">=</span> <span class="fl">5</span><span class="op">)</span> </span>
 <span><span class="co">#&gt; [[1]]</span></span>
-<span><span class="co">#&gt; [1] -10.450840  -9.352552 -10.444994 -10.459816 -10.696030</span></span>
+<span><span class="co">#&gt; [1] -11.593290  -9.595670 -10.074479 -10.376344  -9.894132</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; [[2]]</span></span>
-<span><span class="co">#&gt; [1] -1.02201230  0.51518107 -0.06759967  1.84171739 -0.26527501</span></span>
+<span><span class="co">#&gt; [1]  0.8514637 -0.3718945  0.2349390  0.9178362  1.1322401</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; [[3]]</span></span>
-<span><span class="co">#&gt; [1] 11.054006 10.416850 10.239724  9.903284  9.540246</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="co">#&gt; [1]  8.947493 10.704697  8.935551 11.370871 10.152588</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>This is, of course excessive for this small example!</p>
 <p>One thing to be aware of is that we need to be very careful handling random number generation in relation to parallelisation. There are many options for how you might want to set this up, see <a href="https://www.r-bloggers.com/2020/09/future-1-19-1-making-sure-proper-random-numbers-are-produced-in-parallel-processing/">R-bloggers</a> for more details.</p>
@@ -862,23 +859,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     icon: icon
   };
   anchorJS.add('.anchored');
-  const isCodeAnnotation = (el) => {
-    for (const clz of el.classList) {
-      if (clz.startsWith('code-annotation-')) {                     
-        return true;
-      }
-    }
-    return false;
-  }
   const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
+    target: function(trigger) {
+      return trigger.previousElementSibling;
     }
   });
   clipboard.on('success', function(e) {
@@ -890,24 +873,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     button.classList.add('code-copy-button-checked');
     var currentTitle = button.getAttribute("title");
     button.setAttribute("title", "Copied!");
-    let tooltip;
-    if (window.bootstrap) {
-      button.setAttribute("data-bs-toggle", "tooltip");
-      button.setAttribute("data-bs-placement", "left");
-      button.setAttribute("data-bs-title", "Copied!");
-      tooltip = new bootstrap.Tooltip(button, 
-        { trigger: "manual", 
-          customClass: "code-copy-button-tooltip",
-          offset: [0, -8]});
-      tooltip.show();    
-    }
     setTimeout(function() {
-      if (tooltip) {
-        tooltip.hide();
-        button.removeAttribute("data-bs-title");
-        button.removeAttribute("data-bs-toggle");
-        button.removeAttribute("data-bs-placement");
-      }
       button.setAttribute("title", currentTitle);
       button.classList.remove('code-copy-button-checked');
     }, 1000);
@@ -935,136 +901,31 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   for (var i=0; i<noterefs.length; i++) {
     const ref = noterefs[i];
     tippyHover(ref, function() {
-      // use id or data attribute instead here
-      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      let href = ref.getAttribute('href');
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
       return note.innerHTML;
     });
   }
-      let selectedAnnoteEl;
-      const selectorForAnnotation = ( cell, annotation) => {
-        let cellAttr = 'data-code-cell="' + cell + '"';
-        let lineAttr = 'data-code-annotation="' +  annotation + '"';
-        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
-        return selector;
-      }
-      const selectCodeLines = (annoteEl) => {
-        const doc = window.document;
-        const targetCell = annoteEl.getAttribute("data-target-cell");
-        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
-        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
-        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
-        const lineIds = lines.map((line) => {
-          return targetCell + "-" + line;
-        })
-        let top = null;
-        let height = null;
-        let parent = null;
-        if (lineIds.length > 0) {
-            //compute the position of the single el (top and bottom and make a div)
-            const el = window.document.getElementById(lineIds[0]);
-            top = el.offsetTop;
-            height = el.offsetHeight;
-            parent = el.parentElement.parentElement;
-          if (lineIds.length > 1) {
-            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
-            height = bottom - top;
-          }
-          if (top !== null && height !== null && parent !== null) {
-            // cook up a div (if necessary) and position it 
-            let div = window.document.getElementById("code-annotation-line-highlight");
-            if (div === null) {
-              div = window.document.createElement("div");
-              div.setAttribute("id", "code-annotation-line-highlight");
-              div.style.position = 'absolute';
-              parent.appendChild(div);
-            }
-            div.style.top = top - 2 + "px";
-            div.style.height = height + 4 + "px";
-            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-            if (gutterDiv === null) {
-              gutterDiv = window.document.createElement("div");
-              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-              gutterDiv.style.position = 'absolute';
-              const codeCell = window.document.getElementById(targetCell);
-              const gutter = codeCell.querySelector('.code-annotation-gutter');
-              gutter.appendChild(gutterDiv);
-            }
-            gutterDiv.style.top = top - 2 + "px";
-            gutterDiv.style.height = height + 4 + "px";
-          }
-          selectedAnnoteEl = annoteEl;
-        }
-      };
-      const unselectCodeLines = () => {
-        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
-        elementsIds.forEach((elId) => {
-          const div = window.document.getElementById(elId);
-          if (div) {
-            div.remove();
-          }
-        });
-        selectedAnnoteEl = undefined;
-      };
-      // Attach click handler to the DT
-      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
-      for (const annoteDlNode of annoteDls) {
-        annoteDlNode.addEventListener('click', (event) => {
-          const clickedEl = event.target;
-          if (clickedEl !== selectedAnnoteEl) {
-            unselectCodeLines();
-            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
-            if (activeEl) {
-              activeEl.classList.remove('code-annotation-active');
-            }
-            selectCodeLines(clickedEl);
-            clickedEl.classList.add('code-annotation-active');
-          } else {
-            // Unselect the line
-            unselectCodeLines();
-            clickedEl.classList.remove('code-annotation-active');
-          }
-        });
-      }
-  const findCites = (el) => {
-    const parentEl = el.parentElement;
-    if (parentEl) {
-      const cites = parentEl.dataset.cites;
-      if (cites) {
-        return {
-          el,
-          cites: cites.split(' ')
-        };
-      } else {
-        return findCites(el.parentElement)
-      }
-    } else {
-      return undefined;
-    }
-  };
   var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
   for (var i=0; i<bibliorefs.length; i++) {
     const ref = bibliorefs[i];
-    const citeInfo = findCites(ref);
-    if (citeInfo) {
-      tippyHover(citeInfo.el, function() {
-        var popup = window.document.createElement('div');
-        citeInfo.cites.forEach(function(cite) {
-          var citeDiv = window.document.createElement('div');
-          citeDiv.classList.add('hanging-indent');
-          citeDiv.classList.add('csl-entry');
-          var biblioDiv = window.document.getElementById('ref-' + cite);
-          if (biblioDiv) {
-            citeDiv.innerHTML = biblioDiv.innerHTML;
-          }
-          popup.appendChild(citeDiv);
-        });
-        return popup.innerHTML;
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
       });
-    }
+      return popup.innerHTML;
+    });
   }
 });
 </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
