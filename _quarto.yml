@@ -13,7 +13,7 @@ book:
   repo-actions: [edit]
   sharing: [twitter, linkedin]
   twitter-card:
-    creator: "@zakvarty"
+    creator: "zakvarty"
   google-analytics: "G-EFK9JPMVM8"
   date: today
   chapters:
