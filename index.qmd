@@ -11,7 +11,7 @@ status("complete")
 
 <!--## Course Description {.unnumbered}-->
 
-Model building and evaluation are are necessary but not sufficient skills for the effective practice of data science. In this module you will develop the technical and personal skills that are required to work successfully as a data scientist within an organisation. 
+Model building and evaluation are necessary but not sufficient skills for the effective practice of data science. In this module you will develop the technical and personal skills that are required to work successfully as a data scientist within an organisation. 
 
 <!-- 
 ::: small_right
@@ -29,7 +29,7 @@ During this module you will critically explore how to:
 - assess the ethical implications of your work as a data scientist.
 
 
-This interdisciplinary course will draw from fields including statistics, computing, management science and data ethics. Each topic will be investigated through a selection of lecture videos, conference presentations and academic papers, hands-on lab exercises, along with readings on industry best-practices from recognised professional bodies. 
+This interdisciplinary course will draw from fields including statistics, computing, management science and data ethics. Each topic will be investigated through a selection of lecture videos, conference presentations and academic papers, supported by hands-on lab exercises and readings on industry best-practices as published by recognised professional bodies. 
 
 
 ## Schedule {-}
@@ -44,7 +44,7 @@ As the course is scheduled to take place over five weeks, the suggested schedule
 -   4th week: preparing for production;
 -   5th week: ethics and context of data science.
 
-A pdf version of these notes may be downloaded [here](./Effective-Data-Science.pdf). Please be aware that these are very rough and will be updated less frequently than the course webpage.
+A pdf version of these notes may be downloaded [here](./Effective-Data-Science.pdf). Please be aware that this pdf version is secondary to, and will be updated less frequently than, this course webpage.
 
 
 ## Learning outcomes {-}
@@ -67,7 +67,7 @@ On successful completion of this module students should be able to:
 
 **Independent Study:** 100 hours (15 hours per week + 30 hours coursework)
 
-**Drop-In Sessions:** Each week there will be a 1-hour optional drop-in session to address any questions about the course or material. This is where you can get support from the course lecturer or GTA on the topics covered each week, individually or in small groups.
+**Drop-In Sessions:** Each week there will be a 1-hour optional drop-in session to address any questions about the course or material. This is where you can get support from the course lecturer or GTA on the topics covered each week, either individually or in small groups.
 
 **Office Hours:** Additionally, there will be an office hour each week. This is a weekly opportunity for 1-1 discussion with the course lecturer to address any individual questions, concerns or problems that you might have. These meetings can be in person or on Teams and can be academic (relating to course content or progress) or pastoral (relating to student well-being) in nature. To book a 1-1 meeting please use the link on the course blackboard page.
 
@@ -77,7 +77,7 @@ The course will be assessed entirely by coursework, reflecting the practical and
 
 **Coursework 1 (30%):** To be completed during the fourth week of the course.
 
-**Coursework 2 (70%):** To be released in the last week of the course and submitted following the examination period in Summer term. 
+**Coursework 2 (70%):** To be released during the course and submitted following the examination period in Summer term. 
 
 ## Acknowledgements {-}
 
