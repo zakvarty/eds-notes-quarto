@@ -44,7 +44,7 @@ As the course is scheduled to take place over five weeks, the suggested schedule
 -   4th week: preparing for production;
 -   5th week: ethics and context of data science.
 
-A pdf version of these notes may be downloaded [here](./Effective-Data-Science.pdf). Please be aware that this pdf version is secondary to, and will be updated less frequently than, this course webpage.
+An alternative pdf version of these notes may be downloaded [here](./Effective-Data-Science.pdf). Please be aware that this pdf version is secondary to this course webpage and will be updated less frequently.
 
 
 ## Learning outcomes {-}
@@ -65,23 +65,27 @@ On successful completion of this module students should be able to:
 
 **Lab / Practical:** 10 hours  (2 hours per week)
 
-**Independent Study:** 100 hours (15 hours per week + 30 hours coursework)
+**Independent Study:** 100 hours (11 hours per week + 45 hours coursework)
 
-**Drop-In Sessions:** Each week there will be a 1-hour optional drop-in session to address any questions about the course or material. This is where you can get support from the course lecturer or GTA on the topics covered each week, either individually or in small groups.
+**Drop-In Sessions:** Each week there will be a 2-hour optional drop-in session to address any questions about the course or material. This is where you can get support from the course lecturer or GTA on the topics covered each week, either individually or in small groups.
+
+These will be held on Fridays 15:00-17:00 in Huxley 711C. 
 
 **Office Hours:** Additionally, there will be an office hour each week. This is a weekly opportunity for 1-1 discussion with the course lecturer to address any individual questions, concerns or problems that you might have. These meetings can be in person or on Teams and can be academic (relating to course content or progress) or pastoral (relating to student well-being) in nature. To book a 1-1 meeting please use the link on the course blackboard page.
+
+Office hours will be held on Mondays 15:00-16:00 in Huxley 6M20. (Week 3 alteration, 14:00-15:00)
 
 ## Assessment Structure {-}
 
 The course will be assessed entirely by coursework, reflecting the practical and pragmatic nature of the course material.
 
-**Coursework 1 (30%):** To be completed during the fourth week of the course.
+**Coursework 1 (30%):** To be completed during the final week of the course, the week commencing 2024-02-12.
 
-**Coursework 2 (70%):** To be released during the course and submitted following the examination period in Summer term. 
+**Coursework 2 (70%):** To be released during the third week of the course and submitted following the examination period in Summer term (2024-01-29 until 2024-05-15 at 13:00). 
 
 ## Acknowledgements {-}
 
-These notes were created by Dr Zak Varty. They were inspired by a previous lecture series by Dr Purvasha Chakravarti at Imperial College London and draw from many resource that were made available by the R community.
+These notes were created by Dr Zak Varty. They were inspired by a previous lecture series by Dr Purvasha Chakravarti at Imperial College London and draw from many resource that were made available by the R community, which are attributed throughout.
 
 
 ```{r setup}

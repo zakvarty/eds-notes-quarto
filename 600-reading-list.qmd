@@ -77,6 +77,18 @@ This reading list is organised by topic, according to each week of the course. T
 
 <!-- If you'd like to get started using version control with your R projects this book will be your guiding light. -->
 
+- [Make Tutorial](https://monashbioinformaticsplatform.github.io/2017-11-16-open-science-training/topics/automation.html) by the Monash Informatics Platform.
+
+<!-- Motivates makefiles via compiling Rmd to multiple output formats -->
+
+- [Makefiles for R and LaTeX projects](https://robjhyndman.com/hyndsight/makefiles/) blog post by Rob Hyndman
+
+<!-- Old, but motivates the use of make files and separating code and writing well. -->
+
+- [Makefile tutorial](https://makefiletutorial.com/#getting-started) by Chase Lambert
+
+<!-- Pretty and current but very extensive and with a strong CS focus -->
+
 ----
 
 ## Aquiring and Sharing Data {#data-reading}
