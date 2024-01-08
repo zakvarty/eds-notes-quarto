@@ -11,7 +11,7 @@ status("complete")
 
 In what we have covered so far we have been very much focused on the first aspect of data science: the data. When we come to consider about whether our work can be reproduced or our results can be replicated, this shifts our focus to the second other, the science. 
 
-```{r, echo=FALSE, warning=FALSE, message=FALSE, fig.cap="Cycle of scientific enqiry."}
+```{r scientific-method-png}
 #| echo: false
 #| warning: false
 #| message: false
@@ -140,6 +140,7 @@ In data science we rely a lot on the use of stochastic methods. These are often 
 #| fig-cap: "Monte Carlo approximation of $\\pi$"
 #| fig-alt: "Points randomly located on [-1,1] x [-1,1], with the unit circle overlaid."
 library(ggplot2)
+set.seed(1234)
 
 N <- 1000
 rand_x <- runif(n = N, min = -1, max = 1)
