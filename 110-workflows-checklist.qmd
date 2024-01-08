@@ -21,6 +21,14 @@ Use the [workflows section](#workflows-reading) of the reading list to support a
 
 ## Tasks 
 
+_Short:_
+
+- When downloading papers from a journal webpage or ArXiV, they often have unhelpful file names like `2310.12711.pdf`. Come up with your own naming convention that will keep your downloaded papers organised and easy to search. Write a short paragraph explaining and justifying your naming convention for someone else.
+
+- When downloading data from websites you can encounter similary uninformative names. Use the [US Geological Survey website](https://earthquake.usgs.gov/earthquakes/search/) to download a csv file of all earthqakes in the conterminous US exceeding magnitude 3.0 during 2023. Note the default name of this file and suggest your own, improved name for this file. 
+
+- Consider simulating a fire evacuation of the Huxley building taking an object oriented approach. List the classes of object might you define and what methods and fields would give to each of these. (There is no expectation to code this simulation) 
+
 _Core:_ 
 
 -  Find 3  data science projects on Github and explore how they organise their work. Write a post on the EdStem forum that links to all three, and in a couple of paragraphs describe the content and structure of one project.
@@ -28,6 +36,7 @@ _Core:_
 - Create your own project directory (or directories) for this course and its assignments.
 
 - Write two of your own R functions. The first should calculate the geometric mean of a numeric vector. The second should calculate the rolling arithmetic mean of a numeric vector.
+
 
 _Bonus:_
 
