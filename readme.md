@@ -94,4 +94,6 @@ If you are still getting used to collaborative workflows with git, check out thi
 ## Development Ideas 
 
 - 1.2 is long - consider splitting into file names and file extensions.
+
+- 1.3 is long - consider splitting or pulling out functional vs OOP sections.
  

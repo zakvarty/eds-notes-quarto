@@ -4,16 +4,16 @@
 #| results: 'asis'
 #| echo: false
 source("_common.R")
-status("polishing")
+status("complete")
 ```
 
 ## Introduction 
 
-We have already described how we might organise an effective data science project at the directory and file level. In this chapter we will delve one step deeper and consider how we can structure our work within those files. In particular, we'll focus on code files here.
+We have already described how we might organise an effective data science project at the directory and file level. In this chapter we will delve one step deeper and consider how we can structure our work within those files. 
 
-We'll start by comparing the two main approaches to structuring our code, namely functional programming and object oriented programming. We'll then see how we should order code within our scripts and conventions on how to name the functions and objects that we work with in our code.
+In particular, we'll focus on code files here. We'll start by comparing the two main approaches to structuring our code, called functional programming and object oriented programming. We'll then consider conventions on how we should order code within our scripts and how we name the functions and objects we create.
 
-Rounding up this chapter, we'll summarise the main points from the R style guide that we will be following in this course and highlight some useful packages for writing effective code.
+To round up this chapter, we'll summarise the main points from the R style guide that we will be following in this course and highlight some useful packages for writing effective code.
 
 ## Functional Programming 
 
@@ -21,24 +21,26 @@ A functional programming style has two major properties:
 
 -   Object immutability,
 
--   Complex programs written using function composition.
+-   Complex programs are written using function composition.
 
-This first point here states that the original data or objects should never be modified or altered by the code we write. We have met this idea before when making new, cleaner versions of our raw data but taking care to leave the original messy data intact. Object immutability is the exact same idea but in a code context rather than data context.
+The first point states that the original data or objects should never be modified or altered by the code that we write. We've met this idea before when making new, cleaner versions of our raw data while taking care to leave the original messy data intact. Object immutability extends this same idea to cover our code as well as our data.
 
-Secondly, in functional programming, complex problems are solved by decomposing them into a series of smaller problems. A separate, self-contained function is then written to solve each sub-problem. Each individual function is, in itself, simple and easy to understand. This makes these small functions easy to test and easy to reuse in many places. Code complexity is then built up by composing these functions in various ways.
+The second point encapsulates that in functional programming complex problems are solved by decomposing them into a series of smaller problems. A separate, self-contained function is then written to solve each sub-problem. This means that each individual function is simple and easy to understand. This makes each of these small functions easy to test and to reuse in many places thoughout our analysis. Code complexity is then built up by composing these functions in various ways.
 
-It can be difficult to get into this way of thinking, but people with mathematical training often find it quite natural. This is because mathematicians have many years of experience in working with function compositions in the abstract, mathematical sense.
+It can be difficult to get into this way of thinking, but people with mathematical training often find it quite natural. This is because mathematicians have many years experience of working with function compositions in the abstract, mathematical sense.
 
 $$y = g(x) = f_3 \circ f_2 \circ f_1(x).$$ 
 
 ### The Pipe Operator 
 
-One issue with functional programming is that lots of nested functions means that there are also lots of nested brackets. These start to get tricky to keep track of when you have upwards of 3 functions being composed. This reading difficulty is only exacerbated if your functions have additional arguments on top of the original inputs. 
+One issue with functional programming is that lots of nested functions means that there are also lots of nested brackets. These start to get tricky to keep track of when you have upwards of 3 functions being composed. 
 
 ```{r example-function-composition}
 #| echo: true
 log(exp(cos(sin(pi))))
 ```
+
+This reading difficulty is only exacerbated if your functions have additional arguments on top of the original inputs.
 
 The pipe operator `%>%` from the `{magrittr}` package helps with this issue. It works exactly like function composition: it takes the whatever is on the left (whether that is an existing object or the output of a function) and passes it to the following function call as the first argument of that function.
 
@@ -61,7 +63,7 @@ iris %>%
 
 The pipe operator is often referred to as "syntactic sugar". This is because it doesn't add anything to your code in itself, but rather it makes your code _so_ much more palatable to read.
 
-In R versions 4.1 and greater, there's a built-in version of this pipe operator,`|>`. This is written using the vertical bar symbol followed by a greater than sign. To type the vertical bar, you can usually find it found above backslash on the keyboard. (Just to cause confusion, the vertical bar symbol is also called the pipe symbol and performs a similar operation in general programming contexts.)
+In R versions 4.1 and greater, there's a built-in version of this pipe operator,`|>`. This is written using the vertical bar symbol followed by a greater than sign. You can usually find this vertical bar above backslash on the keyboard. (Just to cause confusion, the vertical bar symbol is also called the pipe symbol and performs a similar operation in other programming langauges.)
 
 
 ```{r example-base-pipe}
@@ -82,7 +84,8 @@ iris |>
 ```
 
 
-The base R pipe usually behaves in the same way as the pipe from magrittr, but there are a few cases where they differ. For reasons of back-compatibility and consistency we'll stick to the {magrittr} pipe in this course.
+The base R pipe usually behaves in the same way as the pipe from magrittr, but there are a few cases where they differ. For reasons of back-compatibility and consistency we'll stick to the `{magrittr}` pipe in this course. (For an outline of some of the differences between these two pipes, check out this [blog post](https://ivelasq.rbind.io/blog/understanding-the-r-pipe/) by Isabella Velasquez)
+
 
 ### When not to pipe 
 
@@ -94,16 +97,18 @@ Pipes are designed to put focus on the the actions you are performing rather tha
 
 The first of these is when you need to manipulate more than one object at a time. Using secondary objects as reference points (but leaving them unchanged) is of course perfectly fine, but pipes should be used when applying a sequence of steps to create a new, modified version of one primary object. 
 
-Secondly, just because you _can_ chain together many actions into a single pipeline, that doesn't mean that you necessarily should. Very long sequences of piped operations are easier to read than nested functions, however they still burden the reader with the same cognitive load on their short term memory. Be kind and create meaningful, intermediate objects with informative names. This will help the reader to more easily understand the logic within your code.
+Secondly, just because you _can_ chain together many actions into a single pipeline that doesn't mean you necessarily should do so. Very long sequences of piped operations are easier to read than nested functions but they still burden the reader with the same cognitive load on their short-term memory. Be kind to them and create meaningful intermediate objects with informative names. This will help the reader to more easily understand the logic within your code.
 
 ## Object Oriented Programming 
 
 The main alternative to functional programming is object oriented programming.
 
--   Solve problems by using lots of simple objects
--   R has 3 OOP systems: S3, S4 and R6.
--   Objects belong to a class, have methods and fields.
--   Example: agent based simulation of beehive.
+> TL;DR
+>
+> -   OOP solves complex problems by using lots of simple objects
+> -   R has 3 OOP systems: S3, S4 and R6.
+> -   Objects belong to a class, have methods and fields.
+> -   Example: agent based simulation of beehive.
 
 ### OOP Philosophy
 
@@ -113,10 +118,11 @@ Functional programming is excellent for most types of data science work. Object 
 
 In R there are three different systems for doing object oriented programming (called S3, S4, and R6), so things can get a bit complicated. We won't go into detail about them here, but I'll give you an overview of the main ideas.
 
-This approach to programming might be useful for you in the future, for example if you want to extend base R functions to work with new types of input, and to have user-friendly displays. In that case (Advanced R)[https://adv-r.hadley.nz/] by Hadley Wickham is an excellent reference text.
+This approach to programming might be useful for you in the future, for example if you want to extend base R functions to work with new types of input, and to have user-friendly displays. In that case [Advanced R](https://adv-r.hadley.nz/) by Hadley Wickham is an excellent reference text.
 
 
 In OOP, each object belongs to a class and has a set of methods associated with it. The class defines what an object *is* and methods describe what that object can *do*. On top of that, each object has class-specific attributes or data fields. These fields are shared by all objects in a class but the values that they take give information about that specific object.
+
 
 ### OOP Example
 
@@ -124,7 +130,7 @@ In OOP, each object belongs to a class and has a set of methods associated with 
 <img src="images/103-organising-your-code/beehive_3.jpg" alt="Italian Trulli"/>
 :::
 
-This is is all sounding very abstract. Let's consider writing some object oriented code to simulate a beehive. Each object will be a bee, and each bee is an instance of one of three bee classes: it might be a queen, a worker or a drone for example. Different bee classes have different methods associated with them, which describe what the bee can do, for example all bees would have 6 methods that let them move up, down, left, right, forward and backward within the hive. An additional "reproduce" method might only be defined for queen bees and a pollinate method might only be defined for workers. Each instance of a bee has its own fields, which give data about that specific bee. All bees have x, y and z coordinate fields giving their location within the hive. The queen class might have an additional field for their number of offspring and the workers might have an additional field for how much pollen they are carrying.
+This is is all sounding very abstract. Let's consider writing some object oriented code to simulate a beehive. Each object will be a bee, and each bee is an instance of one of three bee classes: it might be a `queen`, a `worker` or a `drone`. Different bee classes have different methods associated with them, which describe what the bee can do, for example all bees would have 6 methods that let them move `up`, `down`, `left`, `right`, `forward` and `backward` within the hive. An additional `reproduce` method might only be defined for queen bees and a `pollinate` method might only be defined for workers. Each instance of a bee has then has its own fields, which give data about that specific bee. All bees have `x`, `y` and `z` coordinate fields that give the bee's current location within the hive. These fields can then be altered by using the movement methods defined above. The queen class might have an additional field, counting its number of offspring and the workers might have an additional field for how much pollen they are carrying.
 
 As the simulation progresses, methods are applied to each object altering their fields and potentially creating or destroying objects. This is very different from the preservation mindset of functional programming, but hopefully you can see that it is a very natural approach to many types of problem.
 
@@ -137,7 +143,7 @@ As the simulation progresses, methods are applied to each object altering their 
 > - `setwd()` and `rm(ls())` are the devil's work.
 > - "Session" > "Restart R" or Keyboard shortcut: crtl/cmd + shift > + 0
 > - Polite to gather all `library()` and `source()`  calls.
-> - Rude to mess with other people's set up using > `install.packages()`.
+> - Rude to mess with other people's set up using `install.packages()`.
 > - Portable scripts use paths relative to the root directory of the project.
 
 First things first, let's discuss what should be at the top of your R scripts. 
@@ -152,7 +158,7 @@ Next, it is likely that you, or someone close to you, will commit the felony of 
 
 Instead, to achieve your original aim of starting a new R session, go to the menu and select the "Session" drop down then select "Restart R". Alternatively, you can use keyboard shortcuts to do the same. This is "crtl + shift + 0" on Windows and "cmd + shift + 0" on a mac. The fact that a keyboard shortcut exists for this should quite strongly hint that, in a reproducible and project oriented workflow, you should be restarting R quite often in an average working day. This is the scripting equivalent of "clear all output and rerun all" in a notebook. 
 
-Finally, let's circle back to the point I made earlier about setting the working directory. The reason that this will not work is because you are likely giving file paths that are specific to your computer, your operating system and your file organisation system. The chances of someone else having all of these the same are practically zero.
+Finally, let's circle back to the point I made earlier about setting the working directory. This is fragile because you are likely giving file paths that are specific to your computer, your operating system and your file organisation system. The chances of someone else having all of these the same are practically zero.
 
 ## Portable File paths with `{here}`
 
@@ -162,13 +168,13 @@ Finally, let's circle back to the point I made earlier about setting the working
 # Bad - breaks if project moved
 source("zaks-mbp/Desktop/exciting-new-project/src/helper_functions/rolling_mean.R")
 
-# Better - breaks if Windows
+# Better - breaks if Windows (older)
 source("../../src/helper_functions/rolling_mean.R")
 
 # Best - but use here:here() to check root directory correctly identified
 source(here::here("src","helper_functions","rolling_mean.R"))
 
-# For more info on the here package:
+# For more info on the {here} package:
 vignette("here")
 ```
 
@@ -178,16 +184,26 @@ The first is to use _relative_ file paths. In this you assume that each R script
 
 This is good in that it solves the problem of paths breaking because you move the project to a different location on your own laptop. However, it does not fully solve the portability problem because you might move your file to a different location _within_ the same project. It also does not solve the problem that windows uses MacOS and linux use forward slashes in file paths with widows uses backslashes. 
 
-To resolve these final two issues I recommend using the `here()` function from the {here} package. This package looks for a `.Rproj` or `.git` file to identify the root directory of your project and creates file paths relative to the root of your project, that are suitable for the operating system the code is being run on. 
+To resolve these final two issues I recommend using the `here()` function from the {here} package. This package looks for a `.Rproj` or `.git` file to identify the root directory of your project. It then creates file paths relative to the root of your project that are suitable for the operating system on which the code is being run. It really is quite marvellous. 
 
-It really is quite marvellous. For more information on how to use the here package, explore its chapter in [R - What They Forgot](https://rstats.wtf/project-oriented-workflow.html "rstats.wtf/project-oriented-workflow"), [R for Data Science ](https://r4ds.had.co.nz/workflow-projects.html) or this [project oriented workflow blog post](https://www.tidyverse.org/blog/2017/12/workflow-vs-script/ "Tidyverse blog: workflow-vs-script"). 
+For more information on how to use the here package, explore its chapter in [R - What They Forgot](https://rstats.wtf/project-oriented-workflow.html "rstats.wtf/project-oriented-workflow"), [R for Data Science ](https://r4ds.had.co.nz/workflow-projects.html) or this [project oriented workflow blog post](https://www.tidyverse.org/blog/2017/12/workflow-vs-script/ "Tidyverse blog: workflow-vs-script"). 
 
 ## Code Body 
 
-Moving on now, we will go from the head to the body of the code. Having well named and organised code will facilitate both reading and understanding. Comments and sectioning do the rest of this work.
+We will moving on now from the head of the code to the body. 
 
-This section is designed as an introduction to the [tidyverse style guide](https://style.tidyverse.org/) and not as a replacement to it. 
+Having well named and organised code will do most of the work of helping people to read and understand your code. Comments and sectioning do the rest of the work.
+
+Note, this section is designed as an introduction to the [tidyverse style guide](https://style.tidyverse.org/) and not as a replacement to it. 
+
 ### Comments 
+
+Comments may be either short in-line comments at the end of a line or full lines dedicated to comments. To create either type of comment in R, simply type hash followed by one space. The rest of that line will not be evaluated and will function as a comment. If multi-line comments are needed simply start multiple lines with a hash and a space.
+
+Comments can also be used to add structure to your code, buy using commented lines of hyphens and equal signs to chunk your files into minor and major sections. 
+
+Markdown-like section titles can be added to these section and subsection headers. Many IDEs, such as RStudio, will interpret these as a table of contents for you, so that you can more easily navigate your code. 
+
 
 ```{r example-comments}
 #| echo: true
@@ -197,7 +213,7 @@ This section is designed as an introduction to the [tidyverse style guide](https
 library(here)
 source(here("src","helper_functions","rolling_mean.R"))
 
-#===============================================================================  <- 80 characters max for readability
+#=============================================================================== 
 # Major Section on Comments ----
 #===============================================================================
 
@@ -211,15 +227,8 @@ x <- 1:10 # this is an inline comment
 #-------------------------------------------------------------------------------
 rolling_mean(x)
 # This is an full line comment
+# Use 80 characters max for readability
 ```
-
-Comments may be either short in-line comments at the end of a line or full lines dedicated to comments. To create either type of comment in R, simply type hash followed by one space. The rest of that line will not be evaluated and will function as a comment. If multi-line comments are needed simply start multiple lines with a hash and a space.
-
-The purpose of these comments is to explain the _why_ of what you are doing, not the what. If you are explaining _what_ you are doing in most of your comments then you perhaps need to consider writing more informative function names, something we will return to in the general advice section. 
-
-Comments can also be used to add structure to your code, buy using commented lines of hyphens and equal signs to chunk your files into minor and major sections. 
-
-Markdown-like section titles can be added to these section and subsection headers. Many IDEs, such as RStudio, will interpret these as a table of contents for you, so that you can more easily navigate your code. 
 
 ### Objects are Nouns 
 
@@ -257,7 +266,7 @@ When naming objects, as far as possible use singular nouns. The main reason for 
 
 - Suggest imperative mood, as in a recipe.
 
-- Break long functions over multiple lines. 4 vs 2 spaces.
+- Break long functions over multiple lines, using 4 rather than the usual 2 spaces for indent.
 
 
 ```{r example-function-names}
