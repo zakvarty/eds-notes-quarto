@@ -4,7 +4,7 @@
 #| results: 'asis'
 #| echo: false
 source("_common.R")
-status("polishing")
+status("complete")
 ```
 
 ## Introduction
@@ -13,19 +13,23 @@ status("polishing")
 >
 > **Phil Karlton, Netscape Developer**
 
-When working on a data science project we can in principle name directories, files, functions and other objects whatever we like. In reality though, using an ad-hoc system of naming is likely to cause confusion, headaches and mistakes. We obviously want to avoid all of those things, in the spirit of being kind to our current colleges and also to our future selves.
+When working on a data science project we can in principle name directories, files, functions and other objects whatever we like. In reality though, using an ad-hoc naming system is likely to cause confusion, mistakes and headaches. We obviously want to avoid all of those things in the spirit of being kind to our current colleges and also to our future selves.
 
-Coming up with good names is an art form. Like most art, naming things is an activity that you get better at with practice. Another similarity is that the best naming systems don't come from giving data scientists free reign over their naming system. Like all art, the best approaches to naming things give you strong guidelines and boundaries within which to express your creativity and skill.
+Coming up with good names is a bit of an art form, it's an activity that you get better at with practice. Another similarity to art is that the best naming systems don't come from giving data scientists free reign over their naming system. The best approaches to naming things give you strong guidelines and boundaries within which to express your creativity and skill.
 
-In this lecture we'll explore what these boundaries and what we want them to achieve for us. The content of this lecture is based largely around a [talk of the same name](https://speakerdeck.com/jennybc/how-to-name-files) given by Jennifer Bryan and the [tidyverse style guide](https://style.tidyverse.org/), which forms the basis of Google's style guide for R programming.
+In this chapter we'll explore what these boundaries and what we want them to achieve for us. The content of this chapter is based largely around a [talk of the same name](https://speakerdeck.com/jennybc/how-to-name-files) given by Jennifer Bryan and the [tidyverse style guide](https://style.tidyverse.org/), which forms the basis of Google's style guide for R programming. 
+
+The core principles we introduce hold across most high-level programming languages. Just like in natural languages, there are differences in how the principles are implemented between languages and between different groups of people who use each language. A fun aspect of this is that people often develop a code "accent" based on their "native" programming language. 
+
+If you'd like to check out how this guidance translates to Python, check out the [naming conventions section](https://peps.python.org/pep-0008/#naming-conventions) of the PEP8 style guide.
 
 ## Naming Files 
 
-We'll be begin by focusing in on what we call our files. That is, we'll first focus on the part of the file name that comes before the dot. In the second part of this video, we'll then cycle back around to discuss file extensions.  
+We'll be begin by focusing in on what we call our files. That is, we'll first focus on the part of the file name that comes before the dot. Later in the chapter, we'll cycle back around to discuss file extensions.  
 
 ### What do we want from our file names? 
 
-Before we dive into naming files, we should first consider what we want from the file names that we choose. There are three key properties that that we would like to satisfy. 
+To decide how we name our files, we should first consider what we want from our file naming system. There are three key properties that that we would like to satisfy. 
 
 1. Machine Readable
 2. Human Readable
@@ -77,21 +81,31 @@ Machine readable names are useful when:
 -   *working programmatically* with file names and regex.
 
 
+#### Computing on File Names
+
 When we are operating on a large number of files it is useful to be able to work with them programmatically. 
 
-One example of where this might be useful is when downloading assessments for marking. This might require me to unzip a large number of zip files, copying the pdf report from each unzipped folder into a single directory and all of the R scripts from each unzipped folder into another directory. The marked scripts and code then need to be paired back up in folders named by student, and re-zipped ready to be returned. 
+One example of where this might be useful is when downloading and marking assessments. This requires me to download and unzip a large number of compressed folders, copying the pdf report from each unzipped folder into a single directory and then repeat this, moving all of the R scripts from each unzipped folder into a second directory. The marked scripts and code then need to be paired back up in folders named by student, and re-zipped ready to be returned. 
 
-This is _monotonously_ dull and might work for ~50 students but not for ~5000. Working programmatically with files is the way to get this job done efficiently. This requires the file names to play nicely with the way that computers interpret file names, which they regard as a string of characters. 
+This is _monotonously_ dull and might work for ~50 students but would not scale to a class of ~5000. Working programmatically with files is the way to get this job done efficiently. This requires the file names to play nicely with the way that computers interpret file names, which they regard as a string of characters. 
 
-It is often helpful to have some meta-data included in the file name, for example the student's id number and the assessment title. We will use an underscore to separate elements of meta-data within the file name and a hyphen to separate sub-elements of meta-data, for example words within the assessment title. 
+It is often helpful to have some meta-data included in the file name, for example the student's id number and the assessment title. We will use an underscore (`_`) to separate elements of meta-data within the file name and a hyphen (`-`) to separate sub-elements of meta-data, for example words within the assessment title. 
 
-Regular expressions and globbing are two ideas from string manipulation that you may not have met, but which will inform our naming conventions. Regular expressions allow you to search for strings (in our case file names) that match a particular pattern. Regular expressions can do really complicated searches but become gnarly when you have to worry about special characters like spaces, punctuation, accents and cases, so these should be avoided in file names. 
+```
+001562679_assessment-1.tex
+001562679_assessment-1.pdf
+001562679_assessment-1.r
+```
 
-A special type of regular expression is called globbing where a star is used to replace any number of subsequent characters in a file name, so that here we can delete all png images that begin with Rplot using a single line of code. Globbing becomes particular powerful when you use a consistent structure to create your file names.  
+#### Regular expressions and Globbing
 
-As in the assessment marking example, having machine readable file names is particularly useful when managing files, such as ordering, finding, moving or deleting them. Another example of this is when your analysis requires you to load a large number of individual data files. 
+[Regular expressions](https://cran.r-project.org/web/packages/stringr/vignettes/regular-expressions.html) and [globbing](https://en.wikipedia.org/wiki/Glob_(programming)) are two ideas from string manipulation that you may not have met, but which will inform our naming conventions. 
 
-Machine readable file names are also useful for extracting meta-information from files without having to open them in memory. This is particularly useful when the files might be too large to load into memory, or you only want to load data from a certain year. 
+Regular expressions allow you to search for strings (in our case file names) that match a particular pattern. Regular expressions can do really complicated searches but become gnarly when you have to worry about special characters like spaces, punctuation, accents and cases, so these should be avoided in file names. 
+
+A special type of regular expression is called a glob. The most common use of globbing is the use of an asterisk (`*`) to replace any number of subsequent characters in a file name. Globbing becomes particular powerful when you use a consistent structure to create your file names. We might, for example, delete all `png` images in our wokring directory that begin with Rplot using a single line of code at the command line: `rm Rplot*.png`.
+
+Having machine readable file names is particularly useful when managing files, such as ordering, finding, moving or deleting them. Another common use case is when an analysis requires you to load a large number of individual data files. Machine readable file names are also useful in this setting for extracting meta-information from files without having to open them in memory. This is particularly useful when the files might be too large to load into memory, or you only want to load data from a certain year. 
 
 The final benefit we list here is the scalability, reduction in drudgery and lowered risk for human error when operating on a very large number of files. 
 
@@ -132,10 +146,11 @@ A second example of orderable file names is when the file has a date associated 
 ```
 2015-10-22_human-resources-protocols.pdf
 ...
+...
 2022-effective-data-science-module-guide.docx
 ```
 
-When using dates, in file names or elsewhere, you should conform to the ISO standard date format.  
+When using dates, in file names or elsewhere, you should conform to the [ISO standard date format](https://en.wikipedia.org/wiki/ISO_8601).  
 
 > ISO 8601 sets an international standard format for dates: `YYYY-MM-DD`. 
 
@@ -159,7 +174,7 @@ There are lots of formatting options with fun names like `camelCase`, `PascalCas
 
 There is weak evidence to suggest that snake case and skewer case are most the readable. We'll use a mixture of these two, using snake case _between_ metadata items and skewer case _within_ them. This has a slight cost to legibility, in a trade-off against making computing on these file names easier. 
  
-The final aspect that you have control over is the length of the name. Having short, evocative and useful file names is not easy and is a skill in itself. For some hints and tips you might want to look into tips for writing URL slugs. These are last part of a web address that are intended to improve accessibility by being immediately and intuitively meaningful to any user. 
+The final aspect that you have control over is the length of the name. Having short, evocative and useful file names is not easy and is a skill in itself. For some hints and tips you might want to look into tips for writing [URL slugs](https://stackoverflow.com/questions/4230846/what-is-the-etymology-of-slug-in-a-url). These are last part of a web address that are intended to improve accessibility by being immediately and intuitively meaningful to any user. 
 
 
 ### Naming Files - Summary 
@@ -174,7 +189,7 @@ The final aspect that you have control over is the length of the name. Having sh
 
 ## File Extensions and Where You Work
 
-So far we have focused entirely on what comes before the dot, that is the file name.Equally, if not more, important is what comes after the dot, the file extension.
+So far we have focused entirely on what comes before the dot, that is the file name. Equally if not more important is the file extension that comes after the dot.
 
 ```
 example-script.r
@@ -190,7 +205,7 @@ You likely already use file extensions to distinguish between code scripts, writ
 
 ### Open Source vs Proprietary File Types
 
-The first feature we'll consider is whether the file type is open source, and can be used by anyone without charge, or if specialist software must be paid for in order to interact with those files. 
+The first feature to consider is whether the file type is open source and can be used by anyone without charge or if specialist software must be paid for to interact with those files. 
 
 ```{r portability-image}
 image_path <- "images/102-workflows-naming-files/file-types-image.png"
@@ -201,7 +216,7 @@ In the figure above, each column represents a different class of file, moving le
 
 To make sure that our work is accessible to as many people as possible we should favour the open source options like csv files over Google sheets or excel, JSON files over Matlab data files, and tex or markdown over a word or Google doc. 
 
-This usually has a benefit in terms of project longevity and scalability. The open source file types are often somewhat simpler in structure, making them more robust to changes over time less memory intensive. 
+This usually has a benefit in terms of project longevity and scalability. This is because open source file types are often somewhat simpler in structure, making them more robust to changes over time and less memory intensive. 
 
 To see this, let's take a look inside some data files.
 
@@ -211,9 +226,7 @@ To see this, let's take a look inside some data files.
 
 CSV or comma separated value files are used to store tabular data. 
 
-In tabular data, each row of the data represents one record and each column represents a data value. 
-
-A csv encodes this by having each record on a separate line and using commas to separate values with that record. You can see this by opening a csv file in a text editor such as notepad. 
+In tabular data, each row of the data represents one record and each column represents a data value. A csv encodes this by having each record on a separate line and using commas to separate values with that record. You can see this by opening a csv file in a text editor such as notepad. 
 
 The raw data stores line breaks using `\n` and indicates new rows by `\r`. These backslashed indicae that these are _escape characters_ with special meanings, and should not be literally interpreted as the letters n and r. 
 
@@ -271,11 +284,11 @@ ef48 fc87 c8f7 d5dd 9010 424b 7741 48bb
 
 Each entry here is a four digit hexadecimal number and there are a lot more of them than we have entries in our small table. 
 
-This is because excel files can carry a lot of additional information that a csv or tsv are not able to, for example cell formatting or having multiple tables (called sheets by excel) stored within a single file. 
+This is because excel files can carry a lot of additional information that a csv or tsv are not able to, such as cell formatting or having multiple tables stored within a single file (called sheets by excel). 
 
 This means that excel files take up much more memory because they are carrying a lot more information than is strictly contained within the data itself. 
 
-#### Indise a JSON file 
+#### Inside a JSON file 
 
 JSON, or Java Script Object Notation, files are an open source format for list-like data. Each record is represented by a collection of `key:value` pairs. In our example table each entry has two fields, one corresponding to the `Name` key and one corresponding to the `Number` key.
 
@@ -318,7 +331,7 @@ XML files are another open source format for list-like data, where each record i
 </root>
 ```
 
-The difference from a JSON file is mainly in how those records are formatted within the file. In a JSON file this is designed to look like objects in the Java Script programming language and in XML the formatting is done to look like html, the markup language used to write websites.
+The difference from a JSON file is mainly in how those records are formatted within the file. In a JSON file this is designed to look like objects in the Java Script programming language and in XML the formatting is done to look like HTML, the markup language used to write websites.
 
 ### A Note on Notebooks 
 
@@ -332,13 +345,13 @@ The difference from a JSON file is mainly in how those records are formatted wit
 
 In addition to the files you read and write, the files that you code in will largely determine your workflow. 
 
-There are three main options for the way that you code: first is typing it directly at the command line, second is using a text editor or IDE to write scripts and third is writing a notebook that mixes code, text and output together in a single document. 
+There are three main options for the way that you code. You might typing your code directly at the command line, you might using a text editor or IDE to write scripts or you might use a notebook file that mixes code, text and output together in a single document. 
 
 We'll compare these methods of working soon, but first let's do a quick review of what notebooks are available to you and why you might want to use them. 
 
-As a data scientist, there are two and a half notebook formats that you're likely to have met before. The first two are Rmarkdown files for those working predominantly in R and interactive Python or jupyter notebooks for those working predominantly in Python. The final half format are quarto markdown documents, which are relatively new and extend the functionality of Rmarkdown files to provide multi-language support. 
+As a data scientist, there are two and a half notebook formats that you're likely to have met before. The first two are Rmarkdown files for those working predominantly in R and interactive Python or JuPyteR notebooks for those working predominantly in Python. The final half format are quarto markdown documents, which are relatively new and extend the functionality of Rmarkdown files to provide multi-language support. 
 
-The main benefit of R markdown documents is that they're plain text files, so they're very human friendly and work very well with version control software like git. ***JuPy***te***R*** notebooks have the benefit of supporting code written in Julia, Python or R, but are not so human friendly - under the hood these documents are JSON files that should not be edited directly (because a misplaced bracket will break them!).
+The main benefit of Rmarkdown documents is that they're plain text files, so they're very human friendly and work very well with version control software like git. ***JuPy***te***R*** notebooks have the benefit of supporting code written in Julia, Python or R, but are not so human friendly - under the hood these documents are JSON files that should not be edited directly (because a misplaced bracket will break them!).
 
 Quarto documents offer the best of both worlds, with plain text formatting and even more extensive language support than jupyter notebooks. Quarto is a recent extension of Rmarkdown, which is rapidly becoming popular in the data science community. Quarto also allows you to create a wider range of documents, including websites, these course notes and the associated slides.
 
@@ -355,13 +368,13 @@ Each format has its benefits and drawbacks depending on the context in which the
 | ordering / automation |    \~    |   ✓    |      \~      |
 
 
-The main benefit of notebook documents is that they are self-documenting, in that they can mix the documentation, code and report all into a single document.  Notebooks also provide a level of interactivity when coding that is not possible when working directly at the command line or using a text editor to write scripts. This limitation is easily overcome by using an integrated development environment when scripting, rather than a plain text editor. 
+The main benefit of notebook documents is that they are self-documenting: they can mix the documentation, code and report all into a single document.  Notebooks also provide a level of interactivity when coding that is not possible when working directly at the command line or using a text editor to write scripts. This limitation is easily overcome by using an integrated development environment when scripting, rather than a plain text editor. 
 
 Writing code in `.r` files is not self-documenting but this separation of code, documentation and outputs has many other benefits. Firstly, the resulting scripts provide a reproducible and automatable workflow, unlike one-off lines of code being run at the command line. Secondly, using an IDE to write these provides you with syntax highlighting and code linting features to help you write readable and accurate code. Finally, the separation of code from documentation and output allows your work to be more easily or even directly put into production.
 
-In this course we will advocate for a scripting-first approach to data science, though notebooks and command line work definitely have their place. 
+In this course we will generally advocate for a scripting-first approach to data science, though notebooks and command line work definitely have their place. 
 
-Notebooks are great as teaching and rapid development tools but have strong limitations with being put into production. Conversely, coding directly at the command line is perfect for simple one-time tasks but it leaves no trace of your workflow and leads to an analysis that cannot be easily replicated in the future. 
+Notebooks are great as a teaching tool, for small reports and for rapid prototyping but they have strong limitations with being put into production. Conversely, coding directly at the command line is perfect for simple one-time tasks but it leaves no trace of your workflow and leads to an analysis that cannot be easily replicated in the future. 
 
 ### Summary 
 
