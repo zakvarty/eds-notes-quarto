@@ -17,40 +17,6 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
 </style>
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -409,9 +375,7 @@ gtag('config', 'G-EFK9JPMVM8', { 'anonymize_ip': true});
   </div>
   
 
-</header><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/source.html">source</a></span><span class="op">(</span><span class="st">"_common.R"</span><span class="op">)</span></span>
-<span><span class="fu">status</span><span class="op">(</span><span class="st">"polishing"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="callout callout-style-default callout-note callout-titled">
+</header><div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -421,26 +385,26 @@ Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Effective Data Science is still a work-in-progress. This chapter should be readable but is currently undergoing final polishing.</p>
+<p>Effective Data Science is still a work-in-progress. This chapter is largely complete and just needs final proof reading.</p>
 <p>If you would like to contribute to the development of EDS, you may do so at <a href="https://github.com/zakvarty/data_science_notes" class="uri">https://github.com/zakvarty/data_science_notes</a>.</p>
 </div>
 </div>
-<p>Welcome to this course on effective data science. This week we’ll be considering effective data science workflows. These workflows are ways of progressing a project that will help you to produce high quality work and help to make you a good collaborator.</p>
-<p>In this Chapter, we’ll kick things off by looking at how you can structure data science projects and organize your work. Familiarity with these skills, processes and practices for collaborative working are going to be instrumental as you become a successful data scientist.</p>
+<p>Welcome to this course on effective data science. This week we’ll be considering effective data science workflows. These workflows are ways of progressing a project that will help you to produce high quality work and help to make you a better collaborator.</p>
+<p>In this chapter, we’ll kick things off by looking at how you can structure data science projects and organise your work. Familiarity with these skills, processes and practices for collaborative working will be instrumental to you become a successful data scientist.</p>
 <section id="what-are-we-trying-to-do" class="level2" data-number="1.1"><h2 data-number="1.1" class="anchored" data-anchor-id="what-are-we-trying-to-do">
 <span class="header-section-number">1.1</span> What are we trying to do?</h2>
 <p>First, let’s consider why we want to provide our data science projects with some sense of structure and organization.</p>
 <p>As a data scientist you’ll never work alone. Within a single project you’ll interact with a whole range of other people. This might be a project manager, one or more business stakeholders or a variety of subject matter experts. These experts might be trained as sociologists, chemists, or civil servants depending on the exact type of data science work that you’re doing.</p>
-<p>To then get your project put into use and working at scale you’ll have to collaborate with data engineers. You’ll also likely work closely with other data scientists. For smaller projects this might be to act as reviewers for one another’s work. For larger projects working collaboratively will allow you to tackle larger challenges. These are the sorts of project that wouldn’t be feasible alone, because of the inherent limitations on the time and skill of any one individual person.</p>
-<p>Even if you work in a small organization, where you’re the only data scientist, then adopting a way of working that’s focused on collaborating will pay dividends over time. This is because when you inevitably return to the project that you’re working on in several weeks or months or years into the future you’ll have forgotten almost everything of what you did the first time around. You’ll also have forgotten why you made the decisions that you did and what other potential options there were that you didn’t take.</p>
-<p>This is exactly like working with a current colleague who has shoddy or poor working practices. Nobody wants to be that colleague to somebody else, let alone to their future self. Even when working alone, treating your future self as a current collaborator (and one that you want to get along well with) makes you a kind colleague and a pleasure to work with.</p>
-<p>The aim of this week is to provide you with a guiding structure on how you organize and perform your work. None of this is going to be particularly difficult or onerous. However it will require a bit more effort up front and daily discipline. Like with flossing, the daily effort required is not large but the benefits will compound over time.</p>
-<p>You’ll get more done by wasting less time staring quizzically at a mess of folders and indecipherable code. You’ll also get a reputation as someone who’s well organized and good to work with. This promotes better professional relationships and greater levels of trust within your team. These can then, in turn, tead to you working on more exciting and more impactful projects in the future.</p>
+<p>To then get your project put into use and working at scale you’ll have to collaborate with data engineers. You’ll also likely work closely with other data scientists. For smaller projects this might be to act as reviewers for one another’s work. For larger projects, working collaboratively will allow you to tackle larger challenges. These are the sorts of project that wouldn’t be feasible alone, because of the inherent limitations on the time and skill of any one individual person.</p>
+<p>Even if you work in a small organization, where you’re the only data scientist, then working in a way that is optimised for collaboration will pay dividends over time. This is because when you inevitably return to your current project in several weeks, months or years. At that point you will have forgotten almost everything that you did the first time around, let alone why you chose to do it that way. You’ll have forgotten about not only the decisions that you made, but also alternative options that you decided against.</p>
+<p>This is exactly like working with a current colleague who has poor communication skills and working practices. Nobody wants to be that colleague to somebody else, let alone to their future self. Treating that future self like a current collaborator will make you a kind colleague and a pleasure to work with.</p>
+<p>In addition to this, you’ll get more done by wasting less time staring quizzically at a mess of folders and indecipherable code. You’ll also get a reputation as someone who is well-organized and enjoyable to work with. This promotes better professional relationships and greater levels of trust within your team. These can then, in turn, tead to you working on more exciting and more impactful projects in the future.</p>
+<p>The aim of this week is to provide you with a guiding structure on how to organize and perform your work. None of this is going to be particularly difficult or onerous. However it will require some up-front effort and daily discipline to maintain. As with brushing your teeth and flossing, the daily effort required is not large but the benefits compound over time.</p>
 </section><section id="an-r-focused-approach" class="level2" data-number="1.2"><h2 data-number="1.2" class="anchored" data-anchor-id="an-r-focused-approach">
 <span class="header-section-number">1.2</span> An R Focused Approach</h2>
 <p>The structures and workflows that are recommend here and throughout the rest of this module are focused strongly on a workflow that predominantly uses R, markdown and LaTeX.</p>
-<p>Similar techniques, code and software can achieve the same results that I show you here when coding in Python or C, or when writing up projects in Quarto or some other markup language. Similarly, different organizations have their own variations on these best practices that we’ll go through together. Often organisations will have extensive guidance on these topics.</p>
-<p>The important thing is that once you understand what good habits are and have build them in one programming language or business, then transferring these skills to a new setting is largely a matter of learning some new vocabulary or slightly different syntax.</p>
+<p>Similar techniques, code and software can achieve the same results that I show you here when coding in Python or C, or when writing up projects in JuPyteR notebooks or using some other markup language. Similarly, different organizations have their own variations on these best practices that we’ll go through together. Often organisations will have extensive guidance on these topics.</p>
+<p>The important thing is that once you understand what good habits are and have built them in one programming language or business, then transferring these skills to a new setting is largely a matter of learning some new vocabulary or slightly different syntax.</p>
 <p>With that said, let’s get going!</p>
 </section><section id="one-project-one-directory" class="level2" data-number="1.3"><h2 data-number="1.3" class="anchored" data-anchor-id="one-project-one-directory">
 <span class="header-section-number">1.3</span> One Project = One Directory</h2>
@@ -458,12 +422,13 @@ Note
 </div>
 </div>
 <p>This one golden rule is deceptively simple.</p>
-<p>The first issue here is that it requires a predetermined scope of what is and what isn’t going to be covered by this particular project. This seems straightforward but at the outset of the project you often do not know exactly where your project will go, or how it will link to other pieces of work within your organization.</p>
-<p>The second issue is the second law of Thermodynamics, which applies equally well to project management as it does to the heatdeath of the universe. It takes continual external effort to prevent the contents of this one folder from becoming chaotic and disordered over time.</p>
-<p>That being said, having a single directory has several benefits which more than justify this additional work.</p>
+<p>The first issue here is that it requires a predetermined scope of what is and what isn’t going to be covered by this particular project. This seems straightforward but at the outset of the project you often don’t know exactly where your project will go, or how it will link to other pieces of work within your organization.</p>
+<p>The second issue is that the second law of Thermodynamics applies equally well to project management as it does to tidying your bedroom or the heatdeath of the universe. It takes continual external effort to prevent the contents of this one folder from becoming chaotic and disordered over time.</p>
+<p>That being said, having a single directory does have several benefits that more than justify this additional work.</p>
 </section><section id="properties-of-a-well-orgainsed-project" class="level2" data-number="1.4"><h2 data-number="1.4" class="anchored" data-anchor-id="properties-of-a-well-orgainsed-project">
 <span class="header-section-number">1.4</span> Properties of a Well-Orgainsed Project</h2>
-<p>What are the properties that we would like this single, well-organized project to have? Ideally, we’d like to organize our projects so that I have the following properties:</p>
+<p>What are the properties that we would like this single, well-organized project to have?</p>
+<p>Ideally, we’d like to organize our project so that it has the following properties:</p>
 <ul>
 <li>Portable</li>
 <li>Version Control Friendly</li>
@@ -482,13 +447,13 @@ Note
 </div>
 </div>
 </div>
-<p>This might be a small move, like relocating the directory to a different location on your own computer. It might also mean a moderate move, say to another machine if yours dies just before a big deadline. Alternatively, it might be a large shift - to be uses by another person who is using a different operating system.</p>
-<p>From this thought experiment you can see that there’s a full spectrum of how portable a project may or may not need to be.</p>
+<p>This might be a small move, like relocating the directory to a different location on your own computer. It might also mean a moderate move, say to another machine if yours dies just before a big deadline. Alternatively, it might be a large shift - to be used by another person who is running a different operating system.</p>
+<p>From this small thought experiment, you can see that there’s a full spectrum of how portable a project may or may not need to be.</p>
 </section><section id="version-control-friendly" class="level3" data-number="1.4.2"><h3 data-number="1.4.2" class="anchored" data-anchor-id="version-control-friendly">
 <span class="header-section-number">1.4.2</span> Version Control Friendly</h3>
 <p>A project under Version Control has all changes tracked either manually or automatically. This means that snapshots of the project are taken regularly as it gradually develops and evolves over time. Having these snapshots as many, incremental changes are made to the project allow it to be rolled back to a specific previous state if something goes wrong.</p>
 <p>A version controlled pattern of working helps to avoid the horrendous state that we have all found ourselves in - renaming <code>final_version.doc</code> to <code>final_final_version.doc</code> and so on.</p>
-<p>By organising your workflow around incremental changes helps you to acknowledge that no work is ever finally complete. There will always be small changes that need to be done in the future.</p>
+<p>By organising your workflow around incremental changes, you acknowledge that no work is ever finally complete. There will always be small changes that need to be done in the future.</p>
 </section><section id="reproducibility" class="level3" data-number="1.4.3"><h3 data-number="1.4.3" class="anchored" data-anchor-id="reproducibility">
 <span class="header-section-number">1.4.3</span> Reproducibility</h3>
 <blockquote class="blockquote">
@@ -498,24 +463,23 @@ Note
 <p>In their paper, Broman et al define reproducibility as a project where you can take the original data and code used to perform the analysis and using these we create all of the numerical findings of the study.</p>
 <p>This definition leads naturally to several follow-up questions.</p>
 <p>Who exactly is <em>you</em> in this definition? Does it specifically mean yourself in the future or should someone else with access to all that data and code be able to recreate your findings too? Also, should this reproducibility be limited to just the numerical results? Or should they also be able to create the associated figures, reports and press releases?</p>
-<p>Another important question is <em>when</em> this project needs to be reproduced. Will it be in a few weeks time or in 10 years time? Do you need to protect your project from changes in dependencies, like new versions of packages or modules? How about different versions of R or Python? Taking this time scale out even further, what about different operating systems and hardware?</p>
-<p>It’s unlikely you’d consider someone handing you a floppy disk of code that only runs on Windows XP to be acceptably reproducible. Sure, you could probably find a way to get it to work, but that would be an awful lot of effort on your end.</p>
-<p>That’s perhaps a bit of an extreme example, but it emphasizes the importance of clearly defining the level of reproducibility that you’re aiming for within every project you work on. This example also highlights the amount of work that can be required to reproduce an analysis, especially after quite some time. It is important to explicitly think about how we dividing that effort between ourselves as the original developer and the person trying to reproduce the analysis in the future.</p>
+<p>Another important question is <em>when</em> this project needs to be reproduced. Will it be in a few weeks time or in 10 years time? Do you need to protect your project from changes in dependencies, like new versions of packages or modules? How about different versions of R or Python? Taking this time-scale out even further, what about different operating systems and hardware?</p>
+<p>It’s unlikely that you would consider someone handing you a <a href="https://en.wikipedia.org/wiki/Floppy_disk">floppy disk</a> of code that only runs on Windows XP to be acceptably reproducible. Sure, you could probably find a way to get it to work, but that would be an awful lot of effort on your end.</p>
+<p>That’s perhaps a bit of an extreme example, but it emphasizes the importance of clearly defining the level of reproducibility that you’re aiming for within every project you work on. This example also highlights the amount of work that can be required to reproduce an analysis, especially after quite some time. It’s important to explicitly think about how we are dividing that effort between ourselves as the original developer and the person trying to reproduce the analysis in the future.</p>
 </section><section id="ide-friendly" class="level3" data-number="1.4.4"><h3 data-number="1.4.4" class="anchored" data-anchor-id="ide-friendly">
 <span class="header-section-number">1.4.4</span> IDE Friendly</h3>
 <p>Our final desirable property is that we’d like our projects to play nicely with integrated development environments.</p>
-<p>When you’re coding document and writing your data science projects it’d be possible for you to work entirely in either a plain text editor or typing code directly at the command line. While these approaches to a data science workflow have the benefit of simplicity, they also expect a great deal from you as a data scientist.</p>
-<p>These workflows expect that you should type everything perfectly accurately every time, that you recall the names and argument orders of every function you use, and that you are constantly aware of the current state of all objects within your working environment.</p>
-<p>Integrated Development Environments (IDEs) are applications that help to reduce this burden, helping make you a more effective programmer and data scientist. IDEs offer tools like code completion and highlighting to make your code easier to read and to write. They offer tools for debugging, to fix where things are going wrong, and they also offer environment panes so that you don’t have to hold everything in your head all at once. Many IDEs also often have templating facilities. These let you save and reuse snippets of code so that you can avoid typing out repetitive, boilerplate code and introducing errors in the process.</p>
-<p>Even if you haven’t heard of IDEs before, you’ve likely already used one. Some common examples might be RStudio for R-users, PyCharm for python users, or Visual Studio as a more language agnostic coding environment.</p>
-<p>Whichever of these we use, we’d like our project to play nicely with them. This lets us reap their benefits while keeping our project portable, version controlled, and reproducible for someone working with a different set-up.</p>
+<p>When you’re coding document and writing your data science projects it would be possible for you to work entirely in either a plain text editor or typing code directly at the command line. While these approaches to a data science workflow have the benefit of simplicity, they also expect a great deal from you as a data scientist.</p>
+<p>These workflows expect you to type everything perfectly accurately every time, that you recall the names and argument orders of every function you use, and that you are constantly aware of the current state of all objects within your working environment.</p>
+<p>Integrated Development Environments (IDEs) are applications to help reduce this burden, allowing you a to be more effective programmer and data scientist. IDEs offer tools like code completion and highlighting that make your code easier to write and to read. They offer tools for debugging, to fix your code when (not if!) things are going wrong. IDEs also offer environment panes so that you don’t have to hold everything in your head all at once. Many IDEs have additional templating facilities. These let you save and reuse snippets of code so that you can avoid typing out repetitive, boilerplate code and introducing errors in the process.</p>
+<p>Even if you haven’t heard of IDEs before, you’ve likely already used one. Some common examples might be RStudio for R-users, PyCharm for python users, or Visual Studio as a more language agnostic coding environment. Whichever of these we use, we’d like our project to play nicely with them. This lets us reap their benefits while keeping our project portable, version controlled, and reproducible for someone working with a different set-up.</p>
 </section></section><section id="project-structure" class="level2" data-number="1.5"><h2 data-number="1.5" class="anchored" data-anchor-id="project-structure">
 <span class="header-section-number">1.5</span> Project Structure</h2>
-<p>I’ve given a pretty exhaustive argument for why having a single directory for each project is a good idea. Let’s now take a look <em>inside</em> that directory and define a common starting layout for the content of all of your projects.</p>
+<p>We have given a pretty exhaustive argument for why having a single directory for each project is a good idea. Let’s now take a look <em>inside</em> that directory and define a common starting layout for the content of all of your projects.</p>
 <p>Having this sort of project directory template will mean that you’ll always know where to find what you’re looking for and other members of your team will too. Again, before we start I’ll reiterate that we’re taking an opinionated approach here and providing a sensible starting point for organizing many projects.</p>
 <p>Every project is going to be slightly different and some might require slight alterations to what I suggest here. Indeed, even if you start as I suggest then you might have to adapt your project structure as it develops and grows. I think it’s helpful to consider yourself as a tailor when making these changes. I’m providing you with a one size fits all design, that’s great for lots of projects but perfect for none of them. It’s your job to alter and refine this design for each individual case.</p>
-<p>One final caveat before we get started: companies and businesses will many times have a house style how to write and organize your code or projects. If that’s the case, then follow the style guide that your business or company uses. The most important thing here is to be consistent at both an individual level and across the entire data science team. It’s this consistency that reaps the benefits.</p>
-<p>Okay, so imagine now that you’ve been assigned a shiny new project and have created a single directory in which to house that project. Here we’ve, quite imaginatively, called that directory <code>exciting-new-project</code>. What do we populate this folder with?</p>
+<p>One final caveat before we get started: companies and businesses usually have a house style for how to write and organize your code or projects. If that’s the case, then follow the style guide that your business or company uses. The most important thing here is to be consistent at both an individual level and across the entire data science team. It’s this consistency that reaps the benefits, not the particular structure.</p>
+<p>Okay, so imagine now that you’ve been assigned an exciting new project and have created a single directory in which to house that project. Here we’ve, quite imaginatively, called that directory <code>exciting-new-project</code>. What do we populate this folder with?</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -524,7 +488,7 @@ Note
 </div>
 </div>
 </div>
-<p>In the rest of this video, I’ll define the house-style for organizing the root directory of your data science projects in this module.</p>
+<p>In the rest of this chapter, I’ll define the house-style for organizing the root directory of your data science projects in this module.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -533,7 +497,7 @@ Note
 </div>
 </div>
 </div>
-<p>Within the project directory there will be some subdirectories, which you can tell a folders in this file structure because they have a forward slash following their names. There will also be some files directly in the root directory. One of these is called <code>readme.md</code> and the another called either <code>makefile</code> or <code>make.r</code>. We’re going to explore each of these files and directories in turn.</p>
+<p>Within the project directory there will be some subdirectories. You can tell that these are folders in this file structure diagram because they have a forward-slash following their names. There will also be some files directly in the root directory. One of these is called <code>readme.md</code> and the another called either <code>makefile</code> or <code>make.r</code>. We will explore each of these files and directories in turn.</p>
 <section id="readme.md" class="level3" data-number="1.5.1"><h3 data-number="1.5.1" class="anchored" data-anchor-id="readme.md">
 <span class="header-section-number">1.5.1</span> README.md</h3>
 <div class="cell" data-layout-align="center">
@@ -547,19 +511,25 @@ Note
 <p>Let’s begin with the readme file. This gives a brief introduction to your project and gives information on what the project aims to do. The readme file should describe how to get started using the project and how to contribute to its development.</p>
 <p>The readme is written either in a plain text format so <code>readme.txt</code> or in markdown format <code>readme.md</code>. The benefit of using markdown is that it allows some light formatting such as sections headers and lists using plain text characters. Here you can see me doing that by using hashes to mark out first and second level headers and using bullet points for a unnumbered list. Whichever format you use, the readme file for your project is always stored in the root directory and is typically named in all uppercase letters.</p>
 <p>The readme file should be the first thing that someone who’s new to your project reads. By placing the readme in the root directory and capitalising the file name you are increase the visibility of this file and increase the chances of this actually happening.</p>
-<p>An additional benefit to keeping the readme in the root directory of your project is that code hosting services like GitHub, GitLab or BitBucket will display the contents of that readme file next to the contents of your project. Those services will also nicely format any markdown that you use for you in your readme file.</p>
-<p>When writing the readme, it can be useful to imaginge that you are writing this for a new, junior team member. The readme file should let them get started with the project and make some simple contributions after reading only that file. It might also link out to more detailed project documentation that will help the new team member toward a more advanced understanding or complex contribution.</p>
+<p>An additional benefit to keeping the readme in the root directory of your project is that code hosting services like GitHub, GitLab or BitBucket will display the contents of that readme file next to the contents of your project, nicely formatting and displaying any markdown synax that you use.</p>
+<p>When writing the readme it can be useful to imaginge that you’re writing this for a new, junior team member. The readme file should let them get started with the project and make some simple contributions after reading only that file. It might also link out to more detailed project documentation that helps the new team member toward having a more advanced understanding of the project or making a more complex contribution.</p>
 </section><section id="inside-the-readme" class="level3" data-number="1.5.2"><h3 data-number="1.5.2" class="anchored" data-anchor-id="inside-the-readme">
 <span class="header-section-number">1.5.2</span> Inside the README</h3>
-<p>let’s take a quick aside to see in more detail what should be covered within a readme file.</p>
+<p>Let’s take a moment to cover in more detail what should be included within a readme file.</p>
+<section id="project-name-and-status" class="level4" data-number="1.5.2.1"><h4 data-number="1.5.2.1" class="anchored" data-anchor-id="project-name-and-status">
+<span class="header-section-number">1.5.2.1</span> Project name and status</h4>
 <p>A readme we should include the name of the project, which should be self-explanatory (so nothing like my generic choice of <code>exciting-new-project</code>). The readme should also give the project status, which is just a couple of sentences to say whether your project is still under development, the version oft the current release or, on the other end of the project life-cycle, if the project is being deprecated or closed.</p>
 <p>Following this, we should also include a description of your project. This will state the purpose of your work and to provide, or link to, any additional context or references that visitors aren’t assumed to be familiar with.</p>
+</section><section id="code-dependencies-and-examples" class="level4" data-number="1.5.2.2"><h4 data-number="1.5.2.2" class="anchored" data-anchor-id="code-dependencies-and-examples">
+<span class="header-section-number">1.5.2.2</span> Code dependencies and examples</h4>
 <p>If your project involves code or depends on other packages then you should give some instruction on how to install those dependencies and run your code. This might just be text but it could also include things like screenshots, code snippets, gifs or a video of the whole process.</p>
 <p>It’s also a good practice to include some simple examples of how to use the code within your project an the expected results, so that new users can confirm that everything is working on their local instance. Keep the examples as simple and minimal as you can so that new users</p>
 <p>For longer or more complicated examples that aren’t necessary in this short introductory document you can add links to those in the readme and explain them in detail elsewhere.</p>
+</section><section id="how-to-contribute" class="level4" data-number="1.5.2.3"><h4 data-number="1.5.2.3" class="anchored" data-anchor-id="how-to-contribute">
+<span class="header-section-number">1.5.2.3</span> How to contribute</h4>
 <p>There should ideally be a short description of how people can report issues with the project and also how people can get started in resolving those issues or extend the project in some way.</p>
 <p>That leads me on to one point that I’ve forgotten to list here. There there should be a section listing the authors of the work and the license in which under which it’s distributed. This is to give credit to all the people who’ve contributed to your project and the license file then says how other people may use your work. The license declares how other may use your project and whether they have to give direct attribution to your work in any modifications that they use.</p>
-</section><section id="data" class="level3" data-number="1.5.3"><h3 data-number="1.5.3" class="anchored" data-anchor-id="data">
+</section></section><section id="data" class="level3" data-number="1.5.3"><h3 data-number="1.5.3" class="anchored" data-anchor-id="data">
 <span class="header-section-number">1.5.3</span> data</h3>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
@@ -570,7 +540,7 @@ Note
 </div>
 </div>
 <p>Moving back to our project structure, next we have the data directory.</p>
-<p>The data directory will have two subdirectories one called <code>raw</code> and one called <code>derived</code>. All data that is not generate as part of your project is stored in the <code>raw</code> subdirectory. To ensure that a project is reproducible, data in the Raw folder should never be edited or modified.</p>
+<p>The data directory will have two subdirectories one called <code>raw</code> and one called <code>derived</code>. All data that is not generate as part of your project is stored in the <code>raw</code> subdirectory. To ensure that a project is reproducible, data in the <code>raw</code> folder should never be edited or modified.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -579,9 +549,9 @@ Note
 </div>
 </div>
 </div>
-<p>In this example we’ve got two different data types: an Excel spreadsheet the XLS file and a JSON file. These files are exacty as we received them from our project stakeholder.</p>
-<p>The text file <code>metadata.txt</code> is a plain text file explaining the contents and interpretation of each of the raw data sets. This metadata should include descriptions of all the measured variables, the units that are recorded in, the date the file was created or acquired, and the source from which it was obtained.</p>
-<p>The raw data likely isn’t going to be in a form that’s amenable to analyzing straight away. To get the data into a more pleasant form to work, it will require some data manipulation and cleaning. Any manipulation or cleaning that is applied should be well documented and the resulting cleaned files saved within the <code>derived</code> data directory.</p>
+<p>In this example we’ve got two different data types: an Excel spreadsheet and a JSON file. These files are exacty as we received them from our project stakeholder.</p>
+<p>A plain text file, <code>metadata.txt</code> explains the contents and interpretation of each of the raw data sets. This metadata should include descriptions of all the measured variables, the units that are recorded in, the date the file was created or acquired, and the source from which it was obtained.</p>
+<p>The raw data most likely is not going to be in a form that’s amenable to analyzing straight away. To get the data into a more pleasant form to work with, we will need to do some data manipulation and cleaning. Any operations applied when cleaning the raw data should be well documented and the resulting cleaned files are saved within the <code>derived</code> data directory for use in our modelling or analysis.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -590,7 +560,7 @@ Note
 </div>
 </div>
 </div>
-<p>In our exciting new project, we can see the clean versions of the previous data sets which are ready for modelling. There’s also a third file in this folder. This is data that we’ve acquired for ourselves through web scraping, using a script within the project.</p>
+<p>In our exciting new project, we can see the cleaned versions of the previous data sets that are ready for modelling. There is also a third file in this folder. This is data that we’ve acquired for ourselves through web scraping, using a script within the project.</p>
 </section><section id="src" class="level3" data-number="1.5.4"><h3 data-number="1.5.4" class="anchored" data-anchor-id="src">
 <span class="header-section-number">1.5.4</span> src</h3>
 <div class="cell" data-layout-align="center">
@@ -602,8 +572,8 @@ Note
 </div>
 </div>
 <p>The <code>src</code> or source directory contains all the source code for your project. This will typically be the functions that you’ve written to make the analysis or modelling code more accessible.</p>
-<p>Here we’ve saved each function in its own R script and, in this project, we’ve used subdirectories to organise these by their use case. We’ve got two functions used in data cleaning: the first replaces <code>NA</code> values with a given value, the second replaces these by the mean of all non-missing values.</p>
-<p>We also have three helper functions: the first two calculate rolling mean and the geometric mean of a given vector, the third is a function that scrapes the web data we saw in the derived data subdirectory.</p>
+<p>In this project, we have saved each function in its own R script and used subdirectories to organise these by their use case. We have two functions used in data cleaning: the first replaces <code>NA</code> values with a user specified value, the second function replaces missing values by the mean of all non-missing values.</p>
+<p>We also have three helper functions: the first two calculate the rolling mean and the geometric mean of a given vector, while the third is a function to scrape the web data we previously found in the derived data subdirectory.</p>
 </section><section id="tests" class="level3" data-number="1.5.5"><h3 data-number="1.5.5" class="anchored" data-anchor-id="tests">
 <span class="header-section-number">1.5.5</span> tests</h3>
 <div class="cell" data-layout-align="center">
@@ -614,8 +584,8 @@ Note
 </div>
 </div>
 </div>
-<p>Moving on then to the tests directory. The structure of this directory mirrors that of the source directory. Each function file has its own counterpart file of tests.</p>
-<p>These test files provide example sets of inputs and the expected outputs for each function. The test files are used to check edge cases of a function or to assure yourself that you haven’t broken anything while fixing some small bug or adding new capabilities to that function.</p>
+<p>The structure of the <code>tests/</code> directory mirrors that of the source directory. Each function file has its own counterpart file of tests.</p>
+<p>These test files provide example sets of inputs and the expected outputs for each function. The test files are used to check edge cases of a function and to assure yourself that you didn’t break anything while you are fixing some small bug or adding new capabilities to that function.</p>
 </section><section id="analyses" class="level3" data-number="1.5.6"><h3 data-number="1.5.6" class="anchored" data-anchor-id="analyses">
 <span class="header-section-number">1.5.6</span> analyses</h3>
 <div class="cell" data-layout-align="center">
@@ -626,7 +596,7 @@ Note
 </div>
 </div>
 </div>
-<p>The analyses directory contains what you probably think of as the bulk of your data science work. It’s going to have one subdirectory for each major analysis that’s performed within your project and within each of these there might be a series of steps that we collect into separate scripts.</p>
+<p>The analyses directory contains what you probably think of as the bulk of your data science work. It’s going to have one subdirectory for each major analysis that’s performed within your project and within each of these there might be a series of steps which we separate into separate scripts.</p>
 <p>The activity performed at each step is made clear by the name of each script, as is the order in which we’re going to perform these steps. Here we can see the scripts used for the 2021 annual report. First is a script used to take the raw monthly receipts and produce the <em>cleaned</em> version of the same data set that we saw earlier. This is followed by a trend analysis of this cleaned data set.</p>
 <p>Similarly for the spending review we have a data cleaning step, followed by some forecast modelling and finally the production of some diagnostic plots to compare these forecasts.</p>
 </section><section id="outputs" class="level3" data-number="1.5.7"><h3 data-number="1.5.7" class="anchored" data-anchor-id="outputs">
@@ -639,7 +609,7 @@ Note
 </div>
 </div>
 </div>
-<p>The outputs directory has again one subdirectory for each meta-analysis within the project. These are then further organized by the output type whether that be some data, a figure, or a table.</p>
+<p>The outputs directory has again one subdirectory for each meta-analysis within the project. These are then further organized by the output type, whether that be some data, a figure, or a table.</p>
 <p>Depending on the nature of your project, you might want to use a modified subdirectory structure here. For example, if you’re doing several numerical experiments then you might want to arrange your outputs by experiment, rather than by output type.</p>
 </section><section id="reports" class="level3" data-number="1.5.8"><h3 data-number="1.5.8" class="anchored" data-anchor-id="reports">
 <span class="header-section-number">1.5.8</span> reports</h3>
@@ -653,9 +623,13 @@ Note
 </div>
 <p>The reports directory is then where everything comes together. This is where the written documents that form the final deliverables of your project are created. If these final documents are written in LaTeX or markdown, both the source and the compiled documents can be found within this directory.</p>
 <p>When including content in this report, for example figures, I’d recommend against making copies of those figure files within the reports directory. If you do that, then you’ll have to manually update the files every time you modify them. Instead you can use relative file paths to include these figures. Relative file paths specify how to get to the image, starting from your TeX document and moving up and down through the levels of your project directory.</p>
-<p>If you’re not using markdown or LaTeX to write your reports, but instead use an online platform like overleaf as a latex editor or Google docs to write collaboratively then links to them in the reports directory using additional readme files. Make sure you set the read and write permissions for those links appropriately, too.</p>
-<p>When using these online writing systems, you’ll have to manually upload and update your plots whenever you modify any of your earlier analysis. That’s one of the drawbacks of these online tools that has to be traded off against their ease of use.</p>
-<p>In our exciting new project, here we can see that the annual report is written in a markdown format, which is compiled to both HTML and PDF. The spendiing review is written in LaTeX and we only have the source for it, we don’t have the compiled pdf version of the document.</p>
+<p>For example when including a figure in the annual report you might use the following code to include a figue within the markdown source code.</p>
+<pre><code>![](../../outputs/2021-annual-report/figures/2021-student-survey-histogram.png)</code></pre>
+<p>While in the spending review, the company logo might be included in the LaTeX source code as follows.</p>
+<pre><code>\includegraphics[width=0.2\textwidth]{images/logo.svg}</code></pre>
+<p>If you’re not using markdown or LaTeX to write your reports, but instead use an online platform like <a href="https://www.overleaf.com/">Overleaf</a> as a LaTeX editor or <a href="https://docs.google.com/">Google Docs</a> to write collaboratively then add links to these in the reports directory by adding additional readme files. Make sure you set the read and write permissions for those links appropriately, too!</p>
+<p>When using these online writing systems, you’ll have to manually upload and update your plots and other outputs whenever you modify any of your earlier analysis. That’s one of the drawbacks of these online tools that has to be traded off against their ease of use.</p>
+<p>In our exciting new project, the annual report is written in a markdown format, which is compiled to both HTML and PDF. The spending review is written in LaTeX and we only have the source for it, we don’t have the compiled pdf version of the document but should be able to create this for ourselves using the materials provided.</p>
 </section><section id="make-file" class="level3" data-number="1.5.9"><h3 data-number="1.5.9" class="anchored" data-anchor-id="make-file">
 <span class="header-section-number">1.5.9</span> make file</h3>
 <div class="cell" data-layout-align="center">
@@ -666,14 +640,22 @@ Note
 </div>
 </div>
 </div>
-<p>The final element of our template project structure is a make file. We aren’t going to cover how to read or write make files in this course. Instead, I’ll give you a brief description of what they are and what it is supposed to do.</p>
-<p>At a high level, the make file is just a text file. What makes it special is what it contains. Similar to a shell or a bash script, make file contains code that could be run at the command line. This code will create or update each element of your project.</p>
-<p>The make file defines shorthand commands for the full lines of code that create each element of your project. The make file also records the order in which these operations have to happen, and which of these steps are dependent on one another. This means that if one step part of your project is updated then any changes will be propagated through your entire project. This is done in quite a clever way so the only part of your projects that are re-run are those that need to be updated.</p>
-<p>We’re omitting make files from this course not because they’re fiendishly difficult to write or read, but rather because they require a reasonable foundation in working at the command line to be understood. What I suggest you do instead throughout this course is to create your own R or markdown file called make. This file will define the intended running order and dependencies of your project and if it is an R file, it might also automate some parts of your analysis.</p>
-</section></section><section id="wrapping-up" class="level2" data-number="1.6"><h2 data-number="1.6" class="anchored" data-anchor-id="wrapping-up">
+<p>The final element of our template project structure is a <code>makefile</code>. We aren’t going to cover how to read or write make files in this course. Instead, I’ll give you a brief description of what one is and what it is supposed to do.</p>
+<p>At a high level, the <code>makefile</code> is just another text file. What makes it special is what it contains. Similar to a shell or a bash script, a makefile contains code that can be run at the command line. This code will create or update each element of your project.</p>
+<p>The <code>makefile</code> makes this easier by defining shorthand commands for the full lines of code that create each element of your project (running R scripts, compiling LaTeX documents and so on). The <code>makefile</code> also records the order in which these operations have to happen and which of these steps are dependent on one another. This means that if a single step part of your project is updated then any changes will be propagated through your entire project. This is done in quite a clever way, so the only part of your projects that are re-run are those which need to be updated.</p>
+<p>We’re omitting the writing of makefiles from this course not because they’re fiendishly difficult to write or read, but rather because they require a reasonable foundation in working at the command line to be understood. What I suggest you do instead throughout this course is to create your own <code>make.R</code> or <code>make.md</code> file. This file will define the intended running order and dependencies of your project and if it is an R file might also automate some parts of your analysis.</p>
+<p>If you’d like to learn more about makefiles, some good resoruces are:</p>
+<ul>
+<li>
+<a href="https://monashbioinformaticsplatform.github.io/2017-11-16-open-science-training/topics/automation.html">Monash Informatics Platform</a> (Motivates makefiles via compiling Rmd to multiple output formats)</li>
+<li>
+<a href="https://robjhyndman.com/hyndsight/makefiles/">Rob Hyndman blog post</a> (Old, but motivates use well)</li>
+<li>
+<a href="https://makefiletutorial.com/#getting-started">Makefile tutorial</a> (Pretty and current but extensive and with a CS focus)</li>
+</ul></section></section><section id="wrapping-up" class="level2" data-number="1.6"><h2 data-number="1.6" class="anchored" data-anchor-id="wrapping-up">
 <span class="header-section-number">1.6</span> Wrapping up</h2>
 <p>Wrapping up then, that’s everything for this chapter.</p>
-<p>I’ve introduced a project structure that will serve you well as a baseline for the vast majority of projects in data science.</p>
+<p>We have introduced a project structure that will serve you well as a baseline for the vast majority of projects in data science.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -690,9 +672,9 @@ Note
 <div class="cell-output-display">
 <p><strong>R version 4.3.1 (2023-06-16)</strong></p>
 <p><strong>Platform:</strong> x86_64-apple-darwin20 (64-bit)</p>
-<p><strong>locale:</strong> en_US.UTF-8||en_US.UTF-8||en_US.UTF-8||C||en_US.UTF-8||en_US.UTF-8</p>
+<p><strong>locale:</strong> en_GB.UTF-8||en_GB.UTF-8||en_GB.UTF-8||C||en_GB.UTF-8||en_GB.UTF-8</p>
 <p><strong>attached base packages:</strong> <em>stats</em>, <em>graphics</em>, <em>grDevices</em>, <em>utils</em>, <em>datasets</em>, <em>methods</em> and <em>base</em></p>
-<p><strong>loaded via a namespace (and not attached):</strong> <em>htmlwidgets(v.1.6.4)</em>, <em>compiler(v.4.3.1)</em>, <em>fastmap(v.1.1.1)</em>, <em>cli(v.3.6.2)</em>, <em>tools(v.4.3.1)</em>, <em>htmltools(v.0.5.7)</em>, <em>rstudioapi(v.0.15.0)</em>, <em>yaml(v.2.3.8)</em>, <em>Rcpp(v.1.0.11)</em>, <em>pander(v.0.6.5)</em>, <em>rmarkdown(v.2.25)</em>, <em>knitr(v.1.45)</em>, <em>jsonlite(v.1.8.8)</em>, <em>xfun(v.0.41)</em>, <em>digest(v.0.6.33)</em>, <em>rlang(v.1.1.2)</em> and <em>evaluate(v.0.23)</em></p>
+<p><strong>loaded via a namespace (and not attached):</strong> <em>htmlwidgets(v.1.6.4)</em>, <em>compiler(v.4.3.1)</em>, <em>fastmap(v.1.1.1)</em>, <em>cli(v.3.6.2)</em>, <em>tools(v.4.3.1)</em>, <em>htmltools(v.0.5.7)</em>, <em>yaml(v.2.3.8)</em>, <em>Rcpp(v.1.0.11)</em>, <em>pander(v.0.6.5)</em>, <em>rmarkdown(v.2.25)</em>, <em>knitr(v.1.45)</em>, <em>jsonlite(v.1.8.8)</em>, <em>xfun(v.0.41)</em>, <em>digest(v.0.6.33)</em>, <em>rlang(v.1.1.2)</em> and <em>evaluate(v.0.23)</em></p>
 </div>
 </div>
 
