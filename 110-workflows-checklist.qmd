@@ -50,11 +50,19 @@ _Bonus:_
 In the live session we will begin with a discussion of this week's tasks. We will then create a minimal R package to organise and test the functions you have written. 
 
 
-Please come to the live session prepared to discuss the following points: 
+- Please come to the live session prepared to discuss the following points: 
 
-- Did you make the assignment projects as subdirectories or as their stand alone projects? Why? 
+  - Did you make the assignment projects as subdirectories or as their stand alone projects? Why? 
 
-- What were some terms that you had not met before during the readings? How did you find their meanings?
+  - What were some terms that you had not met before during the readings? How did you find their meanings?
 
-- What did you have to consider when writing your rolling mean function?
+  - What did you have to consider when writing your rolling mean function?
 
+
+- If you would like to follow along in the live session then you should prepare by:
+
+  - Installling/Updating [R](https://cran.r-project.org/), [RStudio](https://posit.co/download/rstudio-desktop/) and [Quarto](https://quarto.org/).
+
+  - Follow the [Happy git with R](https://happygitwithr.com/) instructions to link RStudio and Git and Github (§1-14).
+
+  - Write a `username/README.md` introducing yourself on your GitHub profile. (See e.g.: [StatsRhian](https://github.com/StatsRhian/StatsRhian),  [nrennie](https://github.com/nrennie/nrennie))
