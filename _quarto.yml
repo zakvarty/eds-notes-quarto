@@ -9,7 +9,7 @@ book:
   #favicon:
   site-url: https://eds-notes.zakvarty.com/
   repo-url: https://github.com/zakvarty/eds-notes-quarto/
-  repo-branch: master
+  repo-branch: main
   repo-actions: [edit]
   sharing: [twitter, linkedin]
   twitter-card:
