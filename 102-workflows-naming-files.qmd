@@ -139,7 +139,7 @@ Adding numbers to the start of these file names can make the intended ordering i
 
 Starting single digit numbers with a leading 0 is a very good idea here to prevent script 1 being sorted in with the tens, script 2 in with the twenties and so on. If you might have over 100 files, for example when saving the output from many simulations, use two or more zeros to maintain this nice ordering.
 
-#### Date Order
+#### Date Order {#naming-things-date-order}
 
 A second example of orderable file names is when the file has a date associated with it. This might be a version of a report or the date on which some data were recorded, cleaned or updated. 
 

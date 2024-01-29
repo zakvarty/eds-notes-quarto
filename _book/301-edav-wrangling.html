@@ -468,7 +468,7 @@ Note
 </div>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://allisonhorst.github.io/palmerpenguins/">palmerpenguins</a></span><span class="op">)</span></span>
-<span><span class="va">pengins</span> <span class="op">&lt;-</span> <span class="fu">palmerpenguins</span><span class="fu">::</span><span class="va"><a href="https://allisonhorst.github.io/palmerpenguins/reference/penguins.html">penguins</a></span></span>
+<span><span class="va">penguins</span> <span class="op">&lt;-</span> <span class="fu">palmerpenguins</span><span class="fu">::</span><span class="va"><a href="https://allisonhorst.github.io/palmerpenguins/reference/penguins.html">penguins</a></span></span>
 <span><span class="va">cars</span> <span class="op">&lt;-</span> <span class="fu">datasets</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/r/datasets/mtcars.html">mtcars</a></span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
@@ -492,7 +492,7 @@ Note
 </h3>
 <p>For large data sets, you might not want (or be able to) view it all at once. You can then use <code><a href="https://rdrr.io/r/utils/head.html">head()</a></code> to view the first few rows. The integer argument <code>n</code> specifies the number of rows you would like to return.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">pengins</span>, n <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">penguins</span>, n <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A tibble: 3 × 8</span></span>
 <span><span class="co">#&gt;   species island   bill_length_mm bill_depth_mm flipper_length_mm body_mass_g</span></span>
 <span><span class="co">#&gt;   &lt;fct&gt;   &lt;fct&gt;             &lt;dbl&gt;         &lt;dbl&gt;             &lt;int&gt;       &lt;int&gt;</span></span>
@@ -504,7 +504,7 @@ Note
 </section><section id="str" class="level3" data-number="7.3.3"><h3 data-number="7.3.3" class="anchored" data-anchor-id="str">
 <span class="header-section-number">7.3.3</span> <code>str()</code>
 </h3>
-<p>An alternative way to view the a large data set, or one with a complicated format is to examine its structure with <code><a href="https://rdrr.io/r/utils/str.html">str()</a></code>. This is a useful way to inspect the structure of list-like objects, particularly when they’ve got a nested structure.</p>
+<p>An alternative way to view a data set that is large or has a complicated format is to examine its structure using <code><a href="https://rdrr.io/r/utils/str.html">str()</a></code>. This is a useful way to inspect list-like objects with a nested structure.</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">penguins</span><span class="op">)</span></span>
 <span><span class="co">#&gt; tibble [344 × 8] (S3: tbl_df/tbl/data.frame)</span></span>
@@ -520,7 +520,7 @@ Note
 </section><section id="names" class="level3" data-number="7.3.4"><h3 data-number="7.3.4" class="anchored" data-anchor-id="names">
 <span class="header-section-number">7.3.4</span> <code>names()</code>
 </h3>
-<p>Finally, if you just want to access the variable names you can do so with the <code><a href="https://rdrr.io/r/base/names.html">names()</a></code> function from base R.</p>
+<p>If you just want to access the variable names you can do so with the <code><a href="https://rdrr.io/r/base/names.html">names()</a></code> function from base R.</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">penguins</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "species"           "island"            "bill_length_mm"   </span></span>
@@ -576,7 +576,7 @@ Note
 <span><span class="co">#&gt;  [7] "qsec"             "vs"               "am"              </span></span>
 <span><span class="co">#&gt; [10] "gear"             "carb"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>This could be done as part of a pipe, if we were making many alterations.</p>
+<p>This could be done as part of a pipe if we were making many alterations.</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">cars_renamed</span> <span class="op">&lt;-</span> <span class="va">cars_renamed</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename</a></span><span class="op">(</span>displacement <span class="op">=</span> <span class="va">disp</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
@@ -589,7 +589,7 @@ Note
 <span><span class="co">#&gt;  [7] "qsec"             "vs"               "am"              </span></span>
 <span><span class="co">#&gt; [10] "gear"             "carb"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>When using the dplyr function you have to remember the format <code>new_name = old_name</code>. This matches the format used to create a data frame or tibble, but is the opposite order to the python function of the same name and often catches people out.</p>
+<p>When using the <a href="https://dplyr.tidyverse.org">dplyr</a> function <code><a href="https://dplyr.tidyverse.org/reference/rename.html">rename()</a></code>, you have to remember the format <code>new_name = old_name</code>. This matches the format used to create a data frame or tibble, but is the opposite order to the python function of the same name and often catches people out.</p>
 <p>In the section on <a href="#creating-new-variables">creating new variables</a>, we will see an alternative way of doing this by copying the column and then deleting the original.</p>
 </section></section><section id="subsetting" class="level2" data-number="7.5"><h2 data-number="7.5" class="anchored" data-anchor-id="subsetting">
 <span class="header-section-number">7.5</span> Subsetting</h2>
@@ -652,7 +652,7 @@ Note
 </div>
 <p>You can also select rows or columns by their names. This can be done using the bracket syntax (<code>[ ]</code>) or the dollar syntax (<code>$</code>).</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">pengins</span><span class="op">[</span> , <span class="st">"species"</span><span class="op">]</span></span>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">penguins</span><span class="op">[</span> ,<span class="st">"species"</span><span class="op">]</span></span>
 <span><span class="co">#&gt; # A tibble: 344 × 1</span></span>
 <span><span class="co">#&gt;   species</span></span>
 <span><span class="co">#&gt;   &lt;fct&gt;  </span></span>
@@ -716,7 +716,7 @@ Note
 <span><span class="co">#&gt; [344] Chinstrap</span></span>
 <span><span class="co">#&gt; Levels: Adelie Chinstrap Gentoo</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Since <code>penguins</code> is a tibble, these return different types of object. Subsetting a tibble with bracket syntax will return a tibble, while extracting a column using the dollar syntax returns a vector of values.</p>
+<p>Since <code>penguins</code> is a tibble, these return different types of object. Subsetting a tibble with bracket syntax will return a tibble but extracting a column using the dollar syntax returns a vector of values.</p>
 </section><section id="filter-and-select" class="level3" data-number="7.5.2"><h3 data-number="7.5.2" class="anchored" data-anchor-id="filter-and-select">
 <span class="header-section-number">7.5.2</span> <code>filter()</code> and <code>select()</code>
 </h3>
@@ -764,16 +764,20 @@ Note
 </div>
 <p>and dropping columns can done by selecting all columns except the one(s) you want to drop.</p>
 <div class="cell" data-layout-align="center">
-<pre><code>#&gt; # A tibble: 340 × 1
-#&gt;   body_mass_g
-#&gt;         &lt;int&gt;
-#&gt; 1        3750
-#&gt; 2        3800
-#&gt; 3        3250
-#&gt; 4        3450
-#&gt; 5        3650
-#&gt; 6        3625
-#&gt; # ℹ 334 more rows</code></pre>
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">penguins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">species</span>, <span class="va">island</span>, <span class="va">body_mass_g</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="op">!</span><span class="op">(</span><span class="va">body_mass_g</span> <span class="op">&gt;</span> <span class="fl">6000</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">species</span>, <span class="va">island</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; # A tibble: 340 × 1</span></span>
+<span><span class="co">#&gt;   body_mass_g</span></span>
+<span><span class="co">#&gt;         &lt;int&gt;</span></span>
+<span><span class="co">#&gt; 1        3750</span></span>
+<span><span class="co">#&gt; 2        3800</span></span>
+<span><span class="co">#&gt; 3        3250</span></span>
+<span><span class="co">#&gt; 4        3450</span></span>
+<span><span class="co">#&gt; 5        3650</span></span>
+<span><span class="co">#&gt; 6        3625</span></span>
+<span><span class="co">#&gt; # ℹ 334 more rows</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section></section><section id="creating-new-variables" class="level2" data-number="7.6"><h2 data-number="7.6" class="anchored" data-anchor-id="creating-new-variables">
 <span class="header-section-number">7.6</span> Creating New Variables</h2>
@@ -841,7 +845,7 @@ Note
 <span><span class="co">#&gt; Hornet 4 Drive    21.4   6    Hornet 4 Drive</span></span>
 <span><span class="co">#&gt; Hornet Sportabout 18.7   8 Hornet Sportabout</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>There’s a neat function called <code>rownames_to_column()</code> in <a href="https://tibble.tidyverse.org/">tibble</a> which will add this as the first column and remove the row names all in one step.</p>
+<p>There’s a neat function called <code>rownames_to_column()</code> in the <a href="https://tibble.tidyverse.org/">tibble</a> package. This will add the row names as the first column and remove the row names all in one step.</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">cars</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/rownames.html">rownames_to_column</a></span><span class="op">(</span>var <span class="op">=</span> <span class="st">"model"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
@@ -897,20 +901,21 @@ Note
 <span>    q_0 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">bill_length_mm</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span>
 <span>    q_1 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span><span class="op">(</span><span class="va">bill_length_mm</span>, prob <span class="op">=</span> <span class="fl">0.25</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span>
 <span>    q_2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/median.html">median</a></span><span class="op">(</span><span class="va">bill_length_mm</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span>
-<span>    q_3 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span><span class="op">(</span><span class="va">bill_length_mm</span>, prob <span class="op">=</span> <span class="fl">0.25</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span>
+<span>    q_3 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span><span class="op">(</span><span class="va">bill_length_mm</span>, prob <span class="op">=</span> <span class="fl">0.75</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span>
 <span>    q_4 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">bill_length_mm</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">bill_length_mm_summary</span></span>
 <span><span class="co">#&gt; # A tibble: 1 × 8</span></span>
 <span><span class="co">#&gt;    mean median   min   q_0   q_1   q_2   q_3   q_4</span></span>
 <span><span class="co">#&gt;   &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span></span>
-<span><span class="co">#&gt; 1  43.9   44.4  59.6  32.1  39.2  44.4  39.2  59.6</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="co">#&gt; 1  43.9   44.4  59.6  32.1  39.2  44.4  48.5  59.6</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>In all, this isn’t overly exciting. You might, rightly, wonder why you’d want to use these <code><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise()</a></code> calls when we could just use the simpler base R calls directly.</p>
-<p>One benefit is that the summarise calls ensure consistent output. However, the main advantage comes when you want to apply these summaries to distinct subgroups of the data.</p>
+<p>In all, this isn’t overly exciting. You might rightly wonder why you’d want to use <code><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise()</a></code> when we could just use the simpler base R calls directly.</p>
+<p>One benefit of <code><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise()</a></code> is that it provides certainty that the obejct returned will be of a certain class (a tibble) no matter what summary function is used. However, <code><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise()</a></code> really comes into its own when you want to apply these summaries to distinct subgroups of the data.</p>
 </section><section id="grouped-operations" class="level2" data-number="7.8"><h2 data-number="7.8" class="anchored" data-anchor-id="grouped-operations">
 <span class="header-section-number">7.8</span> Grouped Operations</h2>
-<p>The real benefit of <code><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise()</a></code> comes from its combination with <code><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by()</a></code>. This allows to you calculate the same summary statistics for each level of a factor with only one additional line of code. Here we’re re-calculating the same set of summary statistics we just found for all penguins, but for each individual species.</p>
+<p>The real benefit of <code><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise()</a></code> comes from its combination with <code><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by()</a></code>. This allows to you calculate the same summary statistics for each level of a factor with only one additional line of code.</p>
+<p>Here we’re re-calculating the same set of summary statistics we just found for all penguins, but for each individual species.</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode" id="cb28"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">penguins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">species</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
@@ -959,13 +964,12 @@ Note
 </div>
 <section id="ungrouping" class="level3" data-number="7.8.1"><h3 data-number="7.8.1" class="anchored" data-anchor-id="ungrouping">
 <span class="header-section-number">7.8.1</span> Ungrouping</h3>
-<p>By default, each call to <code><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise()</a></code> will undo one level of grouping. This means that our previous result was still grouped by species.</p>
-<p>(We can see this in the tibble output above, and also by examining the structure of the returned data frame. This tells us that this is an S3 object of class “grouped_df”, which inherits its properties from a “tbl_df”, “tbl”, and “data.frame” objects.)</p>
+<p>By default, each call to <code><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise()</a></code> will undo one level of grouping. This means that our previous result was still grouped by species. We can see this in the tibble output above or by examining the structure of the returned data frame. This tells us that this is an S3 object of class <code>grouped_df</code>, which inherits its properties from a <code>tbl_df</code>, <code>tbl</code>, and <code>data.frame</code> objects.</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode" id="cb30"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">penguin_summary_stats</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "grouped_df" "tbl_df"     "tbl"        "data.frame"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Since we have grouped by two variables, R expects us to use two summaries before returning a data frame (or tibble) that is not grouped. One way to satisfy this is to use apply a second summary at the species level of grouping.</p>
+<p>Since we have grouped by two variables, <a href="https://dplyr.tidyverse.org">dplyr</a> expects us to use two <code><a href="https://rdrr.io/r/base/summary.html">summary()</a></code> function calls before it will return a data frame (or tibble) that is not grouped. One way to satisfy this is to apply a second summary at the species level of grouping.</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode" id="cb31"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">penguin_summary_stats</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise_all.html">summarise_all</a></span><span class="op">(</span><span class="va">mean</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
@@ -976,7 +980,7 @@ Note
 <span><span class="co">#&gt; 2 Chinstrap     NA  48.8   49.6  58    40.9  46.3  49.6  46.3  58  </span></span>
 <span><span class="co">#&gt; 3 Gentoo        NA  47.5   47.3  59.6  40.9  45.3  47.3  45.3  59.6</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>However, we won’t always want to do apply another summary. In that case, we can undo the grouping using <code><a href="https://dplyr.tidyverse.org/reference/group_by.html">ungroup()</a></code>. Remembering to ungroup is a common gotcha and cause of confusion when working with multiple-group summaries.</p>
+<p>However, we won’t always want to do apply another summary. In that case, we can undo the grouping using <code><a href="https://dplyr.tidyverse.org/reference/group_by.html">ungroup()</a></code>. Remembering to ungroup is a common mistake and cause of confusion when working with multiple-group summaries.</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode" id="cb32"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">ungroup</a></span><span class="op">(</span><span class="va">penguin_summary_stats</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A tibble: 5 × 10</span></span>
@@ -988,21 +992,33 @@ Note
 <span><span class="co">#&gt; 4 Chinstrap Dream      48.8   49.6  58    40.9  46.3  49.6  46.3  58  </span></span>
 <span><span class="co">#&gt; 5 Gentoo    Biscoe     47.5   47.3  59.6  40.9  45.3  47.3  45.3  59.6</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>There’s an alternative method to achieve the same thing in a single step when using <a href="https://dplyr.tidyverse.org">dplyr</a> versions 1.0.0 and above. This is to to set the <code>.groups</code> parameter of the <code><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise()</a></code> function call, which determines the grouping of the returned data frame.</p>
-<p>The <code>.groups</code> parameter and can take 4 possible values:</p>
-<ul>
-<li><p>“drop_last”: dropping the last level of grouping (The only option before v1.0.0);</p></li>
-<li><p>“drop”: All levels of grouping are dropped;</p></li>
-<li><p>“keep”: Same grouping structure as <code>.data</code>;</p></li>
-<li><p>“rowwise”: Each row is its own group.</p></li>
-</ul>
-<p>By default, “drop_last” is used if all the results have 1 row and “keep” is used otherwise.</p>
+<p>There’s an alternative method to achieve the same thing in a single step when using <a href="https://dplyr.tidyverse.org">dplyr</a> versions 1.0.0 and above. This is to to set the <code>.by</code> parameter of the <code><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise()</a></code> function call, which determines the grouping that should be applied to the original data frame, just for this one operation.</p>
+<div class="cell" data-layout-align="center">
+<pre><code>#&gt; # A tibble: 3 × 2
+#&gt;   island    mean_bill_length_mm
+#&gt;   &lt;fct&gt;                   &lt;dbl&gt;
+#&gt; 1 Torgersen                39.0
+#&gt; 2 Biscoe                   45.3
+#&gt; 3 Dream                    44.2</code></pre>
+</div>
+<p>The <code>.by</code> argument applies to a single operation. This means that the result of the <code><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise()</a></code> call will always be an ungrouped tibble, regardless of the number of grouping columns.</p>
+<div class="cell" data-layout-align="center">
+<pre><code>#&gt; # A tibble: 5 × 3
+#&gt;   island    species   mean_bill_length_mm
+#&gt;   &lt;fct&gt;     &lt;fct&gt;                   &lt;dbl&gt;
+#&gt; 1 Torgersen Adelie                   39.0
+#&gt; 2 Biscoe    Adelie                   39.0
+#&gt; 3 Dream     Adelie                   38.5
+#&gt; 4 Biscoe    Gentoo                   47.5
+#&gt; 5 Dream     Chinstrap                48.8</code></pre>
+</div>
+<p>See <code><a href="https://dplyr.tidyverse.org/reference/dplyr_by.html">?dplyr_by</a></code> for more information on using the <code>.by</code> argument with <code><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise()</a></code> and other <a href="https://dplyr.tidyverse.org">dplyr</a> verbs.</p>
 </section></section><section id="reordering-factors" class="level2" data-number="7.9"><h2 data-number="7.9" class="anchored" data-anchor-id="reordering-factors">
 <span class="header-section-number">7.9</span> Reordering Factors</h2>
 <p>R stored factors as integer values, which it then maps to a set of labels. Only factor levels that appear in your data will be assigned a coded integer value and the mapping between factor levels and integers will depend on the order that the labels appear in your data.</p>
 <p>This can be annoying, particularly when your factor levels relate to properties that aren’t numerical but do have an inherent ordering to them. In the example below, we have the t-shirt size of twelve people.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tshirts</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span></span>
+<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tshirts</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span></span>
 <span>  id <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">12</span>, </span>
 <span>  size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">as.factor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"L"</span>, <span class="cn">NA</span>, <span class="st">"M"</span>, <span class="st">"S"</span>, <span class="st">"XS"</span>, <span class="st">"M"</span>, <span class="st">"XXL"</span>, <span class="st">"L"</span>, <span class="st">"XS"</span>, <span class="st">"M"</span>, <span class="st">"L"</span>, <span class="st">"S"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
@@ -1012,7 +1028,7 @@ Note
 </div>
 <p>Irritatingly, the sizes aren’t in order and extra large isn’t included because it’s not included in this particular sample. This leads to awkward looking summary tables and plots.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tshirts</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">size</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>count <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html">n</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
+<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tshirts</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">size</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>count <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html">n</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A tibble: 6 × 2</span></span>
 <span><span class="co">#&gt;   size  count</span></span>
 <span><span class="co">#&gt;   &lt;fct&gt; &lt;int&gt;</span></span>
@@ -1025,16 +1041,22 @@ Note
 </div>
 <p>We can fix this by creating a new variable with the factors explicitly coded in the correct order. We also need to specify that we should not drop empty groups as part of <code><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by()</a></code>.</p>
 <div class="cell" data-layout-align="center">
-<pre><code>#&gt; # A tibble: 7 × 2
-#&gt;   size_tidy count
-#&gt;   &lt;fct&gt;     &lt;int&gt;
-#&gt; 1 XS            2
-#&gt; 2 S             2
-#&gt; 3 M             3
-#&gt; 4 L             3
-#&gt; 5 XL            0
-#&gt; 6 XXL           1
-#&gt; # ℹ 1 more row</code></pre>
+<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tidy_tshirt_levels</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"XS"</span>, <span class="st">"S"</span>, <span class="st">"M"</span>, <span class="st">"L"</span>, <span class="st">"XL"</span>, <span class="st">"XXL"</span>, <span class="cn">NA</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">tshirts</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>size_tidy <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">size</span>, levels <span class="op">=</span> <span class="va">tidy_tshirt_levels</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">size_tidy</span>, .drop <span class="op">=</span> <span class="cn">FALSE</span> <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>count <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html">n</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; # A tibble: 7 × 2</span></span>
+<span><span class="co">#&gt;   size_tidy count</span></span>
+<span><span class="co">#&gt;   &lt;fct&gt;     &lt;int&gt;</span></span>
+<span><span class="co">#&gt; 1 XS            2</span></span>
+<span><span class="co">#&gt; 2 S             2</span></span>
+<span><span class="co">#&gt; 3 M             3</span></span>
+<span><span class="co">#&gt; 4 L             3</span></span>
+<span><span class="co">#&gt; 5 XL            0</span></span>
+<span><span class="co">#&gt; 6 XXL           1</span></span>
+<span><span class="co">#&gt; # ℹ 1 more row</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section><section id="be-aware-factors" class="level2" data-number="7.10"><h2 data-number="7.10" class="anchored" data-anchor-id="be-aware-factors">
 <span class="header-section-number">7.10</span> Be Aware: Factors</h2>
@@ -1055,27 +1077,28 @@ Note
 <span class="header-section-number">7.11</span> Be Aware: Strings</h2>
 <p>Working with and analysing text data is a skill unto itself. However, it is useful to be able to do some basic manipulation of character strings programatically.</p>
 <p>Because R was developed as a statistical programming language, it is well suited to the computational and modelling aspects of working with text data but the base R string manipulation functions can be a bit unwieldy at times.</p>
-<p>The <a href="https://stringr.tidyverse.org">stringr</a> package aims to combat this by providing useful helper functions for a range of text management problems. Even when not analysing text data these can be useful, for example to remove prefixes on a lot of column names.</p>
+<p>The <a href="https://stringr.tidyverse.org">stringr</a> package aims to combat this by providing useful helper functions for a range of text management problems. Even when not analysing text data these can be useful, such as when removing prefixes from many column names.</p>
 <p>Suppose we wanted to keep only the text following an underscore in these column names. We could do that by using a regular expression to extract lower-case or upper-case letters which follow an underscore.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">poorly_named_df</span><span class="op">)</span></span>
+<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">poorly_named_df</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A tibble: 6 × 11</span></span>
-<span><span class="co">#&gt;   observation_id   V1_A   V2_B  V3_C   V4_D    V5_E   V6_F   V7_G   V8_H</span></span>
-<span><span class="co">#&gt;            &lt;int&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;</span></span>
-<span><span class="co">#&gt; 1              1  1.22  -1.11  0.441 -1.41  -0.0649 -1.09   1.61   0.262</span></span>
-<span><span class="co">#&gt; 2              2 -1.01   1.66  0.594  0.189  1.35    0.373  0.678 -0.952</span></span>
-<span><span class="co">#&gt; 3              3 -0.654  0.386 0.104  2.66   0.311   0.734  1.60  -0.962</span></span>
-<span><span class="co">#&gt; 4              4 -1.84   0.234 0.866  2.97  -1.73   -0.521 -0.719 -0.317</span></span>
-<span><span class="co">#&gt; 5              5 -0.321 -1.34  2.31  -1.54  -0.634   1.71   0.335 -1.11 </span></span>
-<span><span class="co">#&gt; 6              6 -2.22  -0.849 2.66  -0.254  0.294   0.153 -0.113 -0.420</span></span>
+<span><span class="co">#&gt;   observation_id    V1_A    V2_B   V3_C   V4_D    V5_E    V6_F    V7_G   V8_H</span></span>
+<span><span class="co">#&gt;            &lt;int&gt;   &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;</span></span>
+<span><span class="co">#&gt; 1              1  0.627   0.0131  0.327 -0.494  0.0718  0.195  -0.687   0.201</span></span>
+<span><span class="co">#&gt; 2              2 -0.105   0.771  -0.826 -1.33  -0.0204  0.541   1.09   -0.149</span></span>
+<span><span class="co">#&gt; 3              3 -0.683  -1.05   -0.451  1.20   1.09    0.0404  0.0669  1.18 </span></span>
+<span><span class="co">#&gt; 4              4 -1.19   -0.110  -0.211 -1.36  -0.704  -0.400  -0.159  -1.57 </span></span>
+<span><span class="co">#&gt; 5              5 -0.0631  0.442   0.364  0.669 -0.636  -1.62    0.299   0.274</span></span>
+<span><span class="co">#&gt; 6              6 -0.791   2.15    0.243  0.762  0.781   1.98    1.09   -0.327</span></span>
 <span><span class="co">#&gt; # ℹ 2 more variables: V9_I &lt;dbl&gt;, V10_J &lt;dbl&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell" data-layout-align="center">
-<pre><code>#&gt;  [1] "id" "A"  "B"  "C"  "D"  "E"  "F"  "G"  "H"  "I"  "J"</code></pre>
+<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">stringr</span><span class="fu">::</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_extract.html">str_extract</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">poorly_named_df</span><span class="op">)</span>, pattern <span class="op">=</span> <span class="st">"(?&lt;=_)([a-zA-Z]+)"</span><span class="op">)</span></span>
+<span><span class="co">#&gt;  [1] "id" "A"  "B"  "C"  "D"  "E"  "F"  "G"  "H"  "I"  "J"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Alternatively, can avoid using regular expressions. We can split each column name at the underscore and keep only the second part of each string.</p>
+<p>Alternatively, can avoid using <a href="https://en.wikipedia.org/wiki/Regular_expression">regular expressions</a>. We can use <code><a href="https://stringr.tidyverse.org/reference/str_split.html">stringr::str_split()</a></code> to divide each column name at the underscore and keep only the second part of each string.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># split column names at underscores and inspect structure of resuting object</span></span>
+<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># split column names at underscores and inspect structure of resuting object</span></span>
 <span><span class="va">split_strings</span> <span class="op">&lt;-</span> <span class="fu">stringr</span><span class="fu">::</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_split.html">str_split</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">poorly_named_df</span><span class="op">)</span>, pattern <span class="op">=</span> <span class="st">"_"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">split_strings</span><span class="op">)</span></span>
 <span><span class="co">#&gt; List of 11</span></span>
@@ -1095,13 +1118,13 @@ Note
 <span><span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map_chr</a></span><span class="op">(</span><span class="va">split_strings</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">{</span><span class="va">x</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span><span class="op">}</span><span class="op">)</span></span>
 <span><span class="co">#&gt;  [1] "id" "A"  "B"  "C"  "D"  "E"  "F"  "G"  "H"  "I"  "J"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Again, unless you plan to work extensively with text data, I would recommend that you look up such string manipulations as you need them. The <a href="https://r4ds.had.co.nz/strings.html#strings">strings</a> section of R for Data Science is a useful starting point.</p>
+<p>Unless you plan to work extensively with text data, I would recommend that you look up such string manipulations as you need them. The <a href="https://r4ds.had.co.nz/strings.html#strings">strings</a> section of R for Data Science is a useful starting point.</p>
 </section><section id="be-aware-date-times" class="level2" data-number="7.12"><h2 data-number="7.12" class="anchored" data-anchor-id="be-aware-date-times">
 <span class="header-section-number">7.12</span> Be Aware: Date-Times</h2>
-<p>Remember all the fuss we made about storing dates in the ISO standard format? That was because dates and times are complicated enough to work with before adding extra ambiguity.</p>
-<p><span class="math display">\[ \text{YYYY} - \text{MM} - \text{DD}\]</span> Dates, times and time intervals have to reconcile two factors: the physical orbit of the Earth around the Sun and the social and geopolitical mechanisms that determine how we measure and record the passing of time. This makes the history of date and time records fascinating and can make working with this type of data complicated.</p>
-<p>Moving from larger to smaller time spans: leap years alter the number of days in a year, months are of variable length (with February’s length changing from year to year). If your data are measured in a place that uses daylight saving, then one day a year will be 23 hours long and another will be 25 hours long. To make things worse, the dates and the hour at which the clocks change are not uniform across countries, which might be in distinct time zones that themselves change over time.</p>
-<p>Even at the level of minutes and seconds we aren’t safe - since the Earth’s orbit is gradually slowing down a leap second is added approximately every 21 months. Nor are things any better when looking at longer time scales or across cultures, where we might have to account for different calendars: months are added removed and altered over time, other calendar systems still take different approaches to measuring time and using different units and origin points.</p>
+<p>Remember <a href="102-workflows-naming-files.html#naming-things-date-order">all the fuss</a> we made about storing dates in the ISO standard format? That was because dates and times are complicated enough to work on without adding extra ambiguity.</p>
+<p><span class="math display">\[ \text{YYYY} - \text{MM} - \text{DD}\]</span> Dates, times and time intervals have to reconcile two factors: the physical orbit of the Earth around the Sun and the social and geopolitical mechanisms that determine how we measure and record the passing of time. This makes the history of date and time records fascinating but also make working with this type of data complicated.</p>
+<p>Moving from larger to smaller time spans: leap years alter the number of days in a year, months are of variable length (with February’s length changing from year to year). If your data are measured in a place that uses daylight saving, then one day a year will be 23 hours long and another will be 25 hours long. To make things worse, the dates and the hour at which the clocks change are not uniform across countries, which might span multiple time zones and those time-zone boundaries can shift over time.</p>
+<p>Even at the level of minutes and seconds we aren’t safe - since the Earth’s orbit is gradually slowing down and a leap second is added approximately every 21 months. Nor are things any better when looking at longer time scales or across cultures, where we might have to account for different calendars: months are added removed and altered over time, other calendar systems still take different approaches to measuring time and using different units and origin points.</p>
 <p>With all of these issues you have to be very careful when working with date and time data. Functions to help you with this can be found in the <a href="https://lubridate.tidyverse.org">lubridate</a> package, with examples in the <a href="https://r4ds.had.co.nz/dates-and-times.html#dates-and-times">dates and times</a> chapter of R for data science.</p>
 </section><section id="be-aware-relational-data" class="level2" data-number="7.13"><h2 data-number="7.13" class="anchored" data-anchor-id="be-aware-relational-data">
 <span class="header-section-number">7.13</span> Be Aware: Relational Data</h2>
