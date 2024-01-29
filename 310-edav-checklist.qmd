@@ -25,9 +25,9 @@ Use the [Data Exploration and Visualisation](#edav-reading) section of the readi
 
 _Core:_ 
 
-- [ ] [NormConf](https://normconf.com/) is a conference dedicated to the unglamorous but essential aspects of working in the data sciences. The in December 2022 conference talks are available as a [Youtube Playlist](https://www.youtube.com/@normconf/videos). Find a talk that interests you and watch it, then post a short summary to EdStem, which includes what you learned from the talk and one thing that you still do not understand. 
+- [ ] [NormConf](https://normconf.com/) is a conference dedicated to the unglamorous but essential aspects of working in the data sciences. The conference talks from December 2022 are available as a [Youtube Playlist](https://www.youtube.com/@normconf/videos). Find a talk that interests you and watch it, then post a short summary to EdStem, describing what you learned from the talk and one thing that you still do not understand. 
 
-- [ ] Work through this ggplot2 tutorial for [beautiful plotting in R](https://www.cedricscherer.com/2019/08/05/a-ggplot2-tutorial-for-beautiful-plotting-in-r/#text) by Cédric Scherer, recreating the examples for yourself.
+- [ ] Work through this ggplot2 tutorial for [beautiful plotting in R](https://www.cedricscherer.com/2019/08/05/a-ggplot2-tutorial-for-beautiful-plotting-in-r) by Cédric Scherer, recreating the examples for yourself.
 
 - [ ]  Using your `rolling_mean()` function as inspiration, write a `rolling_sd()` function that calculates the rolling standard deviation of a numeric vector.
 
