@@ -38,6 +38,7 @@ book:
         - 302-edav-analysis.qmd
         - 303-edav-visualisation.qmd
         - 310-edav-checklist.qmd
+        #- 320-edav-ggplot2-tutorial.qmd
     - part: 400-production-introduction.qmd
       chapters:
         - 401-production-reproducibility.qmd
