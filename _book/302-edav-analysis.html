@@ -17,6 +17,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -389,7 +423,19 @@ Note
 </blockquote>
 <p>One key aspect of EDA is generating quick and simple summaries and plots of the data. These plots and summary statistics can help to quickly understand the distribution of and relationships between the recorded variables. Additionally, during an exploratory analysis you will familiarise yourself with the structure of the data you’re working with and how that data was collected.</p>
 <div class="cell" data-layout-align="center">
-<div class="cell-output-display">
+<details><summary>Code</summary><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://ggplot2.tidyverse.org">"ggplot2"</a></span><span class="op">)</span>                     </span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://ggobi.github.io/ggally/">"GGally"</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">colours</span> <span class="op">&lt;-</span> <span class="fu">colorspace</span><span class="fu">::</span><span class="fu"><a href="https://colorspace.R-Forge.R-project.org/reference/adjust_transparency.html">adjust_transparency</a></span><span class="op">(</span></span>
+<span>  col <span class="op">=</span> <span class="fu">PrettyCols</span><span class="fu">::</span><span class="fu"><a href="https://nrennie.github.io/PrettyCols/reference/prettycols.html">prettycols</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"Fun"</span>, n <span class="op">=</span> <span class="fl">3</span><span class="op">)</span>,</span>
+<span>  alpha <span class="op">=</span> <span class="fl">0.6</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://ggobi.github.io/ggally/reference/ggpairs.html">ggpairs</a></span><span class="op">(</span><span class="va">iris</span>,mapping <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>col <span class="op">=</span> <span class="va">Species</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_colour_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="va">colours</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_fill_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="va">colours</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>axis.text <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">6</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure"><p><img src="302-edav-analysis_files/figure-html/iris-plot-1.png" class="img-fluid figure-img" style="width:80.0%"></p>
 <figcaption class="figure-caption">Investigating marginal and pairwise relationships in the Iris dataset.</figcaption></figure>
@@ -411,7 +457,7 @@ Note
 <p>As an example, these stakeholder conversations often reveal important features in the data generating or measurement process that should be accounted for when modelling. These details are usually left out of the data documentation because they would be immediately obvious to any specialist in that field.</p>
 </section><section id="communicating-with-project-manager" class="level3" data-number="8.3.2"><h3 data-number="8.3.2" class="anchored" data-anchor-id="communicating-with-project-manager">
 <span class="header-section-number">8.3.2</span> Communicating with project manager</h3>
-<p>An EDA can sometimes allow us to identify cases where the strength of signal within the available data is clearly insufficient to answer the question of interest. By clearly communicating this to the project manager, the project can be postponed while different, better quality or simply more data are collected. It’s important to note that this data collection is not trivial and can have a high cost in terms of both time and capital. It might be that collecting the data needed to answer a question will cost more than we’re likely to gain from knowing that answer. Whether the project is postponed or cancelled, this constitutes a successful outcome for the project, the aim is to to produce insight or profit - not to fit models for their own sake.</p>
+<p>An EDA can sometimes allow us to identify cases where the strength of signal within the available data is clearly insufficient to answer the question of interest. By clearly communicating this to the project manager, the project can be postponed while different, better quality or simply more data are collected. It’s important to note that this data collection is not trivial and can have a high cost in terms of both time and capital. It might be that collecting the data needed to answer a question will cost more than we’re likely to gain from knowing that answer. Whether the project is postponed or cancelled, this constitutes a successful outcome for the project; the aim is to to produce insight or profit - not to fit models for their own sake.</p>
 </section></section><section id="scope-your-project" class="level2" data-number="8.4"><h2 data-number="8.4" class="anchored" data-anchor-id="scope-your-project">
 <span class="header-section-number">8.4</span> Scope Your Project</h2>
 <blockquote class="blockquote">
@@ -419,7 +465,7 @@ Note
 </blockquote>
 <p>A third view on EDA is as an initial assessment of whether the available data measure the correct values, with sufficient quality and quantity, to answer a particular question. In order for EDA to be successful, it’s important to take a few key steps.</p>
 <p>First, it’s important to formulate a specific question of interest or line of investigation and agree on it with the stakeholder. By having a clear question in mind, it will be easier to focus the analysis and identify whether the data at hand can answer it.</p>
-<p>Next, it’s important to make a record (if one doesn’t already exist) of how the data were collected, by whom it was collected, what each recorded variable represents and the units in which they are recorded. This meta-data is often known as a data sheet. Having this information in written form is crucial when adding a new collaborator to a project, so that they can understand the data generating and measurement processes, and are aware of the quality and accuracy of the recorded values.</p>
+<p>Next, it’s important to make a record (if one doesn’t already exist) of how the data were collected, by whom it was collected, what each recorded variable represents and the units in which they are recorded. This meta-data is often known as a data sheet or data dictionary. Having this information in written form is crucial when adding a new collaborator to a project, so that they can understand the data generating and measurement processes, and are aware of the quality and accuracy of the recorded values.The <a href="https://help.osf.io/article/217-how-to-make-a-data-dictionary">Open Science Foundation</a> give a concise description of the meta-data you might list in a data dictionary.</p>
 </section><section id="investigate-your-data" class="level2" data-number="8.5"><h2 data-number="8.5" class="anchored" data-anchor-id="investigate-your-data">
 <span class="header-section-number">8.5</span> Investigate Your Data</h2>
 <blockquote class="blockquote">
@@ -429,11 +475,50 @@ Note
 <p>Furthermore, a more advanced EDA might include a simulation study to estimate the amount of data needed to detect the smallest meaningful effect. This is more in-depth than a typical EDA but if you suspect that the signals within your data are weak relative to measurement noise, can help to demonstrate the limitations of the current line of enquiry with the information that is currently available.</p>
 </section><section id="what-is-not-eda" class="level2" data-number="8.6"><h2 data-number="8.6" class="anchored" data-anchor-id="what-is-not-eda">
 <span class="header-section-number">8.6</span> What is not EDA?</h2>
-<p>It’s important to understand that an exploratory data analysis is not the same thing as modelling. In particular is <em>not</em> the construction of your baseline model, which is sometimes called initial data analysis.</p>
-<p>Though it might inform the choice of baseline model, EDA is usually not model based. Simple plots and summaries are used to identify patterns in the data that inform how you approach the rest of the project.</p>
-<p>Some degree of statistical rigour can be added through the use of non-parametric techniques; methods like rolling averages, smoothing or partitioning can to help identify trends or patterns while making minimal assumptions about the data generating process.</p>
+<p>It’s important to understand that an exploratory data analysis is not the same thing as modelling. In particular is <em>not</em> the construction of your baseline model, which is sometimes called initial data analysis. Though it might inform the choice of baseline model, EDA is usually not model based. In an EDA, simple plots and summaries are used to identify patterns in the data that inform how you approach the rest of the project.</p>
+<p>Some degree of statistical rigour can be added to EDA through the use of non-parametric techniques; methods like rolling averages, smoothing or partitioning can to help identify trends or patterns while making minimal assumptions about the data generating process.</p>
 <div class="cell" data-layout-align="center">
-<div class="cell-output-display">
+<details><summary>Code</summary><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://www.ral.ucar.edu/~ericg/softextreme.php">ismev</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://wilkelab.org/cowplot/">cowplot</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"dowjones"</span>, package <span class="op">=</span> <span class="st">"ismev"</span><span class="op">)</span> </span>
+<span></span>
+<span><span class="va">theme_dow_jones</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span></span>
+<span>    axis.text <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">10</span><span class="op">)</span>,</span>
+<span>    axis.title <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">9</span>, face <span class="op">=</span> <span class="st">"bold"</span>,  hjust <span class="op">=</span> <span class="fl">0.98</span>, vjust <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>,</span>
+<span>    plot.title <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">15</span>, hjust <span class="op">=</span> <span class="fl">0.02</span><span class="op">)</span>,</span>
+<span>    plot.subtitle <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">12</span>, hjust <span class="op">=</span> <span class="fl">0.02</span><span class="op">)</span></span>
+<span>  <span class="op">)</span></span>
+<span></span>
+<span><span class="va">p1</span> <span class="op">&lt;-</span> <span class="va">dowjones</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>index_change <span class="op">=</span> <span class="va">Index</span> <span class="op">-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/lead-lag.html">lag</a></span><span class="op">(</span><span class="va">Index</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">index_change</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Date</span>, y <span class="op">=</span> <span class="va">index_change</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span>col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grDevices/rgb.html">rgb</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0.2</span><span class="op">)</span>, size <span class="op">=</span> <span class="fl">2</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html">geom_smooth</a></span><span class="op">(</span>col <span class="op">=</span> <span class="st">"darkorange"</span>, lwd <span class="op">=</span> <span class="fl">1.5</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_vline</a></span><span class="op">(</span>xintercept <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html">as.Date</a></span><span class="op">(</span><span class="st">"1998-06-01"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ggtitle</a></span><span class="op">(</span><span class="st">"Daily change in Dow Jones Index"</span>, <span class="st">"with smoothed estimate of mean change"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ylab</a></span><span class="op">(</span><span class="st">""</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="va">theme_dow_jones</span></span>
+<span></span>
+<span><span class="va">p2</span> <span class="op">&lt;-</span> <span class="va">dowjones</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>index_change <span class="op">=</span> <span class="va">Index</span> <span class="op">-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/lead-lag.html">lag</a></span><span class="op">(</span><span class="va">Index</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">index_change</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Date</span>, y <span class="op">=</span> <span class="va">index_change</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span>col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grDevices/rgb.html">rgb</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0.2</span><span class="op">)</span>, size <span class="op">=</span> <span class="fl">2</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html">geom_smooth</a></span><span class="op">(</span></span>
+<span>    col <span class="op">=</span> <span class="st">"darkorange"</span>, </span>
+<span>    fill <span class="op">=</span> <span class="fu">colorspace</span><span class="fu">::</span><span class="fu"><a href="https://colorspace.R-Forge.R-project.org/reference/adjust_transparency.html">adjust_transparency</a></span><span class="op">(</span><span class="st">"darkorange"</span>, <span class="fl">0.05</span><span class="op">)</span>,</span>
+<span>    lwd <span class="op">=</span> <span class="fl">1.5</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_vline</a></span><span class="op">(</span>xintercept <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html">as.Date</a></span><span class="op">(</span><span class="st">"1998-06-01"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ylab</a></span><span class="op">(</span><span class="st">""</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/coord_cartesian.html">coord_cartesian</a></span><span class="op">(</span>ylim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">2</span>, <span class="fl">12</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="va">theme_dow_jones</span></span>
+<span></span>
+<span><span class="fu"><a href="https://wilkelab.org/cowplot/reference/plot_grid.html">plot_grid</a></span><span class="op">(</span><span class="va">p1</span>,<span class="va">p2</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure"><p><img src="302-edav-analysis_files/figure-html/dow-jones-rolling-mean-plot-1.png" class="img-fluid figure-img" style="width:80.0%"></p>
 <figcaption class="figure-caption">Daily change in Dow Jones Index with smoothed estimate of mean and 95% confidence interval.</figcaption></figure>
@@ -441,7 +526,17 @@ Note
 </div>
 </div>
 <div class="cell" data-layout-align="center">
-<div class="cell-output-display">
+<details><summary>Code</summary><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span></span>
+<span>  x <span class="op">=</span> <span class="va">dowjones</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>index_change <span class="op">=</span> <span class="va">Index</span> <span class="op">-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/lead-lag.html">lag</a></span><span class="op">(</span><span class="va">Index</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>after_june_98 <span class="op">=</span> <span class="va">Date</span> <span class="op">&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html">as.Date</a></span><span class="op">(</span><span class="st">"1998-06-01"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">after_june_98</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span></span>
+<span>    mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">index_change</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span>
+<span>    sd <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">index_change</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  caption <span class="op">=</span> <span class="st">"Mean and standard deviation of daily change in Dow Jones Index, before and after 1st of June 1998."</span></span>
+<span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
 <table class="table table-sm table-striped small">
 <caption>Mean and standard deviation of daily change in Dow Jones Index, before and after 1st of June 1998.</caption>
 <thead><tr class="header">
@@ -465,46 +560,89 @@ Note
 </div>
 </div>
 <p>Though the assumptions in an EDA are often minimal it can help to make them explicit. For example, in this plot a moving averages is shown with a confidence band, but the construction of this band makes the implicit assumption that, at least locally, our observations have the same distribution and so are exchangeable.</p>
-<p>Finally, EDA is not a prescriptive process. While I have given a lot of suggestions on what you might usually want to consider, there is no correct way to go about an EDA because it is so heavily dependent on the particular dataset, its interpretation and the task you want to achieve with it. This is one of the parts of data science that make it a craft that you hone with experience, rather than an algorithmic process. When you work in a particular area for a long time you develop a knowledge for common data quirks in that area, which may or may not translate to other applications.</p>
+<p>Finally, EDA is not a prescriptive process. While I have given a lot of suggestions on what you might usually want to consider, there is no correct way to go about an EDA because it is so heavily dependent on the particular dataset, its interpretation and the task you want to achieve with it. This is one of the parts of data science that make it a craft that you hone with experience, rather than an algorithmic process. When you work in a particular area for a long time you develop domain-specific knowledge of common data quirks, which may or may not translate to other applications.</p>
 <p>Now that we have a better idea of what is and what is not EDA, let’s talk about the issue that an EDA tries to resolve and the other issues that it generates.</p>
 </section><section id="issue-forking-paths" class="level2" data-number="8.7"><h2 data-number="8.7" class="anchored" data-anchor-id="issue-forking-paths">
 <span class="header-section-number">8.7</span> Issue: Forking Paths</h2>
-<p>In any data science project you have a sequence of very many decisions that you must make, each with many potential options and is difficult to decide upon <em>a priori</em>.</p>
+<p>In any data science project you have to make a sequence of very many decisions, each with many potential options. It is almost impossible to anticipate all of the decisions you will have to make ahead of time and even more difficult do decide how to proceed with each decision <em>a priori</em>.</p>
 <div class="small_right">
 <p><img src="images/302-data-exploration/forking-paths.jpg" class="img-fluid"></p>
 </div>
-<p>Focusing in on only one small part of the process, we might consider picking a null or baseline model, which we will then try and improve on. Should that null model make constant predictions, incorporate a simple linear trend or is something more flexible obviously needed? Do you have the option to try all of these or are you working under time constraints? Are there contextual clues that rule some of these null models out on contextual grounds?</p>
+<p>Focusing in on only one small part of the data science process, we might consider picking a null or baseline model that we will then try and improve on. Should that null model make constant predictions, incorporate a simple linear trend or is something more flexible obviously needed? Do you have the option to try all of these or are you working under time constraints? Is there any domain knowledge that rules some of these null models out on contextual grounds?</p>
 <p>An EDA lets you narrow down your options by looking at your data and helps you to decide what might be reasonable modelling approaches.</p>
 <div class="medium_left">
 <p><img src="images/302-data-exploration/supervise_learning_schematic.png" class="img-fluid"></p>
 </div>
-<p>The problem that sneaks in here is data leakage. Formally this is where training data is included in test set, but this sort of information leak can happen informally too. Usually this is because you’ve seen the data you’re trying to model or predict and then selected your modelling approach based on that information.</p>
+<p>The problem that sneaks in here is data leakage. Formally this is where training data is included in test set but this sort of information leak can happen informally too. Usually this is because you’ve seen the data you’re trying to model or predict and then selected your modelling approach based on that information.</p>
 <p>Standard, frequentist statistical methods for estimation and testing assume no “peeking” of this type has occurred. If we use these methods without acknowledging that we have already observed our data then we will artificially inflate the significance of our findings. For example, we might be comparing two models: the first of which makes constant predictions with regard to a predictor, while the second includes a linear trend. We will of course use a statistical test to confirm that what we are seeing is unlikely by chance. However, we must be aware this test was only performed because we had previously examined at the data and noticed what looked to be a trend.</p>
-<p>Similar issues arise in Bayesian approaches, particularly when constructing or eliciting prior distributions for our model parameters. One nice thing that we can do in the Bayesian setting is to simulating data from the prior predictive distribution and then get an expert to check that these datasets seem seem reasonable. However, it is often the case this expert is also the person who collected the data we will soon be modelling. It’s very difficult for them to ignore what they have seen, which leads to similar, subtle leakage problems.</p>
+<p>Similar issues arise in Bayesian approaches, particularly when constructing or eliciting prior distributions for our model parameters. One nice thing that we can do in the Bayesian setting is to simulate data from the prior predictive distribution and then get an expert to check that these datasets seem seem reasonable. However, it is often the case this expert is also the person who collected the data we will soon be modelling. It’s very difficult for them to ignore what they have seen, which leads to similar, subtle leakage problems. (For further discussion see the relevant sections of <a href="https://doi.org/10.48550/arXiv.2011.01808">Gelman et al.&nbsp;(2020)</a> or <a href="https://betanalpha.github.io/assets/case_studies/principled_bayesian_workflow.html">Betancourt (2020)</a>)</p>
 </section><section id="correction-methods" class="level2" data-number="8.8"><h2 data-number="8.8" class="anchored" data-anchor-id="correction-methods">
 <span class="header-section-number">8.8</span> Correction Methods</h2>
 <p>There are various methods or corrections that we can apply during our testing and estimation procedures to ensure that our error rates or confidence intervals account for our previous “peeking” during EDA.</p>
 <p>Examples of these corrections have been developed across many fields of statistics. In medical statistics we have approaches like the Bonferroni correction, to account for carrying out multiple hypothesis tests. In the change-point literature there are techniques for estimating a change location given that a change has been detected somewhere in a time series. While in the extreme value literature there are methods to estimate the required level of protection against rare events, given that the analysis was triggered by the current protections having been compromised.</p>
 <div class="cell" data-layout-align="center">
-<div class="cell-output-display">
+<details><summary>Code</summary><div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Simulate data</span></span>
+<span><span class="va">date</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.Date.html">seq.Date</a></span><span class="op">(</span></span>
+<span>  from <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html">as.Date</a></span><span class="op">(</span><span class="st">"2018-03-01"</span><span class="op">)</span>,</span>
+<span>  to <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html">as.Date</a></span><span class="op">(</span><span class="st">"2022-05-03"</span><span class="op">)</span>,</span>
+<span>  by <span class="op">=</span> <span class="st">"day"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">sim_size</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">date</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">1234</span><span class="op">)</span></span>
+<span><span class="va">surge_height</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span>n <span class="op">=</span> <span class="va">sim_size</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="op">-</span><span class="fl">3</span>, <span class="va">sim_size</span> <span class="op">-</span> <span class="fl">1</span><span class="op">)</span>, <span class="fl">3</span><span class="op">)</span></span>
+<span><span class="va">surface_height</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span>n <span class="op">=</span> <span class="va">sim_size</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">5</span>,<span class="op">-</span><span class="fl">3</span><span class="op">)</span>, times <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1234</span>, <span class="va">sim_size</span> <span class="op">-</span> <span class="fl">1234</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">waves</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span><span class="va">date</span>, <span class="va">surge_height</span>, <span class="va">surface_height</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Extreme Value Plot</span></span>
+<span><span class="va">p3</span> <span class="op">&lt;-</span> <span class="va">waves</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>is_extreme <span class="op">=</span> <span class="va">surge_height</span> <span class="op">&gt;</span> <span class="fl">1</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">date</span>, y <span class="op">=</span> <span class="va">surge_height</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>color <span class="op">=</span> <span class="va">is_extreme</span><span class="op">)</span>, show.legend <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_color_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"FALSE"</span> <span class="op">=</span> <span class="st">"grey40"</span>, <span class="st">"TRUE"</span> <span class="op">=</span> <span class="st">"darkorange"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ylab</a></span><span class="op">(</span><span class="st">"Wave surge height (m)"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span></span>
+<span>    axis.text <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">10</span><span class="op">)</span>,</span>
+<span>    axis.title <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">9</span>, face <span class="op">=</span> <span class="st">"bold"</span>,  hjust <span class="op">=</span> <span class="fl">0.98</span>, vjust <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>,</span>
+<span>    plot.title <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">15</span>, hjust <span class="op">=</span> <span class="fl">0.02</span><span class="op">)</span>,</span>
+<span>    plot.subtitle <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">12</span>, hjust <span class="op">=</span> <span class="fl">0.02</span><span class="op">)</span></span>
+<span>  <span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Changepoint Plot</span></span>
+<span><span class="va">p4</span> <span class="op">&lt;-</span> <span class="va">waves</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">date</span>, y <span class="op">=</span> <span class="va">surface_height</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span>color <span class="op">=</span> <span class="st">"grey40"</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_vline</a></span><span class="op">(</span>xintercept <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html">as.Date</a></span><span class="op">(</span><span class="st">"2021-07-17"</span><span class="op">)</span>,</span>
+<span>             colour <span class="op">=</span> <span class="st">"darkorange"</span>,</span>
+<span>             linewidth <span class="op">=</span> <span class="fl">1.2</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ylab</a></span><span class="op">(</span><span class="st">"Sea surface height (m)"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span></span>
+<span>    axis.text <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">10</span><span class="op">)</span>,</span>
+<span>    axis.title <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">9</span>, face <span class="op">=</span> <span class="st">"bold"</span>,  hjust <span class="op">=</span> <span class="fl">0.98</span>, vjust <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>,</span>
+<span>    plot.title <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">15</span>, hjust <span class="op">=</span> <span class="fl">0.02</span><span class="op">)</span>,</span>
+<span>    plot.subtitle <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">12</span>, hjust <span class="op">=</span> <span class="fl">0.02</span><span class="op">)</span></span>
+<span>  <span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://wilkelab.org/cowplot/reference/plot_grid.html">plot_grid</a></span><span class="op">(</span><span class="va">p3</span>,<span class="va">p4</span>,nrow <span class="op">=</span> <span class="fl">2</span>, ncol <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure"><p><img src="302-edav-analysis_files/figure-html/eva-and-changepoint-plots-1.png" class="img-fluid figure-img" style="width:80.0%"></p>
 <figcaption class="figure-caption">Example sea-height datasets where an analysis has been triggered by an extreme value (above) or a visually identified change in mean (below).</figcaption></figure>
 </div>
 </div>
 </div>
-<p>::: ::::</p>
 <p>All of these corrections require us to make assumptions about the nature of the peeking. They are either very specific about the process that has occurred, or else are very pessimistic about how much information has been leaked. Developing such corrections to account for EDA isn’t really possible, given its adaptive and non-prescriptive nature.</p>
 <p>In addition to being either highly specific or pessimistic, these corrections can also be hard to derive and complicated to implement. This is why in settings where the power of tests or level of estimation is critically important, the entire analysis is pre-registered. In clinical trials, for example, every step of the analysis is specified before any data are collected. In data science this rigorous approach is rarely taken.</p>
 <p>As statistically trained data scientists, it is important for us to remain humble about our potential findings and to suggest follow up studies to confirm the presence of any relationships we do find.</p>
 </section><section id="learning-more" class="level2" data-number="8.9"><h2 data-number="8.9" class="anchored" data-anchor-id="learning-more">
 <span class="header-section-number">8.9</span> Learning More</h2>
-<p>In this chapter we have acknowledged that exploratory analyses are an important part of the data science workflow; this is true not only for us as data scientists, but also for the other people who are involved with our projects.</p>
-<p>We’ve also seen that an exploratory analysis can help to guide the progression of our projects, but that in doing so we must take care to prevent and acknowledge the risk of data leakage.</p>
-<p>If you want to explore this topic further, it can be quite challenging: examples of good, exploratory data analyses can be difficult to come by. This is because they are not often made publicly available in the same way that papers and technical reports are. Additionally, they are often kept out of public repositories because they are not as “polished” as the rest of the project. Personally, I think this is a shame and the culture on this is slowly changing.</p>
-<p>For now, your best approach to learning about what makes a good exploratory analysis is to do lots of your own and to talk to you colleagues about their approaches.</p>
-<p>There are lots of list-articles out there claiming to give you a comprehensive list of steps for any exploratory analysis. These can be good for inspiration, but I strongly suggest you don’t treat these as gospel.</p>
-<p>Despite the name of the chapter, <a href="https://bookdown.org/rdpeng/exdata/exploratory-data-analysis-checklist.html#follow-up-questions">Roger Peng’s EDA check-list</a> gives an excellent worked example of an exploratory analysis in R. The the discussion article “<a href="http://www.stat.columbia.edu/~gelman/research/published/p755.pdf">Exploratory Data Analysis for Complex Models</a>”, Andrew Gelman makes a more abstract discussion of both exploratory analyses (which happen before modelling) and confirmatory analyses (which happen afterwards).</p>
+<p>In this chapter we have acknowledged that exploratory analyses are an important part of the data science workflow; this is true not only for us as data scientists, but also for the other people who are involved with our projects. We’ve also seen that an exploratory analysis can help to guide the progression of our projects, but that in doing so we must take care to prevent and acknowledge the risk of data leakage.</p>
+<p>If you want to explore this topic further, it can be quite challenging. Examples of good, exploratory data analyses can be difficult to come by because, unlike the papers and technical reports that they precede, exploratory analyses are not often made publicly available. Additionally, they are often kept out of public repositories because they are not as “polished” as the rest of the project. Personally, I think this is a shame and the culture on this is slowly changing.</p>
+<p>For now, your best approach to learning about what makes a good exploratory analysis is to do lots of your own and to talk to you colleagues about their approaches. There are lots of list-articles out there claiming to give you a comprehensive list of steps for any exploratory analysis. These can be good for inspiration, but I strongly advise you against falling into the trap of treating these as prescriptive or foolproof.</p>
+<p>Despite the name of the chapter, <a href="https://bookdown.org/rdpeng/exdata/exploratory-data-analysis-checklist.html#follow-up-questions">Roger Peng’s EDA check-list</a> gives an excellent worked example of an exploratory analysis in R. In discussion article “<a href="http://www.stat.columbia.edu/~gelman/research/published/p755.pdf">Exploratory Data Analysis for Complex Models</a>”, Andrew Gelman makes a more abstract discussion of both exploratory analyses (which happen before modelling) and confirmatory analyses (which happen afterwards).</p>
 
 
 </section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">

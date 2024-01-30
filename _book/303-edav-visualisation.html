@@ -17,6 +17,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -339,7 +373,7 @@ gtag('config', 'G-EFK9JPMVM8', { 'anonymize_ip': true});
   <ul class="collapse">
 <li><a href="#picking-the-right-tool-for-the-job" id="toc-picking-the-right-tool-for-the-job" class="nav-link" data-scroll-target="#picking-the-right-tool-for-the-job"><span class="header-section-number">9.2.1</span> Picking the right tool for the job</a></li>
   <li><a href="#analogue-or-digital" id="toc-analogue-or-digital" class="nav-link" data-scroll-target="#analogue-or-digital"><span class="header-section-number">9.2.2</span> Analogue or Digital</a></li>
-  <li><a href="#ggplot2" id="toc-ggplot2" class="nav-link" data-scroll-target="#ggplot2"><span class="header-section-number">9.2.3</span> ggplot2</a></li>
+  <li><a href="#ggplot2" id="toc-ggplot2" class="nav-link" data-scroll-target="#ggplot2"><span class="header-section-number">9.2.3</span> <code>ggplot2</code></a></li>
   </ul>
 </li>
   <li>
@@ -407,14 +441,14 @@ Note
 <div class="medium_left">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure"><p><img src="images/303-data-visualisation/the-climate-book-jacket.jpg" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">Book jacked showing the effect of global temperatures rising. A series of vertical stripes represent the annual global average temperature, progressing from blue on the left to red on the right.</figcaption></figure>
+<figcaption class="figure-caption">Book jacket showing the effect of global temperatures rising. A series of vertical stripes represent the annual global average temperature, progressing from blue on the left to red on the right.</figcaption></figure>
 </div>
 </div>
-<p>You’ll use visualisations to rapidly explore new data sets, to understand their structure and to establish which types of model might be suitable for the task at hand. Visualisation is also vital during model evaluation and when check the validity of the assumptions on which that model is based. These are relatively technical uses of visualisation, but graphics have a much broader role within your work of an effective data scientist.</p>
+<p>You’ll use visualisations to rapidly explore new data sets, to understand their structure and to establish which types of model might be suitable for the task at hand. Visualisation is also vital during model evaluation and when check the validity of the assumptions on which that model is based. These are relatively technical uses of visualisation, but graphics have a much broader role within your work as an effective data scientist.</p>
 <p>When well designed, plots, tables and animations can tell compelling stories that were once trapped within your data. They can also intuitively communicate the strength of evidence for your findings and draw attention to the most salient parts your argument.</p>
 <p>Data visualisation is an amalgamation of science, statistics, graphic design and storytelling. It’s multi-disciplinary nature means that we have to draw on all of our skills to ensure success. While there are certainly many ways to go wrong when visualising data, there are many more ways to get it right.</p>
-<p>This chapter won’t be a a step-by-step tutorial of how to visualise any type of data. Nor will it be a line-up of visualisations gone wrong. Instead, I hope to pose some questions that’ll get you thinking critically about exactly what you want from each graphic that you produce.</p>
-<p>There are five things that you should think about when producing any sort of data visualisation. We will consider each of these in turn.</p>
+<p>This chapter won’t be a a step-by-step tutorial of how to visualise any specific type of data. Nor will it be a line-up of visualisations gone wrong. Instead, I hope to pose some questions that’ll get you thinking critically about exactly what you want from each graphic that you produce.</p>
+<p>There are (at least) five things that you should think about when producing any sort of data visualisation. We will consider each of these in turn.</p>
 </section></section><section id="your-tools" class="level2" data-number="9.2"><h2 data-number="9.2" class="anchored" data-anchor-id="your-tools">
 <span class="header-section-number">9.2</span> Your Tools 🔨</h2>
 <section id="picking-the-right-tool-for-the-job" class="level3" data-number="9.2.1"><h3 data-number="9.2.1" class="anchored" data-anchor-id="picking-the-right-tool-for-the-job">
@@ -451,23 +485,20 @@ Note
 <p>There are then more data-focused tools that have point-and-click interfaces. These are things like Excel’s chart tools, or specialist visualisation software like Tableau. These are great because they scale with the quantity of data, so that you can plot larger amounts of raw data values that you wouldn’t have the time or patience to do by hand - whether that’s in an analogue or digital format.</p>
 <p>Analogue and point-and-click approaches to visualisation have the shared limitation of not being reproducible, at least not without extensive documentation explaining how the graphic was created.</p>
 <p>Using code to create your visualisations can resolve this reproducibility issue, and includes visualisation as a part of your larger, reproducible workflow for data science. Scripted visualisations also scale easily to large data sets and are easy to alter if any changes are required. The downside here is that there is a relatively steep learning curve to creating such visualisations, which is exactly what point-and-click methods are trying to avoid.</p>
-<p>No matter how you produce your visualisations, the time cost of developing your skills in that medium is what buys you the ability to control and customise what you create. This upfront time investment will also often make you faster at producing future graphics in that medium.</p>
+<p>No matter how you produce your visualisations, the time spent on developing your skills in that medium is what buys you the ability to control and customise your creations. This upfront time investment will also often make you faster at producing future graphics in that medium.</p>
 <p>Whenever you approach a new visualisation problem, you should pick your tools and medium judiciously. You have to balance your immediate needs for speed, accuracy and reproducibility against your current skill level and improving those skills in the medium to long term. Unfortunately, the only way to make good visualisations is to make lots of bad ones and even more mediocre ones first.</p>
 </section></section><section id="ggplot2" class="level3" data-number="9.2.3"><h3 data-number="9.2.3" class="anchored" data-anchor-id="ggplot2">
-<span class="header-section-number">9.2.3</span> ggplot2</h3>
+<span class="header-section-number">9.2.3</span> <code>ggplot2</code>
+</h3>
 <p>If your aim is to produce a wide range of high quality data visualisation using R, then the <a href="https://ggplot2.tidyverse.org">ggplot2</a> package is one of the most versatile and well documented tools available to you.</p>
 <p>The g’s at the start of the package name stand for grammar of graphics. This is an opinionated, abstract approach to constructing data visualisations programmatically, by building them up slowly and adding additional plot elements one layer at a time.</p>
 <div class="medium_right">
 <p><img src="images/303-data-visualisation/grammar-of-graphics-abstract.png" class="img-fluid" alt="Abstract of Grammar of Graphics paper by Hadley Wickham."></p>
 </div>
-<p>This idea of a “grammar of Graphics” was originally introduced by Leland Wilkinson. The paper shown by Hadley Wickham, and the associated <a href="https://ggplot2.tidyverse.org">ggplot2</a> package popularised this approach within the R community. Like many of the tidyverse collection of packages, <a href="https://ggplot2.tidyverse.org">ggplot2</a> provides simple but specialised modular functions that can be composed to create complex visualisations.</p>
-<p>If you’d like to learn how to use <a href="https://ggplot2.tidyverse.org">ggplot2</a>, I wouldn’t recommend starting with the paper nor would I recommend trying to get started with the docs alone. Instead, I would suggest you work through an introductory tutorial, or one of the resources linked within the package documentation. Once you have a grasp of the basic principles the best way to improve is to try making your own plots, using reference texts and other people’s work as a guide. A great source of inspiration here is the Tidy Tuesday data visualisation challenge. You can search for the challenge on Github to inspect both the plots made by other people and the code that was used to make them.</p>
-<p><strong>Learning <code>ggplot2</code>:</strong></p>
-<ul>
-<li><a href="https://ggplot2.tidyverse.org/#learning-ggplot2">Resources</a></li>
-<li><a href="https://www.cedricscherer.com/2019/08/05/a-ggplot2-tutorial-for-beautiful-plotting-in-r/">Tutorial</a></li>
-<li><a href="https://github.com/search?p=1&amp;q=tidy+tuesday&amp;type=Repositories">Tidy Tuesday Github</a></li>
-</ul></section></section><section id="your-medium" class="level2" data-number="9.3"><h2 data-number="9.3" class="anchored" data-anchor-id="your-medium">
+<p>This idea of a “grammar of Graphics” was originally introduced by Leland Wilkinson. The paper shown by Hadley Wickham, and the associated <a href="https://ggplot2.tidyverse.org">ggplot2</a> package popularised this approach within the R community. Like many of the tidyverse collection of packages that we have met already, <a href="https://ggplot2.tidyverse.org">ggplot2</a> provides simple but specialised modular functions that can be composed to create complex visualisations.</p>
+<p>If you’d like to learn how to use <a href="https://ggplot2.tidyverse.org">ggplot2</a>, I wouldn’t recommend starting with the paper nor would I recommend trying to get started with the docs alone. Instead, I would suggest you work through an introductory tutorial (e.g.&nbsp;<a href="https://www.cedricscherer.com/2019/05/17/the-evolution-of-a-ggplot/">evolution of a ggplot</a> or <a href="https://www.cedricscherer.com/2019/08/05/a-ggplot2-tutorial-for-beautiful-plotting-in-r/">beautiful plotting in R</a>), or one of the resources linked within the <a href="https://ggplot2.tidyverse.org/#learning-ggplot2">package documentation</a>.</p>
+<p>Once you have a grasp of the basic principles <a href="https://ggplot2.tidyverse.org">ggplot2</a> (geometries, aesthetics, themes) the best way to improve is to make your own plots, using reference texts and other people’s work as a guide. A great source of inspiration here is the <a href="https://github.com/rfordatascience/tidytuesday">Tidy Tuesday</a> data visualisation challenge. You can <a href="https://github.com/search?q=tidy%20tuesday&amp;type=repositories">search for the challenge on Github</a> to inspect both the plots made by other people and the code that was used to make them.</p>
+</section></section><section id="your-medium" class="level2" data-number="9.3"><h2 data-number="9.3" class="anchored" data-anchor-id="your-medium">
 <span class="header-section-number">9.3</span> Your Medium 📽</h2>
 <section id="where-is-your-visualisation-going" class="level3" data-number="9.3.1"><h3 data-number="9.3.1" class="anchored" data-anchor-id="where-is-your-visualisation-going">
 <span class="header-section-number">9.3.1</span> Where is your visualisation going?</h3>
@@ -475,10 +506,10 @@ Note
 <div class="medium_right">
 <p><img src="images/303-data-visualisation/visualisation-purposes.png" class="img-fluid" alt="Hand drawn illustration showing different versions of the same graphic being used in an analysis, presentation, newspaper artilce and technical report."></p>
 </div>
-<p>For example, consider making an exploratory plot at the start of a project to improve your own understanding of the structure within your data. In this case you do not need to spend much time worrying about refining axis labels, colour schemes or which in file format to save your work.</p>
-<p>When working on figure that will be included in a daily stand-up meeting with your team, then you should take a little more care to ensure that your work can be clearly understood by others, for example that the legend and axis labels are both large and sufficiently informative.</p>
-<p>Further refinement again will be required of this is for an external presentation. Is the message of the visualisation immediately clear? Will the graphic it still be clear when displayed in a boardroom or conference hall, or will it pixellate? Finally, how long will the audience have to interpret the visualisation while you are speaking? Even if slide decks are made available, very few audience members will actually refer to them before or after the presentation.</p>
-<p>The opposing consideration has to be made when preparing a visualisation for a report or scientific paper. In this case plots and tables can be very small, particularly in two-column or grid layouts. You have to be wary about the legibility of your smallest text (think values on axes) and your visualisation can be clearly understood, whether the document is being read zoomed-in on a computer screen or printed out in black and white.</p>
+<p>For example, consider making an exploratory plot at the start of a project to improve your own understanding of the data and its structure. In this case you don’t need to spend hours worrying about refining axis labels, colour schemes or which file format to save your work in.</p>
+<p>If you are developing a figure to share in a daily stand-up meeting with your team then you should take a little more care to ensure that your work can be clearly understood by others. For example you might spend some time to ensure that the legend and axis labels are both large and sufficiently informative.</p>
+<p>Further refinement will be required if you plan to use your visualisation in external presentation. Is the message of the visualisation immediately clear? Will the graphic it still be clear when displayed in a boardroom or conference hall, or will it pixellate? Finally, how long will the audience have to interpret the visualisation while you are speaking? Even if slide decks are made available, very few audience members will actually refer to them before or after the presentation.</p>
+<p>The opposing consideration has to be made when preparing a visualisation for a report or scientific paper. In print, plots and tables can be very small - particularly within two-column or grid layouts. You then have to be wary about the legibility of your smallest text (think values on axes) to ensure that your visualisation can be clearly understood, whether the document is being read zoomed-in on a computer screen or printed out in black and white.</p>
 </section><section id="file-types" class="level3" data-number="9.3.2"><h3 data-number="9.3.2" class="anchored" data-anchor-id="file-types">
 <span class="header-section-number">9.3.2</span> File Types</h3>
 <div class="medium_left">
@@ -490,9 +521,9 @@ Note
 <p>To ensure that your graphics are suitable for the intended medium it is helpful to know a little bit about image file types.</p>
 <p>There are two dominant types of image file: vector graphics and bitmap graphics.</p>
 <p><strong>Bitmap graphics</strong> store images as a grid of little squares and each of these pixels takes a single, solid colour. If you make a bitmap image large enough, either by zooming in or by using a really big screen, then these individual pixels become visible. Usually this isn’t going to be your intention, so you need to ensure that the resolution of your graphic (its dimensions counted in pixels) is sufficiently large.</p>
-<p><strong>Vector graphics</strong> create images using continuous paths and then filling the areas that they enclose with flat colour. These vector images can be enlarged as much as you like without image quality becoming compromised. This is great for simple simple designs like logos, which have to be clear when used on both letterhead and billboards.</p>
+<p><strong>Vector graphics</strong> create images using continuous paths and fill the areas that these enclose with flat colour. These vector images can be enlarged as much as you like without the image quality becoming compromised. This is great for simple simple designs like logos, which have to be clear when used on both letterhead and billboards.</p>
 <p>However, these vector graphics are more memory intensive than bitmap images, particularly when there are many distinct colours or objects within the image. This can be a particular problem in data science, for example when creating a scatter plot with many thousands of data points.</p>
-<p>It can often be useful to save both a bitmap and vector version of your graphics. This way you can use bitmap when you need small files that load quickly (like when loading a webpage) and vector graphics when you need your visualisation to stay sharp when enlarged (like when creating a poster or giving a presentation in an auditorium).</p>
+<p>It can often be useful to save both a bitmap and vector version of your most important graphics. This way you can use bitmap when you need small files that load quickly (like when loading a webpage) and vector graphics when you need your visualisation to stay sharp when enlarged (like when creating a poster or giving a presentation in an auditorium).</p>
 </section></section><section id="your-audience" class="level2" data-number="9.4"><h2 data-number="9.4" class="anchored" data-anchor-id="your-audience">
 <span class="header-section-number">9.4</span> Your Audience 👥</h2>
 <section id="know-your-audience" class="level3" data-number="9.4.1"><h3 data-number="9.4.1" class="anchored" data-anchor-id="know-your-audience">
@@ -508,11 +539,11 @@ Note
 <p><img src="images/303-data-visualisation/user-groups.png" class="img-fluid" alt="Illustation of three different user groups, where each group wears a jumper with a different style of neckline."></p>
 </div>
 <p>To know <em>how</em> to target your delivery to a particular audience, you fist have to identify exactly who that is.</p>
-<p>To make a compelling data visualisation you have to have some idea of the background knowledge that the viewer brings. Are they a specialist in statistics or data science, or does their expertise lie in area application? Are the findings that you’re presenting going to come as a surprise to them, or act confirmation of their pre-existing body of knowledge.</p>
-<p>It’s worth considering these prior beliefs and how strongly they are held when constructing your visualisation. Take the time to consider how this existing knowledge could alter or influence their interpretation of what you’re showing to them. On the flip-side, you might be presenting information on a topic that the viewer is the best case ambivalent about or in the worst case is actively bored by. In that case, you can take special care to compose engaging visualisations to capture and hold the attention of the audience.</p>
+<p>To make a compelling data visualisation you have to have some idea of the background knowledge that the viewer brings. Are they a specialist in statistics and data science or does their expertise the area of application? Are the findings that you’re presenting going to come as a surprise to the viewer or will they validate their pre-existing knowledge?</p>
+<p>It’s worth considering these prior beliefs and how strongly they are held when constructing your visualisation. Take the time to consider how this existing knowledge could alter or influence the viewer’s interpretation of what you’re showing to them. If your conclusions go against their experience or knowledge then you need to design your visualisation to be as clear and persuasive as possible. On the flip-side, you might be presenting information on a topic that the viewer is ambivalent about, is actively bored by or is wilfully trying to ignore. In that case, you can take special care to compose engaging visualisations to capture and hold the attention of your audience.</p>
 </section><section id="preattentive-attributes" class="level3" data-number="9.4.2"><h3 data-number="9.4.2" class="anchored" data-anchor-id="preattentive-attributes">
 <span class="header-section-number">9.4.2</span> Preattentive Attributes</h3>
-<p>When crafting a visualisation we want to require as little work as possible from the viewer. To do this, we can use pre-attentive attributes, such as colour, shape size and position to encode our data values.</p>
+<p>When crafting a visualisation we want to require as little work as possible from the viewer. We can do this by using pre-attentive attributes such as colour, shape size and position to encode our data values.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -531,16 +562,16 @@ Note
 </div>
 </div>
 <p>This figure presents a bar chart of the mean height of males in several countries, but has swapped out the bars for human outlines. While the visualisation has an attractive, minimal design and a pleasant colour scheme, it doesn’t do a good job of immediately conveying the relevant information to the viewer.</p>
-<p>The three main issues with this plot are all caused by swapping the bars of this plot for male silhouettes, and are linked to the difference in how lengths and areas are perceived by humans. Typically, we make immediate pre-attentive comparisons based on area but draw more accurate, considered comparisons when comparing lengths.</p>
-<p>By replacing bars with human outlines and not starting the height scale at zero, this plot breaks the proportionality of length and area that is inherent in a bar plot. This causes dissonance between immediate and considered interpretation of this plot. An additional issue is that the silhouettes overlap, creating a forced perspective that makes it seem like the outlines are also further back and therefore even larger if this perspective is taken into account.</p>
-<p>These three issues are important to consider when constructing your own visualisations. Are you showing all the values that the data could take, or focusing on a smaller interval to provide better contrast? If you are using the size of a circle to represent a value, are you changing the diameter or area in proportion to the data value? And finally, if you are making a plot that appears three-dimensional, have you done so on purpose and, if so, can one of those dimensions be better represented by an attribute that isn’t position?</p>
+<p>The three main issues with this plot arise from swapping the bars of this plot for male silhouettes and are caused by the difference in how humans perceive lengths and areas. Typically, we make immediate pre-attentive comparisons based on area but can draw more accurate, considered comparisons when comparing lengths.</p>
+<p>By replacing bars with human outlines this plot breaks the proportionality of length and area that is inherent in a bar plot. This causes dissonance between immediate and considered interpretation of this plot. An additional issue is that the silhouettes overlap, creating a forced perspective that makes it seem like some the outlines are further back and therefore even larger if this forced perspective is taken into account.</p>
+<p>These three issues are important to consider when constructing your own visualisations. Are you showing all the values that the data could take, or focusing on a smaller interval to provide better contrast? If you are using the size of a circle to represent a value, are you changing the diameter or area in proportion to the data value? Finally, if you are making a plot that appears three-dimensional, have you done so on purpose? If so, could one of those dimensions be better represented by an attribute other than position?</p>
 </section><section id="visual-perception" class="level3" data-number="9.4.4"><h3 data-number="9.4.4" class="anchored" data-anchor-id="visual-perception">
 <span class="header-section-number">9.4.4</span> Visual Perception</h3>
 <p>When reducing the dimensionality of your plot you may wish to represent a data value using colour rather than position. When deciding on how to use colour, you should keep your audience in mind.</p>
 <p>Is your aim to two or more categories? In that case, you’ll need to select your finite set of colours and ensure that these can be distinguished.</p>
 <p>Are you are representing a data value that is continuous or has an associated ordering? Then you will again have to select your palette to provide sufficient contrast to all viewers of your work.</p>
 <p>If you are representing a measurement that has a <em>reference value</em> (for example 0 for temperature in centigrade) then a diverging colour palette can be used to represent data that are above or below this reference point. This requires some cultural understanding of how the colours will be interpreted, for example you are likely to cause confusion if you an encoding of red for cold and blue for hot.</p>
-<p>For colour scales without such a reference point then a gradient in a single colour is likely the best option. In either case, it is important to check that a unit change in data value represents a consistent change in colour across all values. This is not the case for the rainbow palette here (which is neither a single gradient or diverging).</p>
+<p>For colour scales without such a reference point then a gradient in a single colour is likely the best option. In either case, it is important to check that a unit change in data value represents a consistent change in colour across all values. This is not the case for the rainbow palette here (which is neither a single gradient nor a diverging colour scale).</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -549,7 +580,7 @@ Note
 </div>
 </div>
 </div>
-<p>To ensure accessibility of your designs, I would recommend one of the many on-line tools to simulate colour vision deficiency or using a pre-made palette where this has been considered for you. A good, low-tech rule of thumb is to design your visualisations so that they’re still easily understood when printed in grey-scale. This can mean picking appropriate colours or additionally varying the point shape, line width or line types used.</p>
+<p>To improve accessibility of your designs, I would recommend one of the many on-line tools to simulate colour vision deficiency or using a pre-made palette where this has been considered for you. A good, low-tech rule of thumb is to design your visualisations so that they’re still easily understood when printed in greyscale. This can mean picking appropriate colours or additionally varying the point shape, line width or line types used.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -562,7 +593,7 @@ Note
 </section><section id="alt-text-titles-and-captions" class="level3" data-number="9.4.5"><h3 data-number="9.4.5" class="anchored" data-anchor-id="alt-text-titles-and-captions">
 <span class="header-section-number">9.4.5</span> Alt-text, Titles and Captions</h3>
 <blockquote class="blockquote">
-<p><strong>Captions</strong> describe a figure or table so that it may be identified in a list of figures and (where appropriate).</p>
+<p><strong>Captions</strong> describe a figure or table so that it may be identified in a list of figures and to add additional detail (where appropriate).</p>
 <p><strong>Alternative text</strong> describes the content of an image for a person who cannot view it. (<a href="https://myaccessible.website/infographic/images/images-accessibility-alt-text">Guide to writing alt-text</a>)</p>
 <p><strong>Titles</strong> give additional context or identify key findings. Active titles are preferable.</p>
 </blockquote>
@@ -572,7 +603,7 @@ Note
 <p>A caption is short description of a visualisation. Captions usually displayed directly above or below the figure or table that they describe. These captions serve two purposes: in a report, the caption can be used to look up the visualisation from a list of figures or tables. The second purpose of a caption is to add additional detail that you don’t want to add to the plot directly. For example caption might be “Time series of GDP in the United States of America, 2017-2022. Lines show daily (solid), monthly (dashed) and five-year (dotted) mean values.”</p>
 </section><section id="alt-text" class="level4" data-number="9.4.5.2"><h4 data-number="9.4.5.2" class="anchored" data-anchor-id="alt-text">
 <span class="header-section-number">9.4.5.2</span> Alt-text</h4>
-<p>Alt text or alternative text is used to describe the content of an image to a person who can’t view it. This text is helpful for people with a visual impairment, particularly those who uses a screen reader. Screen reading software reads digital text out loud but can’t interpret images. Such software replaces the image with the provided alternative text. Alt text is also valuable in cases when the image can’t be found or loaded, for example because of an incorrect file path or a slow internet connection, because it’ll be displayed in place of the image.</p>
+<p>Alt text or alternative text is used to describe the content of an image to a person who can’t view it. This text is helpful for people with a visual impairment, particularly those who use a screen reader. Screen reading software reads digital text out loud but can’t interpret images. Such software replaces the image with the provided alternative text. Alt text is also valuable in cases when the image can’t be found or loaded, for example because of an incorrect file path or a slow internet connection, because it will be displayed in place of the image.</p>
 <p>The purpose of alt-text is different from a caption. It’s designed as a replacement for the image, not just a shorthand or to provide additional information. If there is an important trend or conclusion to be drawn from the visualisation (that is not already mentioned in the main text) this should be identified in the alt-text. This sort of interpretation is a key aspect of alt-text that shouldn’t be included in a caption.</p>
 </section><section id="titles" class="level4" data-number="9.4.5.3"><h4 data-number="9.4.5.3" class="anchored" data-anchor-id="titles">
 <span class="header-section-number">9.4.5.3</span> Titles</h4>
@@ -580,9 +611,9 @@ Note
 <p>If you are including this type of interpretive title, make sure that the same interpretation is clear in the alt-text.</p>
 </section></section></section><section id="your-story" class="level2" data-number="9.5"><h2 data-number="9.5" class="anchored" data-anchor-id="your-story">
 <span class="header-section-number">9.5</span> Your Story 📖</h2>
-<p>The fourth aspect of a successful data visualisation is that it must tell a story. This story doesn’t need to be a multi-generational novel or even a captivating novella. If a picture speaks a thousand words, really what your aiming for is an engaging anecdote.</p>
-<p>Your visualisation should be something the grabs viewers attention and through its through its composition or content alters their knowledge or view of world in some way.</p>
-<p>Telling effective stories requires planning. How you construct your narrative depends on what effect you want to have on your audience. I’d encourage you to think like a data journalist and go into your work with the intended effect clear in your mind. Is your purpose to inform them of a fact, to persuade them to use a different methodology or entertain them by presenting dull or commonplace data in a fresh and engaging way?</p>
+<p>The fourth aspect of a successful data visualisation is that it must tell a story. This story doesn’t need to be a multi-generational novel or even a captivating novella. If a picture speaks a thousand words, really what your aiming for is the visual equivalent of an engaging anecdote.</p>
+<p>Your visualisation should be something the grabs viewers attention and through its composition or content alters their knowledge or view of world in some way.</p>
+<p>Telling effective stories requires planning. How you construct your narrative depends on what effect you want to have on your audience. I’d encourage you to think like a data journalist and go about your work with its intended effect clear in your mind. Is your purpose to inform them of a fact, to persuade them to use a different methodology or entertain them by presenting dull or commonplace data in a fresh and engaging way?</p>
 <div class="medium_right">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure"><p><img src="images/303-data-visualisation/entertain-persuade-inform.png" class="img-fluid figure-img"></p>
@@ -591,7 +622,59 @@ Note
 </div>
 <p>In reality your goal will be some mixture of these, at an interior point of this triangle. Clearly identifying this point will help you to present your visual story in a way that works towards your aims, rather than against them.</p>
 <p>On the point of presentation, it is important to realise that there is no neutral way to present information. In creating a visualisation you’re choosing which aspects of the data to emphasise, what gets summarised and what is not presented at all. This is how you construct a plot that tells a clear and coherent story. However, there is more than one story that you could tell from a single dataset.</p>
-<p>As an example of this, let’s consider a time-series showing the price of two stocks and in particular the choice of scale on the y-axis. Suppose the two stock have values fluctuating around $100 per share. Choosing a scale that goes from $90 to $110 would emphasise the differences between the two stocks. Setting the lower limit to $0 would instead emphasise that these variations are small relative to the overall value of the stocks. Both are valid approaches but tell different stories. Be clear and be open about which of these you are telling and why you have chosen that over the alternative.</p>
+<p>As an example of this, let’s consider a time-series showing the price of two stocks and in particular the choice of scale on the y-axis. Suppose the two stock have values fluctuating around $100 per share. Choosing a scale that goes from $90 to $120 would emphasise the differences between the two stocks. Setting the lower limit to $0 would instead emphasise that these variations are small relative to the overall value of the stocks. Both are valid approaches but tell different stories. Be clear and be open about which of these you are telling and why you have chosen that over the alternative.</p>
+<div class="cell" data-layout-align="center">
+<details><summary>Code</summary><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Load required libraries</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://magrittr.tidyverse.org">magrittr</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://wilkelab.org/cowplot/">cowplot</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Set simulation parameters</span></span>
+<span><span class="va">n_out</span> <span class="op">&lt;-</span> <span class="fl">365</span> </span>
+<span><span class="va">initial_value</span> <span class="op">&lt;-</span> <span class="fl">100</span></span>
+<span></span>
+<span><span class="co"># Simulate data</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">007</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">price</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="cn">NA_real_</span>, <span class="va">n_out</span><span class="op">)</span></span>
+<span><span class="va">price</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">initial_value</span></span>
+<span></span>
+<span><span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">2</span><span class="op">:</span><span class="va">n_out</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">a</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">1</span>, mean <span class="op">=</span> <span class="fl">1</span>, sd <span class="op">=</span> <span class="fl">0.01</span><span class="op">)</span></span>
+<span>  <span class="va">b</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">1</span>, mean <span class="op">=</span> <span class="fl">0</span>, sd <span class="op">=</span> <span class="fl">0.05</span><span class="op">)</span></span>
+<span>  <span class="va">price</span><span class="op">[</span><span class="va">i</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">a</span> <span class="op">*</span> <span class="va">price</span><span class="op">[</span><span class="va">i</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span> <span class="op">+</span> <span class="va">b</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="va">stock</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span></span>
+<span>  date <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span>from <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html">as.Date</a></span><span class="op">(</span><span class="st">"2023-01-01"</span><span class="op">)</span>, length.out <span class="op">=</span> <span class="va">n_out</span>, by <span class="op">=</span> <span class="st">"day"</span><span class="op">)</span>,</span>
+<span>  price <span class="op">=</span> <span class="va">price</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Construct plot</span></span>
+<span><span class="va">p</span> <span class="op">&lt;-</span> <span class="va">stock</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">date</span>, y <span class="op">=</span> <span class="va">price</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span>color <span class="op">=</span> <span class="st">"darkorange"</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ylab</a></span><span class="op">(</span><span class="st">"Stock Price, USD"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span></span>
+<span>    axis.text <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">10</span><span class="op">)</span>,</span>
+<span>    axis.title <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">9</span>, face <span class="op">=</span> <span class="st">"bold"</span>,  hjust <span class="op">=</span> <span class="fl">0.98</span>, vjust <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>,</span>
+<span>    plot.title <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">15</span>, hjust <span class="op">=</span> <span class="fl">0.02</span><span class="op">)</span>,</span>
+<span>    plot.subtitle <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">12</span>, hjust <span class="op">=</span> <span class="fl">0.02</span><span class="op">)</span></span>
+<span>  <span class="op">)</span></span>
+<span></span>
+<span><span class="va">p1</span> <span class="op">&lt;-</span> <span class="va">p</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/lims.html">ylim</a></span><span class="op">(</span><span class="fl">90</span>, <span class="fl">125</span><span class="op">)</span></span>
+<span><span class="va">p2</span> <span class="op">&lt;-</span> <span class="va">p</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/lims.html">ylim</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">125</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://wilkelab.org/cowplot/reference/plot_grid.html">plot_grid</a></span><span class="op">(</span><span class="va">p1</span>, <span class="va">p2</span>, nrow <span class="op">=</span> <span class="fl">2</span>, ncol <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="303-edav-visualisation_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid figure-img" style="width:80.0%"></p>
+</figure>
+</div>
+</div>
+</div>
 <p>A final cross-over from data journalism is that your visualisations will be competing for your viewers attention. You have to compete against everything else that is going on in their lives. Establish a clear “hook” within your visualisation to attract your viewer’s attention and immediately deliver the core message. This might be done with a contrasting trend-line or an intriguing title. Lead their attention first to the key message and then the supporting evidence.</p>
 </section><section id="your-guidelines" class="level2" data-number="9.6"><h2 data-number="9.6" class="anchored" data-anchor-id="your-guidelines">
 <span class="header-section-number">9.6</span> Your Guidelines 📝</h2>

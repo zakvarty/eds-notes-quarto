@@ -47,7 +47,7 @@ To demonstrate some standard skills we will use two datasets. The `mtcars` data 
 #| echo: true
 #| eval: true
 library(palmerpenguins)
-pengins <- palmerpenguins::penguins
+penguins <- palmerpenguins::penguins
 cars <- datasets::mtcars
 ```
 ::::
@@ -83,13 +83,13 @@ For large data sets, you might not want (or be able to) view it all at once. You
 ```{r penguins-head}
 #| echo: true
 #| eval: true
-head(x = pengins, n = 3)
+head(x = penguins, n = 3)
 ```
 
 
 ### `str()`
 
-An alternative way to view the a large data set, or one with a complicated format is to examine its structure with `str()`. This is a useful way to inspect the structure of list-like objects, particularly when they've got a nested structure.
+An alternative way to view a data set that is large or has a complicated format is to examine its structure using `str()`. This is a useful way to inspect list-like objects with a nested structure.
 
 ```{r penguins-structure}
 #| echo: true
@@ -98,7 +98,7 @@ str(penguins)
 ```
 
 ### `names()`
-Finally, if you just want to access the variable names you can do so with the `names()` function from base R. 
+If you just want to access the variable names you can do so with the `names()` function from base R. 
 
 ```{r penguins-names}
 #| echo: true
@@ -149,7 +149,7 @@ cars_renamed <- rename(.data = cars_renamed, cylinders = cyl)
 colnames(cars_renamed)
 ```
 
-This could be done as part of a pipe, if we were making many alterations. 
+This could be done as part of a pipe if we were making many alterations. 
 
 ```{r cars-renaming-with-pipe}
 #| echo: true
@@ -162,7 +162,7 @@ cars_renamed <- cars_renamed %>%
 colnames(cars_renamed)
 ```
 
-When using the dplyr function you have to remember the format `new_name = old_name`. This matches the format used to create a data frame or tibble, but is the opposite order to the python function of the same name and often catches people out. 
+When using the `{dplyr}` function `rename()`, you have to remember the format `new_name = old_name`. This matches the format used to create a data frame or tibble, but is the opposite order to the python function of the same name and often catches people out. 
 
 In the section on [creating new variables](#creating-new-variables), we will see an alternative way of doing this by copying the column and then deleting the original. 
 
@@ -206,12 +206,12 @@ You can also select rows or columns by their names. This can be done using the b
 ```{r base-r-extract-columns-by-name}
 #| echo: true
 #| eval: true
-pengins[ , "species"]
+penguins[ ,"species"]
 penguins$species
 ```
 
 
-Since `penguins` is a tibble, these return different types of object. Subsetting a tibble with bracket syntax will return a tibble, while extracting a column using the dollar syntax returns a vector of values. 
+Since `penguins` is a tibble, these return different types of object. Subsetting a tibble with bracket syntax will return a tibble but extracting a column using the dollar syntax returns a vector of values. 
 
 ### `filter()` and `select()`
 
@@ -247,6 +247,8 @@ penguins %>%
 and dropping columns can done by selecting all columns except the one(s) you want to drop.
 
 ```{r penguins-select-with-negation}
+#| echo: true
+#| eval: true
 penguins %>% 
   select(species, island, body_mass_g) %>% 
   filter(!(body_mass_g > 6000)) %>% 
@@ -317,7 +319,7 @@ cars %>%
   head(n = 5)
 ```
 
-There's a neat function called `rownames_to_column()` in `{tibble}` which will add this as the first column and remove the row names all in one step. 
+There's a neat function called `rownames_to_column()` in the `{tibble}` package.  This will add the row names as the first column and remove the row names all in one step. 
 
 ```{r tibble-rownames-to-column}
 #| echo: true
@@ -372,19 +374,21 @@ bill_length_mm_summary <- penguins %>%
     q_0 = min(bill_length_mm, na.rm = TRUE),
     q_1 = quantile(bill_length_mm, prob = 0.25, na.rm = TRUE),
     q_2 = median(bill_length_mm, na.rm = TRUE),
-    q_3 = quantile(bill_length_mm, prob = 0.25, na.rm = TRUE),
+    q_3 = quantile(bill_length_mm, prob = 0.75, na.rm = TRUE),
     q_4 = max(bill_length_mm, na.rm = TRUE))
 
 bill_length_mm_summary
 ```
 
-In all, this isn't overly exciting. You might, rightly, wonder why you'd want to use these `summarise()` calls when we could just use the simpler base R calls directly. 
+In all, this isn't overly exciting. You might rightly wonder why you'd want to use `summarise()` when we could just use the simpler base R calls directly. 
 
-One benefit is that the summarise calls ensure consistent output. However, the main advantage comes when you want to apply these summaries to distinct subgroups of the data. 
+One benefit of `summarise()` is that it provides certainty that the obejct returned will be of a certain class (a tibble) no matter what summary function is used. However, `summarise()` really comes into its own when you want to apply these summaries to distinct subgroups of the data. 
 
 ## Grouped Operations 
 
-The real benefit of `summarise()` comes from its combination with `group_by()`. This allows to you calculate the same summary statistics for each level of a factor with only one additional line of code. Here we're re-calculating the same set of summary statistics we just found for all penguins, but for each individual species. 
+The real benefit of `summarise()` comes from its combination with `group_by()`. This allows to you calculate the same summary statistics for each level of a factor with only one additional line of code. 
+
+Here we're re-calculating the same set of summary statistics we just found for all penguins, but for each individual species. 
 
 ```{r dplyr-grouped-summarise}
 #| echo: true
@@ -424,9 +428,7 @@ penguin_summary_stats
 
 ### Ungrouping 
 
-By default, each call to `summarise()` will undo one level of grouping. This means that our previous result was still grouped by species. 
-
-(We can see this in the tibble output above, and also by examining the structure of the returned data frame. This tells us that this is an S3 object of class "grouped_df", which inherits its properties from a "tbl_df", "tbl", and "data.frame" objects.)
+By default, each call to `summarise()` will undo one level of grouping. This means that our previous result was still grouped by species. We can see this in the tibble output above or by examining the structure of the returned data frame. This tells us that this is an S3 object of class `grouped_df`, which inherits its properties from a `tbl_df`, `tbl`, and `data.frame` objects.
 
 ```{r penguins-still-grouped}
 #| echo: true
@@ -434,7 +436,7 @@ By default, each call to `summarise()` will undo one level of grouping. This mea
 class(penguin_summary_stats)
 ```
 
-Since we have grouped by two variables, R expects us to use two summaries before returning a data frame (or tibble) that is not grouped. One way to satisfy this is to use apply a second summary at the species level of grouping. 
+Since we have grouped by two variables, `{dplyr}` expects us to use two `summary()` function calls before it will return a data frame (or tibble) that is not grouped. One way to satisfy this is to apply a second summary at the species level of grouping. 
 
 ```{r penguins-still-grouped-evidence}
 #| echo: true
@@ -444,7 +446,7 @@ penguin_summary_stats %>%
   summarise_all(mean, na.rm = TRUE)
 ```
 
-However, we won't always want to do apply another summary. In that case, we can undo the grouping using `ungroup()`. Remembering to ungroup is a common gotcha and cause of confusion when working with multiple-group summaries. 
+However, we won't always want to do apply another summary. In that case, we can undo the grouping using `ungroup()`. Remembering to ungroup is a common mistake and cause of confusion when working with multiple-group summaries. 
 
 ```{r ungrouping-penguins}
 #| echo: true
@@ -452,19 +454,23 @@ However, we won't always want to do apply another summary. In that case, we can 
 ungroup(penguin_summary_stats)
 ```
 
-There's an alternative method to achieve the same thing in a single step when using `{dplyr}` versions 1.0.0 and above. This is to to set the `.groups` parameter of the `summarise()` function call, which determines the grouping of the returned data frame.
+There's an alternative method to achieve the same thing in a single step when using `{dplyr}` versions 1.0.0 and above. This is to to set the `.by` parameter of the `summarise()` function call, which determines the grouping that should be applied to the original data frame, just for this one operation.
 
-The `.groups` parameter and can take 4 possible values: 
+```{r}
+penguins %>% 
+  summarise(mean_bill_length_mm = mean(bill_length_mm, na.rm = TRUE), .by = island)
+```
 
-- "drop_last": dropping the last level of grouping (The only option before v1.0.0);
+The `.by` argument applies to a single operation. This means that the result of the `summarise()` call will always be an ungrouped tibble, regardless of the number of grouping columns.
 
-- "drop": All levels of grouping are dropped;
+```{r}
+penguins %>% 
+  summarise(
+    mean_bill_length_mm = mean(bill_length_mm, na.rm = TRUE), 
+    .by = c(island, species))
+```
 
-- "keep": Same grouping structure as `.data`;
-
-- "rowwise": Each row is its own group.
-
-By default, "drop_last" is used if all the results have 1 row and "keep" is used otherwise.
+See `?dplyr_by` for more information on using the `.by` argument with `summarise()` and other `{dplyr}` verbs.
 
 ## Reordering Factors 
 
@@ -494,6 +500,8 @@ tshirts %>% group_by(size) %>% summarise(count = n())
 We can fix this by creating a new variable with the factors explicitly coded in the correct order. We also need to specify that we should not drop empty groups as part of `group_by()`. 
 
 ```{r tshirts-grouped-summaries}
+#| echo: true
+#| eval: true
 tidy_tshirt_levels <- c("XS", "S", "M", "L", "XL", "XXL", NA)
 
 tshirts %>% 
@@ -522,7 +530,7 @@ Working with and analysing text data is a skill unto itself. However, it is usef
 
 Because R was developed as a statistical programming language, it is well suited to the computational and modelling aspects of working with text data but the base R string manipulation functions can be a bit unwieldy at times. 
 
-The `{stringr}` package aims to combat this by providing useful helper functions for a range of text management problems. Even when not analysing text data these can be useful, for example to remove prefixes on a lot of column names. 
+The `{stringr}` package aims to combat this by providing useful helper functions for a range of text management problems. Even when not analysing text data these can be useful, such as when removing prefixes from many column names. 
 
 ```{r make-poorly-named-df}
 #| echo: false
@@ -545,10 +553,12 @@ head(poorly_named_df)
 
 
 ```{r extract-column-names-with-regex}
+#| echo: true
+#| eval: true
 stringr::str_extract(names(poorly_named_df), pattern = "(?<=_)([a-zA-Z]+)")
 ```
 
-Alternatively, can avoid using regular expressions. We can split each column name at the underscore and keep only the second part of each string. 
+Alternatively, can avoid using [regular expressions](https://en.wikipedia.org/wiki/Regular_expression). We can use `stringr::str_split()` to divide each column name at the underscore and keep only the second part of each string. 
 
 ```{r clean-column-names-manually}
 #| echo: true
@@ -561,18 +571,18 @@ str(split_strings)
 purrr::map_chr(split_strings, function(x){x[2]})
 ```
 
-Again, unless you plan to work extensively with text data, I would recommend that you look up such string manipulations as you need them. The [strings](https://r4ds.had.co.nz/strings.html#strings) section of R for Data Science is a useful starting point. 
+Unless you plan to work extensively with text data, I would recommend that you look up such string manipulations as you need them. The [strings](https://r4ds.had.co.nz/strings.html#strings) section of R for Data Science is a useful starting point. 
 
 ## Be Aware: Date-Times
 
-Remember all the fuss we made about storing dates in the ISO standard format? That was because dates and times are complicated enough to work with before adding extra ambiguity.
+Remember [all the fuss](#naming-things-date-order) we made about storing dates in the ISO standard format? That was because dates and times are complicated enough to work on without adding extra ambiguity.
 
 $$ \text{YYYY} - \text{MM} - \text{DD}$$
-Dates, times and time intervals have to reconcile two factors: the physical orbit of the Earth around the Sun and the social and geopolitical mechanisms that determine how we measure and record the passing of time. This makes the history of date and time records fascinating and can make working with this type of data complicated.
+Dates, times and time intervals have to reconcile two factors: the physical orbit of the Earth around the Sun and the social and geopolitical mechanisms that determine how we measure and record the passing of time. This makes the history of date and time records fascinating but also make working with this type of data complicated.
 
-Moving from larger to smaller time spans: leap years alter the number of days in a year, months are of variable length (with February's length changing from year to year). If your data are measured in a place that uses daylight saving, then one day a year will be 23 hours long and another will be 25 hours long. To make things worse, the dates and the hour at which the clocks change are not uniform across countries, which might be in distinct time zones that themselves change over time.
+Moving from larger to smaller time spans: leap years alter the number of days in a year, months are of variable length (with February's length changing from year to year). If your data are measured in a place that uses daylight saving, then one day a year will be 23 hours long and another will be 25 hours long. To make things worse, the dates and the hour at which the clocks change are not uniform across countries, which might span multiple time zones and those time-zone boundaries can shift over time.
 
-Even at the level of minutes and seconds we aren't safe - since the Earth's orbit is gradually slowing down a leap second is added approximately every 21 months. Nor are things any better when looking at longer time scales or across cultures, where we might have to account for different calendars: months are added removed and altered over time, other calendar systems still take different approaches to measuring time and using different units and origin points. 
+Even at the level of minutes and seconds we aren't safe - since the Earth's orbit is gradually slowing down and a leap second is added approximately every 21 months. Nor are things any better when looking at longer time scales or across cultures, where we might have to account for different calendars: months are added removed and altered over time, other calendar systems still take different approaches to measuring time and using different units and origin points. 
 
 With all of these issues you have to be very careful when working with date and time data. Functions to help you with this can be found in the `{lubridate}` package, with examples in the [dates and times](https://r4ds.had.co.nz/dates-and-times.html#dates-and-times) chapter of R for data science.  
 
