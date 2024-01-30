@@ -29,7 +29,8 @@ One key aspect of EDA is generating quick and simple summaries and plots of the 
 
 ```{r iris-plot}
 #| eval: true
-#| echo: false
+#| echo: true
+#| code-fold: true
 #| warning: false
 #| message: false
 #| fig.cap: "Investigating marginal and pairwise relationships in the Iris dataset."
@@ -67,7 +68,7 @@ As an example, these stakeholder conversations often reveal important features i
 
 ### Communicating with project manager
 
-An EDA can sometimes allow us to identify cases where the strength of signal within the available data is clearly insufficient to answer the question of interest. By clearly communicating this to the project manager, the project can be postponed while different, better quality or simply more data are collected. It's important to note that this data collection is not trivial and can have a high cost in terms of both time and capital. It might be that collecting the data needed to answer a question will cost more than we're likely to gain from knowing that answer. Whether the project is postponed or cancelled, this constitutes a successful outcome for the project, the aim is to to produce insight or profit - not to fit models for their own sake.
+An EDA can sometimes allow us to identify cases where the strength of signal within the available data is clearly insufficient to answer the question of interest. By clearly communicating this to the project manager, the project can be postponed while different, better quality or simply more data are collected. It's important to note that this data collection is not trivial and can have a high cost in terms of both time and capital. It might be that collecting the data needed to answer a question will cost more than we're likely to gain from knowing that answer. Whether the project is postponed or cancelled, this constitutes a successful outcome for the project; the aim is to to produce insight or profit - not to fit models for their own sake.
 
 ## Scope Your Project 
 
@@ -77,7 +78,7 @@ A third view on EDA is as an initial assessment of whether the available data me
 
 First, it's important to formulate a specific question of interest or line of investigation and agree on it with the stakeholder. By having a clear question in mind, it will be easier to focus the analysis and identify whether the data at hand can answer it.
 
-Next, it's important to make a record (if one doesn't already exist) of how the data were collected, by whom it was collected, what each recorded variable represents and the units in which they are recorded. This meta-data is often known as a data sheet. Having this information in written form is crucial when adding a new collaborator to a project, so that they can understand the data generating and measurement processes, and are aware of the quality and accuracy of the recorded values.  
+Next, it's important to make a record (if one doesn't already exist) of how the data were collected, by whom it was collected, what each recorded variable represents and the units in which they are recorded. This meta-data is often known as a data sheet or data dictionary. Having this information in written form is crucial when adding a new collaborator to a project, so that they can understand the data generating and measurement processes, and are aware of the quality and accuracy of the recorded values.The [Open Science Foundation](https://help.osf.io/article/217-how-to-make-a-data-dictionary) give a concise description of the meta-data you might list in a data dictionary. 
 
 
 ## Investigate Your Data
@@ -91,23 +92,31 @@ Furthermore, a more advanced EDA might include a simulation study to estimate th
 
 ## What is not EDA? 
 
-It's important to understand that an exploratory data analysis is not the same thing as modelling. In particular is _not_ the construction of your baseline model, which is sometimes called initial data analysis.
+It's important to understand that an exploratory data analysis is not the same thing as modelling. In particular is _not_ the construction of your baseline model, which is sometimes called initial data analysis. Though it might inform the choice of baseline model, EDA is usually not model based. In an EDA, simple plots and summaries are used to identify patterns in the data that inform how you approach the rest of the project. 
 
-Though it might inform the choice of baseline model, EDA is usually not model based. Simple plots and summaries are used to identify patterns in the data that inform how you approach the rest of the project. 
-
-Some degree of statistical rigour can be added through the use of non-parametric techniques; methods like rolling averages, smoothing or partitioning can to help identify trends or patterns while making minimal assumptions about the data generating process.
+Some degree of statistical rigour can be added to EDA through the use of non-parametric techniques; methods like rolling averages, smoothing or partitioning can to help identify trends or patterns while making minimal assumptions about the data generating process.
 
 
 ```{r dow-jones-rolling-mean-plot}
 #| eval: true
-#| echo: false
+#| echo: true
+#| code-fold: true
 #| message: false
 #| warning: false
 #| fig.cap: "Daily change in Dow Jones Index with smoothed estimate of mean and 95% confidence interval."
 library(tidyverse)
 library(ismev)
 library(cowplot)
+
 data("dowjones", package = "ismev") 
+
+theme_dow_jones <- theme_minimal() +
+  theme(
+    axis.text = element_text(size = 10),
+    axis.title = element_text(size = 9, face = "bold",  hjust = 0.98, vjust = 2),
+    plot.title = element_text(size = 15, hjust = 0.02),
+    plot.subtitle = element_text(size = 12, hjust = 0.02)
+  )
 
 p1 <- dowjones %>% 
   mutate(index_change = Index - lag(Index)) %>% 
@@ -118,13 +127,7 @@ p1 <- dowjones %>%
   geom_vline(xintercept = as.Date("1998-06-01")) +
   ggtitle("Daily change in Dow Jones Index", "with smoothed estimate of mean change") +
   ylab("") +
-  theme_minimal() + 
-  theme(
-    axis.text = element_text(size = 10),
-    axis.title = element_text(size = 0, face = "bold",  hjust = 0.98, vjust = 2),
-    plot.title = element_text(size = 15, hjust = 0.02),
-    plot.subtitle = element_text(size = 12, hjust = 0.02)
-  )
+  theme_dow_jones
 
 p2 <- dowjones %>% 
   mutate(index_change = Index - lag(Index)) %>% 
@@ -138,18 +141,14 @@ p2 <- dowjones %>%
   geom_vline(xintercept = as.Date("1998-06-01")) +
   ylab("") +
   coord_cartesian(ylim = c(-2, 12)) +
-  theme_minimal() + 
-  theme(
-    axis.text = element_text(size = 10),
-    axis.title = element_text(size = 9, face = "bold",  hjust = 0.98, vjust = 2),
-    plot.title = element_text(size = 15, hjust = 0.02),
-    plot.subtitle = element_text(size = 12, hjust = 0.02)
-  )
+  theme_dow_jones
 
 plot_grid(p1,p2)
 ```
 
-```{r, echo = FALSE}
+```{r dow-jones-summary-table}
+#| echo: true
+#| code-fold: true
 knitr::kable(
   x = dowjones %>% 
   mutate(index_change = Index - lag(Index)) %>%
@@ -164,30 +163,31 @@ knitr::kable(
 
 Though the assumptions in an EDA are often minimal it can help to make them explicit. For example, in this plot a moving averages is shown with a confidence band, but the construction of this band makes the implicit assumption that, at least locally, our observations have the same distribution and so are exchangeable. 
 
-Finally, EDA is not a prescriptive process. While I have given a lot of suggestions on what you might usually want to consider, there is no correct way to go about an EDA because it is so heavily dependent on the particular dataset, its interpretation and the task you want to achieve with it. This is one of the parts of data science that make it a craft that you hone with experience, rather than an algorithmic process. When you work in a particular area for a long time you develop a knowledge for common data quirks in that area, which may or may not translate to other applications.
+Finally, EDA is not a prescriptive process. While I have given a lot of suggestions on what you might usually want to consider, there is no correct way to go about an EDA because it is so heavily dependent on the particular dataset, its interpretation and the task you want to achieve with it. This is one of the parts of data science that make it a craft that you hone with experience, rather than an algorithmic process. When you work in a particular area for a long time you develop domain-specific knowledge of common data quirks, which may or may not translate to other applications.
 
 Now that we have a better idea of what is and what is not EDA, let's talk about the issue that an EDA tries to resolve and the other issues that it generates. 
 
 ## Issue: Forking Paths 
 
-In any data science project you have a sequence of very many decisions that you must make, each with many potential options and is difficult to decide upon _a priori_.  
+In any data science project you have to make a sequence of very many decisions, each with many potential options. It is almost impossible to anticipate all of the decisions you will have to make ahead of time and even more difficult do decide how to proceed with each decision _a priori_.  
 
 ::: small_right
 ![](images/302-data-exploration/forking-paths.jpg)
 :::
 
-Focusing in on only one small part of the process, we might consider picking a null or baseline model, which we will then try and improve on. Should that null model make constant predictions, incorporate a simple linear trend or is something more flexible obviously needed? Do you have the option to try all of these or are you working under time constraints? Are there contextual clues that rule some of these null models out on contextual grounds? 
+Focusing in on only one small part of the data science process, we might consider picking a null or baseline model that we will then try and improve on. Should that null model make constant predictions, incorporate a simple linear trend or is something more flexible obviously needed? Do you have the option to try all of these or are you working under time constraints? Is there any domain knowledge that rules some of these null models out on contextual grounds? 
 
 An EDA lets you narrow down your options by looking at your data and helps you to decide what might be reasonable modelling approaches. 
 
 ::: medium_left
 ![](images/302-data-exploration/supervise_learning_schematic.png)
 :::
-The problem that sneaks in here is data leakage. Formally this is where training data is included in test set, but this sort of information leak can happen informally too. Usually this is because you've seen the data you're trying to model or predict and then selected your modelling approach based on that information.  
+
+The problem that sneaks in here is data leakage. Formally this is where training data is included in test set but this sort of information leak can happen informally too. Usually this is because you've seen the data you're trying to model or predict and then selected your modelling approach based on that information.  
 
 Standard, frequentist statistical methods for estimation and testing assume no "peeking" of this type has occurred. If we use these methods without acknowledging that we have already observed our data then we will artificially inflate the significance of our findings. For example, we might be comparing two models: the first of which makes constant predictions with regard to a predictor, while the second includes a linear trend. We will of course use a statistical test to confirm that what we are seeing is unlikely by chance. However, we must be aware this test was only performed because we had previously examined at the data and noticed what looked to be a trend. 
 
-Similar issues arise in Bayesian approaches, particularly when constructing or eliciting prior distributions for our model parameters. One nice thing that we can do in the Bayesian setting is to simulating data from the prior predictive distribution and then get an expert to check that these datasets seem seem reasonable. However, it is often the case this expert is also the person who collected the data we will soon be modelling. It's very difficult for them to ignore what they have seen, which leads to similar, subtle leakage problems. 
+Similar issues arise in Bayesian approaches, particularly when constructing or eliciting prior distributions for our model parameters. One nice thing that we can do in the Bayesian setting is to simulate data from the prior predictive distribution and then get an expert to check that these datasets seem seem reasonable. However, it is often the case this expert is also the person who collected the data we will soon be modelling. It's very difficult for them to ignore what they have seen, which leads to similar, subtle leakage problems. (For further discussion see the relevant sections of [Gelman et al. (2020)](https://doi.org/10.48550/arXiv.2011.01808) or [Betancourt (2020)](https://betanalpha.github.io/assets/case_studies/principled_bayesian_workflow.html))
 
 
 ## Correction Methods 
@@ -198,25 +198,29 @@ Examples of these corrections have been developed across many fields of statisti
 
 ```{r eva-and-changepoint-plots}
 #| eval: true
-#| echo: false
+#| echo: true
+#| code-fold: true
 #| fig.cap: "Example sea-height datasets where an analysis has been triggered by an extreme value (above) or a visually identified change in mean (below)."
+# Simulate data
 date <- seq.Date(
   from = as.Date("2018-03-01"),
   to = as.Date("2022-05-03"),
   by = "day")
 
-set.seed(1234)
-surge_height <- rnorm(n = 1525) + c(rep(-3, 1524), 3)
-surface_height <- rnorm(n = 1525) + rep(x = c(-5,-3), times = c(1234, 1525 - 1234))
+sim_size <- length(date)
 
+set.seed(1234)
+surge_height <- rnorm(n = sim_size) + c(rep(-3, sim_size - 1), 3)
+surface_height <- rnorm(n = sim_size) + rep(x = c(-5,-3), times = c(1234, sim_size - 1234))
 
 waves <- tibble::tibble(date, surge_height, surface_height)
 
+# Extreme Value Plot
 p3 <- waves %>% 
   mutate(is_extreme = surge_height > 1) %>%
   ggplot(aes(x = date, y = surge_height)) +
   geom_point(aes(color = is_extreme), show.legend = FALSE) + 
-  scale_color_manual(values = c("FALSE" = "black", "TRUE" = "darkorange")) +
+  scale_color_manual(values = c("FALSE" = "grey40", "TRUE" = "darkorange")) +
   ylab("Wave surge height (m)") +
   theme_minimal() +
   theme(
@@ -226,10 +230,13 @@ p3 <- waves %>%
     plot.subtitle = element_text(size = 12, hjust = 0.02)
   )
 
+# Changepoint Plot
 p4 <- waves %>% 
   ggplot(aes(x = date, y = surface_height)) +
-  geom_point() + 
-  geom_vline(xintercept = as.Date("2021-07-17"), colour = "darkorange") +
+  geom_point(color = "grey40") + 
+  geom_vline(xintercept = as.Date("2021-07-17"),
+             colour = "darkorange",
+             linewidth = 1.2) +
   ylab("Sea surface height (m)") +
   theme_minimal() +
     theme(
@@ -241,8 +248,7 @@ p4 <- waves %>%
 
 plot_grid(p3,p4,nrow = 2, ncol = 1)
 ```
-:::
-::::
+
 
 All of these corrections require us to make assumptions about the nature of the peeking. They are either very specific about the process that has occurred, or else are very pessimistic about how much information has been leaked. Developing such corrections to account for EDA isn't really possible, given its adaptive and non-prescriptive nature. 
 
@@ -252,14 +258,10 @@ As statistically trained data scientists, it is important for us to remain humbl
 
 ## Learning More 
 
-In this chapter we have acknowledged that exploratory analyses are an important part of the data science workflow; this is true not only for us as data scientists, but also for the other people who are involved with our projects. 
+In this chapter we have acknowledged that exploratory analyses are an important part of the data science workflow; this is true not only for us as data scientists, but also for the other people who are involved with our projects. We've also seen that an exploratory analysis can help to guide the progression of our projects, but that in doing so we must take care to prevent and acknowledge the risk of data leakage. 
 
-We've also seen that an exploratory analysis can help to guide the progression of our projects, but that in doing so we must take care to prevent and acknowledge the risk of data leakage. 
+If you want to explore this topic further, it can be quite challenging. Examples of good, exploratory data analyses can be difficult to come by because, unlike the papers and technical reports that they precede, exploratory analyses are not often made publicly available. Additionally, they are often kept out of public repositories because they are not as "polished" as the rest of the project. Personally, I think this is a shame and the culture on this is slowly changing. 
 
-If you want to explore this topic further, it can be quite challenging: examples of good, exploratory data analyses can be difficult to come by. This is because they are not often made publicly available in the same way that papers and technical reports are. Additionally, they are often kept out of public repositories because they are not as "polished" as the rest of the project. Personally, I think this is a shame and the culture on this is slowly changing. 
+For now, your best approach to learning about what makes a good exploratory analysis is to do lots of your own and to talk to you colleagues about their approaches. There are lots of list-articles out there claiming to give you a comprehensive list of steps for any exploratory analysis. These can be good for inspiration, but I strongly advise you against falling into the trap of treating these as prescriptive or foolproof. 
 
-For now, your best approach to learning about what makes a good exploratory analysis is to do lots of your own and to talk to you colleagues about their approaches. 
-
-There are lots of list-articles out there claiming to give you a comprehensive list of steps for any exploratory analysis. These can be good for inspiration, but I strongly suggest you don't treat these as gospel. 
-
-Despite the name of the chapter, [Roger Peng's EDA check-list](https://bookdown.org/rdpeng/exdata/exploratory-data-analysis-checklist.html#follow-up-questions) gives an excellent worked example of an exploratory analysis in R. The the discussion article "[Exploratory Data Analysis for Complex Models](http://www.stat.columbia.edu/~gelman/research/published/p755.pdf)", Andrew Gelman makes a more abstract discussion of both exploratory analyses (which happen before modelling) and confirmatory analyses (which happen afterwards). 
+Despite the name of the chapter, [Roger Peng's EDA check-list](https://bookdown.org/rdpeng/exdata/exploratory-data-analysis-checklist.html#follow-up-questions) gives an excellent worked example of an exploratory analysis in R. In discussion article "[Exploratory Data Analysis for Complex Models](http://www.stat.columbia.edu/~gelman/research/published/p755.pdf)", Andrew Gelman makes a more abstract discussion of both exploratory analyses (which happen before modelling) and confirmatory analyses (which happen afterwards). 
