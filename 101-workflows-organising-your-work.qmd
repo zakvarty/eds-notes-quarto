@@ -3,8 +3,8 @@
 ```{r organising-your-work-setup}
 #| results: 'asis'
 #| echo: false
-source("_common.R")
-status("complete")
+#source("_common.R")
+#status("complete")
 ```
 
 Welcome to this course on effective data science. This week we'll be considering effective data science workflows. These workflows are ways of progressing a project that will help you to produce high quality work and help to make you a better collaborator. 

@@ -423,21 +423,7 @@ gtag('config', 'G-EFK9JPMVM8', { 'anonymize_ip': true});
   </div>
   
 
-</header><div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Note
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Effective Data Science is still a work-in-progress. This chapter is largely complete and just needs final proof reading.</p>
-<p>If you would like to contribute to the development of EDS, you may do so at <a href="https://github.com/zakvarty/data_science_notes" class="uri">https://github.com/zakvarty/data_science_notes</a>.</p>
-</div>
-</div>
-<section id="introduction" class="level2" data-number="3.1"><h2 data-number="3.1" class="anchored" data-anchor-id="introduction">
+</header><section id="introduction" class="level2" data-number="3.1"><h2 data-number="3.1" class="anchored" data-anchor-id="introduction">
 <span class="header-section-number">3.1</span> Introduction</h2>
 <p>We have already described how we might organise an effective data science project at the directory and file level. In this chapter we will delve one step deeper and consider how we can structure our work within those files.</p>
 <p>In particular, we’ll focus on code files here. We’ll start by comparing the two main approaches to structuring our code, called functional programming and object oriented programming. We’ll then consider conventions on how we should order code within our scripts and how we name the functions and objects we create.</p>
@@ -456,47 +442,57 @@ Note
 <section id="the-pipe-operator" class="level3" data-number="3.2.1"><h3 data-number="3.2.1" class="anchored" data-anchor-id="the-pipe-operator">
 <span class="header-section-number">3.2.1</span> The Pipe Operator</h3>
 <p>One issue with functional programming is that lots of nested functions means that there are also lots of nested brackets. These start to get tricky to keep track of when you have upwards of 3 functions being composed.</p>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">exp</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Trig.html">cos</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Trig.html">sin</a></span><span class="op">(</span><span class="va">pi</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] 1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell">
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">exp</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Trig.html">cos</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Trig.html">sin</a></span><span class="op">(</span><span class="va">pi</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1</code></pre>
+</div>
 </div>
 <p>This reading difficulty is only exacerbated if your functions have additional arguments on top of the original inputs.</p>
 <p>The pipe operator <code>%&gt;%</code> from the <a href="https://magrittr.tidyverse.org">magrittr</a> package helps with this issue. It works exactly like function composition: it takes the whatever is on the left (whether that is an existing object or the output of a function) and passes it to the following function call as the first argument of that function.</p>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://magrittr.tidyverse.org">magrittr</a></span><span class="op">)</span></span>
+<div class="cell">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://magrittr.tidyverse.org">magrittr</a></span><span class="op">)</span></span>
 <span><span class="va">pi</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/Trig.html">sin</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/Trig.html">cos</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/Log.html">exp</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] 1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1</code></pre>
 </div>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">iris</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
-<span><span class="co">#&gt;   Sepal.Length Sepal.Width Petal.Length Petal.Width Species</span></span>
-<span><span class="co">#&gt; 1          5.1         3.5          1.4         0.2  setosa</span></span>
-<span><span class="co">#&gt; 2          4.9         3.0          1.4         0.2  setosa</span></span>
-<span><span class="co">#&gt; 3          4.7         3.2          1.3         0.2  setosa</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">iris</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+1          5.1         3.5          1.4         0.2  setosa
+2          4.9         3.0          1.4         0.2  setosa
+3          4.7         3.2          1.3         0.2  setosa</code></pre>
+</div>
 </div>
 <p>The pipe operator is often referred to as “syntactic sugar”. This is because it doesn’t add anything to your code in itself, but rather it makes your code <em>so</em> much more palatable to read.</p>
 <p>In R versions 4.1 and greater, there’s a built-in version of this pipe operator,<code>|&gt;</code>. This is written using the vertical bar symbol followed by a greater than sign. You can usually find this vertical bar above backslash on the keyboard. (Just to cause confusion, the vertical bar symbol is also called the pipe symbol and performs a similar operation in other programming langauges.)</p>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://magrittr.tidyverse.org">magrittr</a></span><span class="op">)</span></span>
+<div class="cell">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://magrittr.tidyverse.org">magrittr</a></span><span class="op">)</span></span>
 <span><span class="va">pi</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/Trig.html">sin</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/Trig.html">cos</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/Log.html">exp</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] 1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1</code></pre>
 </div>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">iris</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
-<span><span class="co">#&gt;   Sepal.Length Sepal.Width Petal.Length Petal.Width Species</span></span>
-<span><span class="co">#&gt; 1          5.1         3.5          1.4         0.2  setosa</span></span>
-<span><span class="co">#&gt; 2          4.9         3.0          1.4         0.2  setosa</span></span>
-<span><span class="co">#&gt; 3          4.7         3.2          1.3         0.2  setosa</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">iris</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+1          5.1         3.5          1.4         0.2  setosa
+2          4.9         3.0          1.4         0.2  setosa
+3          4.7         3.2          1.3         0.2  setosa</code></pre>
+</div>
 </div>
 <p>The base R pipe usually behaves in the same way as the pipe from magrittr, but there are a few cases where they differ. For reasons of back-compatibility and consistency we’ll stick to the <a href="https://magrittr.tidyverse.org">magrittr</a> pipe in this course. (For an outline of some of the differences between these two pipes, check out this <a href="https://ivelasq.rbind.io/blog/understanding-the-r-pipe/">blog post</a> by Isabella Velasquez)</p>
 </section><section id="when-not-to-pipe" class="level3" data-number="3.2.2"><h3 data-number="3.2.2" class="anchored" data-anchor-id="when-not-to-pipe">
@@ -557,15 +553,15 @@ Note
 </section><section id="portable-file-paths-with-here" class="level2" data-number="3.5"><h2 data-number="3.5" class="anchored" data-anchor-id="portable-file-paths-with-here">
 <span class="header-section-number">3.5</span> Portable File paths with <code>{here}</code>
 </h2>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Bad - breaks if project moved</span></span>
+<div class="cell">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Bad - breaks if project moved</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/source.html">source</a></span><span class="op">(</span><span class="st">"zaks-mbp/Desktop/exciting-new-project/src/helper_functions/rolling_mean.R"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Better - breaks if Windows (older)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/source.html">source</a></span><span class="op">(</span><span class="st">"../../src/helper_functions/rolling_mean.R"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Best - but use here:here() to check root directory correctly identified</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/source.html">source</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu">here</span><span class="op">(</span><span class="st">"src"</span>,<span class="st">"helper_functions"</span>,<span class="st">"rolling_mean.R"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/source.html">source</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="st">"src"</span>,<span class="st">"helper_functions"</span>,<span class="st">"rolling_mean.R"</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># For more info on the {here} package:</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/vignette.html">vignette</a></span><span class="op">(</span><span class="st">"here"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -573,7 +569,7 @@ Note
 <p>To fix the problem of person- and computer-specific file paths you can have two options.</p>
 <p>The first is to use <em>relative</em> file paths. In this you assume that each R script is being run in its current location and my moving up and down through the levels of your project directory you point to the file that you need.</p>
 <p>This is good in that it solves the problem of paths breaking because you move the project to a different location on your own laptop. However, it does not fully solve the portability problem because you might move your file to a different location <em>within</em> the same project. It also does not solve the problem that windows uses MacOS and linux use forward slashes in file paths with widows uses backslashes.</p>
-<p>To resolve these final two issues I recommend using the <code>here()</code> function from the {here} package. This package looks for a <code>.Rproj</code> or <code>.git</code> file to identify the root directory of your project. It then creates file paths relative to the root of your project that are suitable for the operating system on which the code is being run. It really is quite marvellous.</p>
+<p>To resolve these final two issues I recommend using the <code><a href="https://here.r-lib.org//reference/here.html">here()</a></code> function from the {here} package. This package looks for a <code>.Rproj</code> or <code>.git</code> file to identify the root directory of your project. It then creates file paths relative to the root of your project that are suitable for the operating system on which the code is being run. It really is quite marvellous.</p>
 <p>For more information on how to use the here package, explore its chapter in <a href="https://rstats.wtf/project-oriented-workflow.html" title="rstats.wtf/project-oriented-workflow">R - What They Forgot</a>, <a href="https://r4ds.had.co.nz/workflow-projects.html">R for Data Science</a> or this <a href="https://www.tidyverse.org/blog/2017/12/workflow-vs-script/" title="Tidyverse blog: workflow-vs-script">project oriented workflow blog post</a>.</p>
 </section><section id="code-body" class="level2" data-number="3.6"><h2 data-number="3.6" class="anchored" data-anchor-id="code-body">
 <span class="header-section-number">3.6</span> Code Body</h2>
@@ -585,11 +581,11 @@ Note
 <p>Comments may be either short in-line comments at the end of a line or full lines dedicated to comments. To create either type of comment in R, simply type hash followed by one space. The rest of that line will not be evaluated and will function as a comment. If multi-line comments are needed simply start multiple lines with a hash and a space.</p>
 <p>Comments can also be used to add structure to your code, buy using commented lines of hyphens and equal signs to chunk your files into minor and major sections.</p>
 <p>Markdown-like section titles can be added to these section and subsection headers. Many IDEs, such as RStudio, will interpret these as a table of contents for you, so that you can more easily navigate your code.</p>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># This is an example script showing good use of comments and sectioning </span></span>
+<div class="cell">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># This is an example script showing good use of comments and sectioning </span></span>
 <span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://here.r-lib.org/">here</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/source.html">source</a></span><span class="op">(</span><span class="fu">here</span><span class="op">(</span><span class="st">"src"</span>,<span class="st">"helper_functions"</span>,<span class="st">"rolling_mean.R"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/source.html">source</a></span><span class="op">(</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="st">"src"</span>,<span class="st">"helper_functions"</span>,<span class="st">"rolling_mean.R"</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co">#=============================================================================== </span></span>
 <span><span class="co"># Major Section on Comments ----</span></span>
@@ -614,8 +610,8 @@ Note
 <li><p>Use underscores (<code>_</code>) to separate words within a name. (<code>snake_case</code>)</p></li>
 <li><p>Use nouns, preferring singular over plural names.</p></li>
 </ul>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Good</span></span>
+<div class="cell">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Good</span></span>
 <span><span class="va">day_one</span></span>
 <span><span class="va">day_1</span></span>
 <span></span>
@@ -636,8 +632,8 @@ Note
 <li><p>Suggest imperative mood, as in a recipe.</p></li>
 <li><p>Break long functions over multiple lines, using 4 rather than the usual 2 spaces for indent.</p></li>
 </ul>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Good</span></span>
+<div class="cell">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Good</span></span>
 <span><span class="fu">add_row</span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu">permute</span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
@@ -685,8 +681,8 @@ Note
 <li><p>Write your code to be easily understood by humans.</p></li>
 <li><p>Use informative names, typing is cheap.</p></li>
 </ul>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Bad</span></span>
+<div class="cell">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Bad</span></span>
 <span><span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="va">dmt</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">i</span><span class="op">)</span></span>
 <span><span class="op">}</span></span>
@@ -748,8 +744,8 @@ Note
 </ol></section><section id="an-roxygen2-example" class="level3" data-number="3.8.4"><h3 data-number="3.8.4" class="anchored" data-anchor-id="an-roxygen2-example">
 <span class="header-section-number">3.8.4</span> An <code>{roxygen2}</code> example</h3>
 <p>Below, we’ve got an example of an Roxygen skeleton to document a function that calculates the geometric mean of a vector. Here, the hash followed by an apostrophe is a special type of comment. It indicates that this is function documentation rather than just a regular comment.</p>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">#' Title</span></span>
+<div class="cell">
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">#' Title</span></span>
 <span><span class="co">#'</span></span>
 <span><span class="co">#' @param x </span></span>
 <span><span class="co">#' @param remove_NA </span></span>
@@ -763,8 +759,8 @@ Note
 <span><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>We’ll fill in all of the fields in this skeleton apart from export, which we’ll remove. If we put this function in a R package, then the export field makes it available to users of that package. Since this is just a standalone function we won’t need the export field, though keeping it wouldn’t actually cause us any problems either.</p>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">#' Calculate the geometric mean of a numeric vector</span></span>
+<div class="cell">
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">#' Calculate the geometric mean of a numeric vector</span></span>
 <span><span class="co">#'</span></span>
 <span><span class="co">#' @param x numeric vector</span></span>
 <span><span class="co">#' @param remove_NA logical scalar, indicating whether NA values should be stripped before computation proceeds. </span></span>
@@ -808,8 +804,11 @@ Note
 <span class="header-section-number">3.8.7</span> A Formal Testing Workflow</h3>
 <p>We can formalise this testing workflow by writing our tests in their own R script and saving them for future reference. Remember from the first lecture that these should be saved in the <code>tests/</code> directory, the structure of which should mirror that of the <code>src/</code> directory for your project. All of the tests for one function should live in a single file, which is named after that function.</p>
 <p>One way of writing these tests is to use lots of if statements. The <a href="https://testthat.r-lib.org">testthat</a> can do some of that syntactic heavy lifting for us. It has lots of helpful functions to test that the output of your function is what you expect.</p>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">testthat</span><span class="fu">::</span><span class="fu"><a href="https://testthat.r-lib.org/reference/equality-expectations.html">expect_equal</a></span><span class="op">(</span></span>
+<div class="cell">
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">geometric_mean</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span> , <span class="va">remove_NA</span> <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">{</span><span class="fu"><a href="https://rdrr.io/r/base/prod.html">prod</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">^</span><span class="op">(</span><span class="fl">1</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">testthat</span><span class="fu">::</span><span class="fu"><a href="https://testthat.r-lib.org/reference/equality-expectations.html">expect_equal</a></span><span class="op">(</span></span>
 <span>  object <span class="op">=</span> <span class="fu">geometric_mean</span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="cn">NA</span><span class="op">)</span>, remove_NA <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>,</span>
 <span>  expected <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span></span>
 <span></span>
@@ -819,6 +818,11 @@ Note
 <p>In this example, we have an error because our function returns a logical <code>NA</code> rather than a double <code>NA</code>. Yes, R really does have different types of <code>NA</code> for different types of missing data, it usually just handles these nicely in the background for you.</p>
 <p>This subtle difference is probably not something that you would have spotted on your own, until it caused you trouble much further down the line. This rigorous approach is one of the benefits of of using the <a href="https://testthat.r-lib.org">testthat</a> functions.</p>
 <p>To fix this test we change out expected output to <code>NA_real_</code>.</p>
+<div class="cell">
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">testthat</span><span class="fu">::</span><span class="fu"><a href="https://testthat.r-lib.org/reference/equality-expectations.html">expect_equal</a></span><span class="op">(</span></span>
+<span>  object <span class="op">=</span> <span class="fu">geometric_mean</span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="cn">NA</span><span class="op">)</span>, remove_NA <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>,</span>
+<span>  expected <span class="op">=</span> <span class="cn">NA_real_</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <p>We’ll revisit the <a href="https://testthat.r-lib.org">testthat</a> package in the live session this week, when we will learn how to use it to test functions within our own packages.</p>
 </section></section><section id="summary" class="level2" data-number="3.9"><h2 data-number="3.9" class="anchored" data-anchor-id="summary">
 <span class="header-section-number">3.9</span> Summary</h2>
@@ -835,7 +839,8 @@ Note
 <p>Finally, we discussed how to write DRY code that is well documented and tested.</p>
 </section><section id="session-information" class="level2" data-number="3.10"><h2 data-number="3.10" class="anchored" data-anchor-id="session-information">
 <span class="header-section-number">3.10</span> Session Information</h2>
-<div class="cell" data-layout-align="center">
+<div class="cell">
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">pander</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/pander/man/pander.html">pander</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html">sessionInfo</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><strong>R version 4.3.1 (2023-06-16)</strong></p>
 <p><strong>Platform:</strong> x86_64-apple-darwin20 (64-bit)</p>
