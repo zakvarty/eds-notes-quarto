@@ -5,8 +5,8 @@
 ```{r workflows-introduction-setup}
 #| results: "asis"
 #| echo: false
-source("_common.R")
-status("complete")
+#source("_common.R")
+#status("complete")
 ```
 
 As a data scientist you will never work alone. 
