@@ -396,21 +396,7 @@ gtag('config', 'G-EFK9JPMVM8', { 'anonymize_ip': true});
   </div>
   
 
-</header><div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Note
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Effective Data Science is still a work-in-progress. This chapter is largely complete and just needs final proof reading.</p>
-<p>If you would like to contribute to the development of EDS, you may do so at <a href="https://github.com/zakvarty/data_science_notes" class="uri">https://github.com/zakvarty/data_science_notes</a>.</p>
-</div>
-</div>
-<section id="introduction" class="level2" data-number="8.1"><h2 data-number="8.1" class="anchored" data-anchor-id="introduction">
+</header><section id="introduction" class="level2" data-number="8.1"><h2 data-number="8.1" class="anchored" data-anchor-id="introduction">
 <span class="header-section-number">8.1</span> Introduction</h2>
 <p>Exploratory data analysis is an essential stage in any data science project. It allows you to become familiar with the data you are working with while also to identify potential strategies for progressing the project and flagging any areas of concern.</p>
 <p>In this chapter we will look at three different perspectives on exploratory data analysis: its purpose for you as a data scientist, its purpose for the broader team working on the project and finally its purpose for the project itself.</p>
@@ -422,7 +408,7 @@ Note
 <p>Exploratory Data Analysis: quick and simple exerpts, summaries and plots to better understand a data set.</p>
 </blockquote>
 <p>One key aspect of EDA is generating quick and simple summaries and plots of the data. These plots and summary statistics can help to quickly understand the distribution of and relationships between the recorded variables. Additionally, during an exploratory analysis you will familiarise yourself with the structure of the data you’re working with and how that data was collected.</p>
-<div class="cell" data-layout-align="center">
+<div class="cell">
 <details><summary>Code</summary><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://ggplot2.tidyverse.org">"ggplot2"</a></span><span class="op">)</span>                     </span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://ggobi.github.io/ggally/">"GGally"</a></span><span class="op">)</span></span>
 <span></span>
@@ -437,7 +423,7 @@ Note
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>axis.text <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">6</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="302-edav-analysis_files/figure-html/iris-plot-1.png" class="img-fluid figure-img" style="width:80.0%"></p>
+<figure class="figure"><p><img src="302-edav-analysis_files/figure-html/iris-plot-1.png" class="img-fluid figure-img" width="672"></p>
 <figcaption class="figure-caption">Investigating marginal and pairwise relationships in the Iris dataset.</figcaption></figure>
 </div>
 </div>
@@ -477,7 +463,7 @@ Note
 <span class="header-section-number">8.6</span> What is not EDA?</h2>
 <p>It’s important to understand that an exploratory data analysis is not the same thing as modelling. In particular is <em>not</em> the construction of your baseline model, which is sometimes called initial data analysis. Though it might inform the choice of baseline model, EDA is usually not model based. In an EDA, simple plots and summaries are used to identify patterns in the data that inform how you approach the rest of the project.</p>
 <p>Some degree of statistical rigour can be added to EDA through the use of non-parametric techniques; methods like rolling averages, smoothing or partitioning can to help identify trends or patterns while making minimal assumptions about the data generating process.</p>
-<div class="cell" data-layout-align="center">
+<div class="cell">
 <details><summary>Code</summary><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://www.ral.ucar.edu/~ericg/softextreme.php">ismev</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://wilkelab.org/cowplot/">cowplot</a></span><span class="op">)</span></span>
@@ -520,12 +506,12 @@ Note
 <span><span class="fu"><a href="https://wilkelab.org/cowplot/reference/plot_grid.html">plot_grid</a></span><span class="op">(</span><span class="va">p1</span>,<span class="va">p2</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="302-edav-analysis_files/figure-html/dow-jones-rolling-mean-plot-1.png" class="img-fluid figure-img" style="width:80.0%"></p>
+<figure class="figure"><p><img src="302-edav-analysis_files/figure-html/dow-jones-rolling-mean-plot-1.png" class="img-fluid figure-img" width="672"></p>
 <figcaption class="figure-caption">Daily change in Dow Jones Index with smoothed estimate of mean and 95% confidence interval.</figcaption></figure>
 </div>
 </div>
 </div>
-<div class="cell" data-layout-align="center">
+<div class="cell">
 <details><summary>Code</summary><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span></span>
 <span>  x <span class="op">=</span> <span class="va">dowjones</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>index_change <span class="op">=</span> <span class="va">Index</span> <span class="op">-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/lead-lag.html">lag</a></span><span class="op">(</span><span class="va">Index</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
@@ -580,7 +566,7 @@ Note
 <span class="header-section-number">8.8</span> Correction Methods</h2>
 <p>There are various methods or corrections that we can apply during our testing and estimation procedures to ensure that our error rates or confidence intervals account for our previous “peeking” during EDA.</p>
 <p>Examples of these corrections have been developed across many fields of statistics. In medical statistics we have approaches like the Bonferroni correction, to account for carrying out multiple hypothesis tests. In the change-point literature there are techniques for estimating a change location given that a change has been detected somewhere in a time series. While in the extreme value literature there are methods to estimate the required level of protection against rare events, given that the analysis was triggered by the current protections having been compromised.</p>
-<div class="cell" data-layout-align="center">
+<div class="cell">
 <details><summary>Code</summary><div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Simulate data</span></span>
 <span><span class="va">date</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.Date.html">seq.Date</a></span><span class="op">(</span></span>
 <span>  from <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html">as.Date</a></span><span class="op">(</span><span class="st">"2018-03-01"</span><span class="op">)</span>,</span>
@@ -629,7 +615,7 @@ Note
 <span><span class="fu"><a href="https://wilkelab.org/cowplot/reference/plot_grid.html">plot_grid</a></span><span class="op">(</span><span class="va">p3</span>,<span class="va">p4</span>,nrow <span class="op">=</span> <span class="fl">2</span>, ncol <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="302-edav-analysis_files/figure-html/eva-and-changepoint-plots-1.png" class="img-fluid figure-img" style="width:80.0%"></p>
+<figure class="figure"><p><img src="302-edav-analysis_files/figure-html/eva-and-changepoint-plots-1.png" class="img-fluid figure-img" width="672"></p>
 <figcaption class="figure-caption">Example sea-height datasets where an analysis has been triggered by an extreme value (above) or a visually identified change in mean (below).</figcaption></figure>
 </div>
 </div>

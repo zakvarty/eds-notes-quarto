@@ -419,21 +419,7 @@ gtag('config', 'G-EFK9JPMVM8', { 'anonymize_ip': true});
   </div>
   
 
-</header><div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Note
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Effective Data Science is still a work-in-progress. This chapter is largely complete and just needs final proof reading.</p>
-<p>If you would like to contribute to the development of EDS, you may do so at <a href="https://github.com/zakvarty/data_science_notes" class="uri">https://github.com/zakvarty/data_science_notes</a>.</p>
-</div>
-</div>
-<section id="introduction" class="level2" data-number="9.1"><h2 data-number="9.1" class="anchored" data-anchor-id="introduction">
+</header><section id="introduction" class="level2" data-number="9.1"><h2 data-number="9.1" class="anchored" data-anchor-id="introduction">
 <span class="header-section-number">9.1</span> Introduction</h2>
 <section id="more-than-a-pretty-picture" class="level3" data-number="9.1.1"><h3 data-number="9.1.1" class="anchored" data-anchor-id="more-than-a-pretty-picture">
 <span class="header-section-number">9.1.1</span> More than a pretty picture</h3>
@@ -455,7 +441,7 @@ Note
 <span class="header-section-number">9.2.1</span> Picking the right tool for the job</h3>
 <p>When you think of data visualisation, you might immediately think of impressive animations or complex, interactive dashboards that allow users to explore relationships within the data for themselves.</p>
 <p>Such tools are no doubt impressive but they are by no means necessary for an effective data visualisation. In many cases there is no technology is needed at all. The history of data visualisation vastly pre-dates that of computers and some of the most effective visualisations remain analogue creations.</p>
-<div class="cell" data-layout-align="center">
+<div class="cell">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure"><p><img src="images/303-data-visualisation/coffee-2.png" class="img-fluid figure-img" style="width:100.0%" alt="12 sheets of paper arranged to make a calendar. Each sheet has been folded into squares, with each square and used as a coaster for a single day. Ring-shaped coffee stains visualise daily coffee consumption over the year, which is greatest in May and least in December."></p>
@@ -469,7 +455,7 @@ Note
 <section id="analogue-data-viz" class="level4" data-number="9.2.2.1"><h4 data-number="9.2.2.1" class="anchored" data-anchor-id="analogue-data-viz">
 <span class="header-section-number">9.2.2.1</span> Analogue Data Viz</h4>
 <p>Here we have another example of an analogue data visualisation that is created as part of data collection. Each member of the department is invited to place a Lego brick on a grid to indicate how much caffeine they have consumed and how much sleep they have had. The beauty of using Lego bricks here is that they are stackable and so create a bar plot over two dimensions.</p>
-<div class="cell" data-layout-align="center">
+<div class="cell">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure"><p><img src="images/303-data-visualisation/lego-coffee.jpg" class="img-fluid figure-img" style="width:100.0%" alt="A 2D barplot with axes for how caffeinated staf members are and how much sleep they have had. The height of stacked bricks appears to show a fairly uniform distribution, other than there being lots of people who have not had much sleep or caffeine."></p>
@@ -544,7 +530,7 @@ Note
 </section><section id="preattentive-attributes" class="level3" data-number="9.4.2"><h3 data-number="9.4.2" class="anchored" data-anchor-id="preattentive-attributes">
 <span class="header-section-number">9.4.2</span> Preattentive Attributes</h3>
 <p>When crafting a visualisation we want to require as little work as possible from the viewer. We can do this by using pre-attentive attributes such as colour, shape size and position to encode our data values.</p>
-<div class="cell" data-layout-align="center">
+<div class="cell">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure"><p><img src="images/303-data-visualisation/preattentive-attributes.png" class="img-fluid figure-img" style="width:100.0%" alt="An illustration of how several pre-attentive attributes can be used to draw the attention of the viewer. In each case there is a grid of nine hollow squares and attention is drawn to a subset of those but altering the following attributes: shape, enclosure, line weight, fill colour/saturation, size and position. Similar examples are given of line length and line curvature."></p>
@@ -572,7 +558,7 @@ Note
 <p>Are you are representing a data value that is continuous or has an associated ordering? Then you will again have to select your palette to provide sufficient contrast to all viewers of your work.</p>
 <p>If you are representing a measurement that has a <em>reference value</em> (for example 0 for temperature in centigrade) then a diverging colour palette can be used to represent data that are above or below this reference point. This requires some cultural understanding of how the colours will be interpreted, for example you are likely to cause confusion if you an encoding of red for cold and blue for hot.</p>
 <p>For colour scales without such a reference point then a gradient in a single colour is likely the best option. In either case, it is important to check that a unit change in data value represents a consistent change in colour across all values. This is not the case for the rainbow palette here (which is neither a single gradient nor a diverging colour scale).</p>
-<div class="cell" data-layout-align="center">
+<div class="cell">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure"><p><img src="images/303-data-visualisation/saturated-colour-scales.png" class="img-fluid figure-img" style="width:100.0%" alt="Six default continuous colour scales used by various R packages, including gradient and diverging and rainbow palette types."></p>
@@ -581,7 +567,7 @@ Note
 </div>
 </div>
 <p>To improve accessibility of your designs, I would recommend one of the many on-line tools to simulate colour vision deficiency or using a pre-made palette where this has been considered for you. A good, low-tech rule of thumb is to design your visualisations so that they’re still easily understood when printed in greyscale. This can mean picking appropriate colours or additionally varying the point shape, line width or line types used.</p>
-<div class="cell" data-layout-align="center">
+<div class="cell">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure"><p><img src="images/303-data-visualisation/desaturated-colour-scales.png" class="img-fluid figure-img" style="width:100.0%" alt="Six default continuous colour scales used by various R packages, this time shown in greyscale."></p>
@@ -623,7 +609,7 @@ Note
 <p>In reality your goal will be some mixture of these, at an interior point of this triangle. Clearly identifying this point will help you to present your visual story in a way that works towards your aims, rather than against them.</p>
 <p>On the point of presentation, it is important to realise that there is no neutral way to present information. In creating a visualisation you’re choosing which aspects of the data to emphasise, what gets summarised and what is not presented at all. This is how you construct a plot that tells a clear and coherent story. However, there is more than one story that you could tell from a single dataset.</p>
 <p>As an example of this, let’s consider a time-series showing the price of two stocks and in particular the choice of scale on the y-axis. Suppose the two stock have values fluctuating around $100 per share. Choosing a scale that goes from $90 to $120 would emphasise the differences between the two stocks. Setting the lower limit to $0 would instead emphasise that these variations are small relative to the overall value of the stocks. Both are valid approaches but tell different stories. Be clear and be open about which of these you are telling and why you have chosen that over the alternative.</p>
-<div class="cell" data-layout-align="center">
+<div class="cell">
 <details><summary>Code</summary><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Load required libraries</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span></span>
@@ -669,10 +655,7 @@ Note
 <span></span>
 <span><span class="fu"><a href="https://wilkelab.org/cowplot/reference/plot_grid.html">plot_grid</a></span><span class="op">(</span><span class="va">p1</span>, <span class="va">p2</span>, nrow <span class="op">=</span> <span class="fl">2</span>, ncol <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="303-edav-visualisation_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid figure-img" style="width:80.0%"></p>
-</figure>
-</div>
+<p><img src="303-edav-visualisation_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>A final cross-over from data journalism is that your visualisations will be competing for your viewers attention. You have to compete against everything else that is going on in their lives. Establish a clear “hook” within your visualisation to attract your viewer’s attention and immediately deliver the core message. This might be done with a contrasting trend-line or an intriguing title. Lead their attention first to the key message and then the supporting evidence.</p>

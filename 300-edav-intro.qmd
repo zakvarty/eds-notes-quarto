@@ -5,8 +5,8 @@
 ```{r edav-intro-setup}
 #| results: asis
 #| echo: false
-source("_common.R")
-status("drafting")
+#source("_common.R")
+#status("complete")
 ```
 
 

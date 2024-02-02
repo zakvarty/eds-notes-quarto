@@ -516,7 +516,7 @@ Structure talk around Alex's parallelisation slides
 <span><span class="va">t_end</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html">Sys.time</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">t_end</span> <span class="op">-</span> <span class="va">t_start</span></span>
-<span><span class="co">#&gt; Time difference of 0.5069079 secs</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="co">#&gt; Time difference of 0.50948 secs</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The system.time function provides a shorthand for this if your code runs sequentially and extends the functionality to work for parallel code too.</p>
 <div class="cell" data-layout-align="center">
@@ -533,7 +533,7 @@ Structure talk around Alex's parallelisation slides
 <span><span class="fu"><a href="https://rdrr.io/pkg/tictoc/man/tic.html">tic</a></span><span class="op">(</span><span class="op">)</span> </span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/Sys.sleep.html">Sys.sleep</a></span><span class="op">(</span><span class="fl">0.5</span><span class="op">)</span> <span class="co"># YOUR CODE </span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/tictoc/man/tic.html">toc</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; 0.508 sec elapsed</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="co">#&gt; 0.51 sec elapsed</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>With <a href="https://github.com/jabiru/tictoc">tictoc</a> we can get fancy</p>
 <div class="cell" data-layout-align="center">
@@ -545,9 +545,9 @@ Structure talk around Alex's parallelisation slides
 <span><span class="fu"><a href="https://rdrr.io/pkg/tictoc/man/tic.html">tic</a></span><span class="op">(</span><span class="st">"second, hard part"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/Sys.sleep.html">Sys.sleep</a></span><span class="op">(</span><span class="fl">3</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/tictoc/man/tic.html">toc</a></span><span class="op">(</span>log <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="co">#&gt; second, hard part: 3.006 sec elapsed</span></span>
+<span><span class="co">#&gt; second, hard part: 3.009 sec elapsed</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/tictoc/man/tic.html">toc</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; total: 3.521 sec elapsed</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="co">#&gt; total: 3.522 sec elapsed</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>If your code is already very fast (but will be run <em>very</em> many times, so further efficiency gains are required) then the methods may fail because they do not sample the state of the code at a high enough frequency. In those cases you might want to explore the <code>{mircobenchmark}</code> package.</p>
 </section></section><section id="profiling-your-code" class="level2" data-number="12.3"><h2 data-number="12.3" class="anchored" data-anchor-id="profiling-your-code">
@@ -643,7 +643,7 @@ Structure talk around Alex's parallelisation slides
 <span><span class="co">#&gt;         "logical", "numeric", "factor"))</span></span>
 <span><span class="co">#&gt;     c(rep(NA, n_left), x, rep(NA, n_right))</span></span>
 <span><span class="co">#&gt; }</span></span>
-<span><span class="co">#&gt; &lt;bytecode: 0x7fc724c3e390&gt;</span></span>
+<span><span class="co">#&gt; &lt;bytecode: 0x7f98c58e7c00&gt;</span></span>
 <span><span class="co">#&gt; &lt;environment: namespace:eds&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Some functions use <em>compiled code</em> that is written in another language. This is the case for dplyr’s <code>arrange()</code>, which calls some compiled C++ code.</p>
@@ -653,7 +653,7 @@ Structure talk around Alex's parallelisation slides
 <span><span class="co">#&gt; {</span></span>
 <span><span class="co">#&gt;     UseMethod("arrange")</span></span>
 <span><span class="co">#&gt; }</span></span>
-<span><span class="co">#&gt; &lt;bytecode: 0x7fc724ef66e0&gt;</span></span>
+<span><span class="co">#&gt; &lt;bytecode: 0x7f98c8d2bf90&gt;</span></span>
 <span><span class="co">#&gt; &lt;environment: namespace:dplyr&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>It is also true for many functions from base R, for which there is (for obvious reason) no R source code.</p>
@@ -661,7 +661,7 @@ Structure talk around Alex's parallelisation slides
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">mean</span></span>
 <span><span class="co">#&gt; function (x, ...) </span></span>
 <span><span class="co">#&gt; UseMethod("mean")</span></span>
-<span><span class="co">#&gt; &lt;bytecode: 0x7fc71f400c80&gt;</span></span>
+<span><span class="co">#&gt; &lt;bytecode: 0x7f98c3518080&gt;</span></span>
 <span><span class="co">#&gt; &lt;environment: namespace:base&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><br></p>
@@ -757,13 +757,13 @@ Structure talk around Alex's parallelisation slides
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">mu</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">10</span>, <span class="fl">0</span>, <span class="fl">10</span><span class="op">)</span></span>
 <span><span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span>.x <span class="op">=</span> <span class="va">mu</span>, .f <span class="op">=</span> <span class="va">rnorm</span>, n <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [[1]]</span></span>
-<span><span class="co">#&gt; [1] -10.15843 -10.06905  -8.83801 -10.25953 -10.09292</span></span>
+<span><span class="co">#&gt; [1] -10.241926  -8.666984 -11.845780 -10.001279 -10.554084</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; [[2]]</span></span>
-<span><span class="co">#&gt; [1]  1.43067801  1.09201316 -0.59195247  0.40650959  0.03079626</span></span>
+<span><span class="co">#&gt; [1] -0.01940282 -0.38622205 -0.66472342  1.17092655 -0.07704214</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; [[3]]</span></span>
-<span><span class="co">#&gt; [1] 12.697819  8.702197  9.762114  9.607069 10.539702</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="co">#&gt; [1]  9.177285 13.145768  8.989020  9.355484  9.648636</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Iterate over multiple objects <code>map2()</code> and <code>pmap()</code>.</p>
 <div class="cell" data-layout-align="center">
@@ -774,7 +774,7 @@ Structure talk around Alex's parallelisation slides
 <span><span class="co">#&gt; [1] -10 -10 -10 -10 -10</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; [[2]]</span></span>
-<span><span class="co">#&gt; [1] -0.014558232 -0.168284315 -0.006125741  0.116916108  0.036721785</span></span>
+<span><span class="co">#&gt; [1]  0.04235816  0.03535451  0.13155567 -0.06982416 -0.11554499</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; [[3]]</span></span>
 <span><span class="co">#&gt; [1] 10 10 10 10 10</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -793,7 +793,7 @@ Structure talk around Alex's parallelisation slides
 <span><span class="co">#&gt; [1] -10 -10 -10 -10 -10</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; [[2]]</span></span>
-<span><span class="co">#&gt; [1] -0.1566077 -0.1495167 -0.1101754 -0.0175030  0.1378526</span></span>
+<span><span class="co">#&gt; [1]  0.09871757 -0.04297099  0.17358730  0.05992504 -0.06150762</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; [[3]]</span></span>
 <span><span class="co">#&gt; [1] 10 10 10 10 10</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -814,13 +814,13 @@ Structure talk around Alex's parallelisation slides
 <span>  .options <span class="op">=</span> <span class="fu">furrr</span><span class="fu">::</span><span class="fu"><a href="https://furrr.futureverse.org/reference/furrr_options.html">furrr_options</a></span><span class="op">(</span>seed <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span>
 <span>  n <span class="op">=</span> <span class="fl">5</span><span class="op">)</span> </span>
 <span><span class="co">#&gt; [[1]]</span></span>
-<span><span class="co">#&gt; [1]  -9.981693 -10.611786 -10.785529  -9.205904 -10.897486</span></span>
+<span><span class="co">#&gt; [1] -10.433666 -11.679933  -8.652979 -12.374279  -9.534355</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; [[2]]</span></span>
-<span><span class="co">#&gt; [1]  0.52511216 -1.24123540  0.02139319  1.01491068 -1.07271903</span></span>
+<span><span class="co">#&gt; [1]  0.4786047  0.7192725 -0.3690354  1.8578314  2.5032020</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; [[3]]</span></span>
-<span><span class="co">#&gt; [1]  9.298789  9.621639  9.212366 10.365893 10.657185</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="co">#&gt; [1] 10.632915 10.530766 10.164082  9.918634 11.140997</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>This is, of course excessive for this small example!</p>
 <p>One thing to be aware of is that we need to be very careful handling random number generation in relation to parallelisation. There are many options for how you might want to set this up, see <a href="https://www.r-bloggers.com/2020/09/future-1-19-1-making-sure-proper-random-numbers-are-produced-in-parallel-processing/">R-bloggers</a> for more details.</p>
