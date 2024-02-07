@@ -3,17 +3,17 @@
 ```{r production-explainability-setup}
 #| results: asis
 #| echo: false
-source("_common.R")
-status("complete")
+#source("_common.R")
+#status("complete")
 ```
 
 ## What are we explaining and to whom? 
 
-There are many reasons you might need to explain the behaviour of your model before it can be put into production. As an example, we can consider a credit scoring system that determines whether or not customers should be given a line of credit.
+There are many reasons you might need to explain the behaviour of your model before it can be put into production. As an example, we can consider a credit scoring system that determines whether or not customers should be given a line of credit. We might need an explanation that can help us to:
 
-- Regulatory or legal requirements to describe how your model works (e.g. ban on "black-box" modelling).
+- Meet regulatory or legal requirements to describe how your model works (e.g. ban on "black-box" modelling).
 - Understanding how your model works to improve it.
-- Explaining to individual load decisions to customers.
+- Explaining individual predictions or outcomes to customers (e.g. loan refusal).
 
 In each of these cases, what exactly do we mean by an explanation? It's likely not the same thing in each example. 
 
@@ -23,7 +23,7 @@ In each of these cases, what exactly do we mean by an explanation? It's likely n
 
 - Finally, individual customers might have some investment in the overall behaviour of the scoring model but would also like to know what actions they can take to increase their chance of securing a loan. 
 
-Between each of these examples, the level of technical detail differs but more importantly the fundamental nature of the explanations are different.
+Between each of these examples, the level of technical detail differs but more importantly the fundamental nature of the explanations are different too.
 
 
 ## Explaining a Decision Tree
@@ -40,13 +40,13 @@ knitr::include_graphics("images/402-production-explainability/ambulance-triage.p
 ```
 
 
-These models use the same sort of logic that is used for medical triage when you call an ambulance, to determine the urgency of the call. The binary decisions used in this type of triage are optimised to identify critical calls as soon as possible, but this is just one form of loss function we could use. We might instead pick these partitions to get the most accurate overall classification of calls to urgency categories. This might not be an appropriate loss function for ambulance calls but might be when deciding which loan applicants to grant credit to.
+Decision trees use the same sort of logic that is applied in a medical triage, which determines how urgently a patient needs to be seen in accident and emergency or when calling an abulance. The specific sequence of binary decisions used in this type of triage are optimised to identify critical calls as soon as possible, but this is not the only objective that we could have optimised for. An alternative loss function might pick these partitions to get the most accurate overall classification of calls to urgency categories. If this leads to an algorithm where 30 minutes of detailed questioning is required to assign a category, then it might not be the most appropriate loss function to triage ambulance calls. However, a similar loss function might be well suitable when deciding which loan applicants are granted credit, since this is a less time-sensitive decision.
 
-The issue is that these decision trees are limited in the relationships they can represent (linear relationships approximated by step function) and are sensitive to small changes in the training data. To overcome these deficiencies we can use a bootstrap aggregation or a random forest model to make predictions based on a collection of these trees. This leads to models that are more stable and flexible but also removes any chance of a simple and human-friendly explanation. 
+The core issue with these decision trees is that they are limited in the relationships they can represent (linear relationships approximated by step function) and are sensitive to small changes in the training data. To overcome these deficiencies we can use a bootstrap aggregation or a random forest model to make predictions based on a collection of these trees. This leads to models that are more stable and flexible but also removes any chance of a simple and human-friendly explanation. 
 
 ## Explaining Regression Models 
 
-Another model that is relatively straightforward to interpret is a linear regression. We can interpret this model using the estimated regression coefficients, which describe how the predicted outcome changes with a unit change in each covariate while the values of all other covariates are held constant. 
+Another model that is relatively straightforward to interpret is a linear regression. We can interpret this model using the estimated regression coefficients, which describe how the predicted outcome changes with a unit change in each covariate (while the values of all other covariates are held constant). 
 
 
 ```{r fig-interpreting-linear-regression}
@@ -60,11 +60,11 @@ knitr::include_graphics("images/402-production-explainability/interpreting-linea
 
 This is a global and a conditional explanation. 
 
-It is __global__ because the effect of increasing a covariate by one unit is the same no matter what the starting value of that covariate. The explanation is the same in all parts of the covariate space. 
+It is __global__ because the effect of increasing a covariate by one unit is the same no matter what the starting value of that covariate. That is to say the explanation is the same in all parts of the covariate space. 
 
-The explanation is __conditional__ because it assumes that all other values are held constant. This can lead to some odd behaviour in our explanations, they are dependent on what other terms are included (or left out of) our model. 
+The explanation is __conditional__ because it assumes that all other values are held constant. This can lead to some odd behaviour in our explanations because they are inherently dependent on what other terms are included (or left out of) the model. 
 
-This can be contrasted against non-linear regression, where covariate effects are still interpreted conditional on the value of other covariates but the size or direction of that effect might vary depending on the value of the covariate. 
+This can be contrasted against non-linear regression. In this model, the regression coefficients provide local conditional explanations of how altering each covariate changes the prediction made.  These explanations are conditional in the sense that they assume the values of all other covariates are held constant and they are local in that the size and direction of this effect might vary across different values of the covariate we are trying to explain. 
 
 ```{r fig-interpreting-nonlinear-models}
 #| eval: true
@@ -82,7 +82,7 @@ Here we have an example where a unit increase in the covariate is associated wit
 
 As an example of this we can look at the height, girth and volume of some cherry trees. 
 
-If we are wanting to use a lathe to produce pretty, cherry wood ornaments we might be interested in understanding how the girth of the trees varies with their height and total volume. Using a linear model, we see that both have a positive linear association with girth. 
+If we are wanting to use a lathe to produce pretty, cherry wood ornaments we might be interested in understanding how the girth of the trees varies with their height and total volume. Using a linear model, we see that both height and volume have a positive linear association with girth. 
 
 ```{r fig-cherry-tree-lm}
 #| eval: true
@@ -129,7 +129,7 @@ lm(Girth ~ 1 + Height, data = trees)
 lm(Girth ~ 1 + Volume, data = trees)
 ```
 
-However, when we include both terms in our model, our interpretation changes dramatically.
+However, when we include both terms in our model, the interpretation changes dramatically.
 
 ```{r cherry-tree-lm-combined}
 #| eval: true
@@ -140,15 +140,12 @@ lm(Girth ~ 1 + Height + Volume, data = trees)
 
 Height is no longer positively associated with girth. This is because the size, direction and significance of our estimated effects is conditional on what other terms are included in the model. For a _fixed volume_ of wood, a taller tree necessarily has to have a smaller girth. 
 
-Techniques such as [SHAP](https://christophm.github.io/interpretable-ml-book/shap.html) try to quantify the importance of a predictor by averaging over all combinations of predictors that might be included within the model. You can read more about such techniques in [Interpretable Machine Learning](https://christophm.github.io/interpretable-ml-book/) by Christoph Molnar.
+Techniques such as [SHAP](https://christophm.github.io/interpretable-ml-book/shap.html) try to quantify the importance of a predictor by averaging its effect on the prediction over models with all combinations of predictors included or excluded. You can read more about such techniques in [Interpretable Machine Learning](https://christophm.github.io/interpretable-ml-book/) by Christoph Molnar.
 
 ## Simpson's Paradox 
 
-This effect is related to __Simpson's Paradox__, where a trend appears in several groups of data but disappears or reverses when the groups are combined. 
+This dependence between a model explanation and which predictors it includes is related to __Simpson's Paradox__, where a trend appears in several sub-groups of a data set but disappears or reverses when considering the data as a whole. This regularly arises in fields like epidemiology, where population level trends are assumed to apply at the level of individuals or small groups, where this is known as the ecological fallacy. 
 
-This regularly arises in fields like epidemiology, where population level trends are assumed to apply at the level of individuals or small groups, where this is known as the ecological fallacy. 
-
-Actually, Simpson's parodox is a terrible name, because it isn't actually a paradox at all. It's not surprising that we have two different answers to two different questions, the supposed contradiction only arises when we fail to distinguish between those questions. 
 
 ```{r fig-simpsons-paradox}
 #| eval: true
@@ -187,12 +184,14 @@ p4 <- simpson %>%
 cowplot::plot_grid(p3, p4, ncol = 2)
 ```
 
-What I hope to have highlighted here is that for some of the simplest models we might use as data scientists, explanations are very much possible but must be made with care and attention to detail - correctly interpreting these models in context can be far from straightforward.  
+Actually, Simpson's parodox is a terrible name, because it isn't actually a paradox at all. It's not surprising that we have two different answers to two different questions, the supposed contradiction only arises when we fail to distinguish between those questions. 
+
+What I hope to have highlighted here is that even for some of the simplest models we might use as data scientists, while explanations are very much possible they must be made with care and attention to detail. Correctly interpreting models in context can be far from straightforward, regardless of model complexity.  
 
 
 ## What hope do we have?
 
-At this stage, you might be asking yourself what hope we have of explaining more complex models like random forests or neural networks, given how difficult it is to explain even the simple models we might take as our benchmark. You'd be right to worry about this and it is important to remain humble in what we can and cannot know about these complex systems that we are building. 
+At this stage, you might be asking yourself what hope we have of explaining more complicated models like random forests or neural networks, given how difficult it is to explain even the simple models we might use as a benchmark. You'd be right to worry about this and it is important to remain humble in what we can and cannot know about these complex systems that we are building. 
 
 All hope isn't lost though - we still have a few tricks up our sleeve! 
 
@@ -200,22 +199,21 @@ All hope isn't lost though - we still have a few tricks up our sleeve!
 
 Suppose we're asked by our product manager to determine which predictors or covariates are usually the most import in our model when determining credit scores and loan outcomes.
 
-One way to do this would be to remove each covariate from the model and investigate how that changes the predictions made by our model. However, we've seen already that removing a predictor can substantively change some models.  
+One way to assess this would be to remove each covariate from the model and investigate how that changes the predictions made by our model. However, we've seen already that removing a predictor can substantitally change the interpretation of some models.  
 
-So instead, we could answer this question by using permutation methods.
+Instead, we could answer this question by using permutation methods.
 
-If we take the observed values of a covariate, say income, and randomly allocate these among all our training examples then this will destroy any association between income and loan outcome. This allows us to remove the information provided by income but without altering the overall structure of our model. We can then refit our model to this modified data set and investigate how rearranging the covariate alters our predictions. If there is a large performance drop, then the covariate is playing an important role within our model.
+If we take the observed values of a covariate, say income, and randomly allocate these among all our training examples then this will destroy any association between income and loan outcome. This allows us to remove the information provided by income but without altering the overall structure of our model (e.g. the joint distribution of the remaining predictors). We can then refit our model to this modified data set and investigate how shuffling that covariate alters our predictions. If there is a large performance drop then the covariate is playing an important role within our model.
 
-There are many variations on this sort of permutation test. They can be simple but powerful tools for understanding the behaviour of all sorts of model.
+There are many variations on this sort of permutation test, which can be simple but powerful tools for understanding the behaviour of all sorts of models.
 
 ### Meta-modelling 
 
-Meta-models are, as the name suggests, models of models and these can be effective methods of providing localised explanations for complex models. 
+As the name suggests, meta-models are models of models. These can be effective tools of providing localised explanations of a model that is too complicated for us to obtain an explanation directly (e.g. a neural network). 
 
-The idea here is to look at a small region of the covariate space that is covered by a complex and highly flexible model, such as a neural network. We can't easily give a global explanation for this complex model's behaviour - it is just too complicated. 
+Meta-modelling uses a simple surrogate model to approximate the behaviour of a more complicated, unexplainable model around a single point in covariate space for which we require an explanation. 
 
-
-However, we can interrogate the model's behaviour within a small region and construct a simplified version of the model (a meta-model) that lets us explain the model within that small region. Often this meta-model is chosen as a linear model. 
+To do this, we select several "design points" in a small region of covariate space centred on our explanation point. We then evaluate the more complicated model at each of these design points to obtain a set of predictions. We then fit a simpler, explainable model to this set of predictions and use this fitted model to provide an approximate, local explanation of the more complicated model.
 
 ```{r fig-function-approximation}
 #| eval: true
@@ -228,9 +226,9 @@ knitr::include_graphics("images/402-production-explainability/local-linear-appro
 
 
 
-This is partly for convenience and familiarity but also has a theoretical backing: if our complex model is sufficiently smooth then we can appeal to [Taylor's Theorem](https://en.wikipedia.org/wiki/Taylor%27s_theorem) to say that in a small enough region the mapping can be well approximated by a linear function. 
+Linear regression is a common choice for the meta-model. This is partly for convenience and familiarity but also has a theoretical backing: if our complex model is sufficiently smooth then we can appeal to [Taylor's Theorem](https://en.wikipedia.org/wiki/Taylor%27s_theorem) to say that in a small enough region it can be well approximated by a linear function. 
 
-This sort of local model explanation is particularly useful where we want to explain individual predictions or decisions made by our model: for example why a single loan applicant was not granted a loan. By inspecting the coefficients of this local surrogate model we can identify which covariates were the most influential in the decision and suggest how the applicant could increase their chance of success by summarising those covariates that were both influential and are within the ability of the applicant to change. This is exactly the approach taken by the [LIME](https://christophm.github.io/interpretable-ml-book/lime.html) methodology developed by Ribiero et al. 
+This sort of local model explanation is particularly useful where we want to explain individual predictions or decisions made by our model: for example why a single loan applicant was not granted a loan. By inspecting the coefficients of the local surrogate model we can identify which covariates were the most influential in the decision and suggest how the applicant could increase their chance of success by summarising those covariates that were both influential and are within the ability of the applicant to change. This is exactly the approach taken by the [LIME](https://christophm.github.io/interpretable-ml-book/lime.html) methodology developed by Ribeiro et al. 
 
 ### Aggregating Meta-models
 
