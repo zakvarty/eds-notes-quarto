@@ -5,6 +5,23 @@
 ```{r production-intro-setup}
 #| results: asis
 #| echo: false
-source("_common.R")
-status("drafting")
+#source("_common.R")
+#status("drafting")
 ```
+
+We now shift our focus to the parts of the data science life cycle which come after modelling. 
+
+This week we will explore several common concerns that must be addressed before a model can be put into production:
+
+1. __Reproducibility__
+  - Can another data scientist or a data engineer reproduce the exact results of your analysis to test their production-grade code against your development version?
+  - Do your findings generalise to the live population or are they limited to the snapshot in the test set you used to evaluate your model?
+
+2. __Explainability __
+  - Can you provide an explanation of how your model works and how its predictions are generated?
+  - Are these explanations the same for any prediction or are they input-specific?
+  
+3. __Scalability__
+  - Can you identify points in your code that are likely to cause problems if it has to run on very large datasets?
+  - How about if it needs to execute very quickly or run on a client device with limited working memory?
+  
