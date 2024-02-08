@@ -199,7 +199,7 @@ Is the optimum you find stable over:
 
 <!-- TODO: Replace with actual gradient descent example -->
 
-If optimisation routines are used in parameter estimation, we have to ensure that the results they find for a particular data set are reproducible for a given configuration. Depending on the function we are trying to optimise, this might involve assessing stablility of the optimisation algortihm to the particular values in a data set, the initial set of starting parameters and step size used, or the choice of learning rate (which controls how that step size changes) and maximum number of iterations to perform. 
+If optimisation routines are used in parameter estimation, we have to ensure that the results they find for a particular data set are reproducible for a given configuration. Depending on the function we are trying to optimise, this might involve assessing stability of the optimisation algorithm to the particular values in a data set, the initial set of starting parameters and step size used, or the choice of learning rate (which controls how that step size changes) and maximum number of iterations to perform. 
 
 We additionally need to be concerned about replication here. If we had chosen a different starting point would the optimisation still converge, and would it converge to the same mode? Our original method may have found a local optimum but how can we confirm that this is a global optimum? 
 
