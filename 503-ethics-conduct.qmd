@@ -3,8 +3,8 @@
 ```{r ethics-conduct-setup}
 #| echo: false
 #| results: asis
-source("_common.R")
-status("complete")
+#source("_common.R")
+#status("complete")
 ```
 
 ## Data Science: Miracle Cure and Sexiest Job
