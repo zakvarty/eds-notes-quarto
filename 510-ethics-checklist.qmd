@@ -35,11 +35,13 @@ _Core:_
 
 _Bonus_
 
-- Answer the [multiple choice questions](data/510-ethics-checklist/gender-shades-mcq.pdf) on Buolamwini and Timnit Gebru (2018).
+- Complete the [Fairness worksheet](https://zakvarty.github.io/effective-data-science-resources/activities/fairness-worksheet/fairness-worksheet-questions.html).
+
+- Complete the [Privacy worksheet](https://zakvarty.github.io/effective-data-science-resources/activities/privacy-worksheet/privacy-worksheet-questions.html).
 
 
 ## Live Session 
 
-In the live session this week we will begin with a few minutes of Q & A about the assessments. We will then break into groups to discuss and compare the professional guidelines on ethical data science. 
+In the live session this week we will begin with a few minutes of Q & A about the assessments. We will then break into groups to discuss and compare several sets of professional guidelines on ethical data science. 
 
-Finally, if time allows we will round up the session with an activity on randomised response survey designs.
+Finally, if time allows we will round up the session with an activity on randomised response survey designs or data anonymisation.
