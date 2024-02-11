@@ -5,6 +5,10 @@
 ```{r ethics-introduction}
 #| results: asis
 #| echo: false
-source("_common.R")
-status("drafting")
+#source("_common.R")
+#status("drafting")
 ```
+
+When carrying out a data science project, ethical concerns can arise at many stages.
+
+This week we focus on the two most common, privacy and fairness. We explore case studies where these ethical principles have been violated in the past and investigate how technical measures and professional guidelines can help to prevent such events from occurring again in the future.

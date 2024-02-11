@@ -3,8 +3,8 @@
 ```{r ethics-fairness-setup}
 #| results: asis
 #| echo: false
-source("_common.R")
-status("complete")
+#source("_common.R")
+#status("complete")
 ```
 
 ## Fairness and the Data Revolution 
