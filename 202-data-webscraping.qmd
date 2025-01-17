@@ -137,7 +137,7 @@ With `{rvest}`, reading a html page can be as simple as loading in tabular data.
 
 ```{r rvest-read-html}
 #| echo: true
-html <- rvest::read_html("https://www.zakvarty.com/professional/teaching.html")
+html <- rvest::read_html("https://www.zakvarty.com/teaching.html")
 ```
 
 The `class` of the resulting object is an `xml_document`. This type of object is from the low-level package `{xml2}`, which allows you to read xml files into R.
