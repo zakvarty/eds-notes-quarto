@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.450">
+<meta name="generator" content="quarto-1.4.553">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <title>Effective Data Science - 11&nbsp; Explainability</title>
 <style>
@@ -19,7 +19,7 @@ ul.task-list li input[type="checkbox"] {
 }
 /* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -76,7 +76,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   "collapse-after": 3,
   "panel-placement": "start",
   "type": "textbox",
-  "limit": 20,
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -85,6 +91,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit",
     "search-label": "Search"
@@ -98,33 +105,30 @@ gtag('config', 'G-EFK9JPMVM8', { 'anonymize_ip': true});
 </script><link rel="stylesheet" href="style.css">
 <meta name="twitter:title" content="Effective Data Science - 11&nbsp; Explainability">
 <meta name="twitter:description" content="">
-<meta name="twitter:image" content="https://eds-notes.zakvarty.com/images/402-production-explainability/ambulance-triage.png">
 <meta name="twitter:creator" content="zakvarty">
-<meta name="twitter:image-height" content="900">
-<meta name="twitter:image-width" content="900">
-<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:card" content="summary">
 </head>
 <body class="nav-sidebar floating">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./400-production-introduction.html">Preparing for Production</a></li><li class="breadcrumb-item"><a href="./402-production-explainability.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Explainability</span></a></li></ol></nav>
-      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-      </a>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./400-production-introduction.html">Preparing for Production</a></li><li class="breadcrumb-item"><a href="./402-production-explainability.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Explainability</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
   </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Effective Data Science</a> 
         <div class="sidebar-tools-main">
-    <a href="https://github.com/zakvarty/eds-notes-quarto/" rel="" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+    <a href="https://github.com/zakvarty/eds-notes-quarto/" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
     <div class="dropdown">
       <a href="" title="Share" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Share"><i class="bi bi-share"></i></a>
       <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
@@ -358,7 +362,7 @@ gtag('config', 'G-EFK9JPMVM8', { 'anonymize_ip': true});
 </li>
     </ul>
 </div>
-</nav><div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+</nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
@@ -378,10 +382,10 @@ gtag('config', 'G-EFK9JPMVM8', { 'anonymize_ip': true});
   </ul>
 </li>
   <li><a href="#wrapping-up" id="toc-wrapping-up" class="nav-link" data-scroll-target="#wrapping-up"><span class="header-section-number">11.7</span> Wrapping Up</a></li>
-  </ul><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/zakvarty/eds-notes-quarto/edit/main/402-production-explainability.qmd" class="toc-action">Edit this page</a></p></div></div></nav>
+  </ul><div class="toc-actions"><ul><li><a href="https://github.com/zakvarty/eds-notes-quarto/edit/main/402-production-explainability.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./400-production-introduction.html">Preparing for Production</a></li><li class="breadcrumb-item"><a href="./402-production-explainability.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Explainability</span></a></li></ol></nav><div class="quarto-title">
 <h1 class="title"><span id="production-explainability" class="quarto-section-identifier"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Explainability</span></span></h1>
 </div>
 
@@ -394,6 +398,7 @@ gtag('config', 'G-EFK9JPMVM8', { 'anonymize_ip': true});
     
   </div>
   
+
 
 </header><div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -429,9 +434,13 @@ Note
 <p>With some models giving an explanation is relatively straightforward. Decision trees are perhaps the easiest model to explain because they mimic human decision making and can be represented like flow-charts that make sequential, linear partitions of the predictor space.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div id="fig-abulance-triage" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure"><p><img src="images/402-production-explainability/ambulance-triage.png" class="img-fluid figure-img" style="width:80.0%" alt="Descision tree to traige ambulance calls into urgency categories."></p>
-<figcaption class="figure-caption">Figure&nbsp;11.1: An example of a decision tree, optimised to correctly identify category 1 ambulance calls in as few questions as possible.</figcaption></figure>
+<div id="fig-abulance-triage" class="quarto-figure quarto-figure-center quarto-float anchored" data-fig-align="center" alt="Descision tree to traige ambulance calls into urgency categories.">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-abulance-triage-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/402-production-explainability/ambulance-triage.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:80.0%" alt="Descision tree to traige ambulance calls into urgency categories.">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-abulance-triage-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;11.1: An example of a decision tree, optimised to correctly identify category 1 ambulance calls in as few questions as possible.
+</figcaption></figure>
 </div>
 </div>
 </div>
@@ -442,9 +451,13 @@ Note
 <p>Another model that is relatively straightforward to interpret is a linear regression. We can interpret this model using the estimated regression coefficients, which describe how the predicted outcome changes with a unit change in each covariate while the values of all other covariates are held constant.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div id="fig-interpreting-linear-regression" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure"><p><img src="images/402-production-explainability/interpreting-linear-regression.png" class="img-fluid figure-img" style="width:80.0%" alt="Sketch of estimated linear regression model overlaid on data. The gratient of the fitted line is labelled as the estimated regression coefficient."></p>
-<figcaption class="figure-caption">Figure&nbsp;11.2: Linear models have global, conditional explanations, provided by the estimated regression coefficients.</figcaption></figure>
+<div id="fig-interpreting-linear-regression" class="quarto-figure quarto-figure-center quarto-float anchored" data-fig-align="center" alt="Sketch of estimated linear regression model overlaid on data. The gratient of the fitted line is labelled as the estimated regression coefficient.">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-interpreting-linear-regression-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/402-production-explainability/interpreting-linear-regression.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:80.0%" alt="Sketch of estimated linear regression model overlaid on data. The gratient of the fitted line is labelled as the estimated regression coefficient.">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-interpreting-linear-regression-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;11.2: Linear models have global, conditional explanations, provided by the estimated regression coefficients.
+</figcaption></figure>
 </div>
 </div>
 </div>
@@ -454,9 +467,13 @@ Note
 <p>This can be contrasted against non-linear regression, where covariate effects are still interpreted conditional on the value of other covariates but the size or direction of that effect might vary depending on the value of the covariate.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div id="fig-interpreting-nonlinear-models" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure"><p><img src="images/402-production-explainability/interpreting-nonlinear-regression.png" class="img-fluid figure-img" style="width:80.0%" alt="Estimated non-linear regression curve overlaid on raw data. At low values of the covariate a unit increase produces a large increase in the estimated response. This gradient is descreasing so that at large covariate values the same change in the covariate produces almost no change in the response."></p>
-<figcaption class="figure-caption">Figure&nbsp;11.3: Non-linear models have local, conditional explanations, provided by the estimated regression coefficients.</figcaption></figure>
+<div id="fig-interpreting-nonlinear-models" class="quarto-figure quarto-figure-center quarto-float anchored" data-fig-align="center" alt="Estimated non-linear regression curve overlaid on raw data. At low values of the covariate a unit increase produces a large increase in the estimated response. This gradient is descreasing so that at large covariate values the same change in the covariate produces almost no change in the response.">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-interpreting-nonlinear-models-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/402-production-explainability/interpreting-nonlinear-regression.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:80.0%" alt="Estimated non-linear regression curve overlaid on raw data. At low values of the covariate a unit increase produces a large increase in the estimated response. This gradient is descreasing so that at large covariate values the same change in the covariate produces almost no change in the response.">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-interpreting-nonlinear-models-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;11.3: Non-linear models have local, conditional explanations, provided by the estimated regression coefficients.
+</figcaption></figure>
 </div>
 </div>
 </div>
@@ -467,9 +484,13 @@ Note
 <p>If we are wanting to use a lathe to produce pretty, cherry wood ornaments we might be interested in understanding how the girth of the trees varies with their height and total volume. Using a linear model, we see that both have a positive linear association with girth.</p>
 <div class="cell" data-layout-align="center" data-note="false">
 <div class="cell-output-display">
-<div id="fig-cherry-tree-lm" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure"><p><img src="402-production-explainability_files/figure-html/fig-cherry-tree-lm-1.png" class="img-fluid figure-img" style="width:80.0%" alt="Linear regression models overlaid on data for predicting tree girth as a linear function of either height or volume. Both have positive coefficients."></p>
-<figcaption class="figure-caption">Figure&nbsp;11.4: Cherry tree girth can be well modelled as a linear function of either tree height or harvestable volume.</figcaption></figure>
+<div id="fig-cherry-tree-lm" class="quarto-figure quarto-figure-center quarto-float anchored" data-fig-align="center" alt="Linear regression models overlaid on data for predicting tree girth as a linear function of either height or volume. Both have positive coefficients.">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-cherry-tree-lm-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="402-production-explainability_files/figure-html/fig-cherry-tree-lm-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:80.0%" alt="Linear regression models overlaid on data for predicting tree girth as a linear function of either height or volume. Both have positive coefficients.">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-cherry-tree-lm-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;11.4: Cherry tree girth can be well modelled as a linear function of either tree height or harvestable volume.
+</figcaption></figure>
 </div>
 </div>
 </div>
@@ -513,9 +534,13 @@ Note
 <p>Actually, Simpson’s parodox is a terrible name, because it isn’t actually a paradox at all. It’s not surprising that we have two different answers to two different questions, the supposed contradiction only arises when we fail to distinguish between those questions.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div id="fig-simpsons-paradox" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure"><p><img src="402-production-explainability_files/figure-html/fig-simpsons-paradox-1.png" class="img-fluid figure-img" style="width:80.0%"></p>
-<figcaption class="figure-caption">Figure&nbsp;11.5: A simulated example in which a covariate has a negative trend at the population level but a positive trend within each sub-group.</figcaption></figure>
+<div id="fig-simpsons-paradox" class="quarto-figure quarto-figure-center quarto-float anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-simpsons-paradox-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="402-production-explainability_files/figure-html/fig-simpsons-paradox-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:80.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-simpsons-paradox-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;11.5: A simulated example in which a covariate has a negative trend at the population level but a positive trend within each sub-group.
+</figcaption></figure>
 </div>
 </div>
 </div>
@@ -538,9 +563,13 @@ Note
 <p>However, we can interrogate the model’s behaviour within a small region and construct a simplified version of the model (a meta-model) that lets us explain the model within that small region. Often this meta-model is chosen as a linear model.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div id="fig-function-approximation" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure"><p><img src="images/402-production-explainability/local-linear-approximation.png" class="img-fluid figure-img" style="width:80.0%" alt="A sketch of a non-linear response surface with two input dimensions. In a small region this is locally approximated by a linear function."></p>
-<figcaption class="figure-caption">Figure&nbsp;11.6: A local linear approximation in two dimensions</figcaption></figure>
+<div id="fig-function-approximation" class="quarto-figure quarto-figure-center quarto-float anchored" data-fig-align="center" alt="A sketch of a non-linear response surface with two input dimensions. In a small region this is locally approximated by a linear function.">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-function-approximation-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/402-production-explainability/local-linear-approximation.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:80.0%" alt="A sketch of a non-linear response surface with two input dimensions. In a small region this is locally approximated by a linear function.">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-function-approximation-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;11.6: A local linear approximation in two dimensions
+</figcaption></figure>
 </div>
 </div>
 </div>
@@ -555,9 +584,13 @@ Note
 <p>If we construct a local, conditional model for each loan applicant in our data set, we can approximate the marginal effect of each covariate by averaging the conditional effects we obtain for each loan applicant.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div id="fig-local-approximation" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure"><p><img src="images/402-production-explainability/local-neighbourhoods.png" class="img-fluid figure-img" style="width:80.0%" alt="A sketch of a two dimensional data set where the local region around each observed value is indicated by a blue square."></p>
-<figcaption class="figure-caption">Figure&nbsp;11.7: Local approximations around each observation can be combined to understand global model behaviour.</figcaption></figure>
+<div id="fig-local-approximation" class="quarto-figure quarto-figure-center quarto-float anchored" data-fig-align="center" alt="A sketch of a two dimensional data set where the local region around each observed value is indicated by a blue square.">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-local-approximation-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/402-production-explainability/local-neighbourhoods.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:80.0%" alt="A sketch of a two dimensional data set where the local region around each observed value is indicated by a blue square.">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-local-approximation-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;11.7: Local approximations around each observation can be combined to understand global model behaviour.
+</figcaption></figure>
 </div>
 </div>
 </div>
@@ -663,10 +696,27 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
-  function tippyHover(el, contentFn) {
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/eds-notes\.zakvarty\.com\/");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -676,8 +726,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -689,7 +748,130 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -733,6 +915,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
+            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -758,6 +941,32 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -817,12 +1026,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
-      <a href="./401-production-reproducibility.html" class="pagination-link">
+      <a href="./401-production-reproducibility.html" class="pagination-link" aria-label="Reproducibility">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Reproducibility</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./403-production-scalability.html" class="pagination-link">
+      <a href="./403-production-scalability.html" class="pagination-link" aria-label="Scalability">
         <span class="nav-page-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Scalability</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
@@ -831,4 +1040,4 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 
 
 
-</body></html>
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/zakvarty/eds-notes-quarto/edit/main/402-production-explainability.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></div></div></footer></body></html>
