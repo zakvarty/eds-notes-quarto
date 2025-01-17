@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.450">
+<meta name="generator" content="quarto-1.4.553">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <title>Effective Data Science - 5&nbsp; Web Scraping</title>
 <style>
@@ -19,7 +19,7 @@ ul.task-list li input[type="checkbox"] {
 }
 /* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -76,7 +76,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   "collapse-after": 3,
   "panel-placement": "start",
   "type": "textbox",
-  "limit": 20,
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -85,6 +91,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit",
     "search-label": "Search"
@@ -98,33 +105,30 @@ gtag('config', 'G-EFK9JPMVM8', { 'anonymize_ip': true});
 </script><link rel="stylesheet" href="style.css">
 <meta name="twitter:title" content="Effective Data Science - 5&nbsp; Web Scraping">
 <meta name="twitter:description" content="">
-<meta name="twitter:image" content="https://eds-notes.zakvarty.com/images/202-data-webscraping/rvest-logo.png">
 <meta name="twitter:creator" content="zakvarty">
-<meta name="twitter:image-height" content="278">
-<meta name="twitter:image-width" content="240">
-<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:card" content="summary">
 </head>
 <body class="nav-sidebar floating">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./200-data-introduction.html">Acquiring and Sharing Data</a></li><li class="breadcrumb-item"><a href="./202-data-webscraping.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Web Scraping</span></a></li></ol></nav>
-      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-      </a>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./200-data-introduction.html">Acquiring and Sharing Data</a></li><li class="breadcrumb-item"><a href="./202-data-webscraping.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Web Scraping</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
   </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Effective Data Science</a> 
         <div class="sidebar-tools-main">
-    <a href="https://github.com/zakvarty/eds-notes-quarto/" rel="" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+    <a href="https://github.com/zakvarty/eds-notes-quarto/" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
     <div class="dropdown">
       <a href="" title="Share" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Share"><i class="bi bi-share"></i></a>
       <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
@@ -358,7 +362,7 @@ gtag('config', 'G-EFK9JPMVM8', { 'anonymize_ip': true});
 </li>
     </ul>
 </div>
-</nav><div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+</nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
@@ -388,10 +392,10 @@ gtag('config', 'G-EFK9JPMVM8', { 'anonymize_ip': true});
 </li>
   <li><a href="#tip-for-building-tibbles" id="toc-tip-for-building-tibbles" class="nav-link" data-scroll-target="#tip-for-building-tibbles"><span class="header-section-number">5.10</span> Tip for Building Tibbles</a></li>
   <li><a href="#session-information" id="toc-session-information" class="nav-link" data-scroll-target="#session-information"><span class="header-section-number">5.11</span> Session Information</a></li>
-  </ul><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/zakvarty/eds-notes-quarto/edit/main/202-data-webscraping.qmd" class="toc-action">Edit this page</a></p></div></div></nav>
+  </ul><div class="toc-actions"><ul><li><a href="https://github.com/zakvarty/eds-notes-quarto/edit/main/202-data-webscraping.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./200-data-introduction.html">Acquiring and Sharing Data</a></li><li class="breadcrumb-item"><a href="./202-data-webscraping.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Web Scraping</span></a></li></ol></nav><div class="quarto-title">
 <h1 class="title"><span id="data-webscraping" class="quarto-section-identifier"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Web Scraping</span></span></h1>
 </div>
 
@@ -404,6 +408,7 @@ gtag('config', 'G-EFK9JPMVM8', { 'anonymize_ip': true});
     
   </div>
   
+
 
 </header><div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -436,16 +441,16 @@ Note
 </section><section id="html" class="level2" data-number="5.3"><h2 data-number="5.3" class="anchored" data-anchor-id="html">
 <span class="header-section-number">5.3</span> HTML</h2>
 <p>A basic HTML page with no styling applied might look something like this:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;html&gt;</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;head&gt;</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;title&gt;</span>Page title<span class="kw">&lt;/title&gt;</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/head&gt;</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;body&gt;</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;h1</span> <span class="er">id</span><span class="ot">=</span><span class="st">'first'</span><span class="kw">&gt;</span>A level 1 heading<span class="kw">&lt;/h1&gt;</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;p&gt;</span>Hello World!<span class="kw">&lt;/p&gt;</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;p&gt;</span>Here is some plain text <span class="dv">&amp;amp;</span> <span class="kw">&lt;b&gt;</span>some bold text.<span class="kw">&lt;/b&gt;&lt;/p&gt;</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;img</span> <span class="er">src</span><span class="ot">=</span><span class="st">'myimg.png'</span> <span class="er">width</span><span class="ot">=</span><span class="st">'100'</span> <span class="er">height</span><span class="ot">=</span><span class="st">'100'</span><span class="kw">&gt;</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/body&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">html</span><span class="dt">&gt;</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">head</span><span class="dt">&gt;</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">title</span><span class="dt">&gt;</span>Page title<span class="dt">&lt;/</span><span class="kw">title</span><span class="dt">&gt;</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">head</span><span class="dt">&gt;</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">body</span><span class="dt">&gt;</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">h1</span><span class="ot"> id</span><span class="op">=</span><span class="st">'first'</span><span class="dt">&gt;</span>A level 1 heading<span class="dt">&lt;/</span><span class="kw">h1</span><span class="dt">&gt;</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">p</span><span class="dt">&gt;</span>Hello World!<span class="dt">&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">p</span><span class="dt">&gt;</span>Here is some plain text <span class="dv">&amp;amp;</span> <span class="dt">&lt;</span><span class="kw">b</span><span class="dt">&gt;</span>some bold text.<span class="dt">&lt;/</span><span class="kw">b</span><span class="dt">&gt;&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">img</span><span class="ot"> src</span><span class="op">=</span><span class="st">'myimg.png'</span><span class="ot"> width</span><span class="op">=</span><span class="st">'100'</span><span class="ot"> height</span><span class="op">=</span><span class="st">'100'</span><span class="dt">&gt;</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">body</span><span class="dt">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <section id="html-elements" class="level3" data-number="5.3.1"><h3 data-number="5.3.1" class="anchored" data-anchor-id="html-elements">
 <span class="header-section-number">5.3.1</span> HTML elements</h3>
 <!-- for presentation 
@@ -480,7 +485,7 @@ Note
 </section></section><section id="html-attributes" class="level2" data-number="5.4"><h2 data-number="5.4" class="anchored" data-anchor-id="html-attributes">
 <span class="header-section-number">5.4</span> HTML Attributes</h2>
 <p>We’ve seen one example of a header with an additional attribute. More generally, all tags can have named attributes. These attributes are contained within the opening tag and look something like:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;tag</span> <span class="er">attribute1</span><span class="ot">=</span><span class="st">'value1'</span> <span class="er">attribute2</span><span class="ot">=</span><span class="st">'value2'</span><span class="kw">&gt;</span>element contents<span class="kw">&lt;/tag&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">tag</span><span class="ot"> attribute1</span><span class="op">=</span><span class="st">'value1'</span><span class="ot"> attribute2</span><span class="op">=</span><span class="st">'value2'</span><span class="dt">&gt;</span>element contents<span class="dt">&lt;/</span><span class="kw">tag</span><span class="dt">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Two of the most important attributes are <code>id</code> and <code>class</code>. These attributes are used in conjunction with the CSS file to control the visual appearance of the page. These are often very useful to identify the elements that you are interested in when scraping data off a page.</p>
 </section><section id="css-selectors" class="level2" data-number="5.5"><h2 data-number="5.5" class="anchored" data-anchor-id="css-selectors">
 <span class="header-section-number">5.5</span> CSS Selectors</h2>
@@ -510,7 +515,7 @@ Note
 </h2>
 <p>With <a href="https://rvest.tidyverse.org/">rvest</a>, reading a html page can be as simple as loading in tabular data.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">html</span> <span class="op">&lt;-</span> <span class="fu">rvest</span><span class="fu">::</span><span class="fu"><a href="http://xml2.r-lib.org/reference/read_xml.html">read_html</a></span><span class="op">(</span><span class="st">"https://www.zakvarty.com/professional/teaching.html"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">html</span> <span class="op">&lt;-</span> <span class="fu">rvest</span><span class="fu">::</span><span class="fu"><a href="http://xml2.r-lib.org/reference/read_xml.html">read_html</a></span><span class="op">(</span><span class="st">"https://www.zakvarty.com/teaching.html"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The <code>class</code> of the resulting object is an <code>xml_document</code>. This type of object is from the low-level package <a href="https://xml2.r-lib.org/">xml2</a>, which allows you to read xml files into R.</p>
 <div class="cell" data-layout-align="center">
@@ -523,7 +528,7 @@ Note
 <span><span class="co">#&gt; {html_document}</span></span>
 <span><span class="co">#&gt; &lt;html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"&gt;</span></span>
 <span><span class="co">#&gt; [1] &lt;head&gt;\n&lt;meta http-equiv="Content-Type" content="text/html; charset=UT ...</span></span>
-<span><span class="co">#&gt; [2] &lt;body class="nav-fixed"&gt;\n\n&lt;div id="quarto-search-results"&gt;&lt;/div&gt;\n   ...</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="co">#&gt; [2] &lt;body class="nav-fixed fullcontent"&gt;\n\n&lt;div id="quarto-search-results ...</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>We have several possible approaches to extracting information from this document.</p>
 </section><section id="extracting-html-elements" class="level2" data-number="5.8"><h2 data-number="5.8" class="anchored" data-anchor-id="extracting-html-elements">
@@ -536,26 +541,49 @@ Note
 <span><span class="co">#&gt; {xml_nodeset (1)}</span></span>
 <span><span class="co">#&gt; [1] &lt;h1&gt;Teaching&lt;/h1&gt;</span></span>
 <span><span class="va">html</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rvest.tidyverse.org/reference/html_element.html">html_elements</a></span><span class="op">(</span><span class="st">"h2"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; {xml_nodeset (2)}</span></span>
-<span><span class="co">#&gt; [1] &lt;h2 id="toc-title"&gt;On this page&lt;/h2&gt;</span></span>
-<span><span class="co">#&gt; [2] &lt;h2 class="anchored" data-anchor-id="course-history"&gt;Course History&lt;/h2&gt;</span></span>
+<span><span class="co">#&gt; {xml_nodeset (1)}</span></span>
+<span><span class="co">#&gt; [1] &lt;h2 class="anchored" data-anchor-id="my-courses"&gt;My Courses&lt;/h2&gt;</span></span>
 <span><span class="va">html</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rvest.tidyverse.org/reference/html_element.html">html_elements</a></span><span class="op">(</span><span class="st">"p"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; {xml_nodeset (7)}</span></span>
-<span><span class="co">#&gt; [1] &lt;p&gt;I am fortunate to have had the opportunity to teach in a variety of ...</span></span>
-<span><span class="co">#&gt; [2] &lt;p&gt;Developing and teaching a number of modules in statistics, data sci ...</span></span>
-<span><span class="co">#&gt; [3] &lt;p&gt;Supervising undergraduate, postgraduate and doctoral research proje ...</span></span>
-<span><span class="co">#&gt; [4] &lt;p&gt;Adapting and leading short courses on scientific writing and commun ...</span></span>
-<span><span class="co">#&gt; [5] &lt;p&gt;Running workshops and computer labs for undergraduate and postgradu ...</span></span>
-<span><span class="co">#&gt; [6] &lt;p&gt;Speaking at univerisity open days and providing one-to-one tuition  ...</span></span>
-<span><span class="co">#&gt; [7] &lt;p&gt;I am an associate fellow of the Higher Education Academy, which you ...</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="co">#&gt; {xml_nodeset (35)}</span></span>
+<span><span class="co">#&gt;  [1] &lt;p&gt;I am fortunate to have had the opportunity to teach in a variety o ...</span></span>
+<span><span class="co">#&gt;  [2] &lt;p&gt;Developing and teaching modules in statistics, data science and da ...</span></span>
+<span><span class="co">#&gt;  [3] &lt;p&gt;Designing courses for both in-person and remote learning, predomin ...</span></span>
+<span><span class="co">#&gt;  [4] &lt;p&gt;Supervising undergraduate, postgraduate and doctoral research proj ...</span></span>
+<span><span class="co">#&gt;  [5] &lt;p&gt;Adapting and leading short courses on scientific writing and commu ...</span></span>
+<span><span class="co">#&gt;  [6] &lt;p&gt;Running workshops and computer labs for undergraduate and postgrad ...</span></span>
+<span><span class="co">#&gt;  [7] &lt;p&gt;Speaking at university open days and providing one-to-one tuition  ...</span></span>
+<span><span class="co">#&gt;  [8] &lt;p&gt;I am an associate fellow of the Higher Education Academy, which yo ...</span></span>
+<span><span class="co">#&gt;  [9] &lt;p&gt;&lt;img src="assets/course-logos/EDS-logo.png" alt="Effective Data Sc ...</span></span>
+<span><span class="co">#&gt; [10] &lt;p&gt;&lt;a href="https://eds-notes.zakvarty.com" class="btn btn-outline-pr ...</span></span>
+<span><span class="co">#&gt; [11] &lt;p&gt;Model building and evaluation are necessary but not sufficient ski ...</span></span>
+<span><span class="co">#&gt; [12] &lt;p&gt;During this module you will critically explore how to:&lt;/p&gt;</span></span>
+<span><span class="co">#&gt; [13] &lt;p&gt;This interdisciplinary course draws from fields including statisti ...</span></span>
+<span><span class="co">#&gt; [14] &lt;p&gt;&lt;img src="assets/course-logos/ethics-logo.png" alt="MLDS Ethics lo ...</span></span>
+<span><span class="co">#&gt; [15] &lt;p&gt;&lt;a class="btn btn-outline-primary m-1" href="https://www.zakvarty. ...</span></span>
+<span><span class="co">#&gt; [16] &lt;p&gt;Data-driven decision making is now pervasive and impacts us all. Y ...</span></span>
+<span><span class="co">#&gt; [17] &lt;p&gt;The ways in which these predictive models can fail &lt;em&gt;mathematica ...</span></span>
+<span><span class="co">#&gt; [18] &lt;p&gt;To prevent this harm, the ethical impacts of using data to make de ...</span></span>
+<span><span class="co">#&gt; [19] &lt;p&gt;The course takes a practical and technical approach to identifying ...</span></span>
+<span><span class="co">#&gt; [20] &lt;p&gt;&lt;img src="assets/course-logos/point-process-logo.png" alt="Stochas ...</span></span>
+<span><span class="co">#&gt; ...</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>You can also combine and nest these selectors. For example you might want to extract all links that are within paragraphs <em>and</em> all second level headers.</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">html</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rvest.tidyverse.org/reference/html_element.html">html_elements</a></span><span class="op">(</span><span class="st">"p a,h2"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; {xml_nodeset (3)}</span></span>
-<span><span class="co">#&gt; [1] &lt;h2 id="toc-title"&gt;On this page&lt;/h2&gt;</span></span>
-<span><span class="co">#&gt; [2] &lt;a href="https://www.advance-he.ac.uk/fellowship/associate-fellowship" ...</span></span>
-<span><span class="co">#&gt; [3] &lt;h2 class="anchored" data-anchor-id="course-history"&gt;Course History&lt;/h2&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="co">#&gt; {xml_nodeset (13)}</span></span>
+<span><span class="co">#&gt;  [1] &lt;a href="https://www.advance-he.ac.uk/fellowship/associate-fellowship ...</span></span>
+<span><span class="co">#&gt;  [2] &lt;h2 class="anchored" data-anchor-id="my-courses"&gt;My Courses&lt;/h2&gt;</span></span>
+<span><span class="co">#&gt;  [3] &lt;a href="https://eds-notes.zakvarty.com" class="btn btn-outline-prima ...</span></span>
+<span><span class="co">#&gt;  [4] &lt;a href="https://youtube.com/playlist?list=PLBVD-YN3U17AiyuMwW77yGnVu ...</span></span>
+<span><span class="co">#&gt;  [5] &lt;a href="https://github.com/zakvarty/effective-data-science-resources ...</span></span>
+<span><span class="co">#&gt;  [6] &lt;a class="btn btn-outline-primary m-1" href="https://www.zakvarty.com ...</span></span>
+<span><span class="co">#&gt;  [7] &lt;a href="https://github.com/zakvarty/ethics-one-resources" class="btn ...</span></span>
+<span><span class="co">#&gt;  [8] &lt;a href="https://github.com/zakvarty/ethics-two-resources" class="btn ...</span></span>
+<span><span class="co">#&gt;  [9] &lt;a href="https://github.com/zakvarty/ethics-three-resources" class="b ...</span></span>
+<span><span class="co">#&gt; [10] &lt;a href="https://m1r.zakvarty.com" class="btn btn-outline-primary m-1 ...</span></span>
+<span><span class="co">#&gt; [11] &lt;a href="https://youtube.com/playlist?list=PLBVD-YN3U17BybIN_6drVs9LL ...</span></span>
+<span><span class="co">#&gt; [12] &lt;a href="https://extremes-notes.zakvarty.com" class="btn btn-outline- ...</span></span>
+<span><span class="co">#&gt; [13] &lt;a href="https://youtube.com/playlist?list=PLBVD-YN3U17Ce7tO3bkJqgJT_ ...</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section><section id="extracting-data-from-html-elements" class="level2" data-number="5.9"><h2 data-number="5.9" class="anchored" data-anchor-id="extracting-data-from-html-elements">
 <span class="header-section-number">5.9</span> Extracting Data From HTML Elements</h2>
@@ -568,11 +596,18 @@ Note
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">html</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://rvest.tidyverse.org/reference/html_element.html">html_elements</a></span><span class="op">(</span><span class="st">"#teaching li"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://rvest.tidyverse.org/reference/html_text.html">html_text2</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] "Developing and teaching a number of modules in statistics, data science and data ethics. These were predominantly at the postgradute-level and include courses designed for in-person and remote learning."</span></span>
-<span><span class="co">#&gt; [2] "Supervising undergraduate, postgraduate and doctoral research projects."                                                                                                                                   </span></span>
-<span><span class="co">#&gt; [3] "Adapting and leading short courses on scientific writing and communication."                                                                                                                               </span></span>
-<span><span class="co">#&gt; [4] "Running workshops and computer labs for undergraduate and postgraduate modules."                                                                                                                           </span></span>
-<span><span class="co">#&gt; [5] "Speaking at univerisity open days and providing one-to-one tuition to high school students."</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="co">#&gt;  [1] "Developing and teaching modules in statistics, data science and data ethics."                      </span></span>
+<span><span class="co">#&gt;  [2] "Designing courses for both in-person and remote learning, predominantly at the postgraduate level."</span></span>
+<span><span class="co">#&gt;  [3] "Supervising undergraduate, postgraduate and doctoral research projects."                           </span></span>
+<span><span class="co">#&gt;  [4] "Adapting and leading short courses on scientific writing and communication."                       </span></span>
+<span><span class="co">#&gt;  [5] "Running workshops and computer labs for undergraduate and postgraduate modules."                   </span></span>
+<span><span class="co">#&gt;  [6] "Speaking at university open days and providing one-to-one tuition to high school students."        </span></span>
+<span><span class="co">#&gt;  [7] "effectively scope and manage a data science project;"                                              </span></span>
+<span><span class="co">#&gt;  [8] "work openly and reproducibly;"                                                                     </span></span>
+<span><span class="co">#&gt;  [9] "efficiently acquire, manipulate, and present data;"                                                </span></span>
+<span><span class="co">#&gt; [10] "interpret and explain your work for a variety of stakeholders;"                                    </span></span>
+<span><span class="co">#&gt; [11] "ensure that your work can be put into production;"                                                 </span></span>
+<span><span class="co">#&gt; [12] "assess the ethical implications of your work as a data scientist."</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The difference between <code><a href="https://rvest.tidyverse.org/reference/html_text.html">html_text()</a></code> and <code><a href="https://rvest.tidyverse.org/reference/html_text.html">html_text2()</a></code> is in how they handle whitespace. In HTML whitespace and line breaks have very little influence over how the code is interpreted by the computer (this is similar to R but very different from Python). <code><a href="https://rvest.tidyverse.org/reference/html_text.html">html_text()</a></code> will extract the text as it is in the raw html, while <code><a href="https://rvest.tidyverse.org/reference/html_text.html">html_text2()</a></code> will do its best to extract the text in a way that gives you something similar to what you’d see in the browser.</p>
 </section><section id="extracting-attributes" class="level3" data-number="5.9.2"><h3 data-number="5.9.2" class="anchored" data-anchor-id="extracting-attributes">
@@ -583,14 +618,15 @@ Note
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">html</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rvest.tidyverse.org/reference/html_element.html">html_element</a></span><span class="op">(</span><span class="st">".compact:nth-child(1) .nav-link"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; {html_node}</span></span>
 <span><span class="co">#&gt; &lt;a class="nav-link" href="https://www.twitter.com/zakvarty"&gt;</span></span>
-<span><span class="co">#&gt; [1] &lt;i class="bi bi-twitter" role="img"&gt;\n&lt;/i&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="co">#&gt; [1] &lt;i class="bi bi-twitter" role="img"&gt;\n&lt;/i&gt;</span></span>
+<span><span class="co">#&gt; [2] &lt;span class="menu-text"&gt;&lt;/span&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>To extract the <code>href</code> attribute from the scraped element, we use the <code><a href="https://rvest.tidyverse.org/reference/html_attr.html">rvest::html_attr()</a></code> function.</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">html</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://rvest.tidyverse.org/reference/html_element.html">html_elements</a></span><span class="op">(</span><span class="st">".compact:nth-child(1) .nav-link"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://rvest.tidyverse.org/reference/html_attr.html">html_attr</a></span><span class="op">(</span><span class="st">"href"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] "https://www.twitter.com/zakvarty"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="co">#&gt; [1] "https://www.twitter.com/zakvarty" "https://www.twitter.com/zakvarty"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><strong>Note:</strong> <code><a href="https://rvest.tidyverse.org/reference/html_attr.html">rvest::html_attr()</a></code> will always return a character string (or list of character strings). If you are extracting an attribute that describes a quantity, such as the width of an image, you’ll need to convert this from a string to your required data type. For example, of the width is measures in pixels you might use <code><a href="https://rdrr.io/r/base/integer.html">as.integer()</a></code>.</p>
 </section><section id="extracting-tables" class="level3" data-number="5.9.3"><h3 data-number="5.9.3" class="anchored" data-anchor-id="extracting-tables">
@@ -647,16 +683,16 @@ Note
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">html</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://rvest.tidyverse.org/reference/html_element.html">html_element</a></span><span class="op">(</span><span class="st">"table"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://rvest.tidyverse.org/reference/html_table.html">html_table</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; # A tibble: 31 × 3</span></span>
-<span><span class="co">#&gt;   Year      Course                                     Role    </span></span>
-<span><span class="co">#&gt;   &lt;chr&gt;     &lt;chr&gt;                                      &lt;chr&gt;   </span></span>
-<span><span class="co">#&gt; 1 "2022-23" Data Science                               Lecturer</span></span>
-<span><span class="co">#&gt; 2 ""        Ethics in Data Science I, II and III       Lecturer</span></span>
-<span><span class="co">#&gt; 3 ""        Data Ethics for Digital Chemistry          Lecturer</span></span>
-<span><span class="co">#&gt; 4 ""        Y1 research projects: point process models Lecturer</span></span>
-<span><span class="co">#&gt; 5 "2021-22" Supervised Learning                        Lecturer</span></span>
-<span><span class="co">#&gt; 6 ""        Ethics in Data Science I                   Lecturer</span></span>
-<span><span class="co">#&gt; # ℹ 25 more rows</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="co">#&gt; # A tibble: 27 × 3</span></span>
+<span><span class="co">#&gt;   Year      Course                                            Role    </span></span>
+<span><span class="co">#&gt;   &lt;chr&gt;     &lt;chr&gt;                                             &lt;chr&gt;   </span></span>
+<span><span class="co">#&gt; 1 "2021-25" Data Science Notes Videos                         Lecturer</span></span>
+<span><span class="co">#&gt; 2 ""        Ethics in Data Science I, II and III Reading List Lecturer</span></span>
+<span><span class="co">#&gt; 3 ""        Data Ethics for Digital Chemistry                 Lecturer</span></span>
+<span><span class="co">#&gt; 4 ""        Y1 research projects: point process models Notes  Lecturer</span></span>
+<span><span class="co">#&gt; 5 "2021-22" Supervised Learning Videos                        Lecturer</span></span>
+<span><span class="co">#&gt; 6 "—"       —                                                 —       </span></span>
+<span><span class="co">#&gt; # ℹ 21 more rows</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section></section><section id="tip-for-building-tibbles" class="level2" data-number="5.10"><h2 data-number="5.10" class="anchored" data-anchor-id="tip-for-building-tibbles">
 <span class="header-section-number">5.10</span> Tip for Building Tibbles</h2>
@@ -717,12 +753,12 @@ Note
 <span class="header-section-number">5.11</span> Session Information</h2>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<p><strong>R version 4.3.1 (2023-06-16)</strong></p>
-<p><strong>Platform:</strong> x86_64-apple-darwin20 (64-bit)</p>
+<p><strong>R version 4.4.2 (2024-10-31)</strong></p>
+<p><strong>Platform:</strong> x86_64-apple-darwin20</p>
 <p><strong>locale:</strong> en_US.UTF-8||en_US.UTF-8||en_US.UTF-8||C||en_US.UTF-8||en_US.UTF-8</p>
 <p><strong>attached base packages:</strong> <em>stats</em>, <em>graphics</em>, <em>grDevices</em>, <em>utils</em>, <em>datasets</em>, <em>methods</em> and <em>base</em></p>
-<p><strong>other attached packages:</strong> rvest(v.1.0.3)</p>
-<p><strong>loaded via a namespace (and not attached):</strong> <em>vctrs(v.0.6.5)</em>, <em>httr(v.1.4.7)</em>, <em>cli(v.3.6.2)</em>, <em>knitr(v.1.45)</em>, <em>rlang(v.1.1.2)</em>, <em>xfun(v.0.41)</em>, <em>stringi(v.1.8.3)</em>, <em>jsonlite(v.1.8.8)</em>, <em>glue(v.1.6.2)</em>, <em>selectr(v.0.4-2)</em>, <em>htmltools(v.0.5.7)</em>, <em>fansi(v.1.0.6)</em>, <em>rmarkdown(v.2.25)</em>, <em>pander(v.0.6.5)</em>, <em>evaluate(v.0.23)</em>, <em>tibble(v.3.2.1)</em>, <em>fastmap(v.1.1.1)</em>, <em>yaml(v.2.3.8)</em>, <em>lifecycle(v.1.0.4)</em>, <em>stringr(v.1.5.1)</em>, <em>compiler(v.4.3.1)</em>, <em>Rcpp(v.1.0.11)</em>, <em>pkgconfig(v.2.0.3)</em>, <em>htmlwidgets(v.1.6.4)</em>, <em>rstudioapi(v.0.15.0)</em>, <em>digest(v.0.6.33)</em>, <em>R6(v.2.5.1)</em>, <em>utf8(v.1.2.4)</em>, <em>pillar(v.1.9.0)</em>, <em>curl(v.5.2.0)</em>, <em>magrittr(v.2.0.3)</em>, <em>tools(v.4.3.1)</em> and <em>xml2(v.1.3.6)</em></p>
+<p><strong>other attached packages:</strong> rvest(v.1.0.4)</p>
+<p><strong>loaded via a namespace (and not attached):</strong> <em>vctrs(v.0.6.5)</em>, <em>httr(v.1.4.7)</em>, <em>cli(v.3.6.3)</em>, <em>knitr(v.1.49)</em>, <em>rlang(v.1.1.4)</em>, <em>xfun(v.0.50)</em>, <em>stringi(v.1.8.4)</em>, <em>jsonlite(v.1.8.9)</em>, <em>glue(v.1.8.0)</em>, <em>selectr(v.0.4-2)</em>, <em>htmltools(v.0.5.8.1)</em>, <em>rmarkdown(v.2.29)</em>, <em>pander(v.0.6.5)</em>, <em>evaluate(v.1.0.3)</em>, <em>tibble(v.3.2.1)</em>, <em>fastmap(v.1.2.0)</em>, <em>yaml(v.2.3.10)</em>, <em>lifecycle(v.1.0.4)</em>, <em>stringr(v.1.5.1)</em>, <em>compiler(v.4.4.2)</em>, <em>Rcpp(v.1.0.14)</em>, <em>htmlwidgets(v.1.6.4)</em>, <em>pkgconfig(v.2.0.3)</em>, <em>rstudioapi(v.0.17.1)</em>, <em>digest(v.0.6.37)</em>, <em>R6(v.2.5.1)</em>, <em>utf8(v.1.2.4)</em>, <em>pillar(v.1.10.1)</em>, <em>curl(v.6.1.0)</em>, <em>magrittr(v.2.0.3)</em>, <em>tools(v.4.4.2)</em> and <em>xml2(v.1.3.6)</em></p>
 </div>
 </div>
 
@@ -806,10 +842,27 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
-  function tippyHover(el, contentFn) {
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/eds-notes\.zakvarty\.com\/");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -819,8 +872,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -832,7 +894,130 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -876,6 +1061,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
+            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -901,6 +1087,32 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -960,12 +1172,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
-      <a href="./201-data-tabular.html" class="pagination-link">
+      <a href="./201-data-tabular.html" class="pagination-link" aria-label="Tabular Data">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Tabular Data</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./203-data-apis.html" class="pagination-link">
+      <a href="./203-data-apis.html" class="pagination-link" aria-label="APIs">
         <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">APIs</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
@@ -974,4 +1186,4 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 
 
 
-</body></html>
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/zakvarty/eds-notes-quarto/edit/main/202-data-webscraping.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></div></div></footer></body></html>
