@@ -1114,14 +1114,14 @@ Note
 <div class="cell" data-layout-align="center">
 <div class="sourceCode" id="cb38"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">poorly_named_df</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A tibble: 6 × 11</span></span>
-<span><span class="co">#&gt;   observation_id   V1_A   V2_B    V3_C    V4_D   V5_E   V6_F   V7_G    V8_H</span></span>
-<span><span class="co">#&gt;            &lt;int&gt;  &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;</span></span>
-<span><span class="co">#&gt; 1              1 -0.780  1.04   0.124  -0.350   2.02   0.181 -0.801 -0.326 </span></span>
-<span><span class="co">#&gt; 2              2  1.10   0.212  0.0453  0.0864 -1.17  -1.21   0.493  0.491 </span></span>
-<span><span class="co">#&gt; 3              3 -0.494  1.57  -0.935  -1.66   -1.60   0.582 -1.59   1.23  </span></span>
-<span><span class="co">#&gt; 4              4  0.482 -0.312  0.486   0.277   1.11   0.857 -1.57  -0.307 </span></span>
-<span><span class="co">#&gt; 5              5 -0.996  3.54  -0.953  -1.70   -1.67   0.424 -0.593 -0.323 </span></span>
-<span><span class="co">#&gt; 6              6  0.972 -0.668  1.48    0.518   0.715 -1.25   0.882  0.0202</span></span>
+<span><span class="co">#&gt;   observation_id   V1_A   V2_B   V3_C   V4_D   V5_E    V6_F      V7_G   V8_H</span></span>
+<span><span class="co">#&gt;            &lt;int&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;     &lt;dbl&gt;  &lt;dbl&gt;</span></span>
+<span><span class="co">#&gt; 1              1  0.401 -0.889 -0.170  0.288  1.76  -0.492  -0.496    -0.469</span></span>
+<span><span class="co">#&gt; 2              2  0.206 -1.61   0.824 -0.118 -0.919 -0.652  -2.00      2.38 </span></span>
+<span><span class="co">#&gt; 3              3 -0.209  0.801  0.390 -1.24   0.718 -1.11   -0.462     1.08 </span></span>
+<span><span class="co">#&gt; 4              4  0.250  0.655 -1.15  -0.263  0.366 -0.772  -0.496    -1.51 </span></span>
+<span><span class="co">#&gt; 5              5 -0.417 -2.06  -0.224 -0.388 -1.55   0.496   0.0611    1.17 </span></span>
+<span><span class="co">#&gt; 6              6  0.782 -0.329 -0.795 -2.27   2.18  -0.0211 -0.000898  0.131</span></span>
 <span><span class="co">#&gt; # ℹ 2 more variables: V9_I &lt;dbl&gt;, V10_J &lt;dbl&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell" data-layout-align="center">
@@ -1203,10 +1203,10 @@ Note
 <div class="cell-output-display">
 <p><strong>R version 4.4.2 (2024-10-31)</strong></p>
 <p><strong>Platform:</strong> x86_64-apple-darwin20</p>
-<p><strong>locale:</strong> en_US.UTF-8||en_US.UTF-8||en_US.UTF-8||C||en_US.UTF-8||en_US.UTF-8</p>
+<p><strong>locale:</strong> en_GB.UTF-8||en_GB.UTF-8||en_GB.UTF-8||C||en_GB.UTF-8||en_GB.UTF-8</p>
 <p><strong>attached base packages:</strong> <em>stats</em>, <em>graphics</em>, <em>grDevices</em>, <em>utils</em>, <em>datasets</em>, <em>methods</em> and <em>base</em></p>
 <p><strong>other attached packages:</strong> <em>dplyr(v.1.1.4)</em> and <em>palmerpenguins(v.0.1.1)</em></p>
-<p><strong>loaded via a namespace (and not attached):</strong> <em>vctrs(v.0.6.5)</em>, <em>cli(v.3.6.3)</em>, <em>knitr(v.1.49)</em>, <em>rlang(v.1.1.4)</em>, <em>xfun(v.0.50)</em>, <em>stringi(v.1.8.4)</em>, <em>purrr(v.1.0.2)</em>, <em>generics(v.0.1.3)</em>, <em>jsonlite(v.1.8.9)</em>, <em>glue(v.1.8.0)</em>, <em>htmltools(v.0.5.8.1)</em>, <em>rmarkdown(v.2.29)</em>, <em>pander(v.0.6.5)</em>, <em>evaluate(v.1.0.3)</em>, <em>tibble(v.3.2.1)</em>, <em>fastmap(v.1.2.0)</em>, <em>yaml(v.2.3.10)</em>, <em>lifecycle(v.1.0.4)</em>, <em>stringr(v.1.5.1)</em>, <em>compiler(v.4.4.2)</em>, <em>Rcpp(v.1.0.14)</em>, <em>htmlwidgets(v.1.6.4)</em>, <em>pkgconfig(v.2.0.3)</em>, <em>rstudioapi(v.0.17.1)</em>, <em>digest(v.0.6.37)</em>, <em>R6(v.2.5.1)</em>, <em>tidyselect(v.1.2.1)</em>, <em>utf8(v.1.2.4)</em>, <em>pillar(v.1.10.1)</em>, <em>magrittr(v.2.0.3)</em>, <em>tools(v.4.4.2)</em> and <em>withr(v.3.0.2)</em></p>
+<p><strong>loaded via a namespace (and not attached):</strong> <em>vctrs(v.0.6.5)</em>, <em>cli(v.3.6.3)</em>, <em>knitr(v.1.49)</em>, <em>rlang(v.1.1.4)</em>, <em>xfun(v.0.50)</em>, <em>stringi(v.1.8.4)</em>, <em>purrr(v.1.0.2)</em>, <em>generics(v.0.1.3)</em>, <em>jsonlite(v.1.8.9)</em>, <em>glue(v.1.8.0)</em>, <em>htmltools(v.0.5.8.1)</em>, <em>rmarkdown(v.2.29)</em>, <em>pander(v.0.6.5)</em>, <em>evaluate(v.1.0.3)</em>, <em>tibble(v.3.2.1)</em>, <em>fastmap(v.1.2.0)</em>, <em>yaml(v.2.3.10)</em>, <em>lifecycle(v.1.0.4)</em>, <em>stringr(v.1.5.1)</em>, <em>compiler(v.4.4.2)</em>, <em>Rcpp(v.1.0.14)</em>, <em>htmlwidgets(v.1.6.4)</em>, <em>pkgconfig(v.2.0.3)</em>, <em>digest(v.0.6.37)</em>, <em>R6(v.2.5.1)</em>, <em>tidyselect(v.1.2.1)</em>, <em>utf8(v.1.2.4)</em>, <em>pillar(v.1.10.1)</em>, <em>magrittr(v.2.0.3)</em>, <em>tools(v.4.4.2)</em> and <em>withr(v.3.0.2)</em></p>
 </div>
 </div>
 

@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2021) (preloaded format=xelatex 2021.8.12)  17 JAN 2025 14:46
+This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2021) (preloaded format=xelatex 2021.8.12)  23 JAN 2025 11:39
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1490,19 +1490,11 @@ rectory-structure-drawing-33.png Graphic file (type bmp)
 <images/101-workflows-organising-your-work/directory-structure-drawings/directo
 ry-structure-drawing-33.png>
 [25]
-Underfull \hbox (badness 10000) in paragraph at lines 1154--1162
+Underfull \hbox (badness 7722) in paragraph at lines 1154--1161
 \TU/lmr/m/it/10.95 cli(v.3.6.3)\TU/lmr/m/n/10.95 , \TU/lmr/m/it/10.95 tools(v.4
 .4.2)\TU/lmr/m/n/10.95 , \TU/lmr/m/it/10.95 htmltools(v.0.5.8.1)\TU/lmr/m/n/10.
-95 , \TU/lmr/m/it/10.95 rstudioapi(v.0.17.1)\TU/lmr/m/n/10.95 , \TU/lmr/m/it/10
-.95 yaml(v.2.3.10)\TU/lmr/m/n/10.95 ,
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 1154--1162
-\TU/lmr/m/it/10.95 Rcpp(v.1.0.14)\TU/lmr/m/n/10.95 , \TU/lmr/m/it/10.95 pander(
-v.0.6.5)\TU/lmr/m/n/10.95 , \TU/lmr/m/it/10.95 rmarkdown(v.2.29)\TU/lmr/m/n/10.
-95 , \TU/lmr/m/it/10.95 knitr(v.1.49)\TU/lmr/m/n/10.95 , \TU/lmr/m/it/10.95 jso
-nlite(v.1.8.9)\TU/lmr/m/n/10.95 ,
+95 , \TU/lmr/m/it/10.95 yaml(v.2.3.10)\TU/lmr/m/n/10.95 , \TU/lmr/m/it/10.95 Rc
+pp(v.1.0.14)\TU/lmr/m/n/10.95 , \TU/lmr/m/it/10.95 pan-
  []
 
 [26]
@@ -1511,21 +1503,21 @@ chapter 2.
 
 ] [28] [29] [30] [31]
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
-(Font)              scaled to size 7.665pt on input line 1484.
+(Font)              scaled to size 7.665pt on input line 1483.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
-(Font)              scaled to size 5.475pt on input line 1484.
+(Font)              scaled to size 5.475pt on input line 1483.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 10.95099pt on input line 1484.
+(Font)              scaled to size 10.95099pt on input line 1483.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 7.66568pt on input line 1484.
+(Font)              scaled to size 7.66568pt on input line 1483.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 5.4755pt on input line 1484.
+(Font)              scaled to size 5.4755pt on input line 1483.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 10.94882pt on input line 1484.
+(Font)              scaled to size 10.94882pt on input line 1483.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 7.66417pt on input line 1484.
+(Font)              scaled to size 7.66417pt on input line 1483.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 5.47441pt on input line 1484.
+(Font)              scaled to size 5.47441pt on input line 1483.
 [32]
 File: images/102-workflows-naming-files/file-types-image.png Graphic file (type
  bmp)
@@ -1544,31 +1536,21 @@ ex-text;!
 [37]
 
 Package longtable Warning: Column widths have changed
-(longtable)                in table 2.1 on input line 1782.
+(longtable)                in table 2.1 on input line 1781.
 
 [38]
-Overfull \hbox (8.8792pt too wide) in paragraph at lines 1876--1888
+Overfull \hbox (8.8792pt too wide) in paragraph at lines 1875--1886
 []\TU/lmr/bx/n/10.95 loaded via a namespace (and not attached): \TU/lmr/m/it/10
 .95 digest(v.0.6.37)\TU/lmr/m/n/10.95 , \TU/lmr/m/it/10.95 R6(v.2.5.1)\TU/lmr/m
 /n/10.95 , \TU/lmr/m/it/10.95 fastmap(v.1.2.0)\TU/lmr/m/n/10.95 ,
  []
 
 
-Underfull \hbox (badness 1558) in paragraph at lines 1876--1888
-\TU/lmr/m/it/10.95 xfun(v.0.50)\TU/lmr/m/n/10.95 , \TU/lmr/m/it/10.95 tzdb(v.0.
-4.0)\TU/lmr/m/n/10.95 , \TU/lmr/m/it/10.95 magrittr(v.2.0.3)\TU/lmr/m/n/10.95 ,
- \TU/lmr/m/it/10.95 glue(v.1.8.0)\TU/lmr/m/n/10.95 , \TU/lmr/m/it/10.95 tibble(
-v.3.2.1)\TU/lmr/m/n/10.95 , \TU/lmr/m/it/10.95 knitr(v.1.49)\TU/lmr/m/n/10.95 ,
-
- []
-
-
-Overfull \hbox (8.47516pt too wide) in paragraph at lines 1876--1888
-\TU/lmr/m/it/10.95 cli(v.3.6.3)\TU/lmr/m/n/10.95 , \TU/lmr/m/it/10.95 pander(v.
-0.6.5)\TU/lmr/m/n/10.95 , \TU/lmr/m/it/10.95 vctrs(v.0.6.5)\TU/lmr/m/n/10.95 , 
-\TU/lmr/m/it/10.95 compiler(v.4.4.2)\TU/lmr/m/n/10.95 , \TU/lmr/m/it/10.95 rstu
-dioapi(v.0.17.1)\TU/lmr/m/n/10.95 , \TU/lmr/m/it/10.95 tools(v.4.4.2)\TU/lmr/m/
-n/10.95 ,
+Underfull \hbox (badness 4096) in paragraph at lines 1875--1886
+\TU/lmr/m/it/10.95 config(v.2.0.3)\TU/lmr/m/n/10.95 , \TU/lmr/m/it/10.95 htmlto
+ols(v.0.5.8.1)\TU/lmr/m/n/10.95 , \TU/lmr/m/it/10.95 png(v.0.1-8)\TU/lmr/m/n/10
+.95 , \TU/lmr/m/it/10.95 rmarkdown(v.2.29)\TU/lmr/m/n/10.95 , \TU/lmr/m/it/10.9
+5 lifecycle(v.1.0.4)\TU/lmr/m/n/10.95 ,
  []
 
 [39]
@@ -1577,7 +1559,7 @@ chapter 3.
 
 ] [41] [42] [43] [44]
 LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <14.4> not available
-(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 2223.
+(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 2221.
 [45] [46] [47] [48]
 Missing character: There is no ❤ (U+2764) in font [lmroman10-regular]:mapping=t
 ex-text;!
@@ -1587,66 +1569,35 @@ Missing character: There is no 💀 (U+1F480) in font [lmroman10-regular]:mappin
 tex-text;!
 [49] [50]
 LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <12> not available
-(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 2595.
+(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 2593.
 [51] [52] [53] [54] [55]
-Underfull \hbox (badness 2865) in paragraph at lines 2854--2870
-[]\TU/lmr/bx/n/10.95 loaded via a namespace (and not attached): \TU/lmr/m/it/10
-.95 crayon(v.1.5.3)\TU/lmr/m/n/10.95 , \TU/lmr/m/it/10.95 vctrs(v.0.6.5)\TU/lmr
-/m/n/10.95 ,
+Underfull \hbox (badness 5696) in paragraph at lines 2852--2868
+\TU/lmr/m/it/10.95 generics(v.0.1.3)\TU/lmr/m/n/10.95 , \TU/lmr/m/it/10.95 asse
+rtthat(v.0.2.1)\TU/lmr/m/n/10.95 , \TU/lmr/m/it/10.95 jsonlite(v.1.8.9)\TU/lmr/
+m/n/10.95 , \TU/lmr/m/it/10.95 glue(v.1.8.0)\TU/lmr/m/n/10.95 , \TU/lmr/m/it/10
+.95 rprojroot(v.2.0.4)\TU/lmr/m/n/10.95 ,
  []
 
 
-Underfull \hbox (badness 4156) in paragraph at lines 2854--2870
-\TU/lmr/m/it/10.95 cli(v.3.6.3)\TU/lmr/m/n/10.95 , \TU/lmr/m/it/10.95 knitr(v.1
-.49)\TU/lmr/m/n/10.95 , \TU/lmr/m/it/10.95 rlang(v.1.1.4)\TU/lmr/m/n/10.95 , \T
-U/lmr/m/it/10.95 xfun(v.0.50)\TU/lmr/m/n/10.95 , \TU/lmr/m/it/10.95 stringi(v.1
-.8.4)\TU/lmr/m/n/10.95 , \TU/lmr/m/it/10.95 purrr(v.1.0.2)\TU/lmr/m/n/10.95 ,
+Underfull \hbox (badness 10000) in paragraph at lines 2852--2868
+\TU/lmr/m/it/10.95 evaluate(v.1.0.3)\TU/lmr/m/n/10.95 , \TU/lmr/m/it/10.95 fast
+map(v.1.2.0)\TU/lmr/m/n/10.95 , \TU/lmr/m/it/10.95 yaml(v.2.3.10)\TU/lmr/m/n/10
+.95 , \TU/lmr/m/it/10.95 lifecycle(v.1.0.4)\TU/lmr/m/n/10.95 , \TU/lmr/m/it/10.
+95 stringr(v.1.5.1)\TU/lmr/m/n/10.95 ,
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 2854--2870
-\TU/lmr/m/it/10.95 pkgload(v.1.4.0)\TU/lmr/m/n/10.95 , \TU/lmr/m/it/10.95 gener
-ics(v.0.1.3)\TU/lmr/m/n/10.95 , \TU/lmr/m/it/10.95 assertthat(v.0.2.1)\TU/lmr/m
-/n/10.95 , \TU/lmr/m/it/10.95 jsonlite(v.1.8.9)\TU/lmr/m/n/10.95 , \TU/lmr/m/it
-/10.95 glue(v.1.8.0)\TU/lmr/m/n/10.95 ,
- []
-
-
-Underfull \hbox (badness 1231) in paragraph at lines 2854--2870
-\TU/lmr/m/it/10.95 rprojroot(v.2.0.4)\TU/lmr/m/n/10.95 , \TU/lmr/m/it/10.95 htm
-ltools(v.0.5.8.1)\TU/lmr/m/n/10.95 , \TU/lmr/m/it/10.95 brio(v.1.1.5)\TU/lmr/m/
-n/10.95 , \TU/lmr/m/it/10.95 rmarkdown(v.2.29)\TU/lmr/m/n/10.95 , \TU/lmr/m/it/
-10.95 pander(v.0.6.5)\TU/lmr/m/n/10.95 ,
- []
-
-
-Underfull \hbox (badness 3009) in paragraph at lines 2854--2870
-\TU/lmr/m/it/10.95 emo(v.0.0.0.9000)\TU/lmr/m/n/10.95 , \TU/lmr/m/it/10.95 eval
-uate(v.1.0.3)\TU/lmr/m/n/10.95 , \TU/lmr/m/it/10.95 fastmap(v.1.2.0)\TU/lmr/m/n
-/10.95 , \TU/lmr/m/it/10.95 yaml(v.2.3.10)\TU/lmr/m/n/10.95 , \TU/lmr/m/it/10.9
-5 lifecycle(v.1.0.4)\TU/lmr/m/n/10.95 ,
- []
-
-
-Underfull \hbox (badness 2057) in paragraph at lines 2854--2870
-\TU/lmr/m/it/10.95 stringr(v.1.5.1)\TU/lmr/m/n/10.95 , \TU/lmr/m/it/10.95 compi
-ler(v.4.4.2)\TU/lmr/m/n/10.95 , \TU/lmr/m/it/10.95 Rcpp(v.1.0.14)\TU/lmr/m/n/10
-.95 , \TU/lmr/m/it/10.95 testthat(v.3.2.3)\TU/lmr/m/n/10.95 , \TU/lmr/m/it/10.9
-5 timechange(v.0.3.0)\TU/lmr/m/n/10.95 ,
- []
-
-
-Underfull \hbox (badness 2512) in paragraph at lines 2854--2870
-\TU/lmr/m/it/10.95 rstudioapi(v.0.17.1)\TU/lmr/m/n/10.95 , \TU/lmr/m/it/10.95 d
-igest(v.0.6.37)\TU/lmr/m/n/10.95 , \TU/lmr/m/it/10.95 R6(v.2.5.1)\TU/lmr/m/n/10
-.95 , \TU/lmr/m/it/10.95 pillar(v.1.10.1)\TU/lmr/m/n/10.95 , \TU/lmr/m/it/10.95
- tools(v.4.4.2)\TU/lmr/m/n/10.95 , \TU/lmr/m/it/10.95 lubri-
+Underfull \hbox (badness 1924) in paragraph at lines 2852--2868
+\TU/lmr/m/it/10.95 compiler(v.4.4.2)\TU/lmr/m/n/10.95 , \TU/lmr/m/it/10.95 Rcpp
+(v.1.0.14)\TU/lmr/m/n/10.95 , \TU/lmr/m/it/10.95 testthat(v.3.2.3)\TU/lmr/m/n/1
+0.95 , \TU/lmr/m/it/10.95 timechange(v.0.3.0)\TU/lmr/m/n/10.95 , \TU/lmr/m/it/1
+0.95 digest(v.0.6.37)\TU/lmr/m/n/10.95 ,
  []
 
 [56]
 
 LaTeX Warning: Hyper reference `workflows-reading' on page 57 undefined on inpu
-t line 2902.
+t line 2900.
 
 [57
 
@@ -1654,7 +1605,7 @@ t line 2902.
 part II.
 Package scrkbase Info: You've told me to use the font selection of the element
 (scrkbase)             `partprefix' that is an alias of element `partnumber'
-(scrkbase)              on input line 3013.
+(scrkbase)              on input line 3011.
 [59
 
 ] [60]
@@ -1663,11 +1614,11 @@ chapter 4.
 
 ] [62]
 LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <10.95> not available
-(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 3162.
+(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 3160.
 [63] [64] [65]
 
 Package longtable Warning: Column widths have changed
-(longtable)                in table 4.4 on input line 3373.
+(longtable)                in table 4.4 on input line 3371.
 
 [66]
 File: images/201-tabular-data/tidy-1.png Graphic file (type bmp)
@@ -1675,10 +1626,10 @@ File: images/201-tabular-data/tidy-1.png Graphic file (type bmp)
 [67]
 
 Package longtable Warning: Column widths have changed
-(longtable)                in table 4.5 on input line 3497.
+(longtable)                in table 4.5 on input line 3495.
 
 [68] [69]
-Underfull \hbox (badness 1789) in paragraph at lines 3587--3604
+Underfull \hbox (badness 1789) in paragraph at lines 3585--3601
 \TU/lmr/m/it/10.95 glue(v.1.8.0)\TU/lmr/m/n/10.95 , \TU/lmr/m/it/10.95 bit(v.4.
 5.0.1)\TU/lmr/m/n/10.95 , \TU/lmr/m/it/10.95 htmltools(v.0.5.8.1)\TU/lmr/m/n/10
 .95 , \TU/lmr/m/it/10.95 hms(v.1.1.3)\TU/lmr/m/n/10.95 , \TU/lmr/m/it/10.95 rma
@@ -1686,7 +1637,7 @@ rkdown(v.2.29)\TU/lmr/m/n/10.95 , \TU/lmr/m/it/10.95 pan-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 3587--3604
+Underfull \hbox (badness 10000) in paragraph at lines 3585--3601
 \TU/lmr/m/it/10.95 lifecycle(v.1.0.4)\TU/lmr/m/n/10.95 , \TU/lmr/m/it/10.95 com
 piler(v.4.4.2)\TU/lmr/m/n/10.95 , \TU/lmr/m/it/10.95 dplyr(v.1.1.4)\TU/lmr/m/n/
 10.95 , \TU/lmr/m/it/10.95 Rcpp(v.1.0.14)\TU/lmr/m/n/10.95 , \TU/lmr/m/it/10.95
@@ -1694,11 +1645,11 @@ piler(v.4.4.2)\TU/lmr/m/n/10.95 , \TU/lmr/m/it/10.95 dplyr(v.1.1.4)\TU/lmr/m/n/
  []
 
 
-Overfull \hbox (9.77823pt too wide) in paragraph at lines 3587--3604
-\TU/lmr/m/it/10.95 tidyselect(v.1.2.1)\TU/lmr/m/n/10.95 , \TU/lmr/m/it/10.95 pa
-rallel(v.4.4.2)\TU/lmr/m/n/10.95 , \TU/lmr/m/it/10.95 vroom(v.1.6.5)\TU/lmr/m/n
-/10.95 , \TU/lmr/m/it/10.95 pillar(v.1.10.1)\TU/lmr/m/n/10.95 , \TU/lmr/m/it/10
-.95 withr(v.3.0.2)\TU/lmr/m/n/10.95 , \TU/lmr/m/it/10.95 tools(v.4.4.2)
+Overfull \hbox (17.49579pt too wide) in paragraph at lines 3585--3601
+\TU/lmr/m/it/10.95 vroom(v.1.6.5)\TU/lmr/m/n/10.95 , \TU/lmr/m/it/10.95 pillar(
+v.1.10.1)\TU/lmr/m/n/10.95 , \TU/lmr/m/it/10.95 parallel(v.4.4.2)\TU/lmr/m/n/10
+.95 , \TU/lmr/m/it/10.95 withr(v.3.0.2)\TU/lmr/m/n/10.95 , \TU/lmr/m/it/10.95 t
+ools(v.4.4.2) \TU/lmr/m/n/10.95 and \TU/lmr/m/it/10.95 bit64(v.4.5.2) 
  []
 
 [70]
@@ -1706,19 +1657,11 @@ chapter 5.
 [71
 
 ] [72] [73] [74] [75] [76] [77] [78] [79] [80]
-Underfull \hbox (badness 1558) in paragraph at lines 4219--4233
+Underfull \hbox (badness 1558) in paragraph at lines 4216--4229
 \TU/lmr/m/it/10.95 tibble(v.3.2.1)\TU/lmr/m/n/10.95 , \TU/lmr/m/it/10.95 fastma
 p(v.1.2.0)\TU/lmr/m/n/10.95 , \TU/lmr/m/it/10.95 yaml(v.2.3.10)\TU/lmr/m/n/10.9
 5 , \TU/lmr/m/it/10.95 lifecycle(v.1.0.4)\TU/lmr/m/n/10.95 , \TU/lmr/m/it/10.95
  stringr(v.1.5.1)\TU/lmr/m/n/10.95 , \TU/lmr/m/it/10.95 com-
- []
-
-
-Underfull \hbox (badness 5592) in paragraph at lines 4219--4233
-\TU/lmr/m/it/10.95 piler(v.4.4.2)\TU/lmr/m/n/10.95 , \TU/lmr/m/it/10.95 Rcpp(v.
-1.0.14)\TU/lmr/m/n/10.95 , \TU/lmr/m/it/10.95 pkgconfig(v.2.0.3)\TU/lmr/m/n/10.
-95 , \TU/lmr/m/it/10.95 rstudioapi(v.0.17.1)\TU/lmr/m/n/10.95 , \TU/lmr/m/it/10
-.95 digest(v.0.6.37)\TU/lmr/m/n/10.95 ,
  []
 
 [81]
@@ -1731,51 +1674,35 @@ File: images/203-data-apis/sign-up.png Graphic file (type bmp)
 File: images/203-data-apis/confirmation-email.png Graphic file (type bmp)
 <images/203-data-apis/confirmation-email.png>
 [88] [89] [90] [91]
-Overfull \hbox (36.13484pt too wide) in paragraph at lines 4744--4744
+Overfull \hbox (36.13484pt too wide) in paragraph at lines 4740--4740
 []\TU/lmtt/m/n/10.95 http://www.omdbapi.com/?t=<TITLE>&y=<YEAR>&plot=<LENGTH>&r
 =<FORMAT>&apikey=<API_KEY>[] 
  []
 
 [92]
-Overfull \hbox (679.99472pt too wide) in paragraph at lines 4806--4806
+Overfull \hbox (679.99472pt too wide) in paragraph at lines 4802--4802
 []\TU/lmtt/m/n/10.95 #> [1] "Cady Heron is a hit with The Plastics, the A-list 
 girl clique at her new school, until she makes the mistake of falling for Aaron
  Samuels, the ex-boyfriend of alpha Plastic Regina George."[] 
  []
 
 
-Overfull \hbox (168.35605pt too wide) in paragraph at lines 4818--4818
+Overfull \hbox (168.35605pt too wide) in paragraph at lines 4814--4814
 []\TU/lmtt/m/n/10.95 #> [1] "https://m.media-amazon.com/images/M/MV5BMjE1MDQ4Mj
 I1OV5BMl5BanBnXkFtZTcwNzcwODAzMw@@._V1_SX300.jpg"[] 
  []
 
 [93] [94]
-Overfull \hbox (8.8792pt too wide) in paragraph at lines 4913--4922
+Overfull \hbox (8.8792pt too wide) in paragraph at lines 4909--4917
 []\TU/lmr/bx/n/10.95 loaded via a namespace (and not attached): \TU/lmr/m/it/10
 .95 digest(v.0.6.37)\TU/lmr/m/n/10.95 , \TU/lmr/m/it/10.95 R6(v.2.5.1)\TU/lmr/m
 /n/10.95 , \TU/lmr/m/it/10.95 fastmap(v.1.2.0)\TU/lmr/m/n/10.95 ,
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 4913--4922
-\TU/lmr/m/it/10.95 pander(v.0.6.5)\TU/lmr/m/n/10.95 , \TU/lmr/m/it/10.95 compil
-er(v.4.4.2)\TU/lmr/m/n/10.95 , \TU/lmr/m/it/10.95 httr(v.1.4.7)\TU/lmr/m/n/10.9
-5 , \TU/lmr/m/it/10.95 rstudioapi(v.0.17.1)\TU/lmr/m/n/10.95 , \TU/lmr/m/it/10.
-95 tools(v.4.4.2)\TU/lmr/m/n/10.95 ,
- []
-
-
-Underfull \hbox (badness 1371) in paragraph at lines 4913--4922
-\TU/lmr/m/it/10.95 curl(v.6.1.0)\TU/lmr/m/n/10.95 , \TU/lmr/m/it/10.95 evaluate
-(v.1.0.3)\TU/lmr/m/n/10.95 , \TU/lmr/m/it/10.95 Rcpp(v.1.0.14)\TU/lmr/m/n/10.95
- , \TU/lmr/m/it/10.95 yaml(v.2.3.10)\TU/lmr/m/n/10.95 , \TU/lmr/m/it/10.95 rlan
-g(v.1.1.4) \TU/lmr/m/n/10.95 and \TU/lmr/m/it/10.95 json-
- []
-
 [95]
 
 LaTeX Warning: Hyper reference `data-reading' on page 96 undefined on input lin
-e 4963.
+e 4958.
 
 [96
 
@@ -1785,42 +1712,42 @@ ex-text;!
 Missing character: There is no ⭐ (U+2B50) in font [lmroman10-regular]:mapping=t
 ex-text;!
 
-Overfull \hbox (17.54582pt too wide) in paragraph at lines 5025--5026
+Overfull \hbox (17.54582pt too wide) in paragraph at lines 5020--5021
  []\TU/lmr/m/n/10.95 n_reviews
  []
 
 
-Overfull \hbox (27.59421pt too wide) in paragraph at lines 5027--5028
+Overfull \hbox (27.59421pt too wide) in paragraph at lines 5022--5023
  []\TU/lmr/m/n/10.95 percent_5_star
  []
 
 
-Overfull \hbox (27.59421pt too wide) in paragraph at lines 5029--5030
+Overfull \hbox (27.59421pt too wide) in paragraph at lines 5024--5025
  []\TU/lmr/m/n/10.95 percent_4_star
  []
 
 
-Overfull \hbox (27.59421pt too wide) in paragraph at lines 5031--5032
+Overfull \hbox (27.59421pt too wide) in paragraph at lines 5026--5027
  []\TU/lmr/m/n/10.95 percent_3_star
  []
 
 
-Overfull \hbox (27.59421pt too wide) in paragraph at lines 5033--5034
+Overfull \hbox (27.59421pt too wide) in paragraph at lines 5028--5029
  []\TU/lmr/m/n/10.95 percent_2_star
  []
 
 
-Overfull \hbox (27.59421pt too wide) in paragraph at lines 5035--5036
+Overfull \hbox (27.59421pt too wide) in paragraph at lines 5030--5031
  []\TU/lmr/m/n/10.95 percent_1_star
  []
 
 
-Overfull \hbox (31.63863pt too wide) in paragraph at lines 5043--5043
+Overfull \hbox (31.63863pt too wide) in paragraph at lines 5038--5038
 []|\TU/lmr/m/n/10.95 example_name|  
  []
 
 
-Overfull \hbox (37.56778pt too wide) in paragraph at lines 5043--5044
+Overfull \hbox (37.56778pt too wide) in paragraph at lines 5038--5039
 []|\TU/lmr/m/n/10.95 www.example.com|  
  []
 
@@ -1828,18 +1755,18 @@ Overfull \hbox (37.56778pt too wide) in paragraph at lines 5043--5044
 part III.
 Package scrkbase Info: You've told me to use the font selection of the element
 (scrkbase)             `partprefix' that is an alias of element `partnumber'
-(scrkbase)              on input line 5094.
+(scrkbase)              on input line 5089.
 [98
 
 ] [99]
 chapter 7.
 
 LaTeX Warning: Hyper reference `data-apis' on page 100 undefined on input line 
-5136.
+5131.
 
 
 LaTeX Warning: Hyper reference `data-webscraping' on page 100 undefined on inpu
-t line 5137.
+t line 5132.
 
 File: images/301-edav-wrangling/palmer-penguins.png Graphic file (type bmp)
 <images/301-edav-wrangling/palmer-penguins.png>
@@ -1852,20 +1779,20 @@ File: images/301-edav-wrangling/view-penguins-screenshot.png Graphic file (type
 [102] [103] [104]
 
 LaTeX Warning: Hyper reference `creating-new-variables' on page 105 undefined o
-n input line 5343.
+n input line 5338.
 
 [105] [106]
-Underfull \vbox (badness 10000) detected at line 5487
+Underfull \vbox (badness 10000) detected at line 5482
  []
 
 
-Underfull \vbox (badness 10000) detected at line 5487
+Underfull \vbox (badness 10000) detected at line 5482
  []
 
 [107] [108] [109] [110] [111] [112] [113] [114] [115] [116] [117] [118]
 
 LaTeX Warning: Hyper reference `naming-things-date-order' on page 119 undefined
- on input line 6105.
+ on input line 6100.
 
 [119]
 File: images/301-edav-wrangling/join-inner.png Graphic file (type bmp)
@@ -1878,27 +1805,35 @@ File: images/301-edav-wrangling/join-left-right-full.png Graphic file (type bmp
 Overfull \vbox (5.5088pt too high) has occurred while \output is active []
 
 [122] [123]
-Underfull \hbox (badness 1796) in paragraph at lines 6248--6262
-\TU/lmr/m/it/10.95 glue(v.1.8.0)\TU/lmr/m/n/10.95 , \TU/lmr/m/it/10.95 htmltool
-s(v.0.5.8.1)\TU/lmr/m/n/10.95 , \TU/lmr/m/it/10.95 rmarkdown(v.2.29)\TU/lmr/m/n
-/10.95 , \TU/lmr/m/it/10.95 pander(v.0.6.5)\TU/lmr/m/n/10.95 , \TU/lmr/m/it/10.
-95 evaluate(v.1.0.3)\TU/lmr/m/n/10.95 ,
+Underfull \hbox (badness 10000) in paragraph at lines 6243--6257
+\TU/lmr/m/it/10.95 rlang(v.1.1.4)\TU/lmr/m/n/10.95 , \TU/lmr/m/it/10.95 xfun(v.
+0.50)\TU/lmr/m/n/10.95 , \TU/lmr/m/it/10.95 stringi(v.1.8.4)\TU/lmr/m/n/10.95 ,
+ \TU/lmr/m/it/10.95 purrr(v.1.0.2)\TU/lmr/m/n/10.95 , \TU/lmr/m/it/10.95 generi
+cs(v.0.1.3)\TU/lmr/m/n/10.95 , \TU/lmr/m/it/10.95 json-
  []
 
 
-Underfull \hbox (badness 1558) in paragraph at lines 6248--6262
-\TU/lmr/m/it/10.95 tibble(v.3.2.1)\TU/lmr/m/n/10.95 , \TU/lmr/m/it/10.95 fastma
-p(v.1.2.0)\TU/lmr/m/n/10.95 , \TU/lmr/m/it/10.95 yaml(v.2.3.10)\TU/lmr/m/n/10.9
-5 , \TU/lmr/m/it/10.95 lifecycle(v.1.0.4)\TU/lmr/m/n/10.95 , \TU/lmr/m/it/10.95
- stringr(v.1.5.1)\TU/lmr/m/n/10.95 , \TU/lmr/m/it/10.95 com-
+Underfull \hbox (badness 10000) in paragraph at lines 6243--6257
+\TU/lmr/m/it/10.95 lite(v.1.8.9)\TU/lmr/m/n/10.95 , \TU/lmr/m/it/10.95 glue(v.1
+.8.0)\TU/lmr/m/n/10.95 , \TU/lmr/m/it/10.95 htmltools(v.0.5.8.1)\TU/lmr/m/n/10.
+95 , \TU/lmr/m/it/10.95 rmarkdown(v.2.29)\TU/lmr/m/n/10.95 , \TU/lmr/m/it/10.95
+ pander(v.0.6.5)\TU/lmr/m/n/10.95 ,
  []
 
 
-Underfull \hbox (badness 5592) in paragraph at lines 6248--6262
-\TU/lmr/m/it/10.95 piler(v.4.4.2)\TU/lmr/m/n/10.95 , \TU/lmr/m/it/10.95 Rcpp(v.
-1.0.14)\TU/lmr/m/n/10.95 , \TU/lmr/m/it/10.95 pkgconfig(v.2.0.3)\TU/lmr/m/n/10.
-95 , \TU/lmr/m/it/10.95 rstudioapi(v.0.17.1)\TU/lmr/m/n/10.95 , \TU/lmr/m/it/10
-.95 digest(v.0.6.37)\TU/lmr/m/n/10.95 ,
+Underfull \hbox (badness 10000) in paragraph at lines 6243--6257
+\TU/lmr/m/it/10.95 evaluate(v.1.0.3)\TU/lmr/m/n/10.95 , \TU/lmr/m/it/10.95 tibb
+le(v.3.2.1)\TU/lmr/m/n/10.95 , \TU/lmr/m/it/10.95 fastmap(v.1.2.0)\TU/lmr/m/n/1
+0.95 , \TU/lmr/m/it/10.95 yaml(v.2.3.10)\TU/lmr/m/n/10.95 , \TU/lmr/m/it/10.95 
+lifecycle(v.1.0.4)\TU/lmr/m/n/10.95 ,
+ []
+
+
+Underfull \hbox (badness 6842) in paragraph at lines 6243--6257
+\TU/lmr/m/it/10.95 stringr(v.1.5.1)\TU/lmr/m/n/10.95 , \TU/lmr/m/it/10.95 compi
+ler(v.4.4.2)\TU/lmr/m/n/10.95 , \TU/lmr/m/it/10.95 Rcpp(v.1.0.14)\TU/lmr/m/n/10
+.95 , \TU/lmr/m/it/10.95 pkgconfig(v.2.0.3)\TU/lmr/m/n/10.95 , \TU/lmr/m/it/10.
+95 digest(v.0.6.37)\TU/lmr/m/n/10.95 ,
  []
 
 [124]
@@ -1915,13 +1850,13 @@ hic file (type pdf)
 <use 302-edav-analysis_files/figure-pdf/dow-jones-rolling-mean-plot-1.pdf>
 
 Package longtable Warning: Column widths have changed
-(longtable)                in table 8.1 on input line 6546.
+(longtable)                in table 8.1 on input line 6541.
 
 [130]
 File: images/302-data-exploration/forking-paths.jpg Graphic file (type bmp)
 <images/302-data-exploration/forking-paths.jpg>
 
-Overfull \hbox (10.96545pt too wide) in paragraph at lines 6576--6577
+Overfull \hbox (10.96545pt too wide) in paragraph at lines 6571--6572
 [][] 
  []
 
@@ -1930,7 +1865,7 @@ File: images/302-data-exploration/supervise_learning_schematic.png Graphic file
  (type bmp)
 <images/302-data-exploration/supervise_learning_schematic.png>
 
-Overfull \hbox (10.95073pt too wide) in paragraph at lines 6589--6590
+Overfull \hbox (10.95073pt too wide) in paragraph at lines 6584--6585
 [][] 
  []
 
@@ -1958,7 +1893,7 @@ File: images/303-data-visualisation/grammar-of-graphics-abstract.png Graphic fi
 le (type bmp)
 <images/303-data-visualisation/grammar-of-graphics-abstract.png>
 
-Overfull \hbox (10.93439pt too wide) in paragraph at lines 6917--6918
+Overfull \hbox (10.93439pt too wide) in paragraph at lines 6912--6913
 [][] 
  []
 
@@ -1969,7 +1904,7 @@ File: images/303-data-visualisation/visualisation-purposes.png Graphic file (ty
 pe bmp)
 <images/303-data-visualisation/visualisation-purposes.png>
 
-Overfull \hbox (10.95532pt too wide) in paragraph at lines 6958--6959
+Overfull \hbox (10.95532pt too wide) in paragraph at lines 6953--6954
 [][] 
  []
 
@@ -1983,7 +1918,7 @@ text;!
 File: images/303-data-visualisation/user-groups.png Graphic file (type bmp)
 <images/303-data-visualisation/user-groups.png>
 
-Overfull \hbox (10.95532pt too wide) in paragraph at lines 7051--7052
+Overfull \hbox (10.95532pt too wide) in paragraph at lines 7046--7047
 [][] 
  []
 
@@ -2029,7 +1964,7 @@ tex-text;!
 [159]
 
 LaTeX Warning: Hyper reference `edav-reading' on page 160 undefined on input li
-ne 7512.
+ne 7507.
 
 [160
 
@@ -2037,14 +1972,14 @@ ne 7512.
 part IV.
 Package scrkbase Info: You've told me to use the font selection of the element
 (scrkbase)             `partprefix' that is an alias of element `partnumber'
-(scrkbase)              on input line 7602.
+(scrkbase)              on input line 7597.
 [162
 
 ]
 part V.
 Package scrkbase Info: You've told me to use the font selection of the element
 (scrkbase)             `partprefix' that is an alias of element `partnumber'
-(scrkbase)              on input line 7604.
+(scrkbase)              on input line 7599.
 [163
 
 ] [164]
@@ -2059,7 +1994,7 @@ File: images/401-production-reproducibility/forking-paths-abstract.png Graphic
 file (type bmp)
 <images/401-production-reproducibility/forking-paths-abstract.png>
 
-Overfull \hbox (46.95284pt too wide) in paragraph at lines 7688--7690
+Overfull \hbox (46.95284pt too wide) in paragraph at lines 7683--7685
 [][]\TU/lmr/m/n/10.95 {Abstract
  []
 
@@ -2127,7 +2062,7 @@ File: images/403-production-scalability/profiling-example-memory.png Graphic fi
 le (type bmp)
 <images/403-production-scalability/profiling-example-memory.png>
 [199]
-Underfull \hbox (badness 10000) in paragraph at lines 8916--8918
+Underfull \hbox (badness 10000) in paragraph at lines 8911--8913
 
  []
 
@@ -2135,14 +2070,14 @@ Underfull \hbox (badness 10000) in paragraph at lines 8916--8918
 File: images/403-production-scalability/Rccp.png Graphic file (type bmp)
 <images/403-production-scalability/Rccp.png>
 
-Overfull \hbox (10.95978pt too wide) in paragraph at lines 9130--9131
+Overfull \hbox (10.95978pt too wide) in paragraph at lines 9125--9126
 [] 
  []
 
 [204] [205] [206]
 
 LaTeX Warning: Hyper reference `production-reading' on page 207 undefined on in
-put line 9228.
+put line 9223.
 
 [207
 
@@ -2150,14 +2085,14 @@ put line 9228.
 part VI.
 Package scrkbase Info: You've told me to use the font selection of the element
 (scrkbase)             `partprefix' that is an alias of element `partnumber'
-(scrkbase)              on input line 9281.
+(scrkbase)              on input line 9276.
 [209
 
 ]
 part VII.
 Package scrkbase Info: You've told me to use the font selection of the element
 (scrkbase)             `partprefix' that is an alias of element `partnumber'
-(scrkbase)              on input line 9283.
+(scrkbase)              on input line 9278.
 [210
 
 ] [211]
@@ -2166,31 +2101,31 @@ chapter 13.
 
 ] [213] [214]
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
-(Font)              scaled to size 12.0pt on input line 9461.
+(Font)              scaled to size 12.0pt on input line 9456.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
-(Font)              scaled to size 8.0pt on input line 9461.
+(Font)              scaled to size 8.0pt on input line 9456.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
-(Font)              scaled to size 6.0pt on input line 9461.
+(Font)              scaled to size 6.0pt on input line 9456.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 12.0011pt on input line 9461.
+(Font)              scaled to size 12.0011pt on input line 9456.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 8.00073pt on input line 9461.
+(Font)              scaled to size 8.00073pt on input line 9456.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 6.00055pt on input line 9461.
+(Font)              scaled to size 6.00055pt on input line 9456.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 11.99872pt on input line 9461.
+(Font)              scaled to size 11.99872pt on input line 9456.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 7.99915pt on input line 9461.
+(Font)              scaled to size 7.99915pt on input line 9456.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 5.99936pt on input line 9461.
+(Font)              scaled to size 5.99936pt on input line 9456.
 
 Package longtable Warning: Column widths have changed
-(longtable)                in table 13.1 on input line 9515.
+(longtable)                in table 13.1 on input line 9510.
 
 [215] [216]
 
 Package longtable Warning: Column widths have changed
-(longtable)                in table 13.3 on input line 9622.
+(longtable)                in table 13.3 on input line 9617.
 
 [217]
 File: images/501-ethics-privacy/latanya-sweeney.jpg Graphic file (type bmp)
@@ -2200,7 +2135,7 @@ File: images/501-ethics-privacy/netflix-logo-old.png Graphic file (type bmp)
 <images/501-ethics-privacy/netflix-logo-old.png>
 
 Package longtable Warning: Column widths have changed
-(longtable)                in table 13.4 on input line 9711.
+(longtable)                in table 13.4 on input line 9706.
 
 [220] [221] [222]
 chapter 14.
@@ -2208,7 +2143,7 @@ File: images/502-ethics-fairness/90s-windows-wallpaper.jpg Graphic file (type b
 mp)
 <images/502-ethics-fairness/90s-windows-wallpaper.jpg>
 
-Overfull \hbox (10.9691pt too wide) in paragraph at lines 9783--9784
+Overfull \hbox (10.9691pt too wide) in paragraph at lines 9778--9779
 [] 
  []
 
@@ -2218,14 +2153,14 @@ c file (type pdf)
 [223
 
 ]
-Overfull \hbox (323.5723pt too wide) in paragraph at lines 9830--9830
+Overfull \hbox (323.5723pt too wide) in paragraph at lines 9825--9825
 []\TU/lmtt/m/n/10.95 Warning in geom_text(aes(label = "You are just a point in 
 predictor space", : All aesthetics have length 1, but the data has 126 rows.[] 
 
  []
 
 
-Overfull \hbox (7.39111pt too wide) in paragraph at lines 9831--9831
+Overfull \hbox (7.39111pt too wide) in paragraph at lines 9826--9826
 []\TU/lmtt/m/n/10.95 i Please consider using []annotate()[] or provide this lay
 er with data containing[] 
  []
@@ -2242,7 +2177,7 @@ File: images/502-ethics-fairness/fairness-error-pareto-front.png Graphic file (
 type bmp)
 <images/502-ethics-fairness/fairness-error-pareto-front.png>
 
-Overfull \hbox (10.95532pt too wide) in paragraph at lines 10093--10094
+Overfull \hbox (10.95532pt too wide) in paragraph at lines 10088--10089
 [][] 
  []
 
@@ -2262,8 +2197,8 @@ File: images/503-ethics-conduct/bbc-self-driving_1.png Graphic file (type bmp)
 <images/503-ethics-conduct/bbc-self-driving_1.png>
 [238]
 LaTeX Font Info:    Font shape `TU/lmss/bx/it' in size <14.4> not available
-(Font)              Font shape `TU/lmss/bx/sl' tried instead on input line 1027
-4.
+(Font)              Font shape `TU/lmss/bx/sl' tried instead on input line 1026
+9.
 File: images/503-ethics-conduct/pregnancy-prediction.png Graphic file (type bmp
 )
 <images/503-ethics-conduct/pregnancy-prediction.png>
@@ -2275,7 +2210,7 @@ File: images/503-ethics-conduct/wired-hippocratic.png Graphic file (type bmp)
 [241] [242] [243]
 
 LaTeX Warning: Hyper reference `ethics-reading' on page 244 undefined on input 
-line 10505.
+line 10500.
 
 [244
 
@@ -2288,10 +2223,10 @@ chapter A.
 ] [247]
 
 Package hyperref Warning: Suppressing link with empty target on input line 1081
-7.
+2.
 
 
-Overfull \hbox (17.85693pt too wide) in paragraph at lines 10817--10821
+Overfull \hbox (17.85693pt too wide) in paragraph at lines 10812--10816
 []\TU/lmr/m/n/10.95 A ggplot2 Tutorial for Beautiful Plotting in R https://www.
 cedricscherer.com/2019/08/05/a-
  []
@@ -2304,7 +2239,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.10990 \end{CSLReferences}
+l.10985 \end{CSLReferences}
                             
 Here is how much of TeX's memory you used:
  38138 strings out of 476919
