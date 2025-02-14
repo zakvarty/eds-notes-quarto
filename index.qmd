@@ -17,6 +17,7 @@ Model building and evaluation are necessary but not sufficient skills for the ef
 ::: small_right
 <img src="images/EDS-logo.jpg" alt="Logo"/>
 :::
+test line that will not appear because it is a comment
 -->
 
 During this module you will critically explore how to:
