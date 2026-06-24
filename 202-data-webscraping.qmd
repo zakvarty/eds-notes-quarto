@@ -40,7 +40,7 @@ A basic HTML page with no styling applied might look something like this:
   <title>Page title</title>
 </head>
 <body>
-  <h1 id='first'>A level 1 heading</h1>
+  <h1> id='first'>A level 1 heading</h1>
   <p>Hello World!</p>
   <p>Here is some plain text &amp; <b>some bold text.</b></p>
   <img src='myimg.png' width='100' height='100'>
@@ -137,7 +137,7 @@ With `{rvest}`, reading a html page can be as simple as loading in tabular data.
 
 ```{r rvest-read-html}
 #| echo: true
-html <- rvest::read_html("https://www.zakvarty.com/professional/teaching.html")
+html <- rvest::read_html("https://www.zakvarty.com/teaching-table.html")
 ```
 
 The `class` of the resulting object is an `xml_document`. This type of object is from the low-level package `{xml2}`, which allows you to read xml files into R.
@@ -200,7 +200,7 @@ The difference between `html_text()` and `html_text2()` is in how they handle wh
 
 Attributes are also used to record information that you might like to collect. For example, the destination of links are stored in the `href` attribute and the source of images is stored in the `src` attribute.
 
-As an example of this, consider trying to extract the twitter link from the icon in the page footer. This is quite tricky to locate in the html source, so I used the [Selector Gadget](https://rvest.tidyverse.org/articles/selectorgadget.html) to help find the correct combination of elements.
+As an example of this, consider trying to extract the github link from the icon in the page footer. This is quite tricky to locate in the html source, so I used the [Selector Gadget](https://rvest.tidyverse.org/articles/selectorgadget.html) to help find the correct combination of elements.
 
 ```{r extracting-by-attributes}
 #| echo: true
